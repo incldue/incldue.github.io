@@ -3,7 +3,7 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>第一次blog的Hello World(留作纪念~~) | D&#39;b8Gr的小站~</title>
+  <title>CTF-文件上传漏洞 | D&#39;b8Gr的小站~</title>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -142,7 +142,7 @@
         <span>TABLE OF CONTENTS</span>
       </div>
       <div class="section-content">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E6%9D%A5%E6%89%AF%E4%B8%80%E4%B8%8B%E6%B7%A1%E2%80%A6"><span class="toc-text">第一篇文章，来扯一下淡…</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E8%A1%B7"><span class="toc-text">初衷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E5%B0%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">小小的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%84%9F%E8%A7%A6"><span class="toc-text">感触</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="toc-text">文件上传漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="toc-text">文件上传漏洞原因：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9A"><span class="toc-text">可能存在漏洞的位置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%A3%80%E6%B5%8B%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">文件上传检测方式：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="toc-text">绕过客户端检测：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="toc-text">绕过服务端检测：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E6%A3%80%E6%B5%8B%E2%80%93%E9%BB%91%E5%90%8D%E5%8D%95"><span class="toc-text">绕过文件后缀检测–黑名单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E6%A3%80%E6%B5%8B%E2%80%93%E7%99%BD%E5%90%8D%E5%8D%95"><span class="toc-text">绕过文件后缀检测–白名单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%A3%80%E6%B5%8B"><span class="toc-text">绕过文件内容检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a></li></ol></li></ol>
       </div>
     </div>
     
@@ -160,8 +160,8 @@
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">随笔</a>
-            <span class="count">(2)</span>
+            <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">CTF基础知识</a>
+            <span class="count">(1)</span>
           </div>
         
       </div>
@@ -174,24 +174,24 @@
     <div class="tab-bar">
       <div class="tab active">
         <i class="fas fa-file-alt"></i>
-        <span>第一次blog的Hello World(留作纪念~~).md</span>
+        <span>CTF-文件上传漏洞.md</span>
       </div>
     </div>
     
     <div class="content-area">
       <article class="post-content">
         <div class="post-header">
-          <h1>第一次blog的Hello World(留作纪念~~)</h1>
+          <h1>CTF-文件上传漏洞</h1>
           <div class="post-meta">
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
-              2024-10-13
+              2025-06-01
             </span>            
             
               <span class="tags">
                 <i class="fas fa-tags"></i>
                 <div class="tags-list">
-                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">CTF基础知识</a></li></ul>
                 </div>
               </span>
             
@@ -199,22 +199,27 @@
         </div>
         
         <div class="post-body vscode-markdown">
-          <h2 id="第一篇文章，来扯一下淡…"><a href="#第一篇文章，来扯一下淡…" class="headerlink" title="第一篇文章，来扯一下淡…"></a>第一篇文章，来扯一下淡…</h2><p>这是我的第一篇文章，请大家多多支持我！</p>
-<h3 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h3><p>其实，在我读高中时，学习编程、翻看别的大佬的blog的时候，就已经萌生了自己写blog的想法。奈何…懂的都懂，要考高考，所以呢，计划搁置了很久。<br>终于考完高考，我也能尽情遨游在编程、CS的海洋中了。</p>
-<h3 id="小小的实现"><a href="#小小的实现" class="headerlink" title="小小的实现"></a>小小的实现</h3><p>现在是在读大一，看到有大二的CTF学长搭建了自己的blog，于是…手痒啊！就这样，degu8ger的blog诞生了！最初，觉得搭建blog要从零开始完全自己手搓一个出来，但是如今看来，技术飞速发展，都有现成的框架、demo了，只需引用一下即可。<br>所以，事不宜迟，我选用了Hexo，大概断断续续地捣鼓了有三天吧，一个简陋的demo版出现了！！后续还得自己购置服务器(bushi)或者租一台，弄个域名…现在大一只看到经费在燃烧哇。其实呢，看到自己把别的佬的resources学到并记录在互联网这样一个大家庭中，也算是一种对自己努力学习的见证吧！</p>
-<h3 id="感触"><a href="#感触" class="headerlink" title="感触"></a>感触</h3><p>之前遇到CS上的一些问题，在互联网上搜索，看到好的、精妙绝伦的就会点击收藏在收藏夹中。时间久了，收藏夹已经满了，而自己没有把他们分门别类的分好，便于自己以后查找。这也是我下定决心搭建blog的其中一个原因吧！<br>特别是最近在疯狂肝CTF，在网上查找了a deluge of 信息，看到大佬的blog做得精彩绝伦、赏心悦目，自己已然心动。出于对技术的渴望也是对自己近一段时间以来获取信息的掌握度，搭建自己的blog也是对自己成长的见证。<br>搭建blog，既是对自己在编程、学CS上的一点点见证，同时也可以锻炼自己的代码能力，包括后期维护啥的。将来工作时也可以呢…欸，不能明说。任何时候起步都不晚，重要的是起步了，就一切都好说。</p>
-<span id="more"></span>
+          <h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。</p>
+<h3 id="文件上传漏洞原因："><a href="#文件上传漏洞原因：" class="headerlink" title="文件上传漏洞原因："></a>文件上传漏洞原因：</h3><p>1.服务器配置不当<br>2.文件上传限制被绕过<br>3.开源编辑器的上传漏洞<br>4.文件解析漏洞导致文件执行<br>5.过滤不严或被绕过</p>
+<h3 id="可能存在漏洞的位置："><a href="#可能存在漏洞的位置：" class="headerlink" title="可能存在漏洞的位置："></a>可能存在漏洞的位置：</h3><p>1.图片上传功能    2.头像上传功能    3.文档上传功能</p>
+<h3 id="文件上传检测方式："><a href="#文件上传检测方式：" class="headerlink" title="文件上传检测方式："></a>文件上传检测方式：</h3><p>1.客户端JS检测（文件扩展名）<br>2.服务端MIME类型检测（content-type内容）<br>3.服务端目录路径检测（跟path参数相关）<br>4.服务器文件扩展名检测（跟文件extension相关）<br>5.服务端文件内容检测（内容是否合法、是否含有恶意代码）</p>
+<h4 id="绕过客户端检测："><a href="#绕过客户端检测：" class="headerlink" title="绕过客户端检测："></a>绕过客户端检测：</h4><p>1.原理：在上传页面里含有专门检测文件上传的JS代码，最常见的则是检测文件类型和扩展名是否合法<br>2.方法：在本地浏览器客户端禁用JS即可<br>3.测试：靶场</p>
+<h4 id="绕过服务端检测："><a href="#绕过服务端检测：" class="headerlink" title="绕过服务端检测："></a>绕过服务端检测：</h4><p>1.服务端代码检测三点：MIME类型、文件后缀、文件内容<br>2.常见MIME类型<br>​ 1.HTML、txt、pdf<br>​ 2.Word、png、gif<br>​ 3.MPEG、AVI<br>3.绕过MIME类型检测<br>​ 1.原理：检测图片类型文件上传过程中http包的Content-Type字段的值，从而判断文件是否合法<br>​ 2.方法：用BP截取并修改数据包中文件的Content-type类型来进行绕过</p>
+<h4 id="绕过文件后缀检测–黑名单"><a href="#绕过文件后缀检测–黑名单" class="headerlink" title="绕过文件后缀检测–黑名单"></a>绕过文件后缀检测–黑名单</h4><p>1.后缀大小写绕过（.Php)<br>2.空格绕过（.php ）<br>3.点绕过（.php.）<br>4.::DATA绕过(利用Windows下NTFS文件系统的特性,可在文件后缀名加::DATA绕过<br>5.配合Apache解析漏洞（Apache解析有一个特点：解析从右向左，若为不可识别的则继续从左解析，Apache不解析.rar和.owf。）<br>6..htaccess文件<br>    1.配合名单列表绕过，上传一个自定义的.htaccess，就可绕过各种检测<br>    2…htaccess文件（分布式配置文件）提供了针对目录改变配置的方法。</p>
+<h4 id="绕过文件后缀检测–白名单"><a href="#绕过文件后缀检测–白名单" class="headerlink" title="绕过文件后缀检测–白名单"></a>绕过文件后缀检测–白名单</h4><p>1.绕过方法：服务端判断文件类型是从后往前判断，而解析则是与判断相反，可用00截断的方式绕过，%00与0x00截断<br>2.系统在对文文件名读取时，若遇到0x00,则认为读取结束。</p>
+<h4 id="绕过文件内容检测"><a href="#绕过文件内容检测" class="headerlink" title="绕过文件内容检测"></a>绕过文件内容检测</h4><p>1.通过检测文件幻数来判断：通常，通过判断文件前10个字节，即可判断文件的真实类型。<br>    1.绕过jpg类型的文件幻数检测要在文件开头写Value&#x3D;FF D8 FF E0 00 10 4A 49 46<br>    2.绕过gif类型的文件幻数检测则要加Value&#x3D;47 49 46 38 39 61<br>    3.绕过png的，则要加Value&#x3D;89 50 4E 47<br>2.通过检测文件加载：一般是调用API或函数进行文件加载测试，常见的则是图像渲染测试，那我们对渲染&#x2F;加载 测试的攻击方式时代码注入绕过，对二次渲染的则是攻击文件加载器自身。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>我们可以用溢出攻击对文件加载器进行攻击，上传自己的恶意代码后，服务器上的文件加载器会主动进行加载测试，加载测试时被溢出攻击执行shellcode。</p>
 
         </div>
         
         <!-- 文章导航 -->
         <nav class="post-nav">
           
-            <a class="prev" href="../../../../2025/06/01/Db8Gr%E7%9A%84blog01/">
-              <i class="fas fa-chevron-left"></i>
-              Db8Gr的blog01
-            </a>
           
+            <a class="next" href="../Db8Gr%E7%9A%84blog01/">
+              Db8Gr的blog01
+              <i class="fas fa-chevron-right"></i>
+            </a>
           
         </nav>
       </article>
