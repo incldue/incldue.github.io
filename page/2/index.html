@@ -3,9 +3,9 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>CTF--Web的请求头伪造（简单的Wp） | D&#39;b8Gr的小站~</title>
+  <title> | D&#39;b8Gr的小站~</title>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../../../css/main.css">
+  <link rel="stylesheet" href="../../css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -15,28 +15,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <!-- 添加mermaid.js库 -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <link rel="stylesheet" href="../../../../css/code.css">
-  <link rel="stylesheet" href="../../../../css/code-custom.css">
-  <link rel="stylesheet" href="../../../../css/code-languages.css">
-  <link rel="stylesheet" href="../../../../css/mermaid.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/code-custom.css">
+  <link rel="stylesheet" href="../../css/code-languages.css">
+  <link rel="stylesheet" href="../../css/mermaid.css">
 
-  <link rel="stylesheet" href="../../../../css/vscode.css">
-  <link rel="stylesheet" href="../../../../css/post.css">
-  <link rel="stylesheet" href="../../../../css/tag.css">
-  <link rel="stylesheet" href="../../../../css/categories.css">
-  <link rel="stylesheet" href="../../../../css/archive.css">
-  <link rel="stylesheet" href="../../../../css/search.css">
-  <link rel="stylesheet" href="../../../../css/mobile.css">  <link rel="stylesheet" href="../../../../css/responsive.css">
-  <link rel="stylesheet" href="../../../../css/elements.css">
+  <link rel="stylesheet" href="../../css/vscode.css">
+  <link rel="stylesheet" href="../../css/post.css">
+  <link rel="stylesheet" href="../../css/tag.css">
+  <link rel="stylesheet" href="../../css/categories.css">
+  <link rel="stylesheet" href="../../css/archive.css">
+  <link rel="stylesheet" href="../../css/search.css">
+  <link rel="stylesheet" href="../../css/mobile.css">  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/elements.css">
 
   <!-- 添加 JetBrains Mono 字体 -->  
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Add any custom head content here -->
 
-  <script src="../../../../js/explorer.js"></script>
-  <script src="../../../../js/code-copy.js"></script>
-  <script src="../../../../js/code-enhance.js"></script>
+  <script src="../../js/explorer.js"></script>
+  <script src="../../js/code-copy.js"></script>
+  <script src="../../js/code-enhance.js"></script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
   <body>
@@ -54,7 +54,7 @@
     </div>
     
     <div class="nav-right">
-      <a href="/" class="nav-item ">
+      <a href="/" class="nav-item active">
         <i class="fas fa-home"></i>
         <span>首页</span>
       </a>
@@ -133,96 +133,131 @@
 
 
 <div class="vscode-container">
-  <!-- 左侧资源管理器 -->
   <div class="sidebar-explorer">
-    <!-- TOC导航 -->
+    <div class="explorer-header">
+      <span class="explorer-title">
+        <i class="fas fa-folder-open"></i> EXPLORER
+      </span>
+    </div>
+    
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-list"></i>
-        <span>TABLE OF CONTENTS</span>
+        <i class="fas fa-chevron-down"></i>
+        <span>BLOG CONTENTS</span>
       </div>
+      
       <div class="section-content">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-text">解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5-CTF%E2%80%94%E2%80%94HTTP%E5%8F%91%E9%80%81%E5%A4%B4Headers%E6%95%B4%E7%90%86-CTF%E2%80%94%E2%80%94HTTP%E5%8F%91%E9%80%81%E5%A4%B4Headers%E6%95%B4%E7%90%86-ctf-easyheader-CSDN%E5%8D%9A%E5%AE%A2-%E3%80%82"><span class="toc-text">请求头相关链接[CTF——HTTP发送头Headers整理](CTF——HTTP发送头Headers整理_ctf easyheader-CSDN博客)。</span></a></li></ol>
       </div>
     </div>
     
-    <!-- 同分类文章 -->
-    
-    
-    <!-- 标签列表 -->
-    
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-tags"></i>
-        <span>ARTICLE TAGS</span>
+        <i class="fas fa-chevron-down"></i>
+        <span>RECENT POSTS</span>
       </div>
+      
+      <div class="section-content">
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../2025/06/01/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">CTF-文件上传漏洞</a>
+          </div>
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../2025/06/01/Db8Gr%E7%9A%84blog01/">Db8Gr的blog01</a>
+          </div>
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../2025/06/01/CTF--Web%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BC%AA%E9%80%A0%EF%BC%88%E7%AE%80%E5%8D%95%E7%9A%84Wp%EF%BC%89/">CTF--Web的请求头伪造（简单的Wp）</a>
+          </div>
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../2025/01/21/XAUT2025%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%96%B0%E7%94%9F%E9%A2%84%E9%80%89%E8%B5%9B-WP/">XAUT2025全国大学生信息安全竞赛新生预选赛-WP</a>
+          </div>
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../2024/10/24/%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%BF%91%E6%9C%9Fcoding%E4%B9%8B%E6%97%85%E5%8F%8A%E9%9A%8F%E7%AC%94-2024%E5%B9%B4/">大学的近期Coding之旅及随笔(2024年)</a>
+          </div>
+      </div>
+    </div>
+
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-chevron-down"></i>
+        <span>TAGS</span>
+      </div>
+      
       <div class="section-content">
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">CTF基础知识</a>
+            <a href="../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">CTF基础知识</a>
             <span class="count">(2)</span>
+          </div>
+        
+          <div class="tag-item">
+            <i class="fas fa-tag"></i>
+            <a href="../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>
+            <span class="count">(1)</span>
+          </div>
+        
+          <div class="tag-item">
+            <i class="fas fa-tag"></i>
+            <a href="../../tags/%E9%9A%8F%E7%AC%94/">随笔</a>
+            <span class="count">(3)</span>
           </div>
         
       </div>
     </div>
-    
   </div>
 
-  <!-- 主要内容区域 -->
   <div class="editor-content">
     <div class="tab-bar">
       <div class="tab active">
-        <i class="fas fa-file-alt"></i>
-        <span>CTF--Web的请求头伪造（简单的Wp）.md</span>
+        <i class="fas fa-home"></i>
+        <span>welcome.md</span>
       </div>
     </div>
     
     <div class="content-area">
-      <article class="post-content">
-        <div class="post-header">
-          <h1>CTF--Web的请求头伪造（简单的Wp）</h1>
-          <div class="post-meta">
-            <span class="date">
-              <i class="fas fa-calendar-alt"></i>
-              2025-06-01
-            </span>            
-            
-              <span class="tags">
-                <i class="fas fa-tags"></i>
-                <div class="tags-list">
-                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">CTF基础知识</a></li></ul>
-                </div>
+      <div class="posts-container">
+          <div class="post-card">
+            <div class="post-header">
+              <i class="fas fa-file-alt"></i>
+              <span class="post-title">
+                <a href="../../2024/10/13/hello-world/">第一次blog的Hello World(留作纪念~~)</a>
               </span>
+            </div>
             
+            <div class="post-meta">
+              <span class="date">
+                <i class="fas fa-calendar-alt"></i>
+                2024-10-13
+              </span>
+            </div>
+            
+            <div class="post-excerpt">
+              <h2 id="第一篇文章，来扯一下淡…"><a href="#第一篇文章，来扯一下淡…" class="headerlink" title="第一篇文章，来扯一下淡…"></a>第一篇文章，来扯一下淡…</h2><p>这是我的第一篇文章，请大家多多支持我！</p>
+<h3 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h3><p>其实，在我读高中时，学习编程、翻看别的大佬的blog的时候，就已经萌生了自己写blog的想法。奈何…懂的都懂，要考高考，所以呢，计划搁置了很久。<br>终于考完高考，我也能尽情遨游在编程、CS的海洋中了。</p>
+<h3 id="小小的实现"><a href="#小小的实现" class="headerlink" title="小小的实现"></a>小小的实现</h3><p>现在是在读大一，看到有大二的CTF学长搭建了自己的blog，于是…手痒啊！就这样，degu8ger的blog诞生了！最初，觉得搭建blog要从零开始完全自己手搓一个出来，但是如今看来，技术飞速发展，都有现成的框架、demo了，只需引用一下即可。<br>所以，事不宜迟，我选用了Hexo，大概断断续续地捣鼓了有三天吧，一个简陋的demo版出现了！！后续还得自己购置服务器(bushi)或者租一台，弄个域名…现在大一只看到经费在燃烧哇。其实呢，看到自己把别的佬的resources学到并记录在互联网这样一个大家庭中，也算是一种对自己努力学习的见证吧！</p>
+<h3 id="感触"><a href="#感触" class="headerlink" title="感触"></a>感触</h3><p>之前遇到CS上的一些问题，在互联网上搜索，看到好的、精妙绝伦的就会点击收藏在收藏夹中。时间久了，收藏夹已经满了，而自己没有把他们分门别类的分好，便于自己以后查找。这也是我下定决心搭建blog的其中一个原因吧！<br>特别是最近在疯狂肝CTF，在网上查找了a deluge of 信息，看到大佬的blog做得精彩绝伦、赏心悦目，自己已然心动。出于对技术的渴望也是对自己近一段时间以来获取信息的掌握度，搭建自己的blog也是对自己成长的见证。<br>搭建blog，既是对自己在编程、学CS上的一点点见证，同时也可以锻炼自己的代码能力，包括后期维护啥的。将来工作时也可以呢…欸，不能明说。任何时候起步都不晚，重要的是起步了，就一切都好说。</p>...
+            </div>
+            
+            <div class="post-footer">
+              <a href="../../2024/10/13/hello-world/" class="read-more">
+                <i class="fas fa-code"></i>
+                Read More
+              </a>
+            </div>
           </div>
-        </div>
-        
-        <div class="post-body vscode-markdown">
-          <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><strong>题目描述</strong></h3><p>WEB入门5-请求头伪造</p>
-<p>在发生HTTP请求时，往往会带上许多请求头，这些请求头是可以被我们所控制的，倘若服务端没有进行校验而轻易相信，便会出现安全问题，试试解决这个问题吧！</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a><strong>解决</strong></h3><p>1.将cookie中的guest权限改为admin，同时增加题述中的发出请求的用户的电子邮件地址（From:…）</p>
-<p>2.接着增加其他题述中的请求头：X-forwards-for(从内网访问：127.0.0.1）、Via（通知中间网关或代理服务器地址，通讯协议）。</p>
-<p>3.得到flag</p>
-<h3 id="请求头相关链接-CTF——HTTP发送头Headers整理-CTF——HTTP发送头Headers整理-ctf-easyheader-CSDN博客-。"><a href="#请求头相关链接-CTF——HTTP发送头Headers整理-CTF——HTTP发送头Headers整理-ctf-easyheader-CSDN博客-。" class="headerlink" title="请求头相关链接[CTF——HTTP发送头Headers整理](CTF——HTTP发送头Headers整理_ctf easyheader-CSDN博客)。"></a>请求头相关链接[CTF——HTTP发送头Headers整理](<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51735061/article/details/123647266">CTF——HTTP发送头Headers整理_ctf easyheader-CSDN博客</a>)。</h3>
-        </div>
-        
-        <!-- 文章导航 -->
-        <nav class="post-nav">
-          
-            <a class="prev" href="../Db8Gr%E7%9A%84blog01/">
-              <i class="fas fa-chevron-left"></i>
-              Db8Gr的blog01
-            </a>
-          
-          
-            <a class="next" href="../../../01/21/XAUT2025%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%96%B0%E7%94%9F%E9%A2%84%E9%80%89%E8%B5%9B-WP/">
-              XAUT2025全国大学生信息安全竞赛新生预选赛-WP
-              <i class="fas fa-chevron-right"></i>
-            </a>
-          
+      </div>
+      
+        <nav class="pagination-container">
+          <div class="pagination-info">
+            <i class="fas fa-file-code"></i>
+            Page 2 of 2
+          </div>
+          <a class="extend prev" rel="prev" href="../../">&lt;i class&#x3D;&quot;fas fa-chevron-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="../../">1</a><span class="page-number current">2</span>
         </nav>
-      </article>
     </div>
   </div>
 </div>
@@ -312,7 +347,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 </script>
-<script src="../../../../js/toc.js"></script>
+<script src="../../js/toc.js"></script>
 
 <!-- Scripts -->
 <script>
@@ -340,8 +375,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 
 <!-- 添加所有需要的脚本 -->
-<script src="../../../../js/main.js"></script>
-<script src="../../../../js/search.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/search.js"></script>
 
 
     <script>

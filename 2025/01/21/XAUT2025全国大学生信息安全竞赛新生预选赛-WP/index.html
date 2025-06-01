@@ -3,7 +3,7 @@
   <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>CTF--Web的请求头伪造（简单的Wp） | D&#39;b8Gr的小站~</title>
+  <title>XAUT2025全国大学生信息安全竞赛新生预选赛-WP | D&#39;b8Gr的小站~</title>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../../../css/main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -142,7 +142,7 @@
         <span>TABLE OF CONTENTS</span>
       </div>
       <div class="section-content">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-text">解决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5-CTF%E2%80%94%E2%80%94HTTP%E5%8F%91%E9%80%81%E5%A4%B4Headers%E6%95%B4%E7%90%86-CTF%E2%80%94%E2%80%94HTTP%E5%8F%91%E9%80%81%E5%A4%B4Headers%E6%95%B4%E7%90%86-ctf-easyheader-CSDN%E5%8D%9A%E5%AE%A2-%E3%80%82"><span class="toc-text">请求头相关链接[CTF——HTTP发送头Headers整理](CTF——HTTP发送头Headers整理_ctf easyheader-CSDN博客)。</span></a></li></ol>
+        
       </div>
     </div>
     
@@ -160,8 +160,8 @@
         
           <div class="tag-item">
             <i class="fas fa-tag"></i>
-            <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">CTF基础知识</a>
-            <span class="count">(2)</span>
+            <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>
+            <span class="count">(1)</span>
           </div>
         
       </div>
@@ -174,24 +174,24 @@
     <div class="tab-bar">
       <div class="tab active">
         <i class="fas fa-file-alt"></i>
-        <span>CTF--Web的请求头伪造（简单的Wp）.md</span>
+        <span>XAUT2025全国大学生信息安全竞赛新生预选赛-WP.md</span>
       </div>
     </div>
     
     <div class="content-area">
       <article class="post-content">
         <div class="post-header">
-          <h1>CTF--Web的请求头伪造（简单的Wp）</h1>
+          <h1>XAUT2025全国大学生信息安全竞赛新生预选赛-WP</h1>
           <div class="post-meta">
             <span class="date">
               <i class="fas fa-calendar-alt"></i>
-              2025-06-01
+              2025-01-21
             </span>            
             
               <span class="tags">
                 <i class="fas fa-tags"></i>
                 <div class="tags-list">
-                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">CTF基础知识</a></li></ul>
+                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" rel="tag">比赛个人WP</a></li></ul>
                 </div>
               </span>
             
@@ -199,25 +199,30 @@
         </div>
         
         <div class="post-body vscode-markdown">
-          <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><strong>题目描述</strong></h3><p>WEB入门5-请求头伪造</p>
-<p>在发生HTTP请求时，往往会带上许多请求头，这些请求头是可以被我们所控制的，倘若服务端没有进行校验而轻易相信，便会出现安全问题，试试解决这个问题吧！</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a><strong>解决</strong></h3><p>1.将cookie中的guest权限改为admin，同时增加题述中的发出请求的用户的电子邮件地址（From:…）</p>
-<p>2.接着增加其他题述中的请求头：X-forwards-for(从内网访问：127.0.0.1）、Via（通知中间网关或代理服务器地址，通讯协议）。</p>
-<p>3.得到flag</p>
-<h3 id="请求头相关链接-CTF——HTTP发送头Headers整理-CTF——HTTP发送头Headers整理-ctf-easyheader-CSDN博客-。"><a href="#请求头相关链接-CTF——HTTP发送头Headers整理-CTF——HTTP发送头Headers整理-ctf-easyheader-CSDN博客-。" class="headerlink" title="请求头相关链接[CTF——HTTP发送头Headers整理](CTF——HTTP发送头Headers整理_ctf easyheader-CSDN博客)。"></a>请求头相关链接[CTF——HTTP发送头Headers整理](<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51735061/article/details/123647266">CTF——HTTP发送头Headers整理_ctf easyheader-CSDN博客</a>)。</h3>
+          
+
+	<div class="row">
+    <embed src="/debu8ger--XAUT2025全国大学生信息安全竞赛新生预选赛-WP.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+
+<span id="more"></span>
+
         </div>
         
         <!-- 文章导航 -->
         <nav class="post-nav">
           
-            <a class="prev" href="../Db8Gr%E7%9A%84blog01/">
+            <a class="prev" href="../../../06/01/CTF--Web%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BC%AA%E9%80%A0%EF%BC%88%E7%AE%80%E5%8D%95%E7%9A%84Wp%EF%BC%89/">
               <i class="fas fa-chevron-left"></i>
-              Db8Gr的blog01
+              CTF--Web的请求头伪造（简单的Wp）
             </a>
           
           
-            <a class="next" href="../../../01/21/XAUT2025%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%96%B0%E7%94%9F%E9%A2%84%E9%80%89%E8%B5%9B-WP/">
-              XAUT2025全国大学生信息安全竞赛新生预选赛-WP
+            <a class="next" href="../../../../2024/10/24/%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%BF%91%E6%9C%9Fcoding%E4%B9%8B%E6%97%85%E5%8F%8A%E9%9A%8F%E7%AC%94-2024%E5%B9%B4/">
+              大学的近期Coding之旅及随笔(2024年)
               <i class="fas fa-chevron-right"></i>
             </a>
           
