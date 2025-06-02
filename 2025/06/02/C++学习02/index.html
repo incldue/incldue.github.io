@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> | D&#39;b8Gr的小站~</title>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- 添加代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <!-- 添加highlight.js库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <!-- 添加mermaid.js库 -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <link rel="stylesheet" href="../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../css/code-custom.css">
+  <link rel="stylesheet" href="../../../../css/code-languages.css">
+  <link rel="stylesheet" href="../../../../css/mermaid.css">
+
+  <link rel="stylesheet" href="../../../../css/vscode.css">
+  <link rel="stylesheet" href="../../../../css/post.css">
+  <link rel="stylesheet" href="../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../css/archive.css">
+  <link rel="stylesheet" href="../../../../css/search.css">
+  <link rel="stylesheet" href="../../../../css/mobile.css">  <link rel="stylesheet" href="../../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../../css/elements.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+  <script src="../../../../js/explorer.js"></script>
+  <script src="../../../../js/code-copy.js"></script>
+  <script src="../../../../js/code-enhance.js"></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="/" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        D&#39;b8Gr的小站~
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="/archives/" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>归档</span>
+      </a>
+      <a href="/categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>分类</span>
+      </a>
+      <a href="/tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>标签</span>
+      </a>
+      <a href="/search/" class="nav-item ">
+        <i class="fas fa-search"></i>
+        <span>搜索</span>
+      </a>
+      <a href="/about/" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>关于</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
+</script>
+
+
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>TABLE OF CONTENTS</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%80%81"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E6%B5%81"><span class="toc-text">文件与流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-text">后记</span></a></li></ol>
+      </div>
+    </div>
+    
+    <!-- 同分类文章 -->
+    
+    
+    <!-- 标签列表 -->
+    
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <article class="post-content">
+        <div class="post-header">
+          <h1></h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2025-06-02
+            </span>            
+            
+          </div>
+        </div>
+        
+        <div class="post-body vscode-markdown">
+          <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ol>
+<li><strong>继承</strong>让我们能依据另一个类来定义一个类，这种特性也很容易创建和维护一个程序，从而达到了重用代码功能和提高执行效率的一个效果。</li>
+</ol>
+<p>​	当创建一个类时，无需重新编写新的数据成员、成员函数，只需指定该类<strong>继承一个已有类的成员即可</strong>，</p>
+<p>​	上述已有类称为<em><strong>基类</strong></em>，新建类则为<em><strong>派生类</strong></em>。</p>
+<ol start="2">
+<li><p>语法：</p>
+<p>a.基本：<em><strong>class子类(派生类) : 继承方式 父类(基类)</strong></em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br>    <span class="hljs-keyword">public</span>:<br>    	<span class="hljs-type">int</span> a;<br>    <span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>b.共有继承：基类的<strong>公用成员</strong>和<strong>保护成员</strong>在派生类中保持原有访问属性，其私有成员仍为私有。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">public</span> A&#123;<br>    <span class="hljs-keyword">public</span>:<br>    	<span class="hljs-type">int</span> a;<br>    <span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-comment">//不可访问:</span><br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>c.私有继承：基类的<strong>公用成员</strong>和<strong>保护成员</strong>在派生类中变为<strong>私有</strong>属性，其私有成员仍为私有。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">private</span> A&#123;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-type">int</span> a;<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-comment">//不可访问</span><br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>d.保护继承：基类的<strong>公用成员</strong>和<strong>保护成员</strong>在派生类中变为<strong>保护</strong>属性，其私有成员仍为私有。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">protected</span> A&#123;<br>    <span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> a;<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-comment">//不可访问</span><br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>多继承：一个子类可有多个父类，继承多个父类的特性。</p>
+<p>语法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> &lt;派生类名&gt;:&lt;继承方式<span class="hljs-number">1</span>&gt;&lt;基类<span class="hljs-number">1</span>&gt;,&lt;继承方式<span class="hljs-number">2</span>&gt;&lt;基类<span class="hljs-number">2</span>&gt;,...<br>&#123;<br>    &lt;派生类类体&gt;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE]</p>
+<p>访问修饰符继承方式可以是public、protected或private中的任何一个。</p>
+</blockquote>
+</li>
+<li><p>其他注意：</p>
+<p>a.派生类是不能继承基类的<strong>析构函数</strong>，也需要通过派生类的析构函数<strong>调用基类的析构函数</strong>。</p>
+<p>b.继承中先调用父类构造函数，再调用子类的，析构函数的调用顺序<strong>与之相反</strong>。</p>
+<p>c.C++中<em><strong>构造函数不能被派生类继承！</strong></em></p>
+</li>
+</ol>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><ol>
+<li><p>多态指具有不同功能的函数可以用同一个函数名。</p>
+<p>这也意味在调用成员函数时<strong>会根据调用函数的对象的不同类型来执行不同函数</strong>。</p>
+<p>当类之间存在<strong>层次结构&amp;&amp;类之间通过继承关联</strong>时，会用到多态。</p>
+</li>
+<li><p><strong>静态多态</strong>：函数重载、运算符重载</p>
+<p>a.重载声明指一个与之前已在该作用域内声明过的函数&#x2F;方法<strong>具有相同名称的声明</strong>，但<strong>参数列表和定义不同。</strong></p>
+<p>b.函数重载：同名函数功能类似，但形式参数<em><strong>必须不同</strong></em>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Print</span>&#123;<br>  	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">int</span> m)</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;整数为：&quot;</span>&lt;&lt;m&lt;&lt;endl;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">double</span> n)</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;浮点数为：&quot;</span>&lt;&lt;n&lt;&lt;endl;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">char</span> chr[])</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;字符串为：&quot;</span>&lt;&lt;chr&lt;&lt;endl;<br>        &#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    Print p;<br>    p.<span class="hljs-built_in">print</span>(<span class="hljs-number">5</span>);<br>    p.<span class="hljs-built_in">print</span>(<span class="hljs-number">3.14159</span>);<br>    <span class="hljs-type">char</span> chr[]=<span class="hljs-string">&quot;h3llo_w0rld&quot;</span>;<br>    p.<span class="hljs-built_in">print</span>(chr);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>c.运算符重载：运算符为带有特殊名称的函数，函数名由关键字<strong>operator</strong>和<strong>运算符符号</strong>构成。同时，重载运算符也有一个<strong>返回类型</strong>与一个<strong>参数列表</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//语法</span><br>Box <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Box&amp;); <span class="hljs-comment">//类成员函数</span><br>Box <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Box&amp;, <span class="hljs-type">const</span> Box&amp;); <span class="hljs-comment">//类的非成员函数</span><br><br><span class="hljs-comment">//示例</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Box</span>&#123;<br>	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getVolume</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> length * breadth * height;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setLength</span><span class="hljs-params">(<span class="hljs-type">double</span> len)</span> </span>&#123;<br>            length = len;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setBreadth</span><span class="hljs-params">(<span class="hljs-type">double</span> bre)</span> </span>&#123;<br>            breadth = bre;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setHeight</span><span class="hljs-params">(<span class="hljs-type">double</span> hei)</span> </span>&#123;<br>            height = hei;<br>        &#125;<br>    	<span class="hljs-comment">//重载+运算符，把两Box对象相加</span><br>    	Box <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Box&amp; b) &#123;<br>            Box box;<br>            box.length = <span class="hljs-keyword">this</span>-&gt;length + b.length;<br>            box.breadth = <span class="hljs-keyword">this</span>-&gt;breadth + b.breadth;<br>            box.height = <span class="hljs-keyword">this</span>-&gt;height + b.height;<br>        &#125;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-type">double</span> length;<br>    	<span class="hljs-type">double</span> breadth;<br>    	<span class="hljs-type">double</span> height;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>运算符列表：<img src="C:\Users\Jonathan Hu\AppData\Roaming\Typora\typora-user-images\image-20250602162602079.png" alt="image-20250602162602079" style="zoom:50%;" /></p>
+</li>
+<li><p><strong>动态多态</strong>：派生类和虚函数实现运行时多态</p>
+<p>a.<em><strong>虚函数</strong></em> 是在基类中使用关键字<strong>virtual</strong>声明的函数。在派生类中重新定义基类中的定义的虚函数时，会告诉编译器不要静态链接到基类中的该函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span>&#123;<br>  	<span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> width, height;<br>    <span class="hljs-keyword">public</span>:<br>    	<span class="hljs-built_in">Shape</span>(<span class="hljs-type">int</span> a=<span class="hljs-number">0</span>, <span class="hljs-type">int</span> b=<span class="hljs-number">0</span>) &#123;<br>            width = a;<br>            height = b;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">area</span><span class="hljs-params">()</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;Parent class area: &quot;</span>&lt;&lt;endl;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>    <br>    	<span class="hljs-comment">//纯虚函数</span><br>    	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">area</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>&#125;;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="文件与流"><a href="#文件与流" class="headerlink" title="文件与流"></a>文件与流</h2><ol>
+<li><p>**基本输入输出(I&#x2F;O)<strong>发生在</strong>流(字节序列)**中。<img src="C:\Users\Jonathan Hu\AppData\Roaming\Typora\typora-user-images\image-20250602163812734.png" alt="image-20250602163812734" style="zoom:50%;" /></p>
+</li>
+<li><p><strong>文件操作</strong>：从文件读取流和向文件写入流。<img src="C:\Users\Jonathan Hu\AppData\Roaming\Typora\typora-user-images\image-20250602164124156.png" alt="image-20250602164124156" style="zoom:50%;" /></p>
+<p>a.打开文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename, ios::openmode mode)</span></span>;<br><span class="hljs-comment">//第一个参数指定文件名称&amp;位置，第二个参数定义文件被打开的模式</span><br></code></pre></td></tr></table></figure>
+
+<p>打开模式：<img src="C:\Users\Jonathan Hu\AppData\Roaming\Typora\typora-user-images\image-20250602164523839.png" alt="image-20250602164523839" style="zoom:33%;" /></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//以写入模式打开文件，并希望截断文件</span><br>ofstream out;<br>out.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;file.dat&quot;</span>, ios::out | ios::trunc);<br><br><span class="hljs-comment">//打开一个文件用于读写</span><br>ifstream afile;<br>afile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;file.dat&quot;</span>, ios::out | ios::in);<br></code></pre></td></tr></table></figure>
+
+<p>b.关闭文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">close</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//close()是fstream、ifstream和ofstream对象的一个成员</span><br></code></pre></td></tr></table></figure>
+
+<p>c.读取&amp;写入示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fstream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> data[<span class="hljs-number">105</span>];<br>    <span class="hljs-comment">//已写模式打开文件</span><br>    ofstream outfile;<br>    outfile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;afile.dat&quot;</span>);<br>    <br>    cout&lt;&lt;<span class="hljs-string">&quot;Writing...&quot;</span>&lt;&lt;endl;<br>    cout&lt;&lt;<span class="hljs-string">&quot;Name: &quot;</span>;<br>    cin.<span class="hljs-built_in">getline</span>(data, <span class="hljs-number">105</span>);<br>    outfile&lt;&lt;data&lt;&lt;endl; <span class="hljs-comment">//数据写入文件</span><br>    cout&lt;&lt;<span class="hljs-string">&quot;Age: &quot;</span>;<br>    cin&gt;&gt;data;<br>    cin.<span class="hljs-built_in">ignore</span>(); <span class="hljs-comment">//ignore()函数会忽略之前读语句留下的多余字符。</span><br>    outfile&lt;&lt;data&lt;&lt;endl;<br>    outfile.<span class="hljs-built_in">close</span>();<br>    <span class="hljs-comment">//以读模式打开文件</span><br>    ifstream infile;<br>    infile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;afile.dat&quot;</span>);<br>    <br>    cout&lt;&lt;<span class="hljs-string">&quot;Reading...&quot;</span>&lt;&lt;endl;<br>    infile&gt;&gt;data;<br>    cout&lt;&lt;data&lt;&lt;endl;<br>    infile&gt;&gt;data;<br>    cout&lt;&lt;data&lt;&lt;endl;<br>    infile.<span class="hljs-built_in">close</span>();<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这个时间点的C++学习…懂得都懂 :)</p>
+
+        </div>
+        
+        <!-- 文章导航 -->
+        <nav class="post-nav">
+          
+          
+            <a class="next" href="../../01/Db8Gr%E7%9A%84blog01/">
+              Db8Gr的blog01
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          
+        </nav>
+      </article>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      debu8ger
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2025-06-02
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <!-- 全局配置 -->
+    <script>
+      window.HEXO_CONFIG = {
+        language: "zh-CN",
+        root: "/"
+      };
+      
+      // 特定于搜索的配置
+      window.VSC4T_SEARCH = {
+        root: "/"
+      };
+    </script>
+    
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Apply smooth scroll to non-TOC anchor links
+  document.querySelectorAll('a[href^="#"]:not(.toc-link)').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      // Check if querySelector is valid before using it
+      try {
+        const targetSelector = this.getAttribute('href');
+        // Basic check for potentially invalid selectors (though not exhaustive)
+        if (targetSelector && targetSelector.length > 1) { 
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          } else {
+            console.warn('Smooth scroll target not found:', targetSelector);
+          }
+        } else {
+           console.warn('Invalid href for smooth scroll:', targetSelector);
+        }
+      } catch (error) {
+        console.error('Error during smooth scroll:', error, 'Selector:', this.getAttribute('href'));
+        // Fallback or alternative behavior if needed
+        // For example, try getElementById if it's just an ID
+        const targetId = this.getAttribute('href').slice(1);
+        try {
+            const targetElementById = document.getElementById(decodeURIComponent(targetId));
+            if (targetElementById) {
+                targetElementById.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (idError) {
+             console.error('Fallback getElementById also failed:', idError);
+        }
+      }
+    });
+  });
+});
+</script>
+<script src="../../../../js/toc.js"></script>
+
+<!-- Scripts -->
+<script>
+  // 将语言文件中的翻译传递给前端
+  window.HEXO_CONFIG = {
+    language: "zh-CN",
+    search_placeholder: "输入关键词搜索...",
+    search_no_results: "未找到相关结果",
+    search_result: "نتيجة",
+    search_results: "搜索结果",
+    search_results_found: "找到 undefined 个结果",
+    search_in: "搜索范围",
+    search_in_title: "标题",
+    search_in_content: "内容",
+    search_in_tags: "标签",
+    search_in_categories: "分类",
+    search_filters: "搜索过滤器",
+    search_recent: "最近搜索",
+    search_clear: "清除",
+    search_loading: "加载中...",
+    search_error: "加载搜索数据时出错"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../../../js/main.js"></script>
+<script src="../../../../js/search.js"></script>
+
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        $('.mobile-menu-toggle').click(function() {
+          $('.sidebar-explorer').toggleClass('show');
+        });
+      });
+    </script>
+  </body>
+</html>
