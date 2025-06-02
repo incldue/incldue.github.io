@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://incldue.github.io/books/index.html</loc>
+    
+    <lastmod>2025-06-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/</loc>
     
     <lastmod>2025-06-02</lastmod>
@@ -142,13 +151,6 @@
   </url>
   
   <url>
-    <loc>https://incldue.github.io/tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
-    <lastmod>2025-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://incldue.github.io/tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/</loc>
     <lastmod>2025-06-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -157,6 +159,13 @@
   
   <url>
     <loc>https://incldue.github.io/tags/%E5%93%B2%E6%80%9D/</loc>
+    <lastmod>2025-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://incldue.github.io/tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
     <lastmod>2025-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
