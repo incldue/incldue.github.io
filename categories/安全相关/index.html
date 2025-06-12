@@ -62,11 +62,11 @@
         <i class="fas fa-archive"></i>
         <span>归档</span>
       </a>
-      <a href="/categories/" class="nav-item ">
+      <a href="/categories/" class="nav-item active">
         <i class="fas fa-folder"></i>
         <span>分类</span>
       </a>
-      <a href="/tags/" class="nav-item active">
+      <a href="/tags/" class="nav-item ">
         <i class="fas fa-tags"></i>
         <span>标签</span>
       </a>
@@ -137,52 +137,34 @@
   <div class="sidebar-explorer">
     <div class="explorer-section">
       <div class="section-header">
-        <i class="fas fa-tags"></i>
-        <span>ALL TAGS</span>
+        <i class="fas fa-folder-open"></i>
+        <span>CATEGORIES</span>
       </div>
       <div class="section-content">
         
-          <div class="tag-item active">
-            <i class="fas fa-tag"></i>
-            <a href="">C++学习</a>
+          <a class="category-item " href="../CTF%E7%9B%B8%E5%85%B3/">
+            <i class="fas fa-folder"></i>
+            <span>CTF相关</span>
+            <span class="count">(4)</span>
+          </a>
+        
+          <a class="category-item active" href="">
+            <i class="fas fa-folder"></i>
+            <span>安全相关</span>
             <span class="count">(2)</span>
-          </div>
+          </a>
         
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">CTF基础知识</a>
-            <span class="count">(3)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../CTF%E8%B5%9B%E9%A2%98/">CTF赛题</a>
-            <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../SRC%E6%8C%96%E6%B4%9E/">SRC挖洞</a>
+          <a class="category-item " href="../%E6%9D%82%E8%B0%88/">
+            <i class="fas fa-folder"></i>
+            <span>杂谈</span>
             <span class="count">(2)</span>
-          </div>
+          </a>
         
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../%E5%93%B2%E6%80%9D/">哲思</a>
-            <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>
-            <span class="count">(1)</span>
-          </div>
-        
-          <div class="tag-item ">
-            <i class="fas fa-tag"></i>
-            <a href="../%E9%9A%8F%E7%AC%94/">随笔</a>
-            <span class="count">(3)</span>
-          </div>
+          <a class="category-item " href="../%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
+            <i class="fas fa-folder"></i>
+            <span>程序设计</span>
+            <span class="count">(2)</span>
+          </a>
         
       </div>
     </div>
@@ -192,81 +174,44 @@
   <div class="editor-content">
     <div class="tab-bar">
       <div class="tab active">
-        <i class="fas fa-tag"></i>
-        <span>tag: C++%u5B66%u4E60.md</span>
+        <i class="fas fa-folder-open"></i>
+        <span>安全相关.md</span>
       </div>
     </div>
     
     <div class="content-area">
-      <div class="tag-header">
-        <h1>
-          <i class="fas fa-tag"></i>
-          Tag: C++学习
-        </h1>
-        <span class="tag-count">2 posts</span>
-      </div>
-
-      <div class="posts-container">
-        
-          <div class="post-card">
-            <div class="post-header">
+      <div class="category-detail">
+        <div class="category-header">
+          <i class="fas fa-folder"></i>
+          <h2>安全相关</h2>
+          <span class="count">2 posts</span>
+        </div>
+        <div class="category-posts">
+          
+            <div class="post-item">
               <i class="fas fa-file-alt"></i>
-              <span class="post-title">
-                <a href="../../2025/06/02/C++%E5%AD%A6%E4%B9%A002/">C++学习02</a>
-              </span>
+              <div class="post-info">
+                <a href="../../2025/06/11/SRC%E6%8C%96%E6%B4%9E01--%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86_1/">SRC挖洞01--信息收集_1</a>
+                <span class="date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2025-06-11
+                </span>
+              </div>
             </div>
-            
-            <div class="post-meta">
-              <span class="date">
-                <i class="fas fa-calendar-alt"></i>
-                2025-06-02
-              </span>
-              
-            </div>
-            
-            <div class="post-excerpt">
-              学习OOP时的一些知识点，涉及继承&多态&文件与流...
-            </div>
-            
-            <div class="post-footer">
-              <a href="../../2025/06/02/C++%E5%AD%A6%E4%B9%A002/" class="read-more">
-                <i class="fas fa-code"></i>
-                Read More
-              </a>
-            </div>
-          </div>
-        
-          <div class="post-card">
-            <div class="post-header">
+          
+            <div class="post-item">
               <i class="fas fa-file-alt"></i>
-              <span class="post-title">
-                <a href="../../2025/05/23/C++%E5%AD%A6%E4%B9%A001/">C++学习01</a>
-              </span>
+              <div class="post-info">
+                <a href="../../2025/06/03/SRC%E6%8C%96%E6%B4%9E00/">SRC挖洞00</a>
+                <span class="date">
+                  <i class="fas fa-calendar-alt"></i>
+                  2025-06-03
+                </span>
+              </div>
             </div>
-            
-            <div class="post-meta">
-              <span class="date">
-                <i class="fas fa-calendar-alt"></i>
-                2025-05-23
-              </span>
-              
-            </div>
-            
-            <div class="post-excerpt">
-              学习OOP时记录的一些知识点，涉及内存模型&函数...
-            </div>
-            
-            <div class="post-footer">
-              <a href="../../2025/05/23/C++%E5%AD%A6%E4%B9%A001/" class="read-more">
-                <i class="fas fa-code"></i>
-                Read More
-              </a>
-            </div>
-          </div>
-        
+          
+        </div>
       </div>
-
-      
     </div>
   </div>
 </div>
@@ -284,7 +229,7 @@
     </div>
     <div class="status-item">
       <i class="fas fa-clock"></i>
-      2025-06-11
+      2025-06-12
     </div>
     <div class="status-item">
       Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
@@ -365,7 +310,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     language: "zh-CN",
     search_placeholder: "输入关键词搜索...",
     search_no_results: "未找到相关结果",
-    search_result: "نتيجة",
+    search_result: "Ergebnis",
     search_results: "搜索结果",
     search_results_found: "找到 undefined 个结果",
     search_in: "搜索范围",
