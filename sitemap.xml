@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://incldue.github.io/404.html</loc>
+    
+    <lastmod>2025-09-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://incldue.github.io/tags/index.html</loc>
+    
+    <lastmod>2025-09-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://incldue.github.io/categories/index.html</loc>
+    
+    <lastmod>2025-09-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://incldue.github.io/2025/07/18/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A001%EF%BC%88X86%EF%BC%89/</loc>
     
     <lastmod>2025-09-26</lastmod>
@@ -138,24 +165,6 @@
   
   <url>
     <loc>https://incldue.github.io/search/index.html</loc>
-    
-    <lastmod>2025-05-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://incldue.github.io/tags/index.html</loc>
-    
-    <lastmod>2025-05-31</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://incldue.github.io/categories/index.html</loc>
     
     <lastmod>2025-05-31</lastmod>
     
