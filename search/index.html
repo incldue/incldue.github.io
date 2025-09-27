@@ -56,27 +56,27 @@
     <div class="nav-right">
       <a href="/" class="nav-item ">
         <i class="fas fa-home"></i>
-        <span>الرئيسية</span>
+        <span>Home</span>
       </a>
       <a href="/archives/" class="nav-item ">
         <i class="fas fa-archive"></i>
-        <span>الأرشيف</span>
+        <span>Archives</span>
       </a>
       <a href="/categories/" class="nav-item ">
         <i class="fas fa-folder"></i>
-        <span>التصنيفات</span>
+        <span>Categories</span>
       </a>
       <a href="/tags/" class="nav-item ">
         <i class="fas fa-tags"></i>
-        <span>الوسوم</span>
+        <span>Tags</span>
       </a>
       <a href="/search/" class="nav-item active">
         <i class="fas fa-search"></i>
-        <span>بحث</span>
+        <span>Search</span>
       </a>
       <a href="/about/" class="nav-item ">
         <i class="fas fa-info-circle"></i>
-        <span>حول</span>
+        <span>About</span>
       </a>
     </div>
   </nav>
@@ -138,23 +138,23 @@
     <div class="explorer-section">
       <div class="section-header">
         <i class="fas fa-search"></i>
-        <span>تصفية البحث</span>
+        <span>SEARCH FILTERS</span>
       </div>
       <div class="section-content">
         <div class="search-filters">
           <div class="filter-group">
-            <div class="filter-title">البحث في</div>
+            <div class="filter-title">Search in</div>
             <div class="filter-item">
               <input type="checkbox" id="search-titles" checked>
-              <label for="search-titles">العنوان</label>
+              <label for="search-titles">Title</label>
             </div>
             <div class="filter-item">
               <input type="checkbox" id="search-content" checked>
-              <label for="search-content">المحتوى</label>
+              <label for="search-content">Content</label>
             </div>
             <div class="filter-item">
               <input type="checkbox" id="search-tags" checked>
-              <label for="search-tags">الوسوم</label>
+              <label for="search-tags">Tags</label>
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@
     <div class="explorer-section">
       <div class="section-header">
         <i class="fas fa-history"></i>
-        <span>عمليات البحث الأخيرة</span>
+        <span>RECENT SEARCHES</span>
       </div>
       <div class="section-content">
         <div id="recent-searches">
@@ -185,14 +185,14 @@
     
     <div class="content-area">
       <div class="vs-search-header">
-        <h1><i class="fas fa-search"></i> بحث</h1>
-        <p>اكتب للبحث...</p>
+        <h1><i class="fas fa-search"></i> Search</h1>
+        <p>Type to search...</p>
       </div>
       
       <div id="vs-search-container" class="vs-search-container">
         <div class="vs-search-input-container">
           <i class="fas fa-search vs-search-icon"></i>
-          <input type="text" id="vs-search-input" class="vs-search-input" placeholder="اكتب للبحث..." autofocus>
+          <input type="text" id="vs-search-input" class="vs-search-input" placeholder="Type to search..." autofocus>
           <button id="vs-search-clear" class="vs-search-clear">
             <i class="fas fa-times"></i>
           </button>
@@ -200,19 +200,19 @@
         
         <div class="vs-search-status-bar">
           <div class="vs-search-status">
-            <span id="vs-search-counter">0 نتائج</span>
+            <span id="vs-search-counter">0 results</span>
           </div>
           <div class="vs-search-commands">
             <span class="vs-keybind"><span class="vs-key">↑</span><span class="vs-key">↓</span> to navigate</span>
             <span class="vs-keybind"><span class="vs-key">Enter</span> to select</span>
-            <span class="vs-keybind"><span class="vs-key">Esc</span> to مسح</span>
+            <span class="vs-keybind"><span class="vs-key">Esc</span> to clear</span>
           </div>
         </div>
         
         <div id="vs-search-results" class="vs-search-results">
           <div class="vs-search-loading">
             <i class="fas fa-spinner fa-spin"></i>
-            <span>جار التحميل...</span>
+            <span>Loading...</span>
           </div>
         </div>
       </div>
@@ -225,12 +225,12 @@
   window.HEXO_CONFIG = {
     language: "zh-Hans",
     root: "/",
-    search_placeholder: "اكتب للبحث...",
-    search_no_results: "لم يتم العثور على نتائج",
-    search_results: "نتائج",
-    search_result: "نتيجة",
-    search_loading: "جار التحميل...",
-    search_error: "خطأ في تحميل بيانات البحث"
+    search_placeholder: "Type to search...",
+    search_no_results: "No results found",
+    search_results: "results",
+    search_result: "result",
+    search_loading: "Loading...",
+    search_error: "Error loading search data"
   };
 
   // 特定于搜索的配置
@@ -355,21 +355,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // 将语言文件中的翻译传递给前端
   window.HEXO_CONFIG = {
     language: "zh-Hans",
-    search_placeholder: "اكتب للبحث...",
-    search_no_results: "لم يتم العثور على نتائج",
-    search_result: "نتيجة",
-    search_results: "نتائج",
-    search_results_found: "تم العثور على undefined نتائج",
-    search_in: "البحث في",
-    search_in_title: "العنوان",
-    search_in_content: "المحتوى",
-    search_in_tags: "الوسوم",
-    search_in_categories: "التصنيفات",
-    search_filters: "تصفية البحث",
-    search_recent: "عمليات البحث الأخيرة",
-    search_clear: "مسح",
-    search_loading: "جار التحميل...",
-    search_error: "خطأ في تحميل بيانات البحث"
+    search_placeholder: "Type to search...",
+    search_no_results: "No results found",
+    search_result: "result",
+    search_results: "results",
+    search_results_found: "Found undefined results",
+    search_in: "Search in",
+    search_in_title: "Title",
+    search_in_content: "Content",
+    search_in_tags: "Tags",
+    search_in_categories: "Categories",
+    search_filters: "Search Filters",
+    search_recent: "Recent Searches",
+    search_clear: "Clear",
+    search_loading: "Loading...",
+    search_error: "Error loading search data"
   };
 </script>
 
