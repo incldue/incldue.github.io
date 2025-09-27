@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>渗透测试01 | D&#39;b8Gr的小站~</title>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../../css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- 添加代码高亮样式 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <!-- 添加highlight.js库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <!-- 添加mermaid.js库 -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <link rel="stylesheet" href="../../../../css/code.css">
+  <link rel="stylesheet" href="../../../../css/code-custom.css">
+  <link rel="stylesheet" href="../../../../css/code-languages.css">
+  <link rel="stylesheet" href="../../../../css/mermaid.css">
+
+  <link rel="stylesheet" href="../../../../css/vscode.css">
+  <link rel="stylesheet" href="../../../../css/post.css">
+  <link rel="stylesheet" href="../../../../css/tag.css">
+  <link rel="stylesheet" href="../../../../css/categories.css">
+  <link rel="stylesheet" href="../../../../css/archive.css">
+  <link rel="stylesheet" href="../../../../css/search.css">
+  <link rel="stylesheet" href="../../../../css/mobile.css">  <link rel="stylesheet" href="../../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../../css/elements.css">
+
+  <!-- 添加 JetBrains Mono 字体 -->  
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Add any custom head content here -->
+
+  <script src="../../../../js/explorer.js"></script>
+  <script src="../../../../js/code-copy.js"></script>
+  <script src="../../../../js/code-enhance.js"></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+      <div class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <header class="vs-header">
+  <nav class="vs-nav">
+    <div class="nav-left">
+      <a href="/" class="nav-brand">
+        <i class="fas fa-terminal"></i>
+        D&#39;b8Gr的小站~
+      </a>
+    </div>
+    
+    <div class="nav-right">
+      <a href="/" class="nav-item ">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+      </a>
+      <a href="/archives/" class="nav-item ">
+        <i class="fas fa-archive"></i>
+        <span>الأرشيف</span>
+      </a>
+      <a href="/categories/" class="nav-item ">
+        <i class="fas fa-folder"></i>
+        <span>التصنيفات</span>
+      </a>
+      <a href="/tags/" class="nav-item ">
+        <i class="fas fa-tags"></i>
+        <span>الوسوم</span>
+      </a>
+      <a href="/search/" class="nav-item ">
+        <i class="fas fa-search"></i>
+        <span>بحث</span>
+      </a>
+      <a href="/about/" class="nav-item ">
+        <i class="fas fa-info-circle"></i>
+        <span>حول</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function smoothScroll(event, target) {
+    event.preventDefault();
+    const targetId = target.substring(target.indexOf('#') + 1);
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 50, // 调整偏移量
+        behavior: 'smooth'
+      });
+    } else {
+      window.location.href = target;
+    }
+  }
+
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('.vs-header');
+    const nav = document.querySelector('.vs-nav');
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    
+    nav.style.setProperty('--scroll-percent', `${scrollPercent}%`);
+    
+    if (window.scrollY > 0) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // 添加标签页切换动画
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('nav-ripple');
+      this.appendChild(ripple);
+      
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      
+      setTimeout(() => ripple.remove(), 1000);
+    });
+  });
+</script>
+
+
+<div class="vscode-container">
+  <!-- 左侧资源管理器 -->
+  <div class="sidebar-explorer">
+    <!-- TOC导航 -->
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-list"></i>
+        <span>TABLE OF CONTENTS</span>
+      </div>
+      <div class="section-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%9501"><span class="toc-text">渗透测试01</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x0-%E4%BB%8B%E7%BB%8D"><span class="toc-text">0x0.介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x1-%E5%88%86%E7%B1%BB"><span class="toc-text">0x1.分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x2-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%98%B6%E6%AE%B5"><span class="toc-text">0x2.渗透测试阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x3-%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">0x3.安全漏洞生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x4-%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%B5%84%E6%BA%90%E5%BA%93"><span class="toc-text">0x4.安全漏洞资源库</span></a></li></ol></li></ol>
+      </div>
+    </div>
+    
+    <!-- 同分类文章 -->
+    
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-folder"></i>
+        <span>CATEGORY POSTS</span>
+      </div>
+      <div class="section-content">
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../11/SRC%E6%8C%96%E6%B4%9E01--%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86_1/">SRC挖洞01--信息收集_1</a>
+          </div>
+        
+          <div class="file">
+            <i class="fas fa-file-code"></i>
+            <a href="../../03/SRC%E6%8C%96%E6%B4%9E00/">SRC挖洞00</a>
+          </div>
+        
+      </div>
+    </div>
+    
+    
+    <!-- 标签列表 -->
+    
+    <div class="explorer-section">
+      <div class="section-header">
+        <i class="fas fa-tags"></i>
+        <span>ARTICLE TAGS</span>
+      </div>
+      <div class="section-content">
+        
+          <div class="tag-item">
+            <i class="fas fa-tag"></i>
+            <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
+            <span class="count">(1)</span>
+          </div>
+        
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 主要内容区域 -->
+  <div class="editor-content">
+    <div class="tab-bar">
+      <div class="tab active">
+        <i class="fas fa-file-alt"></i>
+        <span>渗透测试01.md</span>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      <article class="post-content">
+        <div class="post-header">
+          <h1>渗透测试01</h1>
+          <div class="post-meta">
+            <span class="date">
+              <i class="fas fa-calendar-alt"></i>
+              2025-06-13
+            </span>            
+              <span class="categories">
+                <i class="fas fa-folder"></i>
+                <div class="categories-list">
+                  <ul class="category-item-post-list"><li class="category-item-post-list-item"><a class="category-item-post-list-link" href="../../../../categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">安全相关</a></li></ul>
+                </div>
+              </span>
+            
+            
+              <span class="tags">
+                <i class="fas fa-tags"></i>
+                <div class="tags-list">
+                  <ul class="tag-item-post-list" itemprop="keywords"><li class="tag-item-post-list-item"><a class="tag-item-post-list-link" href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag">渗透测试</a></li></ul>
+                </div>
+              </span>
+            
+          </div>
+        </div>
+        
+        <div class="post-body vscode-markdown">
+          <h2 id="渗透测试01"><a href="#渗透测试01" class="headerlink" title="渗透测试01"></a>渗透测试01</h2><h3 id="0x0-介绍"><a href="#0x0-介绍" class="headerlink" title="0x0.介绍"></a>0x0.介绍</h3><ol>
+<li><strong>渗透测试</strong>就是一种通过模拟恶意攻击者的技术&amp;方法，挫败目标系统安全控制措施、取得访问控制权、同时发现具备业务影响后果安全隐患的<strong>安全测试与评估方式</strong>。</li>
+<li>其一般需要对系统进行目标系统进行主动探测分析，以发现潜在的系统漏洞（包括不恰当的系统配置、已知或未知的软件硬件漏洞，以及在安全计划与响应过程中的操作性弱点…）</li>
+</ol>
+<h3 id="0x1-分类"><a href="#0x1-分类" class="headerlink" title="0x1.分类"></a>0x1.分类</h3><ol>
+<li><p><strong>黑盒测试</strong>（外部测试），设计为模拟一个对客户组织一无所知的攻击者所进行的渗透测试。</p>
+<p>a.采用该方式时，渗透测试人员将从一个<strong>远程网络位置</strong>来评估目标网络基础设施。值得注意的是，他们并没有任何目标网络内部拓扑等相关信息，即完全模拟外部攻击者，采用流行的攻击技术&amp;工具对目标组织进行逐步的<strong>渗透与入侵</strong>，揭示目标网络中的已知&#x2F;未知安全漏洞，并评估这些漏洞是否能被利用来<strong>获取控制权&#x2F;造成相关业务资产的损失</strong>。</p>
+<p>b.黑盒测试比较费时费力，同时也需要具备<strong>较高的技术能力</strong>。因此，也更受推崇。</p>
+</li>
+<li><p><strong>白盒测试</strong>（内部测试），设计为人员在拥有客户组织所有知识的情况下所进行的渗透测试。</p>
+<p>a.采用该方法时，渗透测试人员可以了解到关于目标环境的所以内部&amp;底层知识 &#x3D;&gt; 以最小代价发现&amp;验证系统中最严重的安全漏洞。</p>
+<p>b.白盒测试<strong>无需进行目标定位与情报搜集</strong>（在CTF中，一般是进行黑盒测试）；同时，其能够更加方便地在一次常规开发&amp;部署计划周期中集成，避免被入侵者发现利用可能存在的安全漏洞。</p>
+<p>c.其<strong>无法有效测试客户组织的应急响应程序</strong>。</p>
+</li>
+<li><p><strong>灰盒测试</strong>（白+黑的组合）</p>
+<p>a.灰盒测试需要渗透测试人员能够根据对目标系统所掌握的有限知识与信息，来评估整体安全性的<strong>最佳途径</strong>。</p>
+<p>b.简单来说，结合了黑盒测试&amp;白盒测试的各自优点。</p>
+</li>
+</ol>
+<h3 id="0x2-渗透测试阶段"><a href="#0x2-渗透测试阶段" class="headerlink" title="0x2.渗透测试阶段"></a>0x2.渗透测试阶段</h3><ol>
+<li><p><strong>前期交互</strong>：确定渗透测试的范围、目标、限制条件以及业务目标…</p>
+</li>
+<li><p><strong>情报搜集</strong>（白盒测试无）：获取更多关于目标组织<strong>网络拓扑、系统配置与安全防御措施</strong>的信息</p>
+<p>a.可以使用的方法包括公开来源信息查询、Google Hacking、社会工程学（社工，哈哈）、网络踩点、扫描探测（类似于嗅探）、被动监听、服务查点…</p>
+</li>
+<li><p><strong>威胁建模</strong>：通过共同的缜密情报分析&amp;攻击思路brainstorm，可以确定最可行的攻击通道。</p>
+</li>
+<li><p><strong>漏洞分析</strong>（如何root&#x2F;提权）：综合分析+找出攻击点+验证</p>
+</li>
+<li><p><strong>渗透攻击</strong>（真正提权）：考虑系统特性+挫败防御措施（+考虑检测机制的逃逸–黑盒）</p>
+</li>
+<li><p><strong>后渗透攻击</strong>：根据目标组织不同特点，自主设计攻击目标+寻找最具价值的信息&amp;资产，达成攻击途径。</p>
+</li>
+</ol>
+<h3 id="0x3-安全漏洞生命周期"><a href="#0x3-安全漏洞生命周期" class="headerlink" title="0x3.安全漏洞生命周期"></a>0x3.安全漏洞生命周期</h3><ol start="0">
+<li>利用安全漏洞来造成入侵&#x2F;破坏效果的程序为<em><strong>渗透代码（EXP–CTF中的老朋友了啊）</strong></em>。</li>
+<li><strong>安全漏洞研究&amp;挖掘</strong>：主要利用源代码审计（白盒测试）+逆向工程（灰盒测试）+Fuzz测试（黑盒测试）等方法，挖掘可用漏洞。</li>
+<li><strong>渗透代码开发与测试</strong>：黑客们会开发概念验证性的渗透代码 &#x3D;&gt; <em><strong>POC</strong></em>，用于验证漏洞是否存在。</li>
+<li><strong>安全漏洞&amp;渗透代码在团队内流传</strong>：“白帽”会通知厂商修补，后者给出补丁后再发布；“黑帽”以及“灰帽”则会各自进行秘密共享，以充分利用其所带来的攻击价值。</li>
+<li><strong>安全漏洞&amp;渗透代码开始扩散</strong>：安全漏洞和渗透代码最终被披露出来，在互联网上得以发布。</li>
+<li><strong>恶意程序出现+传播</strong>：“黑帽”在掌握安全漏洞&amp;渗透代码的基础上，进一步开发更易使用、更具有自动化传播能力的恶意程序，并通过社区、组织、互联网传播，进而快速扩散。</li>
+<li><strong>渗透代码&#x2F;恶意程序大规模扩散，造成危害</strong>：厂商发布补丁和安全警报让更多黑客了解，从而加以利用。</li>
+<li><strong>渗透代码&#x2F;攻击工具&#x2F;恶意程序&#x3D;&gt;消亡</strong>：检测&amp;移除机制得到广泛使用。</li>
+</ol>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<p>1.<strong>Patch</strong>为补丁；</p>
+<p>2.从安全漏洞被发现到厂商发布Patch用于修补该漏洞之前的这段期间，称为<em><strong>0day</strong></em>；</p>
+<p>3.在这段时间里，黑客攻击存有“0day”漏洞的目标可达到100%成功率，同时也可以躲避检测，因此“0day”和对应的渗透代码对与黑客社区有很高价值。</p>
+</blockquote>
+<h3 id="0x4-安全漏洞资源库"><a href="#0x4-安全漏洞资源库" class="headerlink" title="0x4.安全漏洞资源库"></a>0x4.安全漏洞资源库</h3><p>国内：</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cnnvd.org.cn/">CNNVD</a></strong>:中国国家漏洞库</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/">CNVD</a></strong>:中国国家信息安全漏洞共享平台</li>
+</ul>
+<p>国外：</p>
+<ul>
+<li><strong>CVE（通用漏洞与披露）</strong>：已成为安全漏洞命名索引的业界事实标准</li>
+<li><strong>NVD</strong>：国家漏洞数据库，是美国政府官方根据NIST的SCAP标准协议所描述的安全漏洞管理信息库</li>
+<li><strong>SecurityFocus</strong>：起源于Bugtraq邮件列表。</li>
+<li><strong>OSVDB</strong>：开源漏洞数据库，一个独立、开源的安全漏洞信息库</li>
+</ul>
+<!--more-->
+
+        </div>
+        
+        <!-- 文章导航 -->
+        <nav class="post-nav">
+          
+            <a class="prev" href="../../../07/18/%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A001%EF%BC%88X86%EF%BC%89/">
+              <i class="fas fa-chevron-left"></i>
+              汇编学习01
+            </a>
+          
+          
+            <a class="next" href="../../11/SRC%E6%8C%96%E6%B4%9E01--%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86_1/">
+              SRC挖洞01--信息收集_1
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          
+        </nav>
+      </article>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <footer class="footer">
+  <div class="status-bar">
+    <div class="status-item">
+      <i class="fas fa-code-branch"></i>
+      master
+    </div>
+    <div class="status-item">
+      <i class="fas fa-sync"></i>
+      debu8ger
+    </div>
+    <div class="status-item">
+      <i class="fas fa-clock"></i>
+      2025-09-27
+    </div>
+    <div class="status-item">
+      Designed By&nbsp; <a href="https://github.com/B143KC47" target="_blank"> BlackCat</a>
+    </div>
+    <div class="status-item github">
+      <a href="#" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+    
+    <!-- 全局配置 -->
+    <script>
+      window.HEXO_CONFIG = {
+        language: "zh-Hans",
+        root: "/"
+      };
+      
+      // 特定于搜索的配置
+      window.VSC4T_SEARCH = {
+        root: "/"
+      };
+    </script>
+    
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <!-- 这里可以放置自定义脚本 -->
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  // Apply smooth scroll to non-TOC anchor links
+  document.querySelectorAll('a[href^="#"]:not(.toc-link)').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      // Check if querySelector is valid before using it
+      try {
+        const targetSelector = this.getAttribute('href');
+        // Basic check for potentially invalid selectors (though not exhaustive)
+        if (targetSelector && targetSelector.length > 1) { 
+          const targetElement = document.querySelector(targetSelector);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          } else {
+            console.warn('Smooth scroll target not found:', targetSelector);
+          }
+        } else {
+           console.warn('Invalid href for smooth scroll:', targetSelector);
+        }
+      } catch (error) {
+        console.error('Error during smooth scroll:', error, 'Selector:', this.getAttribute('href'));
+        // Fallback or alternative behavior if needed
+        // For example, try getElementById if it's just an ID
+        const targetId = this.getAttribute('href').slice(1);
+        try {
+            const targetElementById = document.getElementById(decodeURIComponent(targetId));
+            if (targetElementById) {
+                targetElementById.scrollIntoView({ behavior: 'smooth' });
+            }
+        } catch (idError) {
+             console.error('Fallback getElementById also failed:', idError);
+        }
+      }
+    });
+  });
+});
+</script>
+<script src="../../../../js/toc.js"></script>
+
+<!-- Scripts -->
+<script>
+  // 将语言文件中的翻译传递给前端
+  window.HEXO_CONFIG = {
+    language: "zh-Hans",
+    search_placeholder: "اكتب للبحث...",
+    search_no_results: "لم يتم العثور على نتائج",
+    search_result: "نتيجة",
+    search_results: "نتائج",
+    search_results_found: "تم العثور على undefined نتائج",
+    search_in: "البحث في",
+    search_in_title: "العنوان",
+    search_in_content: "المحتوى",
+    search_in_tags: "الوسوم",
+    search_in_categories: "التصنيفات",
+    search_filters: "تصفية البحث",
+    search_recent: "عمليات البحث الأخيرة",
+    search_clear: "مسح",
+    search_loading: "جار التحميل...",
+    search_error: "خطأ في تحميل بيانات البحث"
+  };
+</script>
+
+
+
+<!-- 添加所有需要的脚本 -->
+<script src="../../../../js/main.js"></script>
+<script src="../../../../js/search.js"></script>
+
+
+    <script>
+      // 移动端菜单切换
+      $(document).ready(function() {
+        $('.mobile-menu-toggle').click(function() {
+          $('.sidebar-explorer').toggleClass('show');
+        });
+      });
+    </script>
+  </body>
+</html>
