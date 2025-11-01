@@ -1,1 +1,589 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=2,maximum-scale=3,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>D&#39;b8Gr的小站~</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet><meta name="generator" content="Hexo 7.3.0"></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2025 XAUTCTF新生赛 rev&amp;algo部分WP | D&#39;b8Gr的小站~</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="debu8ger, D'b8Gr" />
+  
+  <meta name="description" content="今年XAUTCTF新生赛rev&amp;algo部分WP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025 XAUTCTF新生赛 rev&amp;algo部分WP">
+<meta property="og:url" content="https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="今年XAUTCTF新生赛rev&amp;algo部分WP">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/images/re1.png">
+<meta property="og:image" content="https://incldue.github.io/images/re2.png">
+<meta property="og:image" content="https://incldue.github.io/images/re3.png">
+<meta property="og:image" content="https://incldue.github.io/images/re4.png">
+<meta property="og:image" content="https://incldue.github.io/images/re5.png">
+<meta property="og:image" content="https://incldue.github.io/images/re6.png">
+<meta property="og:image" content="https://incldue.github.io/images/re8.png">
+<meta property="og:image" content="https://incldue.github.io/images/re10.png">
+<meta property="og:image" content="https://incldue.github.io/images/re11.png">
+<meta property="og:image" content="https://incldue.github.io/images/re12.png">
+<meta property="article:published_time" content="2025-10-23T16:16:48.000Z">
+<meta property="article:modified_time" content="2025-10-23T16:27:22.706Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="比赛个人WP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://incldue.github.io/images/re1.png">
+  
+  
+    <link rel="icon" href="/static/avatar/avatar.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+<script src="../../../../js/pace.min.js"></script>
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'true', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?true";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+  <div style="display: none;">
+    <script src="//s22.cnzz.com/z_stat.php?id=true&web_id=true" language="JavaScript"></script>
+  </div>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="../../../../index.html" class="left">
+                    <span class="site-title">D&#39;b8Gr的小站</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="../../../../index.html">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="../../../../archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="../../../../pages/about/index">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="../../../../index.html">
+                    <img src="../../../../static/avatar/avatar.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        D&#39;b8Gr的小站
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个CTFer的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="debu8ger" target="_blank" href="//incldue.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/incldue">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//x.com/JonathanHu70782">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-XAUTCTF2025 rev&amp;algo部分WP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      2025 XAUTCTF新生赛 rev&amp;algo部分WP
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/CTF相关/">CTF相关</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2025-10-24
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="algo"><a href="#algo" class="headerlink" title="algo"></a>algo</h2><h3 id="ezzz-base"><a href="#ezzz-base" class="headerlink" title="ezzz_base"></a>ezzz_base</h3><hr>
+<p>题目描述：欸，这个base怎么有点不一样？？</p>
+<hr>
+<p>打开附件，</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">dict</span>:&#123;<span class="hljs-number">0</span>: &#x27;J&#x27;, <span class="hljs-number">1</span>: &#x27;K&#x27;, <span class="hljs-number">2</span>: &#x27;L&#x27;, <span class="hljs-number">3</span>: &#x27;M&#x27;, <span class="hljs-number">4</span>: &#x27;N&#x27;, <span class="hljs-number">5</span>: &#x27;O&#x27;, <span class="hljs-number">6</span>: &#x27;x&#x27;, <span class="hljs-number">7</span>: &#x27;y&#x27;, <span class="hljs-number">8</span>: &#x27;U&#x27;, <span class="hljs-number">9</span>: &#x27;V&#x27;, <span class="hljs-number">10</span>: &#x27;z&#x27;, <span class="hljs-number">11</span>: &#x27;A&#x27;, <span class="hljs-number">12</span>: &#x27;B&#x27;, <span class="hljs-number">13</span>: &#x27;C&#x27;, <span class="hljs-number">14</span>: &#x27;D&#x27;, <span class="hljs-number">15</span>: &#x27;E&#x27;, <span class="hljs-number">16</span>: &#x27;F&#x27;, <span class="hljs-number">17</span>: &#x27;G&#x27;, <span class="hljs-number">18</span>: &#x27;H&#x27;, <span class="hljs-number">19</span>: &#x27;<span class="hljs-number">7</span>&#x27;, <span class="hljs-number">20</span>: &#x27;<span class="hljs-number">8</span>&#x27;, <span class="hljs-number">21</span>: &#x27;<span class="hljs-number">9</span>&#x27;, <span class="hljs-number">22</span>: &#x27;P&#x27;, <span class="hljs-number">23</span>: &#x27;Q&#x27;, <span class="hljs-number">24</span>: &#x27;I&#x27;, <span class="hljs-number">25</span>: &#x27;a&#x27;, <span class="hljs-number">26</span>: &#x27;b&#x27;, <span class="hljs-number">27</span>: &#x27;c&#x27;, <span class="hljs-number">28</span>: &#x27;d&#x27;, <span class="hljs-number">29</span>: &#x27;e&#x27;, <span class="hljs-number">30</span>: &#x27;f&#x27;, <span class="hljs-number">31</span>: &#x27;g&#x27;, <span class="hljs-number">32</span>: &#x27;h&#x27;, <span class="hljs-number">33</span>: &#x27;i&#x27;, <span class="hljs-number">34</span>: &#x27;j&#x27;, <span class="hljs-number">35</span>: &#x27;k&#x27;, <span class="hljs-number">36</span>: &#x27;l&#x27;, <span class="hljs-number">37</span>: &#x27;m&#x27;, <span class="hljs-number">38</span>: &#x27;W&#x27;, <span class="hljs-number">39</span>: &#x27;X&#x27;, <span class="hljs-number">40</span>: &#x27;Y&#x27;, <span class="hljs-number">41</span>: &#x27;Z&#x27;, <span class="hljs-number">42</span>: &#x27;<span class="hljs-number">0</span>&#x27;, <span class="hljs-number">43</span>: &#x27;<span class="hljs-number">1</span>&#x27;, <span class="hljs-number">44</span>: &#x27;<span class="hljs-number">2</span>&#x27;, <span class="hljs-number">45</span>: &#x27;<span class="hljs-number">3</span>&#x27;, <span class="hljs-number">46</span>: &#x27;<span class="hljs-number">4</span>&#x27;, <span class="hljs-number">47</span>: &#x27;<span class="hljs-number">5</span>&#x27;, <span class="hljs-number">48</span>: &#x27;<span class="hljs-number">6</span>&#x27;, <span class="hljs-number">49</span>: &#x27;R&#x27;, <span class="hljs-number">50</span>: &#x27;S&#x27;, <span class="hljs-number">51</span>: &#x27;T&#x27;, <span class="hljs-number">52</span>: &#x27;n&#x27;, <span class="hljs-number">53</span>: &#x27;o&#x27;, <span class="hljs-number">54</span>: &#x27;p&#x27;, <span class="hljs-number">55</span>: &#x27;q&#x27;, <span class="hljs-number">56</span>: &#x27;r&#x27;, <span class="hljs-number">57</span>: &#x27;s&#x27;, <span class="hljs-number">58</span>: &#x27;t&#x27;, <span class="hljs-number">59</span>: &#x27;u&#x27;, <span class="hljs-number">60</span>: &#x27;v&#x27;, <span class="hljs-number">61</span>: &#x27;w&#x27;, <span class="hljs-number">62</span>: &#x27;+&#x27;, <span class="hljs-number">63</span>: &#x27;/&#x27;, <span class="hljs-number">64</span>: &#x27;=&#x27;&#125;<br><br><span class="hljs-attribute">chipertext</span>:<br><span class="hljs-attribute">PNO99NC8GX3nHMCgc8KT9x9SQTKxQpUndn9w</span><br></code></pre></td></tr></table></figure>
+
+<p>通过“&#x3D;”和64个字符，得知是base64编码的一个换表，</p>
+<p>重新换表后输入密文解码得到flag：XAUTCTF{tH3_m@sTer_0F_b4sE}</p>
+<h3 id="e咋不是65537？？？"><a href="#e咋不是65537？？？" class="headerlink" title="e咋不是65537？？？"></a>e咋不是65537？？？</h3><hr>
+<p>题目描述：完了，e不是65537，咋办呢？</p>
+<hr>
+<p>关于RSA的前置知识，建议食用<a target="_blank" rel="noopener" href="https://xz.aliyun.com/news/16125">关于CTF-RSA题目类型解题思路</a></p>
+<p>打开附件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br>m=bytes_to_long(<span class="hljs-string">b&#x27;xxxxxx&#x27;</span>)<br>p=getPrime(<span class="hljs-number">256</span>)<br>q=getPrime(<span class="hljs-number">256</span>)<br>e=<span class="hljs-number">74</span><br>n=p*q<br>c=<span class="hljs-built_in">pow</span>(m,e,n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;p=&quot;</span>,p)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;q=&quot;</span>,q)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;c=&quot;</span>,c)<br><span class="hljs-comment">#p = 86053582917386343422567174764040471033234388106968488834872953625339458483149</span><br><span class="hljs-comment">#q = 72031998384560188060716696553519973198388628004850270102102972862328770104493</span><br><span class="hljs-comment">#c = 331902287503397442396418773991759527842718419738370800180657653090960908650804</span><br><span class="hljs-comment">#    1781233603918453326670975069669017566120311964861589659101428987255146018427</span><br><br></code></pre></td></tr></table></figure>
+
+<p>简单的RSA，但与一般的RSA不同的是e为74。</p>
+<p>e&#x3D;74&#x3D;2*37，不与phi(n)互素，得使用最大公约数(GCD)来解答，明文m0，密文c，<strong>c&#x3D;m0^e (mod n)</strong></p>
+<p>令<code>t = gcd(e,phi(n))</code>，使<code>e = t*e&#39;</code>，从而得到<code>gcd(e&#39;,phi(n))=1</code>，重新互素。</p>
+<p>计算步骤：</p>
+<ol>
+<li>计算<code>t = gcd(e,phi(n))</code></li>
+<li>令<code>e&#39; = e/t</code>，求<code>d = (e&#39;)^-1 (mod phi(n))</code></li>
+<li>最后计算<code>m = c^d mod n</code>，也就为最终的明文</li>
+</ol>
+<p>EXP：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gmpy2<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 当e约去公约数t后与phi(n)互素</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">decrypt</span>(<span class="hljs-params">p, q, e, c</span>):<br>    n = p * q<br>    phi = (p - <span class="hljs-number">1</span>) * (q - <span class="hljs-number">1</span>)<br>    t = gmpy2.gcd(e, phi)<br>    d = gmpy2.invert(e // t, phi)<br>    m = <span class="hljs-built_in">pow</span>(c, d, n)<br>    <span class="hljs-built_in">print</span>(m)<br>    msg = gmpy2.iroot(m, t)<br>    <span class="hljs-built_in">print</span>(msg)<br>    <span class="hljs-keyword">if</span> msg[<span class="hljs-number">1</span>]:<br>        <span class="hljs-built_in">print</span>(long_to_bytes(msg[<span class="hljs-number">0</span>]))<br>e=<span class="hljs-number">74</span><br>p= <span class="hljs-number">86053582917386343422567174764040471033234388106968488834872953625339458483149</span><br>q= <span class="hljs-number">72031998384560188060716696553519973198388628004850270102102972862328770104493</span><br>c= <span class="hljs-number">3319022875033974423964187739917595278427184197383708001806576530909609086508041781233603918453326670975069669017566120311964861589659101428987255146018427</span><br><br>decrypt(p, q, e, c)<br><br><span class="hljs-comment"># XAUTCTF&#123;e_1s_n0t_@_Prime&#125;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Close-Enough"><a href="#Close-Enough" class="headerlink" title="Close Enough"></a>Close Enough</h3><hr>
+<p>题目描述：听说 RSA 非常安全？可是如果两个质数选得“太接近”，结果会怎样呢？</p>
+<hr>
+<p>打开附件，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> getPrime, bytes_to_long, isPrime, inverse<br><br>//找到大于n的最大素数<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">nextprime</span>(<span class="hljs-params">n</span>):<br>    n += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> isPrime(n):<br>        n += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> n<br><br>flag = <span class="hljs-string">&quot;&quot;</span><br>e = <span class="hljs-number">65537</span><br><br>p = getPrime(<span class="hljs-number">512</span>)<br>q = nextprime(p + (<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">20</span>))<br><br>n = p * q<br>phi = (p - <span class="hljs-number">1</span>) * (q - <span class="hljs-number">1</span>)<br>d = inverse(e, phi)<br><br>m = bytes_to_long(<span class="hljs-built_in">bytes</span>(flag, <span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>c = <span class="hljs-built_in">pow</span>(m, e, n)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;n =&quot;</span>, n)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;c =&quot;</span>, c)<br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">n = 123396213393166669967180741417142386608199293295343396860771048265983027294499309946576382614888097841439905355747919662299668639065387197060901118151079928153661471067906790612624750455011912757452786783406975664690965235505528837643347037179762435944987875469138529309017524600020070268892228090521628748157</span><br><span class="hljs-string">c = 96164959972807254618417630680358223130932461911993510788732180904733021127322517962027522173599694137945712716717847174536035583857007099675639087774330478493529755676338936283880541666682835088571888431839407259147158612358623749706985446040831405827991266588402528874606153834653456725906949141238839683080</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>我们知道了n、c和e，通过nextprime函数和p、q的设定得知q是<code>p+2^20</code>之后的一个大素数，鉴于生成的素数都很大，所以该题中p和q相差不大。</p>
+<p>在这里，我们有两种思路：</p>
+<ol>
+<li><p><strong>费马分解</strong>：我们知道了<code>n = p*q</code>后，设：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-keyword">a</span> = (p+q)/<span class="hljs-number">2</span><br>b = (q-p)/<span class="hljs-number">2</span><br>得 n = (<span class="hljs-keyword">a</span>+b)(<span class="hljs-keyword">a</span>-b) = <span class="hljs-keyword">a</span>^<span class="hljs-number">2</span>-b^<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+<p>本题，<code>p</code>和<code>q</code>接近，可以从<code>ceil(sqrt(n))</code>将n开方后尝试a，直至<code>a^2-n</code>为完全平方数</p>
+</li>
+<li><p><strong>基于偏移量的暴力搜索(逼近)</strong>：</p>
+<p>我们知道了<code>q = p +2^20</code>，则<code>n = p*q = p*(p +2^20) = p^2 + 2^20 * p</code></p>
+<p>则<code>p^2 + 2^20 * p - n</code>也就约等于<code>0</code>了，解方程式得p。</p>
+<p>知道了<code>p</code>，也就知道了<code>q</code>，之后就是RSA的常规操作了。</p>
+</li>
+</ol>
+<p>所以，我们解密该RSA的核心思路就是通过<code>p^2 + 2^20 * p - n</code>解方程得到<code>p</code>的大概值，从其前后各试多个数，从<code>是不是素数</code>、<code>q_ca = p+2^20大的下一个素数</code>、<code>p*q_ca是不是为n</code>几个方面猜测，循环直至得到找到<code>p</code>和<code>q</code>。通过数学估算+暴力逼近解密RSA。</p>
+<p>EXP：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> isqrt<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> isPrime, inverse, long_to_bytes<br><br>n = <span class="hljs-number">123396213393166669967180741417142386608199293295343396860771048265983027294499309946576382614888097841439905355747919662299668639065387197060901118151079928153661471067906790612624750455011912757452786783406975664690965235505528837643347037179762435944987875469138529309017524600020070268892228090521628748157</span><br>c = <span class="hljs-number">96164959972807254618417630680358223130932461911993510788732180904733021127322517962027522173599694137945712716717847174536035583857007099675639087774330478493529755676338936283880541666682835088571888431839407259147158612358623749706985446040831405827991266588402528874606153834653456725906949141238839683080</span><br>e = <span class="hljs-number">65537</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">nextprime</span>(<span class="hljs-params">n</span>):<br>    n += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> isPrime(n):<br>        n += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> x<br><br>//估算p<br>delta = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">20</span><br>p_guess = (isqrt(<span class="hljs-number">4</span> * n + delta * delta) - delta) // <span class="hljs-number">2</span><br><br>//得到大概值后前后数猜测<br><span class="hljs-keyword">for</span> diff <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(-<span class="hljs-number">50000</span>, <span class="hljs-number">50000</span>):<br>    p = p_guess + diff<br>    <span class="hljs-keyword">if</span> p &lt;= <span class="hljs-number">1</span>: <span class="hljs-keyword">continue</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isPrime(p): <span class="hljs-keyword">continue</span><br>    q = nextprime(p + delta)<br>    <span class="hljs-keyword">if</span> p * q == n:<br>        <span class="hljs-keyword">break</span><br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Failed to find p, q&quot;</span>)<br>    exit()<br><br>phi = (p - <span class="hljs-number">1</span>) * (q - <span class="hljs-number">1</span>)<br>d = inverse(e, phi)<br>m = <span class="hljs-built_in">pow</span>(c, d, n)<br>flag = long_to_bytes(m).decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>, errors=<span class="hljs-string">&#x27;ignore&#x27;</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Flag:&quot;</span>, flag)<br><br><span class="hljs-comment">#flag: XAUTCTF&#123;Y0u_c@n_d0_3zzz_rs4!!!&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="rev"><a href="#rev" class="headerlink" title="rev"></a>rev</h2><h3 id="SignIn"><a href="#SignIn" class="headerlink" title="SignIn"></a>SignIn</h3><hr>
+<p>题目描述：来签个到吧！ 什么？你想直接得到flag？</p>
+<hr>
+<p>下载附件，用IDA打开，看到全是密密麻麻的函数肯定不想看下去了吧</p>
+<p>直接<code>Ctrl+F12</code>看所有的字符串，得到flag：XAUTCTF{F|rsT_5t3P_}</p>
+<h3 id="Welcome-to-Reverse-World"><a href="#Welcome-to-Reverse-World" class="headerlink" title="Welcome to Reverse World"></a>Welcome to Reverse World</h3><hr>
+<p>题目描述：XAUT网络安全小组的新实验室刚刚上线，传说每一个想要进入实验室的人，必须在入口处输入正确的口令。</p>
+<p>然而，这个口令被小组的成员编译进了一段神秘程序中。</p>
+<p>想要成为实验室的新成员，你必须通过逆向分析，找出正确的通关口令！</p>
+<p>程序已经为你准备好，快来试试吧！</p>
+<hr>
+<p>下载附件，用IDA打开，查看字符串，很遗憾，你被骗了 T_T</p>
+<p>本题有<strong>两种解法</strong>：直接用<code>strings</code>看&#x2F;将十六进制转换</p>
+<p>第一种<strong>转换</strong>：进入main函数，<img src="/images/re1.png" alt="re1"></p>
+<p>v6数组存储的字符串就是加密后的flag,即 <code>xmmword_2080</code>、<code>xmmword_2090</code>、<code>xmmword_20A0</code>。</p>
+<p>单击进入，得到小端序的flag十六进制字节：</p>
+<p><img src="/images/re2.png" alt="re2"></p>
+<p>我们把这些数值反转，再转换为ASCII字符，</p>
+<p>得到flag：XAUTCTF{W3c0me_T0_tH3_w0r1d_oF_R3verSe_3nGineErin9!!!}</p>
+<p>第二种<strong>直接strings命令</strong>：在命令行输入<code>strings welcome_rev</code>，即可得到flag。</p>
+<p><img src="/images/re3.png" alt="re3"></p>
+<h3 id="你喜欢贝斯吗"><a href="#你喜欢贝斯吗" class="headerlink" title="你喜欢贝斯吗"></a>你喜欢贝斯吗</h3><hr>
+<p>题目描述：听说贝斯蛮好听的，一起来听吧！</p>
+<hr>
+<p>下载附件。在IDA中打开，</p>
+<p>一样的，查看字符串，看到一串奇怪的字符串<code>WEFVVENURntTM2MwbkRfOUhhczNffQ==</code>，</p>
+<p>后面有两个<code>=</code>的一定是base64编码，一个<code>=</code>的一般是base32编码，</p>
+<p>我们放到解码模块里得到flag：XAUTCTF{S3c0nD_9Has3_}</p>
+<h3 id="base-revenge"><a href="#base-revenge" class="headerlink" title="base_revenge"></a>base_revenge</h3><hr>
+<p>题目描述：base reunion</p>
+<hr>
+<p>IDA中打开，查看main函数，代码逻辑为用<code>base58字母表加密base64表</code>，<code>然后再用解密后的base64表去加密flag</code>，得到密文。</p>
+<p>知道了逻辑，只需找到对应的字符串即可，</p>
+<p><img src="/images/re4.png" alt="re4"></p>
+<p>先用base58标准字母表解密base64加密表(注意，上下两个字符串都是表，base64表为64个字符)得<code>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/</code></p>
+<p>再用解密后的表解密密文得到flag：XAUTCTF{|_|nu5U@L_b@sE}</p>
+<h3 id="Eeeeazy"><a href="#Eeeeazy" class="headerlink" title="Eeeeazy"></a>Eeeeazy</h3><hr>
+<p>题目描述：can u find me??? 得到的flag用XAUTCTF{}包裹提交</p>
+<p>​		   hint：涉及动态调试，可参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/lsgxeva/p/18629167">IDA使用技巧之动态调试</a></p>
+<hr>
+<p>IDA打开，定位<code>_main函数</code>，打开：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"> __main();<br>  <span class="hljs-built_in">time</span>(&amp;Time);<br>  v5 = <span class="hljs-built_in">localtime</span>(&amp;Time);<br>  <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Can you find me?\n&quot;</span>);<br>  <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>没啥好看的，继续看可疑函数，找到了<code>_ques函数</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c++">  v3 = <span class="hljs-number">2147122737</span>;<br>  v4[<span class="hljs-number">0</span>] = <span class="hljs-number">140540</span>;<br>  v4[<span class="hljs-number">1</span>] = <span class="hljs-number">-2008399303</span>;<br>  v4[<span class="hljs-number">2</span>] = <span class="hljs-number">141956</span>;<br>  v4[<span class="hljs-number">3</span>] = <span class="hljs-number">139457077</span>;<br>  v4[<span class="hljs-number">4</span>] = <span class="hljs-number">262023</span>;<br>  v4[<span class="hljs-number">5</span>] = <span class="hljs-number">-2008923597</span>;<br>  v4[<span class="hljs-number">6</span>] = <span class="hljs-number">143749</span>;<br>  v4[<span class="hljs-number">7</span>] = <span class="hljs-number">2118271985</span>;<br>  v4[<span class="hljs-number">8</span>] = <span class="hljs-number">143868</span>;<br>  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">4</span>; ++i )<br>  &#123;<br>    <span class="hljs-built_in">memset</span>(v2, <span class="hljs-number">0</span>, <span class="hljs-built_in">sizeof</span>(v2));<br>    v8 = <span class="hljs-number">0</span>;<br>    v7 = <span class="hljs-number">0</span>;<br>    v0 = v4[<span class="hljs-number">2</span> * i];<br>    <span class="hljs-built_in">LODWORD</span>(v6) = v4[<span class="hljs-number">2</span> * i - <span class="hljs-number">1</span>];<br>    <span class="hljs-built_in">HIDWORD</span>(v6) = v0;<br>    <span class="hljs-keyword">while</span> ( v6 &gt; <span class="hljs-number">0</span> )<br>    &#123;<br>      v2[v8++] = v6 % <span class="hljs-number">2</span>;<br>      v6 /= <span class="hljs-number">2LL</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span> ( j = <span class="hljs-number">50</span>; j &gt;= <span class="hljs-number">0</span>; --j )<br>    &#123;<br>      <span class="hljs-keyword">if</span> ( v2[j] )<br>      &#123;<br>        <span class="hljs-keyword">if</span> ( v2[j] == <span class="hljs-number">1</span> )<br>        &#123;<br>          <span class="hljs-built_in">putchar</span>(<span class="hljs-number">42</span>);<br>          ++v7;<br>        &#125;<br>      &#125;<br>      <span class="hljs-keyword">else</span><br>      &#123;<br>        <span class="hljs-built_in">putchar</span>(<span class="hljs-number">32</span>);<br>        ++v7;<br>      &#125;<br>      <span class="hljs-keyword">if</span> ( !(v7 % <span class="hljs-number">5</span>) )<br>        <span class="hljs-built_in">putchar</span>(<span class="hljs-number">32</span>);<br>    &#125;<br>    result = <span class="hljs-built_in">putchar</span>(<span class="hljs-number">10</span>);<br>  &#125;<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>很明显是一个加密函数，你可以选择解密这一段代码，逻辑是<code>将v4数组的奇数索引的值作为低位，偶数为高位，一起组成一个64位的整数v6，以二进制位图打印出图形</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">v4 = [<span class="hljs-number">140540</span>,-<span class="hljs-number">2008399303</span>,<span class="hljs-number">141956</span>,<span class="hljs-number">139457077</span>,<span class="hljs-number">262023</span>,-<span class="hljs-number">2008923597</span>,<span class="hljs-number">143749</span>,<span class="hljs-number">2118271985</span>]<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">4</span>):<br>    n = ((v4[i*<span class="hljs-number">2</span>] &amp; <span class="hljs-number">0xFFFFFFFF</span>) &lt;&lt; <span class="hljs-number">32</span>) | (v4[i*<span class="hljs-number">2</span>+<span class="hljs-number">1</span>] &amp; <span class="hljs-number">0xFFFFFFFF</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join(<span class="hljs-string">&#x27; *&#x27;</span>[((n &gt;&gt; (<span class="hljs-number">49</span>-j)) &amp; <span class="hljs-number">1</span>)] + <span class="hljs-string">&#x27; &#x27;</span>*(j%<span class="hljs-number">5</span>==<span class="hljs-number">4</span>) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">50</span>)))<br></code></pre></td></tr></table></figure>
+
+<p>运行看到flag为 HACKIT4FUN ：<img src="/images/re5.png" alt="re5"></p>
+<p>但本题真正考察IDA的动态调试。</p>
+<p>通过看该附件的<code>_main函数</code>汇编代码，<img src="/images/re6.png" alt="re6">，在<code>0x401773</code>下断点，让我们能在main函数执行完成前暂停程序；</p>
+<p>然后，再看<code>_ques函数</code>，先记下<code>_ques</code>开始的位置<code>0x401520</code>，这里汇编语言中<code>pop ebp</code>即为将<code>把基址指针寄存器弹出堆栈</code>，也就是将我们之前所说的 v6 所包含的值剥开来，呈现在命令行里。所以，我们要想在运行时得到位图，就得在<code>pop</code>这儿下断点，即<code>0x401723</code>，方便查看最终的flag。</p>
+<p>我们运行程序，来到该界面：<img src="/images/re8.png" alt="re8"></p>
+<p>将<code>General registers</code>里<code>0x0401773</code>修改EIP为刚刚我们记下的<code>_ques</code>开始的位置<code>0x0401520</code>，然后点击继续运行，即可得到二进制位图flag XAUTCTF{HACKIT4FUN} ：<img src="/images/re10.png" alt="re10"></p>
+<h3 id="糖衣炸弹"><a href="#糖衣炸弹" class="headerlink" title="糖衣炸弹"></a>糖衣炸弹</h3><hr>
+<p>题目描述：听说每一位新成员都会得到一颗SS-Team定制糖果吗？</p>
+<p>​		   真的有那么善良吗？</p>
+<p>​		   “不要随便吃糖，有毒咋办？”妈妈说。</p>
+<p>​		  hint：U konw Packed Xanadu?(用UPX脱壳)</p>
+<hr>
+<p>下载附件，先查查有无加壳，放到Exeinfo里查壳，<img src="/images/re11.png" alt="re11">，得到有UPX的壳。</p>
+<p>于是，我们到upx指定目录下，运行<code>./upx -d candy.exe</code>给其脱壳(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bonelee/p/16407794.html">关于UPX相关介绍</a>)，</p>
+<p><img src="/images/re12.png" alt="re12"></p>
+<p>然后再IDA打开，定位到主函数(这里不是<code>main</code>)：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++">v7 = __readfsqword(<span class="hljs-number">0x28u</span>);<br>  <span class="hljs-built_in">sub_405450</span>(<span class="hljs-string">&quot;Welcome to XAUT simple XOR crackme!&quot;</span>);<br>  <span class="hljs-built_in">sub_405450</span>(<span class="hljs-string">&quot;Enter the secret code to reveal the flag:&quot;</span>);<br>  <span class="hljs-keyword">if</span> ( <span class="hljs-built_in">sub_4050B0</span>(v6, <span class="hljs-number">64LL</span>, off_4B06D8) )<br>  &#123;<br>    v6[<span class="hljs-built_in">sub_401140</span>(v6, <span class="hljs-string">&quot;\r\n&quot;</span>)] = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> ( (<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>)<span class="hljs-built_in">sub_401A90</span>(v6) )<br>    &#123;<br>      *(__m128i *)v5 = _mm_load_si128((<span class="hljs-type">const</span> __m128i *)&amp;xmmword_48AA40);<br>      *(__m128i *)&amp;v5[<span class="hljs-number">9</span>] = _mm_load_si128((<span class="hljs-type">const</span> __m128i *)&amp;xmmword_48AA50);<br>      v0 = <span class="hljs-built_in">sub_4108A0</span>(<span class="hljs-number">26LL</span>);<br>      <span class="hljs-keyword">if</span> ( v0 )<br>      &#123;<br>        <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0LL</span>; i != <span class="hljs-number">25</span>; ++i )<br>          *(_BYTE *)(v0 + i) = v5[i] ^ <span class="hljs-number">0x5A</span>;<br>        *(_BYTE *)(v0 + <span class="hljs-number">25</span>) = <span class="hljs-number">0</span>;<br>        <span class="hljs-built_in">sub_41BFA0</span>(<span class="hljs-number">2</span>, (<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>)<span class="hljs-string">&quot;Good job! The flag is:\n%s\n&quot;</span>, v0, (<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span>)v5, v1, v2, v5[<span class="hljs-number">0</span>]);<br>        <span class="hljs-built_in">sub_410FB0</span>(v0);<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>      <span class="hljs-built_in">sub_405450</span>(<span class="hljs-string">&quot;Wrong secret. Try reversing the binary!&quot;</span>);<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">if</span> ( v7 != __readfsqword(<span class="hljs-number">0x28u</span>) )<br>    <span class="hljs-built_in">sub_41C070</span>();<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0LL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>将<code>xmmword_48AA40</code>和<code>xmmword_48AA50</code>里的数据存入<code>v5</code>里，再进行异或操作得到密文，我们要做的是把密文异或回去 <code>明文 ^ key = 密文，即 密文 ^ key = 明文</code>，这里<code>key</code>为<strong>0x5A</strong>。</p>
+<p>最后的EXP：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">enc_flag = [<span class="hljs-number">2</span>, <span class="hljs-number">27</span>, <span class="hljs-number">15</span>, <span class="hljs-number">14</span>, <span class="hljs-number">25</span>, <span class="hljs-number">14</span>, <span class="hljs-number">28</span>, <span class="hljs-number">33</span>, <span class="hljs-number">3</span>, <span class="hljs-number">106</span>, <span class="hljs-number">47</span>, <span class="hljs-number">5</span>, <span class="hljs-number">61</span>, <span class="hljs-number">106</span>, <span class="hljs-number">14</span>, <span class="hljs-number">5</span>, <span class="hljs-number">105</span>, <span class="hljs-number">44</span>, <span class="hljs-number">51</span>, <span class="hljs-number">22</span>, <span class="hljs-number">5</span>, <span class="hljs-number">47</span>, <span class="hljs-number">10</span>, <span class="hljs-number">34</span>, <span class="hljs-number">39</span>]<br>key = <span class="hljs-number">0x5A</span><br><br>plain = <span class="hljs-string">&#x27;&#x27;</span>.join(<span class="hljs-built_in">chr</span>(i ^ key) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> enc_flag)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Decrypted flag:&quot;</span>, plain)<br><br><span class="hljs-comment">#flag：XAUTCTF&#123;Y0u_g0T_3viL_uPx&#125;</span><br></code></pre></td></tr></table></figure>
+
+<!--more-->
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2025年10月24日 00:27</p>
+        <p>原始链接： <a class="post-url" href="" title="2025 XAUTCTF新生赛 rev&amp;algo部分WP">https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&amp;algo%E9%83%A8%E5%88%86WP/</a></p>
+        <footer>
+            <a href="https://incldue.github.io">
+                <img src="../../../../static/avatar/avatar.png" alt="debu8ger">
+                debu8ger
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/&title=《2025 XAUTCTF新生赛 rev&algo部分WP》 — D'b8Gr的小站~&pic=https://incldue.github.io/static/avatar/avatar.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/&title=《2025 XAUTCTF新生赛 rev&algo部分WP》 — D'b8Gr的小站~&source=今年XAUTCTF新生赛rev&algo部分WP" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《2025 XAUTCTF新生赛 rev&algo部分WP》 — D'b8Gr的小站~&url=https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/&via=https://incldue.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://incldue.github.io/2025/10/24/XAUTCTF2025%20rev&algo%E9%83%A8%E5%88%86WP/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/比赛个人WP/" class="color2">比赛个人WP</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#algo"><span class="post-toc-text">algo</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ezzz-base"><span class="post-toc-text">ezzz_base</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#e%E5%92%8B%E4%B8%8D%E6%98%AF65537%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="post-toc-text">e咋不是65537？？？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Close-Enough"><span class="post-toc-text">Close Enough</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#rev"><span class="post-toc-text">rev</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SignIn"><span class="post-toc-text">SignIn</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Welcome-to-Reverse-World"><span class="post-toc-text">Welcome to Reverse World</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BD%A0%E5%96%9C%E6%AC%A2%E8%B4%9D%E6%96%AF%E5%90%97"><span class="post-toc-text">你喜欢贝斯吗</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#base-revenge"><span class="post-toc-text">base_revenge</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Eeeeazy"><span class="post-toc-text">Eeeeazy</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B3%96%E8%A1%A3%E7%82%B8%E5%BC%B9"><span class="post-toc-text">糖衣炸弹</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="../../../11/01/ilovectf%20week4%20%E9%83%A8%E5%88%86WP/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          ?CTF2025 week4部分WP
+        
+      </span>
+    </a>
+  
+  
+    <a href="../../18/iloveCTF%202025%20%E9%83%A8%E5%88%86%E9%A2%98WP/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">?CTF2025 week1部分WP</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2025 debu8ger<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://incldue.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 0
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a><a class="category-link" href="../../../../categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">安全相关</a><a class="category-link" href="../../../../categories/%E6%9D%82%E8%B0%88/">杂谈</a><a class="category-link" href="../../../../categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="../../../../tags/CTF%E5%85%A5%E9%97%A8/" style="font-size: 10px;">CTF入门</a> <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">CTF基础知识</a> <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/" style="font-size: 10px;">CTF赛题</a> <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/" style="font-size: 12.5px;">SRC挖洞</a> <a href="../../../../tags/%E5%93%B2%E6%80%9D/" style="font-size: 10px;">哲思</a> <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" style="font-size: 17.5px;">比赛个人WP</a> <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a> <a href="../../../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">编程学习</a> <a href="../../../../tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="../../../../index.html">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="../../../../archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="../../../../pages/about/index">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="../../../../tags/CTF%E5%85%A5%E9%97%A8/" style="font-size: 10px;">CTF入门</a> <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">CTF基础知识</a> <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/" style="font-size: 10px;">CTF赛题</a> <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/" style="font-size: 12.5px;">SRC挖洞</a> <a href="../../../../tags/%E5%93%B2%E6%80%9D/" style="font-size: 10px;">哲思</a> <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" style="font-size: 17.5px;">比赛个人WP</a> <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a> <a href="../../../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">编程学习</a> <a href="../../../../tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="../../../../js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="../../../../js/animate.js"></script>
+
+
+
+  
+<script src="../../../../js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

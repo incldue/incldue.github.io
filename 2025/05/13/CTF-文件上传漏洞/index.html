@@ -1,1 +1,458 @@
-<!doctype html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=2,maximum-scale=3,minimum-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><link rel="shortcut icon" href=/static/favicon.ico><title>D&#39;b8Gr的小站~</title><link href=/static/css/app.c64eadfc8d3abfc9d85514dba4054813.css rel=stylesheet><meta name="generator" content="Hexo 7.3.0"></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.992b63bf2abbf3194771.js></script><script type=text/javascript src=/static/js/vendor.e12dc8c9af1f7aa12436.js></script><script type=text/javascript src=/static/js/app.bc036f9167871d39aecf.js></script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CTF-文件上传漏洞 | D&#39;b8Gr的小站~</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="debu8ger, D'b8Gr" />
+  
+  <meta name="description" content="文件上传漏洞之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CTF-文件上传漏洞">
+<meta property="og:url" content="https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="文件上传漏洞之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-05-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-12T06:25:24.986Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="CTF基础知识">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/static/avatar/avatar.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+<script src="../../../../js/pace.min.js"></script>
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'true', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?true";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+  <div style="display: none;">
+    <script src="//s22.cnzz.com/z_stat.php?id=true&web_id=true" language="JavaScript"></script>
+  </div>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="../../../../index.html" class="left">
+                    <span class="site-title">D&#39;b8Gr的小站</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="../../../../index.html">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="../../../../archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="../../../../pages/about/index">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="../../../../index.html">
+                    <img src="../../../../static/avatar/avatar.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        D&#39;b8Gr的小站
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个CTFer的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="debu8ger" target="_blank" href="//incldue.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/incldue">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//x.com/JonathanHu70782">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-CTF-文件上传漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      CTF-文件上传漏洞
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/CTF相关/">CTF相关</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2025-05-13
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。</p>
+<h3 id="文件上传漏洞原因："><a href="#文件上传漏洞原因：" class="headerlink" title="文件上传漏洞原因："></a>文件上传漏洞原因：</h3><p>1.服务器配置不当<br>2.文件上传限制被绕过<br>3.开源编辑器的上传漏洞<br>4.文件解析漏洞导致文件执行<br>5.过滤不严或被绕过</p>
+<h3 id="可能存在漏洞的位置："><a href="#可能存在漏洞的位置：" class="headerlink" title="可能存在漏洞的位置："></a>可能存在漏洞的位置：</h3><p>1.图片上传功能    2.头像上传功能    3.文档上传功能</p>
+<h3 id="文件上传检测方式："><a href="#文件上传检测方式：" class="headerlink" title="文件上传检测方式："></a>文件上传检测方式：</h3><p>1.客户端JS检测（文件扩展名）<br>2.服务端MIME类型检测（content-type内容）<br>3.服务端目录路径检测（跟path参数相关）<br>4.服务器文件扩展名检测（跟文件extension相关）<br>5.服务端文件内容检测（内容是否合法、是否含有恶意代码）</p>
+<h4 id="绕过客户端检测："><a href="#绕过客户端检测：" class="headerlink" title="绕过客户端检测："></a>绕过客户端检测：</h4><p>1.原理：在上传页面里含有专门检测文件上传的JS代码，最常见的则是检测文件类型和扩展名是否合法<br>2.方法：在本地浏览器客户端禁用JS即可<br>3.测试：靶场</p>
+<h4 id="绕过服务端检测："><a href="#绕过服务端检测：" class="headerlink" title="绕过服务端检测："></a>绕过服务端检测：</h4><p>1.服务端代码检测三点：MIME类型、文件后缀、文件内容<br>2.常见MIME类型<br>​ 1.HTML、txt、pdf<br>​ 2.Word、png、gif<br>​ 3.MPEG、AVI<br>3.绕过MIME类型检测<br>​ 1.原理：检测图片类型文件上传过程中http包的Content-Type字段的值，从而判断文件是否合法<br>​ 2.方法：用BP截取并修改数据包中文件的Content-type类型来进行绕过</p>
+<h4 id="绕过文件后缀检测–黑名单"><a href="#绕过文件后缀检测–黑名单" class="headerlink" title="绕过文件后缀检测–黑名单"></a>绕过文件后缀检测–黑名单</h4><p>1.后缀大小写绕过（.Php)<br>2.空格绕过（.php ）<br>3.点绕过（.php.）<br>4.::DATA绕过(利用Windows下NTFS文件系统的特性,可在文件后缀名加::DATA绕过<br>5.配合Apache解析漏洞（Apache解析有一个特点：解析从右向左，若为不可识别的则继续从左解析，Apache不解析.rar和.owf。）<br>6..htaccess文件<br>    1.配合名单列表绕过，上传一个自定义的.htaccess，就可绕过各种检测<br>    2…htaccess文件（分布式配置文件）提供了针对目录改变配置的方法。</p>
+<h4 id="绕过文件后缀检测–白名单"><a href="#绕过文件后缀检测–白名单" class="headerlink" title="绕过文件后缀检测–白名单"></a>绕过文件后缀检测–白名单</h4><p>1.绕过方法：服务端判断文件类型是从后往前判断，而解析则是与判断相反，可用00截断的方式绕过，%00与0x00截断<br>2.系统在对文文件名读取时，若遇到0x00,则认为读取结束。</p>
+<h4 id="绕过文件内容检测"><a href="#绕过文件内容检测" class="headerlink" title="绕过文件内容检测"></a>绕过文件内容检测</h4><p>1.通过检测文件幻数来判断：通常，通过判断文件前10个字节，即可判断文件的真实类型。<br>    1.绕过jpg类型的文件幻数检测要在文件开头写Value&#x3D;FF D8 FF E0 00 10 4A 49 46<br>    2.绕过gif类型的文件幻数检测则要加Value&#x3D;47 49 46 38 39 61<br>    3.绕过png的，则要加Value&#x3D;89 50 4E 47<br>2.通过检测文件加载：一般是调用API或函数进行文件加载测试，常见的则是图像渲染测试，那我们对渲染&#x2F;加载 测试的攻击方式时代码注入绕过，对二次渲染的则是攻击文件加载器自身。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>我们可以用溢出攻击对文件加载器进行攻击，上传自己的恶意代码后，服务器上的文件加载器会主动进行加载测试，加载测试时被溢出攻击执行shellcode。</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2025年06月12日 14:25</p>
+        <p>原始链接： <a class="post-url" href="" title="CTF-文件上传漏洞">https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</a></p>
+        <footer>
+            <a href="https://incldue.github.io">
+                <img src="../../../../static/avatar/avatar.png" alt="debu8ger">
+                debu8ger
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/&title=《CTF-文件上传漏洞》 — D'b8Gr的小站~&pic=https://incldue.github.io/static/avatar/avatar.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/&title=《CTF-文件上传漏洞》 — D'b8Gr的小站~&source=文件上传漏洞之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《CTF-文件上传漏洞》 — D'b8Gr的小站~&url=https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/&via=https://incldue.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://incldue.github.io/2025/05/13/CTF-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/CTF基础知识/" class="color3">CTF基础知识</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="post-toc-text">文件上传漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="post-toc-text">文件上传漏洞原因：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9A"><span class="post-toc-text">可能存在漏洞的位置：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%A3%80%E6%B5%8B%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="post-toc-text">文件上传检测方式：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="post-toc-text">绕过客户端检测：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="post-toc-text">绕过服务端检测：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E6%A3%80%E6%B5%8B%E2%80%93%E9%BB%91%E5%90%8D%E5%8D%95"><span class="post-toc-text">绕过文件后缀检测–黑名单</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E6%A3%80%E6%B5%8B%E2%80%93%E7%99%BD%E5%90%8D%E5%8D%95"><span class="post-toc-text">绕过文件后缀检测–白名单</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%A3%80%E6%B5%8B"><span class="post-toc-text">绕过文件内容检测</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="post-toc-text">总结：</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="../../16/CTF--Web%E7%9A%84%E8%AF%B7%E6%B1%82%E5%A4%B4%E4%BC%AA%E9%80%A0%EF%BC%88%E7%AE%80%E5%8D%95%E7%9A%84Wp%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          CTF--Web的请求头伪造（简单的Wp）
+        
+      </span>
+    </a>
+  
+  
+    <a href="../../../04/26/%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89%E7%A8%8B%E5%BA%8F%E5%91%98%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0%E7%9A%8410%E4%BB%B6%E4%BA%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2025 debu8ger<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://incldue.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 0
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a><a class="category-link" href="../../../../categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">安全相关</a><a class="category-link" href="../../../../categories/%E6%9D%82%E8%B0%88/">杂谈</a><a class="category-link" href="../../../../categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="../../../../tags/CTF%E5%85%A5%E9%97%A8/" style="font-size: 10px;">CTF入门</a> <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">CTF基础知识</a> <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/" style="font-size: 10px;">CTF赛题</a> <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/" style="font-size: 12.5px;">SRC挖洞</a> <a href="../../../../tags/%E5%93%B2%E6%80%9D/" style="font-size: 10px;">哲思</a> <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" style="font-size: 17.5px;">比赛个人WP</a> <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a> <a href="../../../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">编程学习</a> <a href="../../../../tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="../../../../index.html">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="../../../../archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="../../../../pages/about/index">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="../../../../tags/CTF%E5%85%A5%E9%97%A8/" style="font-size: 10px;">CTF入门</a> <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">CTF基础知识</a> <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/" style="font-size: 10px;">CTF赛题</a> <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/" style="font-size: 12.5px;">SRC挖洞</a> <a href="../../../../tags/%E5%93%B2%E6%80%9D/" style="font-size: 10px;">哲思</a> <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" style="font-size: 17.5px;">比赛个人WP</a> <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a> <a href="../../../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">编程学习</a> <a href="../../../../tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="../../../../js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="../../../../js/animate.js"></script>
+
+
+
+  
+<script src="../../../../js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
