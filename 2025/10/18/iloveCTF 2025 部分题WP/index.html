@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://incldue.github.io/images/%E8%BF%9D%E8%83%8C.png">
 <meta property="og:image" content="https://incldue.github.io/images/web6.png">
 <meta property="article:published_time" content="2025-10-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-18T12:59:23.098Z">
+<meta property="article:modified_time" content="2025-11-01T15:54:01.193Z">
 <meta property="article:author" content="debu8ger">
 <meta property="article:tag" content="比赛个人WP">
 <meta name="twitter:card" content="summary">
@@ -188,8 +188,7 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><p><strong>[Week1] Basic Number theory</strong></p>
-<hr>
+            <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Week1-Basic-Number-theory"><a href="#Week1-Basic-Number-theory" class="headerlink" title="[Week1] Basic Number theory"></a>[Week1] Basic Number theory</h3><hr>
 <p>题目描述：数论并非那么简单…</p>
 <hr>
 <p>下载附件并打开：</p>
@@ -202,8 +201,7 @@ ga('send', 'pageview');
 
 
 
-<p><strong>[Week1] Strange Machine</strong></p>
-<hr>
+<h3 id="Week1-Strange-Machine"><a href="#Week1-Strange-Machine" class="headerlink" title="[Week1] Strange Machine"></a>[Week1] Strange Machine</h3><hr>
 <p>题目描述：nc连接</p>
 <hr>
 <p>要连靶机，先看给的附件：</p>
@@ -216,8 +214,7 @@ ga('send', 'pageview');
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> base64<br><br>C1_b64 = <span class="hljs-string">&quot;6Asv1s203wj+QtckNNfQXw==&quot;</span><br>C_oracle_b64 = <span class="hljs-string">&quot;HOKwH+YiQu7jgL4v1m3yRQ==&quot;</span><br>msg_len = <span class="hljs-number">16</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">bxor</span>(<span class="hljs-params">a,b</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">bytes</span>(x^y <span class="hljs-keyword">for</span> x,y <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(a,b))<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">rot_left</span>(<span class="hljs-params">bs,r</span>):<br>    n=<span class="hljs-built_in">len</span>(bs); r%=n<br>    <span class="hljs-keyword">return</span> bs[r:]+bs[:r]<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">rot_right</span>(<span class="hljs-params">bs,r</span>):<br>    n=<span class="hljs-built_in">len</span>(bs); r%=n<br>    <span class="hljs-keyword">return</span> bs[-r:]+bs[:-r] <span class="hljs-keyword">if</span> r!=<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> bs<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">unpad_pk_like</span>(<span class="hljs-params">data</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data)==<span class="hljs-number">0</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    last = data[-<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">if</span> last==<span class="hljs-number">0</span> <span class="hljs-keyword">or</span> last&gt;<span class="hljs-built_in">len</span>(data): <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">if</span> data[-last:]==<span class="hljs-built_in">bytes</span>([last])*last:<br>        <span class="hljs-keyword">return</span> data[:-last]<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br><br>c1 = base64.b64decode(C1_b64)<br>cor = base64.b64decode(C_oracle_b64)<br>P0 = <span class="hljs-string">b&quot;A&quot;</span>*msg_len<br>key_oracle = bxor(cor, P0)<br><br><span class="hljs-keyword">for</span> offset <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(msg_len):<br>    r = (<span class="hljs-number">2</span>*offset) % msg_len<br>    seed = rot_right(key_oracle, r)<br>    key_initial = rot_left(seed, offset)<br>    padded = bxor(c1, key_initial)<br>    plain = unpad_pk_like(padded)<br>    <span class="hljs-keyword">if</span> plain <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;found offset =&quot;</span>, offset)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;plaintext =&quot;</span>, plain)<br>        <span class="hljs-keyword">break</span><br><br><span class="hljs-comment"># found offset = 12</span><br><span class="hljs-comment"># plaintext = b&#x27;Oh,you find it!&#x27;</span><br></code></pre></td></tr></table></figure>
 
 <p>选择选择2，输入明文进行校验，即可得到flag：flag{477fa58d-588e-448e-83b5-a737a1f652ed}</p>
-<p><strong>[Week1] beyondHex</strong></p>
-<hr>
+<h3 id="Week1-beyondHex"><a href="#Week1-beyondHex" class="headerlink" title="[Week1] beyondHex"></a>[Week1] beyondHex</h3><hr>
 <p>题目描述：质疑，理解，成为！</p>
 <hr>
 <p>下载附件，得到：</p>
@@ -229,8 +226,7 @@ ga('send', 'pageview');
 
 
 
-<p><strong>[Week1] two Es</strong></p>
-<hr>
+<h3 id="Week1-two-Es"><a href="#Week1-two-Es" class="headerlink" title="[Week1] two Es"></a>[Week1] two Es</h3><hr>
 <p>题目描述：two Es, too Ez!</p>
 <hr>
 <p>打开附件：</p>
@@ -245,8 +241,7 @@ ga('send', 'pageview');
 
 
 
-<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><p><strong>[Week1] 《关于我穿越到CTF的异世界这档事:序》</strong></p>
-<hr>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="Week1-《关于我穿越到CTF的异世界这档事-序》"><a href="#Week1-《关于我穿越到CTF的异世界这档事-序》" class="headerlink" title="[Week1] 《关于我穿越到CTF的异世界这档事:序》"></a>[Week1] 《关于我穿越到CTF的异世界这档事:序》</h3><hr>
 <p>题目描述：metavi正在深夜刷题，屏幕突然弹出计算器窗口，紧接着浮现一句话：<br>【”即使引导早已破碎，也请您当上MISC之王。”】<br>一阵强光过后，他已然站在一片不可思议的大陆上，NPC告诉他，这里是“异世界·Misc大陆”，而他是被召唤来的挑战者。他被选中代表“Misc分域”挑战其他技术领域，否则 Misc 将被系统删除。挑战形式则是一道道Misc题的具象化场景。为了Misc也为了自己，metavi不得不接受挑战。<br>【第一层·base：请解出隐藏在base里的flag。】</p>
 <hr>
 <p>下载附件，有两个文件：</p>
@@ -259,8 +254,7 @@ ga('send', 'pageview');
 <p>随后将字符串视为<code>0..7</code>，穷举映射为3位二进制，按8位分组得到字节，</p>
 <p>最后是base64的<code>ZmxhZ3tUaDNfUHIxbmMxcGwzXzBmX0Jhc2VfMXNfUzBfRXp6fQ==</code>，</p>
 <p>得到flag：flag{Th3_Pr1nc1pl3_0f_Base_1s_S0_Ezz}</p>
-<p><strong>[Week1] 俱乐部之旅(1) - 邀请函</strong></p>
-<hr>
+<h3 id="Week1-俱乐部之旅-1-邀请函"><a href="#Week1-俱乐部之旅-1-邀请函" class="headerlink" title="[Week1] 俱乐部之旅(1) - 邀请函"></a>[Week1] 俱乐部之旅(1) - 邀请函</h3><hr>
 <p>题目描述：一天Tomoki在冲浪的时候，突然收到了一封来自“c5im俱乐部”的邮件，里面是一封俱乐部邀请函，但想要打开邀请函必须先解出附件中的flag……</p>
 <hr>
 <p>下载附件，是压缩包，尝试解压缩发现要密码…</p>
@@ -273,8 +267,7 @@ ga('send', 'pageview');
 <p>尝试把.docx文件解压缩，在word里看到u_f0und_m3文件，得到十六进制字符串：<code>2657656c63306d655f74305f7468335f6335696d5f433175627d</code></p>
 <p>解得flag后一半：&amp;Welc0me_t0_th3_c5im_C1ub}</p>
 <p>即可得到完整flag：flag{W0rd_5t3g_is_1z&amp;Welc0me_t0_th3_c5im_C1ub}</p>
-<p><strong>[Week1] 布豪有黑客(一)</strong></p>
-<hr>
+<h3 id="Week1-布豪有黑客-一"><a href="#Week1-布豪有黑客-一" class="headerlink" title="[Week1] 布豪有黑客(一)"></a>[Week1] 布豪有黑客(一)</h3><hr>
 <p>题目描述：c3把心爱的flag藏在了服务器上，但粗心的他好像忘记关闭HTTP服务了，于是黑客成功偷走了c3的flag和解压密码…</p>
 <hr>
 <p>下载附件，是流量分析的文件，打开，直接搜索flag，看到有flag.zip和password.txt：</p>
@@ -282,16 +275,14 @@ ga('send', 'pageview');
 <p>首先知道了flag.zip的密码为<code>?CTF2025</code>,然后尝试提取flag.zip</p>
 <p>点中zip文件对应的HTTP流量，右键Media Type，导出分组字节流，得到了flag.zip</p>
 <p>在bandizip里打开，看到flag.txt，输入之前得到的密码，即得flag：flag{Wireshark_1s_4wes0m3}</p>
-<p><strong>[Week1] 文化木的侦探委托(一)</strong></p>
-<hr>
+<h3 id="Week1-文化木的侦探委托-一"><a href="#Week1-文化木的侦探委托-一" class="headerlink" title="[Week1] 文化木的侦探委托(一)"></a>[Week1] 文化木的侦探委托(一)</h3><hr>
 <p>题目描述：文化木是一家仅有一人的灵异侦探所的员工，有一天，她收到了一张奇怪的照片……？</p>
 <hr>
 <p>下载附件，直接丢到随波逐流里一把梭，修复宽高，得到提示：</p>
 <p><code>我在红色通道的第1位,绿色通道的第0位,蓝色通道的第2位藏了一些东西 -- 你能找到吗?</code></p>
 <p>于是打开StegSolve，按照提示操作，得到flag：flag{Please Find_ME}</p>
 <p><img src="/images/misc4.png" alt="misc4"></p>
-<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><p><strong>[Week1] Ping??</strong></p>
-<hr>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="Week1-Ping"><a href="#Week1-Ping" class="headerlink" title="[Week1] Ping??"></a>[Week1] Ping??</h3><hr>
 <p>题目描述：给你一个ping工具，然后狠狠的想办法ping我吧</p>
 <hr>
 <p>打开靶机，尝试输入127.0.0.1：<img src="/images/web1.png" alt="web1"></p>
@@ -299,14 +290,12 @@ ga('send', 'pageview');
 <p>输入<code>127.0.0.1;cat flag.txt</code>，提示<code>输入包含敏感内容，已被过滤！</code>，</p>
 <p>尝试用<code>ca\t f\lag.txt</code>绕过，拿到flag：flag{91aaaffa-dc90-4b3d-8476-5d0c95c06965}</p>
 <p><img src="/images/web3.png" alt="web3"></p>
-<p><strong>[Week1] from_http</strong></p>
-<hr>
+<h3 id="Week1-from-http"><a href="#Week1-from-http" class="headerlink" title="[Week1] from_http"></a>[Week1] from_http</h3><hr>
 <p>题目描述：从http入门吧~</p>
 <hr>
 <p>打开靶机，简单的HTTP请求头伪造，一路操作，得到flag：</p>
 <p><img src="/images/web4.png" alt="web4"></p>
-<p><strong>[Week1] 包含不明东西的食物？！</strong></p>
-<hr>
+<h3 id="Week1-包含不明东西的食物？！"><a href="#Week1-包含不明东西的食物？！" class="headerlink" title="[Week1] 包含不明东西的食物？！"></a>[Week1] 包含不明东西的食物？！</h3><hr>
 <p>题目描述：将物品投入锅里即可收获神秘礼品😋</p>
 <hr>
 <p>打开靶机，<img src="/images/web5.png" alt="web5"></p>
@@ -318,8 +307,7 @@ ga('send', 'pageview');
 <p>想到可能是目录穿越，于是果断输入<code>../../../../../../../flag.txt</code>，幸运地得到了flag：</p>
 <p>flag{28e57be9-3a51-4120-b46f-4fa60ceda491}</p>
 <p><img src="/images/web6.png" alt="web7"></p>
-<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><p><strong>[Week1] 8086ASM</strong></p>
-<hr>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Week1-8086ASM"><a href="#Week1-8086ASM" class="headerlink" title="[Week1] 8086ASM"></a>[Week1] 8086ASM</h3><hr>
 <p>题目描述：你的汇编入门了吗？</p>
 <hr>
 <p>下载附件，得到.asm文件，用记事本打开得到：</p>
@@ -337,8 +325,7 @@ ga('send', 'pageview');
 
 
 
-<p><strong>[Week1] jvav</strong></p>
-<hr>
+<h3 id="Week1-jvav"><a href="#Week1-jvav" class="headerlink" title="[Week1] jvav"></a>[Week1] jvav</h3><hr>
 <p>题目描述：觉得Main很史可以直接去看加密</p>
 <hr>
 <p>下载附件，是apk文件，用jadx-gui打开，根据描述，直接定位到<code>EncKt类</code>，反编译得：</p>
@@ -365,8 +352,7 @@ ga('send', 'pageview');
 
 
 
-<p><strong>[Week1] ezCSharp</strong></p>
-<hr>
+<h3 id="Week1-ezCSharp"><a href="#Week1-ezCSharp" class="headerlink" title="[Week1] ezCSharp"></a>[Week1] ezCSharp</h3><hr>
 <p>题目描述：用ida看不懂？那就对了，建议换个工具（你知道dnspy吗？）</p>
 <hr>
 <p>下载附件，根据提示用dnspy打开，得到DecodeFlag：</p>
@@ -379,8 +365,7 @@ ga('send', 'pageview');
 
 
 
-<p><strong>[Week1] PlzDebugMe</strong></p>
-<hr>
+<h3 id="Week1-PlzDebugMe"><a href="#Week1-PlzDebugMe" class="headerlink" title="[Week1] PlzDebugMe"></a>[Week1] PlzDebugMe</h3><hr>
 <p>题目描述：超级简单呢~快去尝试debug出flag吧！</p>
 <hr>
 <p>用IDA打开附件，start函数：</p>
@@ -401,7 +386,7 @@ ga('send', 'pageview');
 <!--more-->
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2025年10月18日 20:59</p>
+        <p>最后更新： 2025年11月01日 23:54</p>
         <p>原始链接： <a class="post-url" href="" title="?CTF2025 week1部分WP">https://incldue.github.io/2025/10/18/iloveCTF%202025%20%E9%83%A8%E5%88%86%E9%A2%98WP/</a></p>
         <footer>
             <a href="https://incldue.github.io">
@@ -488,7 +473,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Crypto"><span class="post-toc-text">Crypto</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MISC"><span class="post-toc-text">MISC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Web"><span class="post-toc-text">Web</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Reverse"><span class="post-toc-text">Reverse</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Crypto"><span class="post-toc-text">Crypto</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-Basic-Number-theory"><span class="post-toc-text">[Week1] Basic Number theory</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-Strange-Machine"><span class="post-toc-text">[Week1] Strange Machine</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-beyondHex"><span class="post-toc-text">[Week1] beyondHex</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-two-Es"><span class="post-toc-text">[Week1] two Es</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MISC"><span class="post-toc-text">MISC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%A9%BF%E8%B6%8A%E5%88%B0CTF%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E8%BF%99%E6%A1%A3%E4%BA%8B-%E5%BA%8F%E3%80%8B"><span class="post-toc-text">[Week1] 《关于我穿越到CTF的异世界这档事:序》</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-%E4%BF%B1%E4%B9%90%E9%83%A8%E4%B9%8B%E6%97%85-1-%E9%82%80%E8%AF%B7%E5%87%BD"><span class="post-toc-text">[Week1] 俱乐部之旅(1) - 邀请函</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-%E5%B8%83%E8%B1%AA%E6%9C%89%E9%BB%91%E5%AE%A2-%E4%B8%80"><span class="post-toc-text">[Week1] 布豪有黑客(一)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-%E6%96%87%E5%8C%96%E6%9C%A8%E7%9A%84%E4%BE%A6%E6%8E%A2%E5%A7%94%E6%89%98-%E4%B8%80"><span class="post-toc-text">[Week1] 文化木的侦探委托(一)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Web"><span class="post-toc-text">Web</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-Ping"><span class="post-toc-text">[Week1] Ping??</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-from-http"><span class="post-toc-text">[Week1] from_http</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-%E5%8C%85%E5%90%AB%E4%B8%8D%E6%98%8E%E4%B8%9C%E8%A5%BF%E7%9A%84%E9%A3%9F%E7%89%A9%EF%BC%9F%EF%BC%81"><span class="post-toc-text">[Week1] 包含不明东西的食物？！</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Reverse"><span class="post-toc-text">Reverse</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-8086ASM"><span class="post-toc-text">[Week1] 8086ASM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-jvav"><span class="post-toc-text">[Week1] jvav</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-ezCSharp"><span class="post-toc-text">[Week1] ezCSharp</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Week1-PlzDebugMe"><span class="post-toc-text">[Week1] PlzDebugMe</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
