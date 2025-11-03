@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++学习02 | D&#39;b8Gr的小站~</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="debu8ger, D'b8Gr" />
+  
+  <meta name="description" content="学习OOP时的一些知识点，涉及继承&amp;多态&amp;文件与流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++学习02">
+<meta property="og:url" content="https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="学习OOP时的一些知识点，涉及继承&amp;多态&amp;文件与流">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/images/%E8%BF%90%E7%AE%97%E7%AC%A6.png">
+<meta property="og:image" content="https://incldue.github.io/images/%E6%96%87%E4%BB%B6%E4%B8%8E%E6%B5%811.png">
+<meta property="og:image" content="https://incldue.github.io/images/%E6%96%87%E4%BB%B6%E4%B8%8E%E6%B5%812.png">
+<meta property="og:image" content="https://incldue.github.io/images/%E6%89%93%E5%BC%80%E6%A8%A1%E5%BC%8F.png">
+<meta property="article:published_time" content="2025-06-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-12T06:27:11.440Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="编程学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://incldue.github.io/images/%E8%BF%90%E7%AE%97%E7%AC%A6.png">
+  
+  
+    <link rel="icon" href="/static/avatar/avatar.png">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  
+<script src="../../../../js/pace.min.js"></script>
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'true', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?true";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+  
+  <div style="display: none;">
+    <script src="//s22.cnzz.com/z_stat.php?id=true&web_id=true" language="JavaScript"></script>
+  </div>
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="../../../../index.html" class="left">
+                    <span class="site-title">D&#39;b8Gr的小站</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="../../../../index.html">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="../../../../archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="../../../../about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="../../../../index.html">
+                    <img src="../../../../static/avatar/avatar0.jpg" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        D&#39;b8Gr的小站
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        一个CTFer的技术博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="debu8ger"  href="//incldue.github.io">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/incldue">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Weibo" target="_blank" href="//weibo.com/debu8gerr">
+                            <i class="fa fa-weibo fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//x.com/JonathanHu70782">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-C++学习02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      C++学习02
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/程序设计/">程序设计</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2025-06-02
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><ol>
+<li><strong>继承</strong>让我们能依据另一个类来定义一个类，这种特性也很容易创建和维护一个程序，从而达到了重用代码功能和提高执行效率的一个效果。</li>
+</ol>
+<p>​	当创建一个类时，无需重新编写新的数据成员、成员函数，只需指定该类<strong>继承一个已有类的成员即可</strong>，</p>
+<p>​	上述已有类称为<em><strong>基类</strong></em>，新建类则为<em><strong>派生类</strong></em>。</p>
+<ol start="2">
+<li><p>语法：</p>
+<p>a.基本：<em><strong>class子类(派生类) : 继承方式 父类(基类)</strong></em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br>    <span class="hljs-keyword">public</span>:<br>    	<span class="hljs-type">int</span> a;<br>    <span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>b.共有继承：基类的<strong>公用成员</strong>和<strong>保护成员</strong>在派生类中保持原有访问属性，其私有成员仍为私有。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">public</span> A&#123;<br>    <span class="hljs-keyword">public</span>:<br>    	<span class="hljs-type">int</span> a;<br>    <span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-comment">//不可访问:</span><br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>c.私有继承：基类的<strong>公用成员</strong>和<strong>保护成员</strong>在派生类中变为<strong>私有</strong>属性，其私有成员仍为私有。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">private</span> A&#123;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-type">int</span> a;<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-comment">//不可访问</span><br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>d.保护继承：基类的<strong>公用成员</strong>和<strong>保护成员</strong>在派生类中变为<strong>保护</strong>属性，其私有成员仍为私有。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">B</span> : <span class="hljs-keyword">protected</span> A&#123;<br>    <span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> a;<br>    	<span class="hljs-type">int</span> b;<br>    <span class="hljs-comment">//不可访问</span><br>    	<span class="hljs-type">int</span> c;<br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>多继承：一个子类可有多个父类，继承多个父类的特性。</p>
+<p>语法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> &lt;派生类名&gt;:&lt;继承方式<span class="hljs-number">1</span>&gt;&lt;基类<span class="hljs-number">1</span>&gt;,&lt;继承方式<span class="hljs-number">2</span>&gt;&lt;基类<span class="hljs-number">2</span>&gt;,...<br>&#123;<br>    &lt;派生类类体&gt;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE]</p>
+<p>访问修饰符继承方式可以是public、protected或private中的任何一个。</p>
+</blockquote>
+</li>
+<li><p>其他注意：</p>
+<p>a.派生类是不能继承基类的<strong>析构函数</strong>，也需要通过派生类的析构函数<strong>调用基类的析构函数</strong>。</p>
+<p>b.继承中先调用父类构造函数，再调用子类的，析构函数的调用顺序<strong>与之相反</strong>。</p>
+<p>c.C++中<em><strong>构造函数不能被派生类继承！</strong></em></p>
+</li>
+</ol>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><ol>
+<li><p>多态指具有不同功能的函数可以用同一个函数名。</p>
+<p>这也意味在调用成员函数时<strong>会根据调用函数的对象的不同类型来执行不同函数</strong>。</p>
+<p>当类之间存在<strong>层次结构&amp;&amp;类之间通过继承关联</strong>时，会用到多态。</p>
+</li>
+<li><p><strong>静态多态</strong>：函数重载、运算符重载</p>
+<p>a.重载声明指一个与之前已在该作用域内声明过的函数&#x2F;方法<strong>具有相同名称的声明</strong>，但<strong>参数列表和定义不同。</strong></p>
+<p>b.函数重载：同名函数功能类似，但形式参数<em><strong>必须不同</strong></em>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Print</span>&#123;<br>  	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">int</span> m)</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;整数为：&quot;</span>&lt;&lt;m&lt;&lt;endl;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">double</span> n)</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;浮点数为：&quot;</span>&lt;&lt;n&lt;&lt;endl;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">char</span> chr[])</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;字符串为：&quot;</span>&lt;&lt;chr&lt;&lt;endl;<br>        &#125;<br>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    Print p;<br>    p.<span class="hljs-built_in">print</span>(<span class="hljs-number">5</span>);<br>    p.<span class="hljs-built_in">print</span>(<span class="hljs-number">3.14159</span>);<br>    <span class="hljs-type">char</span> chr[]=<span class="hljs-string">&quot;h3llo_w0rld&quot;</span>;<br>    p.<span class="hljs-built_in">print</span>(chr);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>c.运算符重载：运算符为带有特殊名称的函数，函数名由关键字<strong>operator</strong>和<strong>运算符符号</strong>构成。同时，重载运算符也有一个<strong>返回类型</strong>与一个<strong>参数列表</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//语法</span><br>Box <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Box&amp;); <span class="hljs-comment">//类成员函数</span><br>Box <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Box&amp;, <span class="hljs-type">const</span> Box&amp;); <span class="hljs-comment">//类的非成员函数</span><br><br><span class="hljs-comment">//示例</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Box</span>&#123;<br>	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-function"><span class="hljs-type">double</span> <span class="hljs-title">getVolume</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br>            <span class="hljs-keyword">return</span> length * breadth * height;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setLength</span><span class="hljs-params">(<span class="hljs-type">double</span> len)</span> </span>&#123;<br>            length = len;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setBreadth</span><span class="hljs-params">(<span class="hljs-type">double</span> bre)</span> </span>&#123;<br>            breadth = bre;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setHeight</span><span class="hljs-params">(<span class="hljs-type">double</span> hei)</span> </span>&#123;<br>            height = hei;<br>        &#125;<br>    	<span class="hljs-comment">//重载+运算符，把两Box对象相加</span><br>    	Box <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Box&amp; b) &#123;<br>            Box box;<br>            box.length = <span class="hljs-keyword">this</span>-&gt;length + b.length;<br>            box.breadth = <span class="hljs-keyword">this</span>-&gt;breadth + b.breadth;<br>            box.height = <span class="hljs-keyword">this</span>-&gt;height + b.height;<br>        &#125;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-type">double</span> length;<br>    	<span class="hljs-type">double</span> breadth;<br>    	<span class="hljs-type">double</span> height;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>运算符列表：<img src="/images/%E8%BF%90%E7%AE%97%E7%AC%A6.png" alt="运算符"></p>
+</li>
+<li><p><strong>动态多态</strong>：派生类和虚函数实现运行时多态</p>
+<p>a.<em><strong>虚函数</strong></em> 是在基类中使用关键字<strong>virtual</strong>声明的函数。在派生类中重新定义基类中的定义的虚函数时，会告诉编译器不要静态链接到基类中的该函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Shape</span>&#123;<br>  	<span class="hljs-keyword">protected</span>:<br>    	<span class="hljs-type">int</span> width, height;<br>    <span class="hljs-keyword">public</span>:<br>    	<span class="hljs-built_in">Shape</span>(<span class="hljs-type">int</span> a=<span class="hljs-number">0</span>, <span class="hljs-type">int</span> b=<span class="hljs-number">0</span>) &#123;<br>            width = a;<br>            height = b;<br>        &#125;<br>    	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">area</span><span class="hljs-params">()</span> </span>&#123;<br>            cout&lt;&lt;<span class="hljs-string">&quot;Parent class area: &quot;</span>&lt;&lt;endl;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br>    <br>    	<span class="hljs-comment">//纯虚函数</span><br>    	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">int</span> <span class="hljs-title">area</span><span class="hljs-params">()</span> </span>= <span class="hljs-number">0</span>;<br>&#125;;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="文件与流"><a href="#文件与流" class="headerlink" title="文件与流"></a>文件与流</h2><ol>
+<li><p>**基本输入输出(I&#x2F;O)<strong>发生在</strong>流(字节序列)**中。<img src="/images/%E6%96%87%E4%BB%B6%E4%B8%8E%E6%B5%811.png" alt="输入输出"></p>
+</li>
+<li><p><strong>文件操作</strong>：从文件读取流和向文件写入流。<img src="/images/%E6%96%87%E4%BB%B6%E4%B8%8E%E6%B5%812.png" alt="操作"></p>
+<p>a.打开文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">open</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> *filename, ios::openmode mode)</span></span>;<br><span class="hljs-comment">//第一个参数指定文件名称&amp;位置，第二个参数定义文件被打开的模式</span><br></code></pre></td></tr></table></figure>
+
+<p>打开模式：<img src="/images/%E6%89%93%E5%BC%80%E6%A8%A1%E5%BC%8F.png" alt="模式"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//以写入模式打开文件，并希望截断文件</span><br>ofstream out;<br>out.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;file.dat&quot;</span>, ios::out | ios::trunc);<br><br><span class="hljs-comment">//打开一个文件用于读写</span><br>ifstream afile;<br>afile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;file.dat&quot;</span>, ios::out | ios::in);<br></code></pre></td></tr></table></figure>
+
+<p>b.关闭文件：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">close</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//close()是fstream、ifstream和ofstream对象的一个成员</span><br></code></pre></td></tr></table></figure>
+
+<p>c.读取&amp;写入示例代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fstream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> data[<span class="hljs-number">105</span>];<br>    <span class="hljs-comment">//已写模式打开文件</span><br>    ofstream outfile;<br>    outfile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;afile.dat&quot;</span>);<br>    <br>    cout&lt;&lt;<span class="hljs-string">&quot;Writing...&quot;</span>&lt;&lt;endl;<br>    cout&lt;&lt;<span class="hljs-string">&quot;Name: &quot;</span>;<br>    cin.<span class="hljs-built_in">getline</span>(data, <span class="hljs-number">105</span>);<br>    outfile&lt;&lt;data&lt;&lt;endl; <span class="hljs-comment">//数据写入文件</span><br>    cout&lt;&lt;<span class="hljs-string">&quot;Age: &quot;</span>;<br>    cin&gt;&gt;data;<br>    cin.<span class="hljs-built_in">ignore</span>(); <span class="hljs-comment">//ignore()函数会忽略之前读语句留下的多余字符。</span><br>    outfile&lt;&lt;data&lt;&lt;endl;<br>    outfile.<span class="hljs-built_in">close</span>();<br>    <span class="hljs-comment">//以读模式打开文件</span><br>    ifstream infile;<br>    infile.<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;afile.dat&quot;</span>);<br>    <br>    cout&lt;&lt;<span class="hljs-string">&quot;Reading...&quot;</span>&lt;&lt;endl;<br>    infile&gt;&gt;data;<br>    cout&lt;&lt;data&lt;&lt;endl;<br>    infile&gt;&gt;data;<br>    cout&lt;&lt;data&lt;&lt;endl;<br>    infile.<span class="hljs-built_in">close</span>();<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这个时间点的C++学习…懂得都懂 :)</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2025年06月12日 14:27</p>
+        <p>原始链接： <a class="post-url" href="" title="C++学习02">https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/</a></p>
+        <footer>
+            <a href="https://incldue.github.io">
+                <img src="../../../../static/avatar/avatar0.jpg" alt="debu8ger">
+                debu8ger
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="../../../../images/wechat_code.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="../../../../images/wechat_code.png">
+                <img class="reward-select-item-wechat" src="../../../../images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/&title=《C++学习02》 — D'b8Gr的小站~&pic=https://incldue.github.io/static/avatar/avatar0.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/&title=《C++学习02》 — D'b8Gr的小站~&source=学习OOP时的一些知识点，涉及继承&多态&文件与流" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++学习02》 — D'b8Gr的小站~&url=https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/&via=https://incldue.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://incldue.github.io/2025/06/02/C++%E5%AD%A6%E4%B9%A002/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/编程学习/" class="color5">编程学习</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A4%9A%E6%80%81"><span class="post-toc-text">多态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E6%B5%81"><span class="post-toc-text">文件与流</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="post-toc-text">后记</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="../../03/SRC%E6%8C%96%E6%B4%9E00/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          SRC挖洞00
+        
+      </span>
+    </a>
+  
+  
+    <a href="../../01/Db8Gr%E7%9A%84blog01/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Db8Gr的blog01</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+        <div id="SOHUCS" sid="C++学习02" ></div>
+<script type="text/javascript">
+    (function(){
+        var appid = 'cyycdY1ly';
+        var conf = '7f8cc54ae2f0a2eb2e8aa80b4e0945f7';
+        var width = window.innerWidth || document.documentElement.clientWidth;
+        if (width < 960) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2025 debu8ger<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "https://incldue.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a><a class="category-link" href="../../../../categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">安全相关</a><a class="category-link" href="../../../../categories/%E6%9D%82%E8%B0%88/">杂谈</a><a class="category-link" href="../../../../categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">程序设计</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="../../../../tags/CTF%E5%85%A5%E9%97%A8/" style="font-size: 10px;">CTF入门</a> <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">CTF基础知识</a> <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/" style="font-size: 10px;">CTF赛题</a> <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/" style="font-size: 12.5px;">SRC挖洞</a> <a href="../../../../tags/%E5%93%B2%E6%80%9D/" style="font-size: 10px;">哲思</a> <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" style="font-size: 17.5px;">比赛个人WP</a> <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a> <a href="../../../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">编程学习</a> <a href="../../../../tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="../../../../index.html">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="../../../../archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="../../../../about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="../../../../tags/CTF%E5%85%A5%E9%97%A8/" style="font-size: 10px;">CTF入门</a> <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 20px;">CTF基础知识</a> <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/" style="font-size: 10px;">CTF赛题</a> <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/" style="font-size: 12.5px;">SRC挖洞</a> <a href="../../../../tags/%E5%93%B2%E6%80%9D/" style="font-size: 10px;">哲思</a> <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" style="font-size: 17.5px;">比赛个人WP</a> <a href="../../../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">渗透测试</a> <a href="../../../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">编程学习</a> <a href="../../../../tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="../../../../js/particles.js"></script>
+
+
+
+
+
+
+
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  
+<script src="../../../../js/animate.js"></script>
+
+
+
+  
+<script src="../../../../js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
