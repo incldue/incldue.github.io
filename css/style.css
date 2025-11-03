@@ -2275,7 +2275,7 @@ pre .javascript .function {
   text-shadow: 0 1px #1e7293;
 }
 .sidebar-menu-box {
-  height: 1;
+  height: 0;
   opacity: 1;
   position: fixed;
   bottom: 0;
