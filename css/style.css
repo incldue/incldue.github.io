@@ -2275,7 +2275,7 @@ pre .javascript .function {
   text-shadow: 0 1px #1e7293;
 }
 .sidebar-menu-box {
-  height: 0;
+  height: 1;
   opacity: 1;
   position: fixed;
   bottom: 0;
@@ -2310,8 +2310,8 @@ pre .javascript .function {
   text-decoration: none;
   font-weight: normal;
   font-size: 10px;
-  height: 25px;
-  line-height: 21px;
+  height: 30px;
+  line-height: 25px;
   float: left;
   padding: 0 5px 0 10px;
   position: relative;
@@ -2350,8 +2350,8 @@ pre .javascript .function {
   text-decoration: none;
   font-weight: normal;
   font-size: 10px;
-  height: 25px;
-  line-height: 21px;
+  height: 30px;
+  line-height: 25px;
   float: left;
   padding: 0 5px 0 10px;
   position: relative;
