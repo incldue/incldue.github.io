@@ -424,7 +424,7 @@
                                    href="//incldue.github.io"
                                         >
                                     <i class="fa-regular fa-house fa-fw"></i>
-                                    HOME
+                                    ACCUEIL
                                     
                                 </a>
 
@@ -458,7 +458,7 @@
                                    href="#"
                                         onClick=&#34;return false;&#34;>
                                     <i class="fa-regular fa-user fa-fw"></i>
-                                    ABOUT
+                                    À PROPOS
                                     <i class="fa-solid fa-chevron-down fa-fw"></i>
                                 </a>
 
@@ -486,7 +486,7 @@
                                         
                                             <li>
                                                 <a href="../../../../friends">
-                                                    FRIENDS
+                                                    AMIS
                                                 </a>
                                             </li>
                                         
@@ -527,7 +527,7 @@
                            href="//incldue.github.io"
                         >
                             <span>
-                                HOME
+                                ACCUEIL
                             </span>
                             
                                 <i class="fa-regular fa-house fa-sm fa-fw"></i>
@@ -567,7 +567,7 @@
                              navbar-data-toggle="submenu-About"
                         >
                             <span>
-                                ABOUT
+                                À PROPOS
                             </span>
                             
                                 <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
@@ -595,7 +595,7 @@
                                 
                                     <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
                                         <a class=" text-third-text-color text-xl"
-                                           href="../../../../friends">FRIENDS</a>
+                                           href="../../../../friends">AMIS</a>
                                     </div>
                                 
                             </div>
@@ -646,7 +646,7 @@
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
-        <div class="label text-third-text-color text-sm">Categories</div>
+        <div class="label text-third-text-color text-sm">Catégories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">19</div>
@@ -695,14 +695,14 @@
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
         <span class="desktop">2025-06-07 00</span>
         <span class="mobile">2025-06-07 00</span>
-        <span class="hover-info">Created</span>
+        <span class="hover-info">Créé</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
             <span class="desktop">2025-06-12 14:25</span>
             <span class="mobile">2025-06-12 14:25</span>
-            <span class="hover-info">Updated</span>
+            <span class="hover-info">Mis à jour</span>
         </span>
     
 
@@ -829,7 +829,7 @@
 					</span>
 					<span class="title flex justify-center items-center">
 						<span class="post-nav-title-item truncate max-w-48">SRC挖洞01--信息收集_1</span>
-						<span class="post-nav-item">Prev posts</span>
+						<span class="post-nav-item">Articles précédents</span>
 					</span>
 				</a>
 			</div>
@@ -839,7 +839,7 @@
 				<a class="next" rel="next" href="../../03/SRC%E6%8C%96%E6%B4%9E00/">
 					<span class="title flex justify-center items-center">
 						<span class="post-nav-title-item truncate max-w-48">SRC挖洞00</span>
-						<span class="post-nav-item">Next posts</span>
+						<span class="post-nav-item">Articles suivants</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-right"></i>
@@ -856,12 +856,52 @@
 			<div class="comments-container mt-10 w-full ">
     <div id="comment-anchor" class="w-full h-2.5"></div>
     <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
-        Comments
+        Commentaires
     </div>
     
 
         
             
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: 'Ov23liU0k3l90SWlPMlk',
+                    clientSecret: 'f8106a480b76370ead2220a0aa5086eebd5b7ad1',
+                    repo: 'gitment-comments',
+                    owner: 'incldue',
+                    admin: ['incldue'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN, en',
+                    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
 
 
         
@@ -876,7 +916,7 @@
 	<div class="toc-content-container">
 		<div class="post-toc-wrap">
 	<div class="post-toc">
-		<div class="toc-title">On this page</div>
+		<div class="toc-title">Sur cette page</div>
 		<div class="page-title">CTF--文件上传漏洞PLUS</div>
 		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E4%BE%8B%E9%A2%98%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">CTF文件上传漏洞例题总结</span></a></li></ol>
 
@@ -905,7 +945,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        19 posts in total
+                        19  posts au total
                     </span>
                     
                 </p>
@@ -916,13 +956,13 @@
             <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
                 
                     <span id="busuanzi_container_site_uv" class="lg:!block">
-                        <span class="text-sm">VISITOR COUNT</span>
+                        <span class="text-sm">VISITEURS</span>
                         <span id="busuanzi_value_site_uv"></span>
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv" class="lg:!block">
-                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span class="text-sm">NOMBRE TOTAL DE PAGES VUES</span>
                         <span id="busuanzi_value_site_pv"></span>
                     </span>
                 
@@ -935,7 +975,7 @@
         
         
             <div>
-                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+                Blog en ligne depuis <span class="odometer" id="runtime_days" ></span> Jours <span class="odometer" id="runtime_hours"></span> Hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
             </div>
         
         
@@ -1036,7 +1076,7 @@
 				<i class="fa-solid fa-keyboard"></i>
 			</span>
 			<div class="search-input-container">
-				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="recherche..." spellcheck="false" type="search" class="search-input">
 			</div>
 			<span class="popup-btn-close">
 				<i class="fa-solid fa-times"></i>

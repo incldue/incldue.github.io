@@ -423,7 +423,7 @@
                                    href="//incldue.github.io"
                                         >
                                     <i class="fa-regular fa-house fa-fw"></i>
-                                    HOME
+                                    ACCUEIL
                                     
                                 </a>
 
@@ -457,7 +457,7 @@
                                    href="#"
                                         onClick=&#34;return false;&#34;>
                                     <i class="fa-regular fa-user fa-fw"></i>
-                                    ABOUT
+                                    À PROPOS
                                     <i class="fa-solid fa-chevron-down fa-fw"></i>
                                 </a>
 
@@ -485,7 +485,7 @@
                                         
                                             <li>
                                                 <a href="../../../../friends">
-                                                    FRIENDS
+                                                    AMIS
                                                 </a>
                                             </li>
                                         
@@ -526,7 +526,7 @@
                            href="//incldue.github.io"
                         >
                             <span>
-                                HOME
+                                ACCUEIL
                             </span>
                             
                                 <i class="fa-regular fa-house fa-sm fa-fw"></i>
@@ -566,7 +566,7 @@
                              navbar-data-toggle="submenu-About"
                         >
                             <span>
-                                ABOUT
+                                À PROPOS
                             </span>
                             
                                 <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
@@ -594,7 +594,7 @@
                                 
                                     <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
                                         <a class=" text-third-text-color text-xl"
-                                           href="../../../../friends">FRIENDS</a>
+                                           href="../../../../friends">AMIS</a>
                                     </div>
                                 
                             </div>
@@ -645,7 +645,7 @@
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
-        <div class="label text-third-text-color text-sm">Categories</div>
+        <div class="label text-third-text-color text-sm">Catégories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">19</div>
@@ -694,14 +694,14 @@
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
         <span class="desktop">2025-10-18 00</span>
         <span class="mobile">2025-10-18 00</span>
-        <span class="hover-info">Created</span>
+        <span class="hover-info">Créé</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
             <span class="desktop">2025-11-01 23:54</span>
             <span class="mobile">2025-11-01 23:54</span>
-            <span class="hover-info">Updated</span>
+            <span class="hover-info">Mis à jour</span>
         </span>
     
 
@@ -1041,7 +1041,7 @@
 					</span>
 					<span class="title flex justify-center items-center">
 						<span class="post-nav-title-item truncate max-w-48">2025 XAUTCTF新生赛 rev&amp;algo部分WP</span>
-						<span class="post-nav-item">Prev posts</span>
+						<span class="post-nav-item">Articles précédents</span>
 					</span>
 				</a>
 			</div>
@@ -1051,7 +1051,7 @@
 				<a class="next" rel="next" href="../../../09/30/%E5%85%B3%E4%BA%8ECTFers%E5%9C%A8CTF%E8%B5%9B%E5%88%B6%E4%B8%8B%E3%81%AE%E6%B1%82%E7%94%9F%E6%8C%87%E5%8D%97--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">
 					<span class="title flex justify-center items-center">
 						<span class="post-nav-title-item truncate max-w-48">关于CTFers在CTF赛制下の求生指南--计算机基础</span>
-						<span class="post-nav-item">Next posts</span>
+						<span class="post-nav-item">Articles suivants</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-right"></i>
@@ -1068,12 +1068,52 @@
 			<div class="comments-container mt-10 w-full ">
     <div id="comment-anchor" class="w-full h-2.5"></div>
     <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
-        Comments
+        Commentaires
     </div>
     
 
         
             
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: 'Ov23liU0k3l90SWlPMlk',
+                    clientSecret: 'f8106a480b76370ead2220a0aa5086eebd5b7ad1',
+                    repo: 'gitment-comments',
+                    owner: 'incldue',
+                    admin: ['incldue'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN, en',
+                    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
 
 
         
@@ -1088,7 +1128,7 @@
 	<div class="toc-content-container">
 		<div class="post-toc-wrap">
 	<div class="post-toc">
-		<div class="toc-title">On this page</div>
+		<div class="toc-title">Sur cette page</div>
 		<div class="page-title">?CTF2025 week1部分WP</div>
 		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Crypto"><span class="nav-number">1.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-Basic-Number-theory"><span class="nav-number">1.1.</span> <span class="nav-text">[Week1] Basic Number theory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-Strange-Machine"><span class="nav-number">1.2.</span> <span class="nav-text">[Week1] Strange Machine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-beyondHex"><span class="nav-number">1.3.</span> <span class="nav-text">[Week1] beyondHex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-two-Es"><span class="nav-number">1.4.</span> <span class="nav-text">[Week1] two Es</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-%E3%80%8A%E5%85%B3%E4%BA%8E%E6%88%91%E7%A9%BF%E8%B6%8A%E5%88%B0CTF%E7%9A%84%E5%BC%82%E4%B8%96%E7%95%8C%E8%BF%99%E6%A1%A3%E4%BA%8B-%E5%BA%8F%E3%80%8B"><span class="nav-number">2.1.</span> <span class="nav-text">[Week1] 《关于我穿越到CTF的异世界这档事:序》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-%E4%BF%B1%E4%B9%90%E9%83%A8%E4%B9%8B%E6%97%85-1-%E9%82%80%E8%AF%B7%E5%87%BD"><span class="nav-number">2.2.</span> <span class="nav-text">[Week1] 俱乐部之旅(1) - 邀请函</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-%E5%B8%83%E8%B1%AA%E6%9C%89%E9%BB%91%E5%AE%A2-%E4%B8%80"><span class="nav-number">2.3.</span> <span class="nav-text">[Week1] 布豪有黑客(一)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-%E6%96%87%E5%8C%96%E6%9C%A8%E7%9A%84%E4%BE%A6%E6%8E%A2%E5%A7%94%E6%89%98-%E4%B8%80"><span class="nav-number">2.4.</span> <span class="nav-text">[Week1] 文化木的侦探委托(一)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-number">3.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-Ping"><span class="nav-number">3.1.</span> <span class="nav-text">[Week1] Ping??</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-from-http"><span class="nav-number">3.2.</span> <span class="nav-text">[Week1] from_http</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-%E5%8C%85%E5%90%AB%E4%B8%8D%E6%98%8E%E4%B8%9C%E8%A5%BF%E7%9A%84%E9%A3%9F%E7%89%A9%EF%BC%9F%EF%BC%81"><span class="nav-number">3.3.</span> <span class="nav-text">[Week1] 包含不明东西的食物？！</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse"><span class="nav-number">4.</span> <span class="nav-text">Reverse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-8086ASM"><span class="nav-number">4.1.</span> <span class="nav-text">[Week1] 8086ASM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-jvav"><span class="nav-number">4.2.</span> <span class="nav-text">[Week1] jvav</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-ezCSharp"><span class="nav-number">4.3.</span> <span class="nav-text">[Week1] ezCSharp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Week1-PlzDebugMe"><span class="nav-number">4.4.</span> <span class="nav-text">[Week1] PlzDebugMe</span></a></li></ol></li></ol>
 
@@ -1117,7 +1157,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        19 posts in total
+                        19  posts au total
                     </span>
                     
                 </p>
@@ -1128,13 +1168,13 @@
             <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
                 
                     <span id="busuanzi_container_site_uv" class="lg:!block">
-                        <span class="text-sm">VISITOR COUNT</span>
+                        <span class="text-sm">VISITEURS</span>
                         <span id="busuanzi_value_site_uv"></span>
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv" class="lg:!block">
-                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span class="text-sm">NOMBRE TOTAL DE PAGES VUES</span>
                         <span id="busuanzi_value_site_pv"></span>
                     </span>
                 
@@ -1147,7 +1187,7 @@
         
         
             <div>
-                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+                Blog en ligne depuis <span class="odometer" id="runtime_days" ></span> Jours <span class="odometer" id="runtime_hours"></span> Hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
             </div>
         
         
@@ -1248,7 +1288,7 @@
 				<i class="fa-solid fa-keyboard"></i>
 			</span>
 			<div class="search-input-container">
-				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="recherche..." spellcheck="false" type="search" class="search-input">
 			</div>
 			<span class="popup-btn-close">
 				<i class="fa-solid fa-times"></i>
