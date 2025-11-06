@@ -228,912 +228,150 @@
 
 
 <body>
-	<div class="progress-bar-container">
-	
-	<span class="scroll-progress-bar"></span>
-	
-
-	
-	<span class="pjax-progress-bar"></span>
-	<!--        <span class="swup-progress-icon">-->
-	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
-	<!--        </span>-->
-	
-</div>
-
-<style>
-    :root {
-        --preloader-background-color: #fff;
-        --preloader-text-color: #000;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --preloader-background-color: #202124;
-            --preloader-text-color: #fff;
-        }
-    }
-
-    @media (prefers-color-scheme: light) {
-        :root {
-            --preloader-background-color: #fff;
-            --preloader-text-color: #000;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .ml13 {
-            font-size: 2.6rem !important; /* Adjust this value as needed */
-        }
-    }
-
-    .preloader {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        padding: 12px;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh; /* 'h-screen' is 100% of the viewport height */
-        background-color: var(--preloader-background-color);
-        z-index: 1100; /* 'z-[1100]' sets the z-index */
-        transition: opacity 0.2s ease-in-out;
-    }
-
-    .ml13 {
-        font-size: 3.2rem;
-        /* text-transform: uppercase; */
-        color: var(--preloader-text-color);
-        letter-spacing: -1px;
-        font-weight: 500;
-        font-family: 'Chillax-Variable', sans-serif;
-        text-align: center;
-    }
-
-    .ml13 .word {
-        display: inline-flex;
-        flex-wrap: wrap;
-        white-space: nowrap;
-    }
-
-    .ml13 .letter {
-        display: inline-block;
-        line-height: 1em;
-    }
-</style>
-
-<div class="preloader">
-    <h2 class="ml13">
-        欢迎来到debu8gerのCTF小站
-    </h2>
-    <script>
-        var textWrapper = document.querySelector('.ml13');
-        // Split text into words
-        var words = textWrapper.textContent.trim().split(' ');
-
-        // Clear the existing content
-        textWrapper.innerHTML = '';
-
-        // Wrap each word and its letters in spans
-        words.forEach(function(word) {
-            var wordSpan = document.createElement('span');
-            wordSpan.classList.add('word');
-            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
-            textWrapper.appendChild(wordSpan);
-            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
-        });
-
-        var animation = anime.timeline({ loop: true })
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [20, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                filter: ['blur(5px)', 'blur(0px)'],
-                easing: "easeOutExpo",
-                duration: 1200,
-                delay: (el, i) => 300 + 20 * i,
-            })
-            .add({
-                targets: '.ml13 .letter',
-                translateY: [0, -20],
-                opacity: [1, 0],
-                filter: ['blur(0px)', 'blur(5px)'],
-                easing: "easeInExpo",
-                duration: 1000,
-                delay: (el, i) => 15 * i,
-                complete: function() {
-                    hidePreloader();
-                }
-            }, '-=700');
-
-
-        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
-
-        // If the theme status is not found in local storage, check the preferred color scheme
-        if (themeStatus === undefined || themeStatus === null) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                themeStatus = 'dark';
-            } else {
-                themeStatus = 'light';
-            }
-        }
-
-        // Now you can use the themeStatus variable in your code
-        if (themeStatus) {
-            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
-            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
-        } else {
-            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
-            document.documentElement.style.setProperty('--preloader-text-color', '#000');
-        }
-
-        window.addEventListener('load', function () {
-            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
-        });
-
-        function hidePreloader() {
-            var preloader = document.querySelector('.preloader');
-            preloader.style.opacity = '0';
-            setTimeout(function () {
-                preloader.style.display = 'none';
-            }, 200);
-        }
-    </script>
-</div>
-
-<main class="page-container" id="swup">
-
-	
-
-	<div class="main-content-container flex flex-col justify-between min-h-dvh">
-		<div class="main-content-header">
-			<header class="navbar-container px-6 md:px-12">
-    <div class="navbar-content transition-navbar ">
-        <div class="left">
-            
-                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
-                    <img src="../../../../static/avatar/avatar0.jpg" class="w-full h-full rounded-xs">
-                </a>
-            
-            <a class="logo-title" href="/">
-                
-                D&#39;b8Gr的小站
-                
-            </a>
-        </div>
-
-        <div class="right">
-            <!-- PC -->
-            <div class="desktop">
-                <ul class="navbar-list">
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class=""
-                                   href="../../../../index.html"
-                                        >
-                                    <i class="fa-regular fa-house fa-fw"></i>
-                                    INICIO
-                                    
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class=""
-                                   href="../../../../archives"
-                                        >
-                                    <i class="fa-regular fa-archive fa-fw"></i>
-                                    存档
-                                    
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                            </li>
-                    
-                        
-                            
-
-                            <li class="navbar-item">
-                                <!-- Menu -->
-                                <a class="has-dropdown"
-                                   href="#"
-                                        onClick=&#34;return false;&#34;>
-                                    <i class="fa-regular fa-user fa-fw"></i>
-                                    关于
-                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
-                                </a>
-
-                                <!-- Submenu -->
-                                
-                                    <ul class="sub-menu">
-                                        
-                                            <li>
-                                                <a href="../../../../about">
-                                                    ME
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a target="_blank" rel="noopener" href="https://github.com/incldue">
-                                                    GITHUB
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="https://incldue.github.io">
-                                                    BLOG
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="../../../../friends">
-                                                    AMIGOS
-                                                </a>
-                                            </li>
-                                        
-                                    </ul>
-                                
-                            </li>
-                    
-                    
-                        <li class="navbar-item search search-popup-trigger">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <!-- Mobile -->
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                
-                <div class="icon-item navbar-bar">
-                    <div class="navbar-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile sheet -->
-    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
-        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                           href="../../../../index.html"
-                        >
-                            <span>
-                                INICIO
-                            </span>
-                            
-                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-                
-                    
-
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                           href="../../../../archives"
-                        >
-                            <span>
-                                存档
-                            </span>
-                            
-                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
-                            
-                        </a>
-                        
-
-                        
-                    </li>
-            
-                
-                    
-
-                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
-                        
-                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
-                             navbar-data-toggle="submenu-关于"
-                        >
-                            <span>
-                                关于
-                            </span>
-                            
-                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
-                            
-                        </div>
-                        
-
-                        
-                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-关于">
-                                
-                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
-                                        <a class=" text-third-text-color text-xl"
-                                           href="../../../../about">ME</a>
-                                    </div>
-                                
-                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
-                                        <a class=" text-third-text-color text-xl"
-                                           target="_blank" rel="noopener" href="https://github.com/incldue">GITHUB</a>
-                                    </div>
-                                
-                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
-                                        <a class=" text-third-text-color text-xl"
-                                           href="https://incldue.github.io">BLOG</a>
-                                    </div>
-                                
-                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
-                                        <a class=" text-third-text-color text-xl"
-                                           href="../../../../friends">AMIGOS</a>
-                                    </div>
-                                
-                            </div>
-                        
-                    </li>
-            
-
-            
-            
-                
-                    
-                    
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
-                           href="../../../../tags"
-                        >
-                            <span>标签</span>
-                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
-                        </a>
-                    </li>
-                
-                    
-                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
-                           href="../../../../categories"
-                        >
-                            <span>类别</span>
-                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
-                        </a>
-                    </li>
-                
-            
-        </ul>
-
-        <div class="statistics flex justify-around my-2.5">
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
-        <div class="label text-third-text-color text-sm">Etiquetas</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
-        <div class="label text-third-text-color text-sm">Categorías</div>
-    </a>
-    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">19</div>
-        <div class="label text-third-text-color text-sm">Publicaciones</div>
-    </a>
-</div>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
-		</div>
-
-		<div class="main-content-body transition-fade-up">
-			
-
-			<div class="main-content">
-				<div class="post-page-container flex relative justify-between box-border w-full h-full">
-	<div class="article-content-container">
-
-		<div class="article-title relative w-full">
-			
-			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">SRC挖洞01--信息收集_1</h1>
-			</div>
-			
-		</div>
-
-		
-		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
-			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
-				<img src="../../../../static/avatar/avatar0.jpg">
-			</div>
-			<div class="info flex flex-col justify-between">
-				<div class="author flex items-center">
-					<span class="name text-default-text-color text-lg font-semibold">debu8ger</span>
-					
-					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
-					
-				</div>
-				<div class="meta-info">
-					<div class="article-meta-info">
-    <span class="article-date article-meta-item">
-        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2025-06-11 00</span>
-        <span class="mobile">2025-06-11 00</span>
-        <span class="hover-info">Creado</span>
-    </span>
-    
-        <span class="article-date article-meta-item">
-            <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-06-12 14:28</span>
-            <span class="mobile">2025-06-12 14:28</span>
-            <span class="hover-info">Actualizado</span>
-        </span>
-    
-
-    
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="../../../../categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">安全相关</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fa-regular fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/">SRC挖洞</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
-    
-
-    
-    
-    
-    
-        <span class="article-pv article-meta-item">
-            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-</div>
-
-				</div>
-			</div>
-		</div>
-		
-
-		
-
-
-		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h2 id="SRC挖洞01–信息收集-1"><a href="#SRC挖洞01–信息收集-1" class="headerlink" title="SRC挖洞01–信息收集_1"></a>SRC挖洞01–信息收集_1</h2><h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="0x0-目的"><a href="#0x0-目的" class="headerlink" title="0x0.目的"></a>0x0.目的</h4><ol>
-<li>为什么要进行信息收集呢？这就好比我们出去旅游得做攻略了解当地习俗（吃喝玩乐），亦或是出去露营要了解环境怎么样、当天的天气咋样…</li>
-<li>同样，SRC挖洞类似，你必须知道要面对什么，才能做好充足的准备。</li>
-</ol>
-<h4 id="0x1-获取途径"><a href="#0x1-获取途径" class="headerlink" title="0x1.获取途径"></a>0x1.获取途径</h4><ol>
-<li><p><strong>Whois信息</strong>：关于域名的基本信息。其显示了网站的注册详细信息（包括注册域名的用户&amp;该域名的到期时间等）。在社交工程学中很有用。</p>
-</li>
-<li><p><strong>IP地址</strong>：其由域名服务器解析，可以帮助我们定位网络，同时在测试时查找系统上的开放端口&amp;其他可利用资源及服务等等。</p>
-</li>
-<li><p><strong>Web服务器</strong>：是运行在OS上的应用程序，如Apache、Tomcat、IIS等等都是。当任何Web请求被发送到系统时，这些Web服务器会处理并发出响应。知道了Web服务器类型，也就能找到该服务器的默认目录及漏洞。</p>
-</li>
-<li><p><strong>登录页面</strong>：这也是常出现漏洞的地方（SQL注入、弱口令…）。想进入admin页面或是获得敏感数据，就得有钥匙，可以是万能的（比如admin|admin@123、admin|123456…），或者直接爆破也行…</p>
-</li>
-<li><p><strong>子域名</strong>：我们需要收集到域名下的所有可用的子域名，这样可能会发现隐藏或是私有域。而这些有在被维护的就很容易收到攻击（洪泛攻击…）</p>
-</li>
-<li><p><strong>同一服务器上的其他域</strong>：很多时候没办法在目标站找到漏洞时，可以尝试通过查找反向IP域并查找同一服务器上的其他网站来locate漏洞。</p>
-</li>
-<li><p><strong>Web应用程序防火墙</strong>：除了上述所讲，我们还可以测试是否使用防火墙。这样，我们可以知道要面对的&amp;有无可以绕过该防火墙的方法。</p>
-</li>
-</ol>
-<h4 id="0x2-两维度"><a href="#0x2-两维度" class="headerlink" title="0x2.两维度"></a>0x2.两维度</h4><ol>
-<li><p><strong>网站</strong>框架：</p>
-<p> a. CMS、接口信息、数据库信息、编程语言、前端载体</p>
-<p> b. OS、IP信息、CDN信息、端口协议、DNS信息、域名信息</p>
-</li>
-<li><p><strong>企业相关</strong>框架：</p>
-<p>a. IP C段信息、历史备案信息、鹰图hunter&#x2F;FOFA信息</p>
-<p>b. SRC公告中信息（测试范围…）、域名信息、<a class="link"   target="_blank" rel="noopener" href="https://www.qcc.com/" >企查查<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://www.tianyancha.com/company/3137567605/zhishi" >天眼查<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>&#x2F;<a class="link"   target="_blank" rel="noopener" href="https://sou.xiaolanben.com/pc" >小蓝本<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>信息</p>
-</li>
-</ol>
-<h4 id="0x3-信息打点方向"><a href="#0x3-信息打点方向" class="headerlink" title="0x3.信息打点方向"></a>0x3.信息打点方向</h4><ol>
-<li><p><strong>目标公司相关</strong>：</p>
-<p>a.看目标直接开放的资产业务…</p>
-<p>b.相关单位（迂回战术）：企业总部的安全防护做得比较严格，难以正面攻破。这时，可以选择其下属单位来试试；还有就是，一个集团内部的各个分公司之间的内网隔离不彻底，可以由一个内网进入同一集团下另一分公司的内网中进行信息收集。</p>
-</li>
-<li><p><strong>供应商（供应链攻击）</strong>：集中在上下游供应商，找到漏洞，攻击企业内部</p>
-<p>a.商业购买系统</p>
-<p>b.软件开发商</p>
-<p>c.外包相关业务</p>
-<p>d.代理商</p>
-<p>e.招标&amp;投标文件</p>
-</li>
-</ol>
-<h4 id="0x4-常见打点思路"><a href="#0x4-常见打点思路" class="headerlink" title="0x4.常见打点思路"></a>0x4.常见打点思路</h4><ol>
-<li><p><em><strong>远程Web打点</strong></em></p>
-<p>a.<strong>互联网边界资产</strong>：部分开放于互联网的设备或系统（邮件、官网…）</p>
-<p>b.<strong>通用产品组件漏洞</strong>：自身安全漏洞（OA漏洞、中间件漏洞、数据库漏洞…）</p>
-<p>c. <strong>0Day漏洞</strong>：0day漏洞能够穿透现有基于规则的防护技术。这些漏洞大部分和暴露在互联网上的Web应用相关，直接威胁到core的安全。</p>
-<p>d. <strong>弱口令</strong>：包括但不限于弱强度密码、默认密码、通用密码…但是现在好像基本上没见到啥弱口令了</p>
-</li>
-<li><p><em><strong>近源攻击</strong></em></p>
-<p>a.<strong>线下门店WiFi</strong>：常见的连接方式有万能钥匙、密码爆破…像星巴克等等门店都可以进行。</p>
-<p>b.<strong>WiFi伪造</strong>：干扰正常的WIFI运行，伪造同名的WiFi来等待目标现场的工作人员连接，再分析抓到的数据包，看看是否存在相关的关键业务地址、密码等等。</p>
-<p>c. <strong>BadUSB</strong>：制作干扰U盘找间隙插入工作人员的电脑上，通过模拟键盘按下来执行系统命令等等。</p>
-</li>
-<li><p><em><strong>社交工程学钓鱼攻击</strong></em></p>
-<p>a.电子邮件钓鱼</p>
-<p>b.通讯软件钓鱼（QQ、微信等）</p>
-<p>c.最常见的网页钓鱼</p>
-<p>d.电话社工（比较常见）</p>
-<p>e.水坑攻击</p>
-</li>
-</ol>
-<h4 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h4><!--more-->
-
-		</div>
-
-		
-
-		
-		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
-			
-			<li class="tag-item mx-0.5">
-				<a href="../../../../tags/SRC%E6%8C%96%E6%B4%9E/">#SRC挖洞</a>&nbsp;
-			</li>
-			
-		</ul>
-		
-
-		
-
-		
-		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
-			
-			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="../../13/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%9501/">
-					<span class="left arrow-icon flex justify-center items-center">
-						<i class="fa-solid fa-chevron-left"></i>
-					</span>
-					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">渗透测试01</span>
-						<span class="post-nav-item">Publicaciones anteriores</span>
-					</span>
-				</a>
-			</div>
-			
-			
-			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="../../07/CTF--%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9EPLUS/">
-					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">CTF--文件上传漏洞PLUS</span>
-						<span class="post-nav-item">Publicaciones siguientes</span>
-					</span>
-					<span class="right arrow-icon flex justify-center items-center">
-						<i class="fa-solid fa-chevron-right"></i>
-					</span>
-				</a>
-			</div>
-			
-		</div>
-		
-
-
-		
-		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
-			<div class="comments-container mt-10 w-full ">
-    <div id="comment-anchor" class="w-full h-2.5"></div>
-    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
-        Comentarios
-    </div>
-    
-
-        
-            
-    <div id="gitalk-container"></div>
-    <script data-swup-reload-script
-            src="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js"></script>
-    <script data-swup-reload-script>
-
-        function loadGitalk() {
-            let __gitalk__pathname = decodeURI(location.pathname);
-            const __gitalk__pathnameLength = __gitalk__pathname.length;
-            const __gitalk__pathnameMaxLength = 50;
-            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
-                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
-            }
-
-            try {
-                Gitalk && new Gitalk({
-                    clientID: 'Ov23liU0k3l90SWlPMlk',
-                    clientSecret: 'f8106a480b76370ead2220a0aa5086eebd5b7ad1',
-                    repo: 'gitalk-comments',
-                    owner: 'incldue',
-                    admin: ['incldue'],
-                    id: __gitalk__pathname,
-                    language: 'zh-Hans',
-                    proxy: 'https://github.com/login/oauth/access_token'
-                }).render('gitalk-container');
-
-            } catch (e) {
-                window.Gitalk = null;
-            }
-        }
-
-        if ('true') {
-            const loadGitalkTimeout = setTimeout(() => {
-                loadGitalk();
-                clearTimeout(loadGitalkTimeout);
-            }, 1000);
-        } else {
-            window.addEventListener('DOMContentLoaded', loadGitalk);
-        }
-    </script>
-
-
-
-        
-    
-</div>
-
-		</div>
-		
-	</div>
-
-	
-	<div class="toc-content-container">
-		<div class="post-toc-wrap">
-	<div class="post-toc">
-		<div class="toc-title">En esta página</div>
-		<div class="page-title">SRC挖洞01--信息收集_1</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SRC%E6%8C%96%E6%B4%9E01%E2%80%93%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-1"><span class="nav-number">1.</span> <span class="nav-text">SRC挖洞01–信息收集_1</span></a></li></ol>
-
-	</div>
-</div>
-	</div>
-	
-</div>
-			</div>
-
-			
-		</div>
-
-		<div class="main-content-footer">
-			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
-    <div class="info-container py-3 text-center">
-        
-        <div class="text-center">
-            &copy;
-            
-              <span>2024</span>
-              -
-            
-            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">debu8ger</a>
-            
-                
-                <p class="post-count space-x-0.5">
-                    <span>
-                        19 publicaciones en total
-                    </span>
-                    
-                </p>
-            
-        </div>
-        
-            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
-            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
-                
-                    <span id="busuanzi_container_site_uv" class="lg:!block">
-                        <span class="text-sm">CONTADOR DE VISITANTES</span>
-                        <span id="busuanzi_value_site_uv"></span>
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv" class="lg:!block">
-                        <span class="text-sm">TOTAL DE VISITAS</span>
-                        <span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
-            <span class="lg:block text-sm">DESARROLLADO POR <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
-            <span class="text-sm lg:block">TEMA&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
-        </div>
-        
-        
-            <div>
-                Blog en línea por <span class="odometer" id="runtime_days" ></span> días <span class="odometer" id="runtime_hours"></span> horas <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Seg
-            </div>
-        
-        
-            <script data-swup-reload-script>
-                try {
-                    function odometer_init() {
-                    const elements = document.querySelectorAll('.odometer');
-                    elements.forEach(el => {
-                        new Odometer({
-                            el,
-                            format: '( ddd).dd',
-                            duration: 200
-                        });
-                    });
-                    }
-                    odometer_init();
-                } catch (error) {}
-            </script>
-        
-        
-        
-    </div>  
-</footer>
-		</div>
-	</div>
-
-	
-	<div class="post-tools">
-		<div class="post-tools-container">
-	<ul class="article-tools-list">
-		<!-- TOC aside toggle -->
-		
-		<li class="right-bottom-tools page-aside-toggle">
-			<i class="fa-regular fa-outdent"></i>
-		</li>
-		
-
-		<!-- go comment -->
-		
-		<li class="go-comment">
-			<i class="fa-regular fa-comments"></i>
-		</li>
-		
-	</ul>
-</div>
-	</div>
-	
-
-	<div class="right-side-tools-container">
-		<div class="side-tools-container">
-	<ul class="hidden-tools-list">
-		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
-			<i class="fa-regular fa-magnifying-glass-plus"></i>
-		</li>
-
-		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
-			<i class="fa-regular fa-magnifying-glass-minus"></i>
-		</li>
-
-		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
-			<i class="fa-regular fa-moon"></i>
-		</li>
-
-		<!-- rss -->
-		
-
-		
-
-		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
-			<i class="fa-regular fa-arrow-down"></i>
-		</li>
-	</ul>
-
-	<ul class="visible-tools-list">
-		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
-			<i class="fa-regular fa-cog fa-spin"></i>
-		</li>
-		
-		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
-			<i class="arrow-up fas fa-arrow-up"></i>
-			<span class="percent"></span>
-		</li>
-		
-		
-	</ul>
-</div>
-	</div>
-
-	<div class="image-viewer-container">
-	<img src="">
-</div>
-
-	
-	<div class="search-pop-overlay">
-	<div class="popup search-popup">
-		<div class="search-header">
-			<span class="search-input-field-pre">
-				<i class="fa-solid fa-keyboard"></i>
-			</span>
-			<div class="search-input-container">
-				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar..." spellcheck="false" type="search" class="search-input">
-			</div>
-			<span class="popup-btn-close">
-				<i class="fa-solid fa-times"></i>
-			</span>
-		</div>
-		<div id="search-result">
-			<div id="no-result">
-				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
-			</div>
-		</div>
-	</div>
-</div>
-	
-
-</main>
-
-
-
-<script src="js/build/libs/Swup.min.js"></script>
-
-<script src="js/build/libs/SwupSlideTheme.min.js"></script>
-
-<script src="js/build/libs/SwupScriptsPlugin.min.js"></script>
-
-<script src="js/build/libs/SwupProgressPlugin.min.js"></script>
-
-<script src="js/build/libs/SwupScrollPlugin.min.js"></script>
-
-<script src="js/build/libs/SwupPreloadPlugin.min.js"></script>
-
-<script>
-    const swup = new Swup({
-        plugins: [
-            new SwupScriptsPlugin({
-                optin: true,
-            }),
-            new SwupProgressPlugin(),
-            new SwupScrollPlugin({
-                offset: 80,
-            }),
-            new SwupSlideTheme({
-                mainElement: ".main-content-body",
-            }),
-            new SwupPreloadPlugin(),
-        ],
-        containers: ["#swup"],
-    });
-</script>
-
-
+	@require '../common/variables'
+
+.page-title-header
+  font-size 3.2rem
+  line-height 1
+  font-weight bold
+  color var(--second-text-color)
+  margin 6px 0 36px 0
+
+.page-container
+  position relative
+  box-sizing border-box
+  width 100%
+  height auto
+  background var(--background-color)
+
+  +redefine-tablet()
+    padding-right 0 !important
+
+  .main-content-container
+    padding-top $navbar-height
+    position relative
+    transition padding 0.2s ease
+
+    .navbar-shrink &
+      padding-top $navbar-shrink-height
+      transition padding 0.2s ease
+
+      +redefine-tablet()
+        padding-top: ($navbar-shrink-height * 0.9)
+
+      +redefine-mobile()
+        padding-top: $navbar-shrink-height * 0.8
+
+    +redefine-tablet()
+      padding-top: $navbar-height * 0.9
+
+    +redefine-mobile()
+      padding-top: $navbar-height * 0.8
+
+    .main-content-header
+      position fixed
+      top 0
+      right 0
+      width 100%
+      height $navbar-height
+      z-index $z-index-5
+      box-sizing border-box
+      transition-t('transform, padding-left, height', '0, 0, 0', '0.3, 0.2, 0.2', 'ease-out, linear, ease')
+
+      &.hide
+        transform translateY(-105%)
+
+      .navbar-shrink &
+        height $navbar-shrink-height
+
+        +redefine-tablet()
+          height: ($navbar-shrink-height * 0.9)
+
+        +redefine-mobile()
+          height: $navbar-shrink-height * 0.8
+
+      +redefine-tablet()
+        height: $navbar-height * 0.9
+        padding-left 0 !important
+
+      +redefine-mobile()
+        height: $navbar-height * 0.8
+
+    .main-content-body
+      box-sizing border-box
+      width 100%
+      display flex
+      justify-content center
+      padding $spacing-unit 0
+
+      +redefine-tablet()
+        padding ($spacing-unit * 0.8) 0
+
+      +redefine-mobile()
+        border none !important
+        padding-top 0
+
+      .main-content
+        position relative
+        box-sizing border-box
+        width $main-content-width
+        max-width $content-max-width
+        height 100%
+        transition-t('max-width, width', '0, 0', '0.2, 0.2', 'ease, ease')
+
+        +redefine-tablet()
+          width $main-content-width-tablet
+
+        +redefine-mobile()
+          width $main-content-width-mobile
+
+        &.has-toc
+          max-width $has-toc-content-max-width !important
+
+      .main-content-footer
+        width 100%
+
+  .post-tools
+    position fixed
+    top: $navbar-height + $spacing-unit
+    right $spacing-unit
+    transition-t('top', '0', '0.2', 'ease')
+
+    .navbar-shrink &
+      top: $navbar-shrink-height + $spacing-unit
+
+      +redefine-tablet()
+        top ($navbar-shrink-height * 0.9) + $spacing-unit
+
+      +redefine-mobile()
+        top: ($navbar-shrink-height * 0.8 + $spacing-unit)
+
+    +redefine-tablet()
+      top: ($navbar-height * 0.9 + $spacing-unit)
+      right 10px
+      transform scale(0.82)
+      transform-origin right top
+
+    +redefine-mobile()
+      display none
+      top: ($navbar-height * 0.8 + $spacing-unit)
+      right 5px
+      transform scale(0.72)
+
+  .right-side-tools-container
+    position fixed
+    bottom 5%
+    right $spacing-unit
+    opacity 1
+    transition opacity 0.2s ease
+
+    &.hide
+      opacity 0
+      pointer-events none
+      transition opacity 0.2s ease
+
+    +redefine-mobile()
+      right 12px
 
 
 	
