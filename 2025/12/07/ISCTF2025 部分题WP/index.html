@@ -140,7 +140,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://incldue.github.io/static/bgimage/night.png">
 <meta property="article:published_time" content="2025-12-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-07T09:51:41.654Z">
+<meta property="article:modified_time" content="2025-12-07T09:56:53.215Z">
 <meta property="article:author" content="debu8ger">
 <meta property="article:tag" content="比赛个人WP">
 <meta name="twitter:card" content="summary">
@@ -632,15 +632,15 @@
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../tags">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">12</div>
-        <div class="label text-third-text-color text-sm">Etiquetas</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
-        <div class="label text-third-text-color text-sm">Categorías</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
         <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">21</div>
-        <div class="label text-third-text-color text-sm">Publicaciones</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
     </div>
@@ -685,14 +685,14 @@
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
         <span class="desktop">2025-12-07 00</span>
         <span class="mobile">2025-12-07 00</span>
-        <span class="hover-info">Creado</span>
+        <span class="hover-info">Created</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-12-07 17:51</span>
-            <span class="mobile">2025-12-07 17:51</span>
-            <span class="hover-info">Actualizado</span>
+            <span class="desktop">2025-12-07 17:56</span>
+            <span class="mobile">2025-12-07 17:56</span>
+            <span class="hover-info">Updated</span>
         </span>
     
 
@@ -745,7 +745,7 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h3 id="SIGNIN"><a href="#SIGNIN" class="headerlink" title="SIGNIN"></a>SIGNIN</h3><h4 id="Ez-Caesar"><a href="#Ez-Caesar" class="headerlink" title="Ez_Caesar"></a>Ez_Caesar</h4><hr>
+			<h2 id="SIGNIN"><a href="#SIGNIN" class="headerlink" title="SIGNIN"></a>SIGNIN</h2><h3 id="Ez-Caesar"><a href="#Ez-Caesar" class="headerlink" title="Ez_Caesar"></a>Ez_Caesar</h3><hr>
 <p>题目描述：小蓝鲨看你们牢底坐穿决定送你们一点分。</p>
 <hr>
 <p>下载附件：</p>
@@ -756,7 +756,7 @@
 
 
 
-<h4 id="小蓝鲨的RC4系统"><a href="#小蓝鲨的RC4系统" class="headerlink" title="小蓝鲨的RC4系统"></a>小蓝鲨的RC4系统</h4><hr>
+<h3 id="小蓝鲨的RC4系统"><a href="#小蓝鲨的RC4系统" class="headerlink" title="小蓝鲨的RC4系统"></a>小蓝鲨的RC4系统</h3><hr>
 <p>题目描述：送都送了，再给一个。</p>
 <hr>
 <p>下载附件：</p>
@@ -769,7 +769,7 @@
 
 
 
-<h3 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h3><h4 id="Guess！"><a href="#Guess！" class="headerlink" title="Guess！"></a>Guess！</h4><hr>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="Guess！"><a href="#Guess！" class="headerlink" title="Guess！"></a>Guess！</h3><hr>
 <p>题目描述：这是一个经典的猜数字，开始你的数字解密之旅吧！</p>
 <hr>
 <p>下载附件，是pyinstaller处理后的<code>MiscNumberChallenge.exe</code>，用<code>unpack.py</code>解包后得到<code>extracted</code>目录</p>
@@ -777,7 +777,7 @@
 <div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decode_flag</span>(<span class="params">encoded_flag</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解码隐藏的Flag&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        decoded = base64.b64decode(encoded_flag).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        decoded = base64.b64decode(decoded).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> decoded</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Flag解码错误&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    secret_number = random.randint(<span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line">    max_attempts = <span class="number">10</span></span><br><span class="line">    encoded_flag = <span class="string">&#x27;SVNDVEZ7OXVlU3NfdGhFX0BuJHdlUn0=&#x27;</span></span><br><span class="line">    encoded_flag = base64.b64encode(encoded_flag.encode()).decode()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;==================================================&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;欢迎参加Misc猜数字挑战！&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;系统已生成1-100之间的秘密数字，你有<span class="subst">&#123;max_attempts&#125;</span>次机会&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;猜对数字即可获得Flag!&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;==================================================&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> attempt <span class="keyword">in</span> <span class="built_in">range</span>(max_attempts):</span><br><span class="line">        remaining = max_attempts - attempt</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;\n[剩余机会: <span class="subst">&#123;remaining&#125;</span>]&#x27;</span>)</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                guess = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;请输入你的猜测 (1-100): &#x27;</span>))</span><br><span class="line">                <span class="keyword">if</span> <span class="number">1</span> &lt;= guess &lt;= <span class="number">100</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;请输入1-100之间的整数！&#x27;</span>)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;无效输入！请输入整数。&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> guess &lt; secret_number:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;guess&#125;</span> → 太小了，继续努力！&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> guess &gt; secret_number:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;guess&#125;</span> → 太大了，往小试试！&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;==================================================&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;★ 恭喜！你猜对了！数字就是 <span class="subst">&#123;secret_number&#125;</span>&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;★ 恭喜获得Flag:&#x27;</span>)</span><br><span class="line">            flag = decode_flag(encoded_flag)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;★ <span class="subst">&#123;flag&#125;</span>&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;==================================================&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;程序将在10秒后关闭...&#x27;</span>)</span><br><span class="line">            time.sleep(<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n==================================================&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;⚠️ 挑战失败！&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;⚠️ 正确答案是: <span class="subst">&#123;secret_number&#125;</span>&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;⚠️ 请重新运行程序再次尝试！&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;==================================================&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;程序将在10秒后关闭...&#x27;</span>)</span><br><span class="line">        time.sleep(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        main()</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;\n\n程序已中断。&#x27;</span>)</span><br><span class="line">        sys.exit()</span><br></pre></td></tr></table></figure></div>
 
 <p>容易得到，flag编码为<code>base64</code>，解码即得flag：ISCTF{9ueSs_thE_@n$weR}</p>
-<h3 id="REVERSE"><a href="#REVERSE" class="headerlink" title="REVERSE"></a>REVERSE</h3><h4 id="ezzz-math"><a href="#ezzz-math" class="headerlink" title="ezzz_math"></a>ezzz_math</h4><hr>
+<h2 id="REVERSE"><a href="#REVERSE" class="headerlink" title="REVERSE"></a>REVERSE</h2><h3 id="ezzz-math"><a href="#ezzz-math" class="headerlink" title="ezzz_math"></a>ezzz_math</h3><hr>
 <p>题目描述：来解方程吧</p>
 <hr>
 <p>IDA中打开，可疑点<code>_main</code>函数：</p>
@@ -799,7 +799,7 @@
 
 
 
-<h4 id="ezpy"><a href="#ezpy" class="headerlink" title="ezpy"></a>ezpy</h4><hr>
+<h3 id="ezpy"><a href="#ezpy" class="headerlink" title="ezpy"></a>ezpy</h3><hr>
 <p>题目描述：这是什么库？没见过呢</p>
 <hr>
 <p>下载附件，是pyinstaller处理的<code>ezpy.exe</code>，按照之前做法，得到<code>extracted</code>文件夹，</p>
@@ -824,7 +824,7 @@
 
 
 
-<h4 id="MysteriousStream"><a href="#MysteriousStream" class="headerlink" title="MysteriousStream"></a>MysteriousStream</h4><hr>
+<h3 id="MysteriousStream"><a href="#MysteriousStream" class="headerlink" title="MysteriousStream"></a>MysteriousStream</h3><hr>
 <p>题目描述：小曲冒着生命风险，读入了一个神秘的 payload.dat文件，为了不枉费小曲的艰辛……，你能逆向出被加密的秘密吗？</p>
 <hr>
 <p>下载附件，包含<code>challenge</code>和<code>payload.dat</code>文件，定位至<code>main</code>函数：</p>
@@ -845,7 +845,7 @@
 
 
 
-<h3 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h3><h4 id="easy-RSA"><a href="#easy-RSA" class="headerlink" title="easy_RSA"></a>easy_RSA</h4><hr>
+<h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><h3 id="easy-RSA"><a href="#easy-RSA" class="headerlink" title="easy_RSA"></a>easy_RSA</h3><hr>
 <p>题目描述：我们的爱情像欧拉函数φ(n)——无限趋近却永远达不到n的完美互质，最终只剩周期性的怀念在模n的世界里循环证明</p>
 <hr>
 <p>下载加密代码：</p>
@@ -857,7 +857,7 @@
 
 
 
-<h4 id="小蓝鲨的LFSR系统"><a href="#小蓝鲨的LFSR系统" class="headerlink" title="小蓝鲨的LFSR系统"></a>小蓝鲨的LFSR系统</h4><hr>
+<h3 id="小蓝鲨的LFSR系统"><a href="#小蓝鲨的LFSR系统" class="headerlink" title="小蓝鲨的LFSR系统"></a>小蓝鲨的LFSR系统</h3><hr>
 <p>题目描述：”小蓝鲨是海洋情报局的新晋密码专家，它设计了一个基于LFSR的流密码系统来加密机密信息。这个系统看起来简单高效，但小蓝鲨不知道的是，LFSR在某些情况下可能存在安全隐患。 一天，小蓝鲨的加密系统被神秘的黑客组织””深海幽灵””入侵，他们截获了一段加密信息。作为海洋安全部门的成员，你需要分析这个加密系统，找出潜在的弱点，并解密被截获的信息。”</p>
 <hr>
 <p>打开附件：</p>
@@ -872,7 +872,7 @@
 
 
 
-<h4 id="小蓝鲨的RSA密文"><a href="#小蓝鲨的RSA密文" class="headerlink" title="小蓝鲨的RSA密文"></a>小蓝鲨的RSA密文</h4><hr>
+<h3 id="小蓝鲨的RSA密文"><a href="#小蓝鲨的RSA密文" class="headerlink" title="小蓝鲨的RSA密文"></a>小蓝鲨的RSA密文</h3><hr>
 <p>题目描述：”小蓝鲨是海洋数学天才，它最近正在深耕RSA领域。你嗤之以鼻，心想RSA不是最基础的密码学知识吗？于是你信誓旦旦的跑到小蓝鲨面前告诉它你已经完全掌握了RSA，并宣称所有的RSA题目你都能做出来。 小蓝鲨意味深长的看了你一眼，并出了一道RSA来考考你。现在，该你向它证明你的实力了。”</p>
 <hr>
 <p>打开.py文件，</p>
@@ -885,7 +885,7 @@
 
 
 
-<h4 id="baby-math"><a href="#baby-math" class="headerlink" title="baby_math"></a>baby_math</h4><hr>
+<h3 id="baby-math"><a href="#baby-math" class="headerlink" title="baby_math"></a>baby_math</h3><hr>
 <p>题目描述：死去的记忆突然被唤醒了</p>
 <hr>
 <p>打开：</p>
@@ -898,7 +898,7 @@
 
 
 
-<h4 id="小蓝鲨的费马谜题"><a href="#小蓝鲨的费马谜题" class="headerlink" title="小蓝鲨的费马谜题"></a>小蓝鲨的费马谜题</h4><hr>
+<h3 id="小蓝鲨的费马谜题"><a href="#小蓝鲨的费马谜题" class="headerlink" title="小蓝鲨的费马谜题"></a>小蓝鲨的费马谜题</h3><hr>
 <p>题目描述：小蓝鲨在一次网络探险中发现了一个神秘的加密系统。他发现这个系统好像使用了费马小定理来保护重要信息，但是又好像不太一样。小蓝鲨设法截获了系统的加密输出，但不知道如何解密，你可以帮帮它吗？</p>
 <hr>
 <p>打开，还有25KB的<code>output.txt</code>：</p>
@@ -935,7 +935,7 @@
 				<a class="next" rel="next" href="../../../11/07/Re%E7%BB%83%E4%B9%A0%E4%B9%8BASM%E6%B1%87%E7%BC%96%E9%80%86%E5%90%91/">
 					<span class="title flex justify-center items-center">
 						<span class="post-nav-title-item truncate max-w-48">Re练习之ASM汇编逆向</span>
-						<span class="post-nav-item">Publicaciones siguientes</span>
+						<span class="post-nav-item">Next posts</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-right"></i>
@@ -952,7 +952,7 @@
 			<div class="comments-container mt-10 w-full ">
     <div id="comment-anchor" class="w-full h-2.5"></div>
     <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
-        Comentarios
+        Comments
     </div>
     
 
@@ -995,9 +995,9 @@
 	<div class="toc-content-container">
 		<div class="post-toc-wrap">
 	<div class="post-toc">
-		<div class="toc-title">En esta página</div>
+		<div class="toc-title">On this page</div>
 		<div class="page-title">ISCTF2025 部分题WP</div>
-		<ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SIGNIN"><span class="nav-number">1.</span> <span class="nav-text">SIGNIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REVERSE"><span class="nav-number">3.</span> <span class="nav-text">REVERSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRYPTO"><span class="nav-number">4.</span> <span class="nav-text">CRYPTO</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SIGNIN"><span class="nav-number">1.</span> <span class="nav-text">SIGNIN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ez-Caesar"><span class="nav-number">1.1.</span> <span class="nav-text">Ez_Caesar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RC4%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.2.</span> <span class="nav-text">小蓝鲨的RC4系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Guess%EF%BC%81"><span class="nav-number">2.1.</span> <span class="nav-text">Guess！</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REVERSE"><span class="nav-number">3.</span> <span class="nav-text">REVERSE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ezzz-math"><span class="nav-number">3.1.</span> <span class="nav-text">ezzz_math</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ezpy"><span class="nav-number">3.2.</span> <span class="nav-text">ezpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MysteriousStream"><span class="nav-number">3.3.</span> <span class="nav-text">MysteriousStream</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRYPTO"><span class="nav-number">4.</span> <span class="nav-text">CRYPTO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#easy-RSA"><span class="nav-number">4.1.</span> <span class="nav-text">easy_RSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84LFSR%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.2.</span> <span class="nav-text">小蓝鲨的LFSR系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RSA%E5%AF%86%E6%96%87"><span class="nav-number">4.3.</span> <span class="nav-text">小蓝鲨的RSA密文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#baby-math"><span class="nav-number">4.4.</span> <span class="nav-text">baby_math</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84%E8%B4%B9%E9%A9%AC%E8%B0%9C%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">小蓝鲨的费马谜题</span></a></li></ol></li></ol>
 
 	</div>
 </div>
@@ -1024,7 +1024,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        21 publicaciones en total
+                        21 posts in total
                     </span>
                     
                 </p>
@@ -1035,26 +1035,26 @@
             <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
                 
                     <span id="busuanzi_container_site_uv" class="lg:!block">
-                        <span class="text-sm">CONTADOR DE VISITANTES</span>
+                        <span class="text-sm">VISITOR COUNT</span>
                         <span id="busuanzi_value_site_uv"></span>
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv" class="lg:!block">
-                        <span class="text-sm">TOTAL DE VISITAS</span>
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
                         <span id="busuanzi_value_site_pv"></span>
                     </span>
                 
             </div>
         
         <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
-            <span class="lg:block text-sm">DESARROLLADO POR <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
-            <span class="text-sm lg:block">TEMA&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
         </div>
         
         
             <div>
-                Blog en línea por <span class="odometer" id="runtime_days" ></span> días <span class="odometer" id="runtime_hours"></span> horas <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Seg
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
             </div>
         
         
@@ -1155,7 +1155,7 @@
 				<i class="fa-solid fa-keyboard"></i>
 			</span>
 			<div class="search-input-container">
-				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Buscar..." spellcheck="false" type="search" class="search-input">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
 			</div>
 			<span class="popup-btn-close">
 				<i class="fa-solid fa-times"></i>
