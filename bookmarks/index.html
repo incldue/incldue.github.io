@@ -123,7 +123,7 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://incldue.github.io/search/"/>
+    <link rel="canonical" href="https://incldue.github.io/bookmarks/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
@@ -133,14 +133,14 @@
         
         <meta name="description" content="debu8ger&#39;s CTF tech blog">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Search">
-<meta property="og:url" content="https://incldue.github.io/search/index.html">
+<meta property="og:title" content="个人书签">
+<meta property="og:url" content="https://incldue.github.io/bookmarks/index.html">
 <meta property="og:site_name" content="D&#39;b8Gr的小站~">
 <meta property="og:description" content="debu8ger&#39;s CTF tech blog">
 <meta property="og:locale">
 <meta property="og:image" content="https://incldue.github.io/static/bgimage/night.png">
-<meta property="article:published_time" content="2025-05-31T17:51:53.000Z">
-<meta property="article:modified_time" content="2025-05-31T17:52:14.315Z">
+<meta property="article:published_time" content="2025-12-18T13:32:06.000Z">
+<meta property="article:modified_time" content="2025-12-18T13:33:09.675Z">
 <meta property="article:author" content="debu8ger">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://incldue.github.io/static/bgimage/night.png">
@@ -155,7 +155,7 @@
     
     <title>
         
-            Search | D&#39;b8Gr的小站
+            个人书签 | D&#39;b8Gr的小站
         
     </title>
 
@@ -497,7 +497,7 @@
 
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class=""
+                                <a class="active"
                                    href="../bookmarks/"
                                         >
                                     <i class="fa-regular fa-bookmark fa-fw"></i>
@@ -622,7 +622,7 @@
 
                     <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
                         
-                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
                            href="../bookmarks/"
                         >
                             <span>
@@ -692,28 +692,641 @@
 			
 
 			<div class="main-content">
-				<div class="page-template-container">
-	
+				<div class="py-8 sm:py-0">
 
-	
 
-	<div class="page-template-content markdown-body">
-		
-		<h1>Search</h1>
-		
+	<h1 class="page-title-header">
+		个人书签
+	</h1>
+	<div class="flex flex-col md:flex-row gap-6 md:gap-12 w-full">
 
-		
+
+		<!-- Left Sidebar - Categories -->
+		<div class="w-full md:w-48 shrink-0 md:sticky md:top-[var(--navbar-height)] h-fit sm:py-6">
+			<nav class="flex md:block overflow-x-auto scrollbar-hide pb-4 md:pb-0 gap-2">
+				
+				<a href="#ai工具" class="whitespace-nowrap md:whitespace-normal block px-3 py-2 rounded-lg 
+                   hover:bg-second-background-color hover:text-primary hover:scale-102 
+                   transition-all duration-200 border border-transparent 
+                   hover:border-second-background-color
+                          shrink-0 font-medium
+                          bookmark-nav-item"
+                   data-category="ai工具">
+					<i class="fa-regular fa-tools mr-2 w-6 h-6"></i>
+					AI工具
+				</a>
+				
+				<a href="#ctf入门&amp;导航" class="whitespace-nowrap md:whitespace-normal block px-3 py-2 rounded-lg 
+                   hover:bg-second-background-color hover:text-primary hover:scale-102 
+                   transition-all duration-200 border border-transparent 
+                   hover:border-second-background-color
+                          shrink-0 font-medium
+                          bookmark-nav-item"
+                   data-category="ctf入门&amp;导航">
+					<i class="fa-regular fa-regular fa-laptop-code mr-2 w-6 h-6"></i>
+					CTF入门&amp;导航
+				</a>
+				
+				<a href="#一些ctf练习平台" class="whitespace-nowrap md:whitespace-normal block px-3 py-2 rounded-lg 
+                   hover:bg-second-background-color hover:text-primary hover:scale-102 
+                   transition-all duration-200 border border-transparent 
+                   hover:border-second-background-color
+                          shrink-0 font-medium
+                          bookmark-nav-item"
+                   data-category="一些ctf练习平台">
+					<i class="fa-regular fa-solid fa-user-secret mr-2 w-6 h-6"></i>
+					一些CTF练习平台
+				</a>
+				
+				<a href="#技术社区" class="whitespace-nowrap md:whitespace-normal block px-3 py-2 rounded-lg 
+                   hover:bg-second-background-color hover:text-primary hover:scale-102 
+                   transition-all duration-200 border border-transparent 
+                   hover:border-second-background-color
+                          shrink-0 font-medium
+                          bookmark-nav-item"
+                   data-category="技术社区">
+					<i class="fa-regular fa-regular fa-users mr-2 w-6 h-6"></i>
+					技术社区
+				</a>
+				
+			</nav>
+		</div>
+
+		<!-- Right Content - Bookmarks -->
+		<div class="flex-1 max-w-full">
+			
+			<section id="ai工具" class="mb-12">
+				<h2 class="text-2xl font-semibold text-second-text-color mb-4 pb-2 border-b border-border-color">
+					AI工具
+				</h2>
+
+				<div class="grid gap-6 lg:grid-cols-2">
+					
+					<a href="https://chatgpt.com/zh-CN/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://chatgpt.com/cdn/assets/favicon-180x180-od45eci6.webp" alt="ChatGPT" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											ChatGPT
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										OpenAI 的 AI 对话助手
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://www.gstatic.com/lamda/images/gemini_sparkle_4g_512_lt_f94943af3be039176192d.png" alt="Gemini" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											Gemini
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										Google 的 AI 对话助手
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.qianwen.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://img.alicdn.com/imgextra/i2/O1CN01FPcQDy1WTPjPX6IH9_!!6000000002789-2-tps-96-96.png" alt="通义千问" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											通义千问
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										阿里巴巴 的 AI 对话助手
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://chat.deepseek.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											DeepSeek
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										深度求索公司 的 AI 对话助手
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+				</div>
+			</section>
+			
+			<section id="ctf入门&amp;导航" class="mb-12">
+				<h2 class="text-2xl font-semibold text-second-text-color mb-4 pb-2 border-b border-border-color">
+					CTF入门&amp;导航
+				</h2>
+
+				<div class="grid gap-6 lg:grid-cols-2">
+					
+					<a href="https://ctf-wiki.org/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://ctf-wiki.org/assets/images/favicon.png" alt="CTF Wiki" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											CTF Wiki
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										初学者学习CTF相关的知识 的 开源项目
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://hello-ctf.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://hello-ctf.com/assets/images/favicon.png" alt="Hello CTF" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											Hello CTF
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										探姬姐姐(其实是哥哥) 的 开源CTF项目
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.runoob.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://static.char123.com/images/favicon.ico" alt="菜鸟教程" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											菜鸟教程
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										丰富的学习资料,涵盖各种编程语言、开发建议、AI学习等
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://dh.aabyss.cn/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://dh.aabyss.cn/about/assets/images/favicon.ico" alt="渊龙 Sec 安全团队导航" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											渊龙 Sec 安全团队导航
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										渊龙Sec安全团队开发 的 CTF导航网站
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.ctfiot.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2021/10/bitbug_favicon-1.ico" alt="CTF导航" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											CTF导航
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										分享CTF、IOT、ICS、Car相关内容
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+				</div>
+			</section>
+			
+			<section id="一些ctf练习平台" class="mb-12">
+				<h2 class="text-2xl font-semibold text-second-text-color mb-4 pb-2 border-b border-border-color">
+					一些CTF练习平台
+				</h2>
+
+				<div class="grid gap-6 lg:grid-cols-2">
+					
+					<a href="https://www.nssctf.cn/index" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://www.nssctf.cn/favicon.ico" alt="NSSCTF" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											NSSCTF
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										更新快，题量多，自带WP，开启题目环境需要金币，有每日限免题目
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://buuoj.cn/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://buuoj.cn/themes/buu_core/static/img/favicon.ico" alt="BUUCTF" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											BUUCTF
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										题量丰富，种类多，无需付费，但题目比较老，更新缓慢，对AWD比较友好
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://ctf.bugku.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://ctf.bugku.com/favicon.ico" alt="Bugku CTF平台" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											Bugku CTF平台
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										自带WP，题量较多，可进行AWD比赛，主要的AWD练习平台
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://ctf.show/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://ctf.show/files/3927d3294176f912a38d835fab6196a7/logo32.png" alt="CTF Show" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											CTF Show
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										更新及时，分类多，部分题目需要付费，有VIP专属(我不建议)
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.ctfplus.cn/home" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://www.ctfplus.cn/assets/favicon-BsaQIO6p.ico" alt="CTF+" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											CTF+
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										融合了论坛、比赛、知识库、课程的多功能CTF练习平台，有联合举办比赛
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://gz.imxbt.cn/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://gz.imxbt.cn/favicon.webp" alt="Review::CTF" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											Review::CTF
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										CTF复现平台，也有电子书、资料&amp;工具下载，复现比赛不蛮多
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.yuque.com/dat0u/ctf" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://mdn.alipayobjects.com/huamei_0prmtq/afts/img/A*vMxOQIh4KBMAAAAAAAAAAAAADvuFAQ/original" alt="CTF复现计划" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											CTF复现计划
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										丰富的比赛题目的复现环境及WP，但最近的比赛没有，估计没维护了
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+				</div>
+			</section>
+			
+			<section id="技术社区" class="mb-12">
+				<h2 class="text-2xl font-semibold text-second-text-color mb-4 pb-2 border-b border-border-color">
+					技术社区
+				</h2>
+
+				<div class="grid gap-6 lg:grid-cols-2">
+					
+					<a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://github.githubassets.com/favicons/favicon.png" alt="Github" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											Github
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										世界上最大的开源社区，没有之一，有丰富的开源资源、项目、code，可以保存自己的项目
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://xz.aliyun.com/news" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://xz.aliyun.com/favicon.ico" alt="先知社区" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											先知社区
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										涵盖技术分享、安全培训、漏洞库的技术平台，发文章可得稿费
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.52pojie.cn/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://www.52pojie.cn/apple-touch-icon.png" alt="吾爱破解" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											吾爱破解
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										深耕软件逆向工程与反病毒技术领域，专注逆向、破解、病毒分析的平台，有超多破解版软件
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.kanxue.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://www.kanxue.com/view/img/favicon.ico" alt="看雪学苑" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											看雪学苑
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										专注于PC|移动|智能设备安全研究及逆向工程的开发者社区
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.csdn.net/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://g.csdnimg.cn/static/logo/favicon32.ico" alt="CSDN_专业开发者社区" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											CSDN_专业开发者社区
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										全球知名中文IT技术交流平台,包含原创博客、精品问答、职业培训、技术论坛、资源下载等产品服务
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<a href="https://www.cnblogs.com/" target="_blank" rel="noopener noreferrer" class="group block">
+						<div class="p-5 rounded-xl redefine-box-shadow-flat transition-all duration-300
+                                      hover:transform hover:-translate-y-1">
+							<div class="flex items-center gap-5">
+								<div class="w-12 h-12 rounded-xl overflow-hidden bg-second-background-color shrink-0
+                                                transform group-hover:scale-105 transition-transform duration-300">
+									<img src="https://assets.cnblogs.com/favicon_v3_2.ico" alt="博客园" class="w-full h-full object-cover" onerror="this.src='/images/bookmark-placeholder.svg'">
+								</div>
+								<div class="flex-1 min-w-0 flex flex-col gap-1">
+									<div class="flex items-center justify-between">
+										<h3 class="font-medium text-second-text-color group-hover:text-primary transition-colors">
+											博客园
+										</h3>
+										<i class="fa-regular fa-arrow-right text-third-text-color opacity-0 group-hover:opacity-100 -translate-x-1
+                                                      group-hover:translate-x-0 transition-all duration-300"></i>
+									</div>
+									<p class="text-sm text-third-text-color line-clamp-2">
+										一直致力并专注于为开发者打造一个纯净的技术交流社区，推动并帮助开发者通过互联网分享知识
+									</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+				</div>
+			</section>
+			
+		</div>
 	</div>
 
-	<div class="page-template-comments">
-		
-	</div>
 </div>
-
-<div class="paginator">
-	
-</div>
-  
 			</div>
 
 			
