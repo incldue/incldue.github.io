@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en, zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="debu8ger">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://incldue.github.io/2025/12/29/2025ciscn初赛部分wp/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="debu8ger&#39;s CTF tech blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025ciscn初赛部分WP">
+<meta property="og:url" content="https://incldue.github.io/2025/12/29/2025ciscn%E5%88%9D%E8%B5%9B%E9%83%A8%E5%88%86WP/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="debu8ger&#39;s CTF tech blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/static/bgimage/night.png">
+<meta property="article:published_time" content="2025-12-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-29T15:49:38.649Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="比赛个人WP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://incldue.github.io/static/bgimage/night.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="../../../../static/avatar/avatar.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../static/avatar/avatar.png">
+    <meta name="theme-color" content="#3CB371">
+    <link rel="shortcut icon" href="../../../../static/avatar/avatar.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            2025ciscn初赛部分WP | D&#39;b8Gr的小站
+        
+    </title>
+
+    
+<link rel="stylesheet" href="fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="../../../../css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+        
+<script src="js/build/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"incldue.github.io","root":"/","language":"en, zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"2.8rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"atom-one-light","dark":"monokai-sublime"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#3CB371","secondary":"#41697D","default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1050px","sidebar_width":"230px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"欢迎来到debu8gerのCTF小站"},"side_tools":{"gear_rotation":true,"auto_expand":true},"open_graph":{"enable":true,"image":"/static/bgimage/night.png","description":"debu8ger's CTF tech blog"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/static/bgimage/night.png","dark":"/static/bgimage/night.png"},"title":"D'b8Gr的小站","subtitle":{"text":["my way to record my learning experience","welcome"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn?c=e&c=k"},"typing_speed":100,"backing_speed":80,"starting_delay":300,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"center","links":{"github":"https://github.com/incldue","instagram":null,"zhihu":null,"twitter":"https://x.com/JonathanHu70782","email":"h52463398@outlook.com","fa-brands fa-bilibili":"https://space.bilibili.com/2114835832","qq":"524633948@qq.com"},"qrs":null}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"首页":{"path":"//incldue.github.io","icon":"fa-regular fa-house"},"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"关于":{"icon":"fa-regular fa-user","submenus":{"我":"/about","github":"https://github.com/incldue","博客":"https://incldue.github.io","朋友们":"/friends"}},"书签":{"icon":"fa-regular fa-bookmark","path":"/bookmarks/"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur","bookmarks_column":2},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"no system is secure","show_on_mobile":true,"links":{"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":100,"categories":{"enable":true,"limit":4},"tags":{"enable":true,"limit":4}},"footerStart":"2024/10/13"};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/regular.min.css">
+
+    
+    
+    
+        
+<link rel="stylesheet" href="fontawesome/duotone.min.css">
+
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+	<span class="scroll-progress-bar"></span>
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        欢迎来到debu8gerのCTF小站
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
+                    <img src="../../../../static/avatar/avatar0.jpg" class="w-full h-full rounded-xs">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                D&#39;b8Gr的小站
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="//incldue.github.io"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="../../../../about">
+                                                    我
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/incldue">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://incldue.github.io">
+                                                    博客
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="../../../../friends">
+                                                    朋友们
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../bookmarks/"
+                                        >
+                                    <i class="fa-regular fa-bookmark fa-fw"></i>
+                                    书签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="//incldue.github.io"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-关于"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-关于">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="../../../../about">我</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/incldue">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://incldue.github.io">博客</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="../../../../friends">朋友们</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../bookmarks/"
+                        >
+                            <span>
+                                书签
+                            </span>
+                            
+                                <i class="fa-regular fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="../../../../tags"
+                        >
+                            <span>标签</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="../../../../categories"
+                        >
+                            <span>分类</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">12</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">24</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">2025ciscn初赛部分WP</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="../../../../static/avatar/avatar0.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">debu8ger</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-12-29 00</span>
+        <span class="mobile">2025-12-29 00</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-12-29 23:49</span>
+            <span class="mobile">2025-12-29 23:49</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><h3 id="ECDSA"><a href="#ECDSA" class="headerlink" title="ECDSA"></a>ECDSA</h3><hr>
+<p>ECDSA一定是安全的吗？提交格式：flag{私钥的MD5值}</p>
+<hr>
+<p>打开附件，</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">from</span> ecdsa <span class="keyword">import</span> SigningKey, NIST521p</span><br><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha512</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">digest_int = <span class="built_in">int</span>.from_bytes(sha512(<span class="string">b&quot;Welcome to this challenge!&quot;</span>).digest(), <span class="string">&quot;big&quot;</span>)</span><br><span class="line">curve_order = NIST521p.order</span><br><span class="line">priv_int = digest_int % curve_order</span><br><span class="line">priv_bytes = long_to_bytes(priv_int, <span class="number">66</span>)</span><br><span class="line">sk = SigningKey.from_string(priv_bytes, curve=NIST521p)</span><br><span class="line">vk = sk.verifying_key</span><br><span class="line"></span><br><span class="line">f_pub = <span class="built_in">open</span>(<span class="string">&quot;public.pem&quot;</span>, <span class="string">&quot;wb&quot;</span>)</span><br><span class="line">f_pub.write(vk.to_pem())</span><br><span class="line">f_pub.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">nonce</span>(<span class="params">i</span>):</span><br><span class="line">    seed = sha512(<span class="string">b&quot;bias&quot;</span> + <span class="built_in">bytes</span>([i])).digest()</span><br><span class="line">    k = <span class="built_in">int</span>.from_bytes(seed, <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> k</span><br><span class="line"></span><br><span class="line">msgs = [<span class="string">b&quot;message-&quot;</span> + <span class="built_in">bytes</span>([i]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>)]</span><br><span class="line">sigs = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, msg <span class="keyword">in</span> <span class="built_in">enumerate</span>(msgs):</span><br><span class="line">    k = nonce(i)</span><br><span class="line">    sig = sk.sign(msg, k=k)</span><br><span class="line">    sigs.append((binascii.hexlify(msg).decode(), binascii.hexlify(sig).decode()))</span><br><span class="line"></span><br><span class="line">f_sig = <span class="built_in">open</span>(<span class="string">&quot;signatures.txt&quot;</span>, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> m, s <span class="keyword">in</span> sigs:</span><br><span class="line">    f_sig.write(<span class="string">&quot;%s:%s\n&quot;</span> % (m, s))</span><br><span class="line">f_sig.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>和<code>signature.txt</code>：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">6d6573736167652d00:01a76ff5e0a4490f314ab2a0650d4e9d6955fb154c39eeec2700fefac7b4aeef1230142b1466809d30bc61f32d9ce44757b604b09e211753032c28b64ef9327db44d00c9545bcb3def28828a7424c03d5b688b7ea0581372d9efc417724ab6624244dae9283789a7d7a2f8c2f820fc032dec0c3c2363f2b759e81248f75110344cd13c26</span><br><span class="line">6d6573736167652d01:0048955974b1e4270bc53524e878c60e8664e2a71ae031deb7caba819024cf7ff64d2ec4036a902b1d801c84751c3f97d88f85f56b6451fb4fe7f6fcb8dec09d52d2010c44706874ea123630deb0ff48176cae1359a29161c5da30d47121f1f4432588b4235c78febcea2643a9522099d0a88025382af940a5b8b21c04143f01c8f54656</span><br><span class="line">6d6573736167652d02:0098909b7f185210463f62cdc9f850ccf5e174317077a1473950072f1c3c0c085c851b4e0e8fa6c04eb4f978153da1286eac90f117cec35607f876a2a89e70d2dc6500547ef11dfd166bdf0ad9b11397017ad88c78e092e160867836dd371dd420bfd5e5cbde5fdee6716dd7e9dc2e0f8adc2d094ba055a871c926f5ed4bf54b7b227e05</span><br><span class="line">6d6573736167652d03:0166fa469820ee3a3fff8848b1b923fa7c9b2c9be25c190bff9c0f717dd8785d5bb21e1504293c681ad9a176a708f033f2c48ae5b3b4331c4427a745d1f9bb91697e0094b1e2dde37573eee97da667319652981ca76e8cc0bed1a1be7d22bd350902636a4bad6ef3fb2d34520fb240aeb3cc1a8b156bed8f9bcd75186e18f626355386d1</span><br><span class="line">6d6573736167652d04:017238d2b3fa48f6fdbf59c3ab2a68f5ad02cb5416d4a9413aef7f230394239bdc6834caef2f625c9be78fae3f810f792b62aac8a611dda1ef80091911ec138df6a101ce224300c0f51737f85609c072e88cb90317185f7b17530901903bc411d8f0c96972bb774a7354fffd4b59085a97785ad3f5e2b15a4239517abe5b6d5af7cc6e52</span><br><span class="line">6d6573736167652d05:01d9dc3ab10fb415bbf126a1a30a6673715bb9d4a16c2e826cdb4cdd4196de80597f6c40dde6b0f15c02802fc58efa4dc35bc3b10f8837533dd7014ae7271c22f93701e6d6164d29aa1951badce9869896f7546ce63a46d151036d58ee03f2d67691efbc1278ceb1e56fc83bf180fc980cc39bed491b77a0081287fddd9d3dc5d7afd0d5</span><br><span class="line">6d6573736167652d06:01fd7050adbd2abd1535e20cb3e8ec97e84aaad7bff77f89f236c68b57086a56c209952c12bc07339e24da3b65cfe14ce68d31d783539426658ea52618289bd5e0f601c06d685637ce97f43aa37735c63545173bde635958d3966570c93e549ce1a9990d366132310bf0632f958a317d133c4aacb2df3a413b481225e60b6b83f614a2e2</span><br><span class="line">6d6573736167652d07:001d5a500f629d7c26be87fefd3f30bb439b1f845d17a8b1988b079e720eb7390dd20c12e4360618e33745840a7a660764a7bb7f15d321c217123d5b5c3affe7cb0b0016e21af949899dad91640ea2815cdb7b8cf4c951860a6d86a9997f88adc26f82ed56ffc9ad2aa0c0b11061fb4bcb4eda341a8f9a86e207a49f854ca67795689427</span><br><span class="line">6d6573736167652d08:011fb2b74a3e33fed8acae85c5e1545530a11f028e16fba526d5caf33386c543eafa637de9103e5307b297a8c3b07cd238e99b640d2b6b0dc5f0d1d8abcfb6789d40000670fcce7a49c19b7171201aaa14a01073656d05c9f05a926a31ed8f73311609c8641857bc78c6646850abe6de77e060d558798c0a91c1bfeaaf7c69fac5e7ad6d</span><br><span class="line">6d6573736167652d09:00981453fb596eba08fd7d8475f3d142cf5200a9b1d7d47609fb0230b9c12e265fd30e33ea4e86253486e93a6a3812921d199b2ef760e7a5d998083fe75103bf25290085e4417268e971b4e3d96fa741ab43e253ba5a4423587bf1c613e2027bb92bb9190052d39f80a1bb3005bd73929d3374160d9dbbcba08c3180a6bb56250ab0ce40</span><br><span class="line">6d6573736167652d0a:011e3f7eae5ca1e9cad4c5be0f190edfb5c3677bedb0727b147c01b6598161ba771e1232943fc4600c7b6a0ca91896b2de5ab2ceb37b88a85348fe02800b0eafd86900401bb21d3eab830104e23f2a036a2d0e4579b38a85a1a349a4b8bbf7cffbe4a55e4ea7b03603be397acc7fc3dcf411513c21f3cb70f5d24e2293776363665d11f1</span><br><span class="line">6d6573736167652d0b:00c91e871ee6f512e2b1a5f8efbc84f1e610a8c717f54ee00b27a191473c9dbaaafcbcd9beba65639e61ae07d0fca91aa1238a709f1f41852cc2772c5a958125a14101d9c23e2add2f193c298c4c10e08f475ec682aa4aa562eb96e914cd3d6feb6b79b394e017fcb5652e055d82fe971555f2a850ba4756f74aed882ef721b0274ba4b3</span><br><span class="line">6d6573736167652d0c:00c47667dfd19da9313006cd787b129ac0dd9239a68f452c3c4dfd663b795e4c9e80ef55d637e7d9566e5048a8d71e4584b473e5d89ba56e4a08461638a9941cd11b005e215499c02d06cd76e1b2347e5cfefd8287fb7a77447c574dbe05a0c9db63399d69293ae872cfba6a2f9f3788c1441cb7bdbacd89aa12246736bc4f55e0faeb88</span><br><span class="line">6d6573736167652d0d:014e4cc60372c1cf595b6b561ebb1cc7cb00bcfe63956835ae4c5bfd5357b8ea9b83f6e74098851e22c6fb6e64ba0b9798abf108671865102be609bdc1af5aad6e3000813cf2bdbd80258b0e3f01f8e1fc68e7a1f64c04a6688cff2aaf436942e89787ec2ef69038c17103ec8bc2a2826d805992956b701ca3216df626d9f2bb570f40a2</span><br><span class="line">6d6573736167652d0e:01eba6e7a3c334eaab8cc4706f5482ef3ad16177f87050b417980e80542e76fe49909a57f2d2df6e548b0527f31e0572b61324d402e722c1d7c7a80dd88a6d232dc301f457d14bd5600635c48798255e425a41125fcd1c55abbd3d8683ec03862d8a77bf7598ce48b08baa09b4326481d0df8f0e0ccc3df2cbfe43eb6449c90cb11e0754</span><br><span class="line">6d6573736167652d0f:0024dba7599eb057c86945929ccc3c608328459035a670d82de680bbda8e7444dd56085cbaf3e8b8a4841d8b2f3ce342b92aa6477154b52cbd8f704d44cf325a739900cebb63762b24338d1a72e1860c62879d773e7b7b7f9bb0270f7cd3bf5a20d9e7c26eb9264600a11fcf098c73bf019befda3e62025c105d1c58c1a66f1da4b394b4</span><br><span class="line">6d6573736167652d10:00e2804bf62999c046424f090a7f89cad8990ae17dcb3602df6ce0106c5e66b3bb7d21571df6dfde6d134bc32d7e1dd67f05b8b6d782c751e1e6e2fd8fb1cbd88f5c01ba8b00fe5579835654c6f6b07e4bc493097075376bd6d6335605f7193a2373b6f5af9b145805560498814f2b98f3936bb191dee2c22cc16b82897e32340a24c159</span><br><span class="line">6d6573736167652d11:01237da7a9445906c198b652b97472c4ea90cbca81fed5d88d2322e8102e3ec31ea2a3e88e790ca709a69c7b685cb5d55b9f3c7f7105689040a7907bdf7566c18ef701690d48628987e045fe86b43cc3cd7f71d6661eaad1a1d05f1c83eb1e107b42c53784c93a67a44bbde91f0649e24f84c8a72734c65d7d58ea3bfd6115eeebf07037</span><br><span class="line">6d6573736167652d12:01ffa3421db751cadd2f0758b41a82f9ca40624324c9b9a3403cb08b42aa83f195bb7453467c709d94702ad736a0956e2203e63cf9d5ae62fdf84e3469e4762a4a9200e379afda8228ba8f00b70aeb391148ffeb9a4d304b040add776cd15c49196fe2c865ed960fca3823582abfa2c2c6919cd7a4dc0ca359f43dcacdfb5855c4c80975</span><br><span class="line">6d6573736167652d13:00ccee46ac55897b1e168fd0b1a5d5ea098dc5b149a5385a68c8c8550c2394a49b732c509ccbd3573f9a92b31cfb0c35683e014e482d3a88bc1106f56a39b6d6251e01b04191307a9ada16664c72a3cc48e6faf7322236cb01e5572564b59cec2344ecda846f6d8404ed3790c0c4cf0e1390f4f7cbd175451cc55fd54aba0c76c202ca08</span><br><span class="line">6d6573736167652d14:0097ebbfb75cf0d182e88659ac855844a5e1d08418f170a7b1e96921bc4d6b51f2c6a27c4b7058fb494eb2b0918eeeb5f5aae50d12d864bdf1212882aa1d62f45449004638bebd5e1322a21b4013139e1e86008fba6fe6cc65d4580ec77cc5122ddd624d39d116600084de81d2b745440728334a4efb5f24b5747432cf0aa69b252a14e8</span><br><span class="line">6d6573736167652d15:01fca9fd4c4e31bc403a18b374c55e83eeb151be10ddeb1a8b3f37f330ab9117feba073a95d2bf128087a1a21593f60501b9863f00b6b0407df0f8019912d8b0113f0007dbdbca675580534844443bf6e996783e7028c1e9f5da8ff894dee1f151299726d0f04856888708aae28474e1f8b5c06c8436589b2882fc73d642aed613a1d9f4</span><br><span class="line">6d6573736167652d16:01ec046a141d37004729460d2c47c71839112d0d1b405bc9fb8497c8ce5cc0d9664ae251e206cfe8ccd5fb2677f606aaf3f2cc164bc3f6c5086692251619ad19d13d00b7de97e501cd53108141f0d68b4e493e02595a489d53ddadb2be35198f5bc9b3a7c1793b67819348aacbd3df6805ebb6581af9a936f5ceb62c63724a626924cc2e</span><br><span class="line">6d6573736167652d17:006f61f271a0bf0198d39bce0a6f31d1467e2b2c2aeb40ca90921de07882f297a30f23136e632741e6d43b39244415a0f2da53d2085e150067da4dfc930dfa8ab5f20133c9c3e4f0450e78c697b0c3ed6b596a785fb0e947c5b72789eae529757c35ad313b67c26e70a945c7b6a45b4107d3e1d787b5ca90e3e1b8f4e27e19fd553361a6</span><br><span class="line">6d6573736167652d18:00d1a7a824e3bdc8d53056e1ed4d98279cbbba1cfdc3d7a20cd6915c539c34011e31d5f037be796ba97e0efd3cbe184e0c82c8bafa0e707140a167aed8f99a0d1b78003bf65e481fbf0f52b4e14228f4fe8cdd8616f0fd12ae3523f4eb8c5ce7f50b4d9d0f9e40278f349e7eeb021e0fd5973435393892944db5208736f20751db03dc4b</span><br><span class="line">6d6573736167652d19:015495a576fcfd99c72f079e2a78a908233baac8af2f831cbb1eea036ea02f7c2db436465b80d7ed4528f7fc0cb982a28e3ac6c88db5a89f2284536475b84455b9dd0094e5775277663a5d58733d77f19b3fcc335751788cc5d621ea0b977652edbdfb96c5855137e351172165a11561eaa92fd3250060ce2b58d48426a93aef23725440</span><br><span class="line">6d6573736167652d1a:01da9177c23f8eac40c489da25bba65a9595f0f0ae83cfdd545e0cbd566d697bcb6a6fe4fe174fa35357f08eff211b7931e5892558c68aa61d874504bebcde5ca1950182f7d1830748eb79e84639f3acc33dad16925afb928ead3d4ef5ad43780758db5626b4807b7c81d21ae7144bafbfc17ec751c3dd97d2595f71b024d41e826482d5</span><br><span class="line">6d6573736167652d1b:00ea878d4736045e560c831344e796ef915e232048c286a9e8e64c7dab77f2c71a251c72347ad2e432dfd5433f80a0b1c865d3b5d58e194fe6cadb2d963635a98492011eb68a927c3281ed586eea4c1f4817fc35b92dad5a1d322fe22691b2df83578dfb40ba127ba8f6b42db886e20fd215c1eb9f3e0fcb575056f7c7704876d9a8c839</span><br><span class="line">6d6573736167652d1c:009ed0b7cb58cb0a4d88d307960c2fe4ecbff4a5aabccb2adb42fde666701f2a2b09481bcb3cda6ce02a0fe3ac2abd84c8e251e0e2803e3274d17807b7a0e54d42dc01681e835a885ef04424cfa8ab93e3d42862a0987665e5db6ac8236215b7bca30334a2db02e43a3b402ef1781ed3716f7048511a048d11bf20292eb31fc7c9b3d9a8</span><br><span class="line">6d6573736167652d1d:01492500c7cd7b0217f6558968011a60ef36738cb11eed25aa85e95e1f930c300dacbb0e1dd1782889c85ecfe3748b4fa97fc3a4b93203b099365ff333b89599823600aa90957aff08b37d52c4a014e8b8a809bc89b8e03dee71b330856adbb469c403449bd2cc654aa7d96ed80dcbb410e913969d42c15e4665b6010978f4b36a99fc50</span><br><span class="line">6d6573736167652d1e:0177da0903cd127758583ed66dc44eb737c50868cc5ac48ba86a800c3a466f4e5958b6c107918754133fbc18ce3a2e6a98e98e246790a52f220949fd6aa577864f8b003b1e1803d0b18144c03df5f0b85424ae3944844d5d9c7f95f87e64fb0b9ee41a2716c2765a724b74d52fba79933e0fc2eaf3260ce95116afe92d47175867a9b66d</span><br><span class="line">6d6573736167652d1f:0056f3c0e1a7739fb937a449f8f3d709c980802e41e1476ab1e0307aa65ef6b482d535d8fca7975b2403bf670c5ac21750ab056880fc8af778e22539b2fc384a5b7501dc71b15e388ff7388f38efb82f3bdd13271f194779b86c1634fd3f0adb1f5b7967e6ff26e6a143b09da438a09811765bffdaa80d48ed1d78868be5c0aec255cf50</span><br><span class="line">6d6573736167652d20:003362704d917b5320acd6ce619a9f8c90aab23c8b9d51ce12fb555277f23854bda2d94b099394753286c9dc72e86dd071943a36140837f6b88e4511513f8cd3789800d08ac9f24090c808651fb5d51f1f944d0c5b8811b019c45d9cf159f51d4dc4a9d890dbf763d749e3b90223cf5aa4d7cff86147079522f7229f41c51103b0ffac96</span><br><span class="line">6d6573736167652d21:0139993757c81db79fe540ae9868e49bdf94c947158e5f62e1d1081d6a0d5c73206e5545de339b2106f951e9cfefa6ab5dfada5f0ec1738b67ab55631330b7126ced00fe6a0a5b8f16afc4b0dd1432fdd92f86bb54437ece4897555da1f477f408830f7b7c0cc07c0ece8cb673c02407ccd4a113eb95339acd8029c0c39fdd9160160eed</span><br><span class="line">6d6573736167652d22:01178fbb501848bce60be55e05ae06bd96e05911033bd511d76f0a0e95dc8c9eba4aae85f6bdb7e4330136603794af6270491ad63156e7bc7a00ec14d96ed6227b550196049003ca19d8b6e48d8861c62defabc7e5c0762dcae2947d0bb872fffa38a73cbdf93c82d89c94c30845002706462772acba04b552782402df0a5a96700b6128</span><br><span class="line">6d6573736167652d23:016c072aa6d41b06496a320eb37465514abcc17d8911d85bff51d7d66bc55d57512327fb3c5b35b177cdde59efa254c418e5e4a070a0b2cfb9c9aa6216355007ba7101402412a90406c68b72e4f9eacc3acf7fda2145fc36848d8963a80ce4546a1c028e1d1be3e1be30f937d574601e95bdec6faf1c3f7695434ca4551b4ae1b03c5d7a</span><br><span class="line">6d6573736167652d24:011d5aa22a30c68f5762faf481fda92b5055e46c8c2fc849eb607b862ff63e1a76d80ee0d6781130a46a9486e6e945a41652beec6de720c6b1d43e0a659eec6312e9017e54c82d6409be8dc3271b3032e25bbdf66a2b7016a5b7b75ebf21f68df92fb63ed62417fbb4ca51fb9dc0d15a5ee25e86feb2cfd6c1b25824a33b526391cf165c</span><br><span class="line">6d6573736167652d25:00dcdc8736eae1cd52ca60f285ec53f9941e12dae1f1307b556258e05a52ced95b4d424bce6a5d0f26583a86445e8acb55584d9f18a0163ac917689c8b8b90d4fac00025fba28a8c5a6c92413558dd69025b14106db90a7d134336472e686b5ba80b9dd871e7977d48c60a4bda79d53787d8110572bf03a92b90b5f3d3e26f387151f5f9</span><br><span class="line">6d6573736167652d26:00c138949c2338f0124f5c07bc134890378c45b7c01126bba05c19282c6db6bcf8267383c04483fac58d9f3f0496ca53861f483fd7bcc6c66583416da3c5ad8cb37500cd917d4dcd20dbf0a33b228434114028f1cb3ad49fe88dc0cb749879d5e7805592811bc0d84ed02feac51f7ed6ac877f8bf0481f1a70c87fed4f1099a0314272b3</span><br><span class="line">6d6573736167652d27:00b61ba748b93ae3900bde6639653afda72412acbf43dc8a0b009d4a7e6f3d79a7c766eb147ca1d4d650485c97a4e39de3294ab4e71351dc1e3b227a0b96176b2e2800e68e49bc94f8089d553c491eaf2bc469a37d87c1bd02b25b7779609e39dfe81327a2da8dddddd1edd25f6417e07caf223a0d8d7dbd0a85e429719e74c3708c2115</span><br><span class="line">6d6573736167652d28:01c36b99c52e1d04a718cea1726d718fe592764855812affe6cb26b8486dc7a57af9dcb935b22303ab600c05d5bccd7c025d91d35f766cb95fd55d68c5a79b59fc2d00017a9d559659e9e4fca723e6db89c6a473e7a2ba3e075b09c4bde0b8c6a00b12867592658b40ac92759dff1f2c427fc22f96068d2c7a60947e323cf78408f58c45</span><br><span class="line">6d6573736167652d29:01556d0c7cc5521828c6c3cb66fe3fc87982c0bee8e92c1719e4fb03ef0de8bd517d563ad28252ca3254e81923642ecb69a1f2e231f95e6b4683b241fbe75e01173501d8f78b201e4d303eaac4fc332b925ba181327af7def2ce4fb51097b9df1aff1c7b62b3f7f9cfe23464855aa3817cbc3c13099cf5964d8d61272480221a0e75ce2d</span><br><span class="line">6d6573736167652d2a:00545f4874bf83fa234bd95b8152fbfc1e2413df63e1a974cd7510c9cd1cbe69364f4c4746ab00bca71b480436ffe8e5f374b8efc76e655b5e71e9b4a7a126609b2f01e46bdbb6fd72219f23dbc29c0e02ef4780f0bd5b98b6c7017705f682d6647edf46f4f73a2a63802b23ed8723571d02f98460406ebfc283b694ed3eb784ff4b9ab6</span><br><span class="line">6d6573736167652d2b:0172140529c3e8753bced31f1af91b0b86a5fbcee479614103a8af9cd581b570b5ac0ba58b09bf2349429a25e59c9432b71e18e02b9dac762daa58a41d8db74ab5ad017d71d0a0f3ca01a9a9276b233a5b2584e412f0d8f06c450a647d102fb81107c70d67bc36dc8e0e91eaa4aca5e50dea4550bad18c004af53dff98a64a9c39f1cb89</span><br><span class="line">6d6573736167652d2c:011ca9b82802375855987c151c9d99b64a9cd4a838d5e0196fecd9c57a47399724f2d3227a2fe47c6cf82290e219d6772452ea4d4d9703513a9eb1620447e76e1dc5001fc1023877ac0d26e1807de4f83afe99e3a38fc7f89d2e18190c326fdba4ef236f7c24695950c1db36be3ce53247f13d4d151e25062a05d302f942decbea24df96</span><br><span class="line">6d6573736167652d2d:011a4482948327252cf3288a3690768dc8109bbe813b366b22becaeb78405f4a52e1ac8e35b79a065988f555de010fbc06af63da6095616337164292e0a54482a4ca01a2eb630a5a100d27376bbcb6d704eb15c561ad14118e69a2565d64039f1998d43ed84dae7532d6876932dc729658c05191ee820766526dc8beb387e68815be72e0</span><br><span class="line">6d6573736167652d2e:01eb6647e1e937221e3f41e3581c31d420c1935a114158acd6d8c730a9ab76ad30202632d9f7f1e8e63f36268d21aa581f9f723a28e454f7ae72192f38f0b77b53b501a13889378ccdf78fc7700174dfb8a0d69d8d302d0f50d97af8b20d639bcf5a1631bcb5ca47d285605f9f0eec58938d10cd23bb7cbbb6b34fb95aed36c672b753ca</span><br><span class="line">6d6573736167652d2f:00e0c12420c9873cf507dcb6719209f0ebdbcc8b3e182299dac8712a892661ed27ae2cf34769de65d48ed85355fdfd0a5e32513dd70f1b041ef38d519a9c6fe61d9d0039a45fc01672d66ca55084ba0079d9c4426bc790a237d15d956f79b1ed8ddab24752cb2799dfe158ffb87cc037b357980c4d063c3f88f10883d8e526538900f8bf</span><br><span class="line">6d6573736167652d30:018425b6b4937e6fa1378a7dd7066322f19e108f3beb1b9b9845f4c038884a548be3080a312c0ee3f8d897ed8c7ef90d22de3cc37fc0512cf32a751229648b87ac9a01b65e9827942969986ecd2e9f8f412c8629643935a2587991773ec68017ecec4b31d8f03154c61fa3c40824f9c4222354828f526c728198af42b63a8be73bf2290f</span><br><span class="line">6d6573736167652d31:0198d9bce50038f38774e0d3808d423c53f004765643d2665a79b7d64d97ae514108e269738009dcf1984e74ec69e4543bd5147cd9d65ca23bd8030a0d795c6a852700b22d82f8265150aad97868bc24cb4e26bfcda300cae357772dd80f0f6a9cfc8ab65f55d9ae814f07724ff2d8f43425c0e6cac955bed11e6718f715ff7a2dba1efb</span><br><span class="line">6d6573736167652d32:010a1dce51dc855e06d4320dba8e7b3b87996561013cfbb9573d27783b475b9f591a1c6927e1ddfb78e9c7d4492b1bcb32cdaae5e65b179442a8c68382e42235402300f4070a856fac3bfd515ed961d4e751d1f95648165fe8afaf33874336abc78292b229e67930922e407baf596ba6499aceffdada6839344a32f5a053df6fb3784be5</span><br><span class="line">6d6573736167652d33:0143e33bb42a105dbe232b362b52f512d9fd4ed7dfdf912acf3695f1a9069d4ed7fcb38e0436a7cfd94845635c0ff3c6e414114c5e023f0844076baf8d303e2f3136018378d9b8f7293ffe320bb6eed3c940eb9085b73f4cfc60c38d80978a7c067b6793fdd383ef068876684f727e6def68b7eae9d29f696b305f1bd2de064355f31b71</span><br><span class="line">6d6573736167652d34:01c5dd98454498022e86fc5473d2411d0c76320e76475e1a21dddf1c007875d417f332eb93e312a9ff5a76e913ac04917460ccaf263b0c6d2a99be044165a640da5d016564a6c4b7e0558690ee4eccad46f99715aca2498ccf7c5080e256735f0aa7582321b4bb36e61ba3723432ebd251cc735bab884d29fb8077f2f95177af52704883</span><br><span class="line">6d6573736167652d35:01abf27be3f320735f021fdb9ae7dba731c4aef333f6b3e96c6c92d3043384181e1bb3af6e9c5f7933c4db068e66bbcd208d9caa7dde0d33ae8d9dfb251806bf66a501400791d74ae8bf432a40d275932d9f63f1fd19bea0ffbafddcf5c2377f34b55c0a881ca1bc31272856253a5144ad847a4edf31e3fca8e3a3ef53b5cc3ca9244f89</span><br><span class="line">6d6573736167652d36:01baea8c9e1d46f1cb0290f3af063871e35f93e3d52a3381ba94ebfd846daf9b24cb10b596cfc95e3688a9309c58b1d30a53ba48f9f557a091c689f4c8a7dc70aea30094a95340279b0c4f9d11cebdb54ea73ea2089928d8e2b04ba72bf185ed5b57f5dad28ace68265b2f5866ec1ee7e4b469a7ad036249befbb89d6375f2b049945eae</span><br><span class="line">6d6573736167652d37:0171ccc639b6cc446c24bd6dfc4da06679feceb9cec519f9fb9d819e43bfcfd949aff68b7403ce0ea33e313d320b2a3c95ee4c4adeef44e613724ce87290a8d86ed8016e18f2946a9269e6e3a5ffb4dd5b8fc9e5dfdcc3fdb6d1910441860256b91ae9845374c0508d5ef2f309d1917e28304a9808d73c5d77fedc419bfdec09bf1c2a60</span><br><span class="line">6d6573736167652d38:0062c81df5a8c32671062ba97f67e78edf885c8fa9aad165cedfc84530b329d8dba67e0debc9fc39e52d809ccf4279a191054e487e48820ddbb65f2a56bdb338dcef00764dc58d38f892bc723ad686e5e5c852b26dc42d62eec809953b318f849e26368653458c927e890dad004fcbbd17c1a8476578b316ca187de2e3a07496b5612714</span><br><span class="line">6d6573736167652d39:019446ee444a7ba1dd815e4d20e03a546ee74a5ae5b65b04b2966bc2356fed569682c278bdcb565129952203c24c20f17bcb0b6928c57a4ce5788642f0dcef69d2a601d305c76210ba90cfe5ef33d20b917d63874e7c398e0960ef361d1a9892a7cce61436aa4002b44ca964cc52ca879f07f7b2960e4f42c8feb26467b518293ce05d6a</span><br><span class="line">6d6573736167652d3a:005156879f5367a9f62300fc802dfd7e38852a00fda7f79188c9d062f8bb9b707960fcf91445a2d489d8b18b8ed232871c7d7378836017dc7cd6797ad09f372284600125a61a5480533c6a4567226f03e0ab98175aea2b9ec6e6ea714196f779e0908d00c8e8de98d442e457e61f3b879579d2bf773db8e4f9a53aa851ecf8e46c4448da</span><br><span class="line">6d6573736167652d3b:005c580255e896b3a34b3d1a262046e760dc1bc297ee3a810a7ed3e56b2cb74dbaa491d715cd2a72f4a9c51868272d57d9b2b30af9d99d0c54f44f6a5a53ae64b02401ce5d1106db8a3be0e7ec3ff3dae717d1041189e496b8b39ccb443290bb097c1b6b1201f762d420eb7fa9d17e16deb1cf27530a7fd1fc2cd1fd805a5f3684580c41</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>还有一个公钥<code>public.pem</code>：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQBCmmiMNZTXuR44GdzljZErCUcNgf5</span><br><span class="line">jpCcPTL31HYx8EUdoFh4JC+4kUBFxTn7VzuHxFUBLYmNGO1Jow6QqpDfLb0B+2d4</span><br><span class="line">vs4wjNqvFZ1ET79VDt1AcgySGWX8KlAgizrmIGwXJmp1UfewMhv2f5EDbu3vVU9m</span><br><span class="line">f1WeP2aRaDHmG4ryVkg=</span><br><span class="line">-----END PUBLIC KEY-----</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>是<code>ECDSA随机数</code>泄露，其中<code>nonce(i)</code>生成为：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">nonce</span>(<span class="params">i</span>):</span><br><span class="line">    seed = sha512(<span class="string">b&quot;bias&quot;</span> + <span class="built_in">bytes</span>([i])).digest()</span><br><span class="line">    k = <span class="built_in">int</span>.from_bytes(seed, <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> k</span><br></pre></td></tr></table></figure></div>
+
+<p>第<code>i</code>条签名的<code>k</code>完全可预测，由可以确认的逻辑生成的<code>k = sha512(b&quot;bias&quot; + bytes([i]))</code>；而私钥也是通过对字符串<code>&quot;Welcome to this challenge!&quot;</code>进行<code>SHA512</code>哈希后取模得到。</p>
+<p>最终exp：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha512, sha1, md5</span><br><span class="line"><span class="keyword">from</span> ecdsa <span class="keyword">import</span> SigningKey, VerifyingKey, NIST521p</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> inverse</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line">CURVE = NIST521p</span><br><span class="line">n = CURVE.order</span><br><span class="line">SIG_LEN = <span class="number">66</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">nonce</span>(<span class="params">i: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    seed = sha512(<span class="string">b&quot;bias&quot;</span> + <span class="built_in">bytes</span>([i])).digest()</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>.from_bytes(seed, <span class="string">&quot;big&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_raw_signature</span>(<span class="params">sig: <span class="built_in">bytes</span></span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sig) != SIG_LEN * <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;Invalid signature length&quot;</span>)</span><br><span class="line"></span><br><span class="line">    r = <span class="built_in">int</span>.from_bytes(sig[:SIG_LEN], <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    s = <span class="built_in">int</span>.from_bytes(sig[SIG_LEN:], <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> r, s</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">recover_private_key</span>(<span class="params">msg: <span class="built_in">bytes</span>, sig_hex: <span class="built_in">str</span>, index: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    sig = binascii.unhexlify(sig_hex)</span><br><span class="line">    r, s = parse_raw_signature(sig)</span><br><span class="line"></span><br><span class="line">    e = <span class="built_in">int</span>.from_bytes(sha1(msg).digest(), <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    k = nonce(index)</span><br><span class="line">    d = (s * k - e) * inverse(r, n) % n</span><br><span class="line">    <span class="keyword">return</span> d</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;D:\\项目\\CTF\\GAME\\长城杯&amp;铁人三项\\ECDSA_7d86efaf7f5e84a7135c0b71130c0825\\public.pem&quot;</span>, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        vk = VerifyingKey.from_pem(f.read())</span><br><span class="line"></span><br><span class="line">    recovered = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;D:\\项目\\CTF\\GAME\\长城杯&amp;铁人三项\\ECDSA_7d86efaf7f5e84a7135c0b71130c0825\\signatures.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">            msg_hex, sig_hex = line.strip().split(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">            msg = binascii.unhexlify(msg_hex)</span><br><span class="line">            index = msg[-<span class="number">1</span>]</span><br><span class="line">            d = recover_private_key(msg, sig_hex, index)</span><br><span class="line">            recovered.append(d)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">all</span>(d == recovered[<span class="number">0</span>] <span class="keyword">for</span> d <span class="keyword">in</span> recovered):</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;Recovered private keys mismatch&quot;</span>)</span><br><span class="line"></span><br><span class="line">    priv_int = recovered[<span class="number">0</span>]</span><br><span class="line">    sk = SigningKey.from_secret_exponent(priv_int, curve=CURVE)</span><br><span class="line">    <span class="keyword">if</span> sk.verifying_key.to_string() != vk.to_string():</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(<span class="string">&quot;Private key verification failed&quot;</span>)</span><br><span class="line">    flag_inner = md5(<span class="built_in">hex</span>(priv_int).encode()).hexdigest()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;flag&#123;&#123;<span class="subst">&#123;flag_inner&#125;</span>&#125;&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="comment">#flag: flag&#123;581bdf717b780c3cd8282e5a4d50f3a0&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="EzFlag"><a href="#EzFlag" class="headerlink" title="EzFlag"></a>EzFlag</h3><hr>
+<p>这是一个简单的逆向，轻轻松松获取flag</p>
+<hr>
+<p>打开附件，定位到<code>main</code>函数：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  __int64 v3; // rax</span><br><span class="line">  __int64 v4; // rax</span><br><span class="line">  _BYTE v6[<span class="number">32</span>]; // [rsp+0h] [rbp-50h] BYREF</span><br><span class="line">  _BYTE v7[<span class="number">12</span>]; // [rsp+20h] [rbp-30h] BYREF</span><br><span class="line">  <span class="built_in">int</span> v8; // [rsp+2Ch] [rbp-24h] BYREF</span><br><span class="line">  char v9; // [rsp+33h] [rbp-1Dh]</span><br><span class="line">  <span class="built_in">int</span> i; // [rsp+34h] [rbp-1Ch]</span><br><span class="line">  unsigned __int64 v11; // [rsp+38h] [rbp-18h]</span><br><span class="line"></span><br><span class="line">  std::string::basic_string(v6, argv, envp);</span><br><span class="line">  std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;_bss_start, <span class="string">&quot;Enter password: &quot;</span>);</span><br><span class="line">  std::getline&lt;char,std::char_traits&lt;char&gt;,std::allocator&lt;char&gt;&gt;(&amp;std::cin, v6);</span><br><span class="line">  <span class="keyword">if</span> ( (unsigned __int8)std::operator!=&lt;char&gt;(v6, <span class="string">&quot;V3ryStr0ngp@ssw0rd&quot;</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;_bss_start, <span class="string">&quot;Wrong password!&quot;</span>);</span><br><span class="line">    std::ostream::operator&lt;&lt;(v3, &amp;std::endl&lt;char,std::char_traits&lt;char&gt;&gt;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;_bss_start, <span class="string">&quot;flag&#123;&quot;</span>);</span><br><span class="line">    std::ostream::flush((std::ostream *)&amp;_bss_start);</span><br><span class="line">    v11 = 1LL;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">31</span>; ++i )</span><br><span class="line">    &#123;</span><br><span class="line">      v9 = f(v11);</span><br><span class="line">      std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;_bss_start, (unsigned <span class="built_in">int</span>)v9);</span><br><span class="line">      std::ostream::flush((std::ostream *)&amp;_bss_start);</span><br><span class="line">      <span class="keyword">if</span> ( i == <span class="number">7</span> || i == <span class="number">12</span> || i == <span class="number">17</span> || i == <span class="number">22</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;_bss_start, <span class="string">&quot;-&quot;</span>);</span><br><span class="line">        std::ostream::flush((std::ostream *)&amp;_bss_start);</span><br><span class="line">      &#125;</span><br><span class="line">      v11 *= 8LL;</span><br><span class="line">      v11 += i + <span class="number">64</span>;</span><br><span class="line">      v8 = <span class="number">1</span>;</span><br><span class="line">      std::chrono::duration&lt;long,std::ratio&lt;<span class="number">1l</span>,<span class="number">1l</span>&gt;&gt;::duration&lt;<span class="built_in">int</span>,void&gt;(v7, &amp;v8);</span><br><span class="line">      std::this_thread::sleep_for&lt;long,std::ratio&lt;<span class="number">1l</span>,<span class="number">1l</span>&gt;&gt;(v7);</span><br><span class="line">    &#125;</span><br><span class="line">    v4 = std::operator&lt;&lt;&lt;std::char_traits&lt;char&gt;&gt;(&amp;_bss_start, <span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">    std::ostream::operator&lt;&lt;(v4, &amp;std::endl&lt;char,std::char_traits&lt;char&gt;&gt;);</span><br><span class="line">  &#125;</span><br><span class="line">  std::string::~string(v6);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>输入密码<code>V3ryStr0ngp@ssw0rd</code>正确后到flag逻辑，</p>
+<p><code>v11 = 1LL</code>和循环32次迭代，其中迭代内要调用<code>f函数</code>，不断更新<code>v11</code>，</p>
+<p>所以，反编译<code>f函数</code>，</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  __int64 v2; // [rsp+10h] [rbp-20h]</span><br><span class="line">  unsigned __int64 i; // [rsp+18h] [rbp-18h]</span><br><span class="line">  __int64 v4; // [rsp+20h] [rbp-10h]</span><br><span class="line">  __int64 v5; // [rsp+28h] [rbp-8h]</span><br><span class="line"></span><br><span class="line">  v5 = 0LL;</span><br><span class="line">  v4 = 1LL;</span><br><span class="line">  <span class="keyword">for</span> ( i = 0LL; i &lt; a1; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = v4;</span><br><span class="line">    v4 = ((_BYTE)v5 + (_BYTE)v4) &amp; <span class="number">0xF</span>;</span><br><span class="line">    v5 = v2;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> *(unsigned __int8 *)std::string::operator[](&amp;K, v5);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> K = <span class="string">&quot;012ab9c3478d56ef&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>初始化<code>v5 = 0</code>和<code>v4 = 1</code>，然后进行<code>a1</code>次循环，涉及<code>% 16</code>，所以就是斐波那契数列<code>a1</code>项模16的结果。</p>
+<p>因为在循环中，<code>v11</code>会指数级增长，运行时间变长，空间复杂度&amp;时间复杂度陡增，但其<code>取模运算</code>下是周期性的，可以将其简化为<code>v11 % 24</code>。</p>
+<p>同时可以推导<code>v11</code>是64位长整型，<code>v11 * 8</code>的数值会超过<code>2 ^ 64</code>会发生<strong>溢出</strong>，所以我们在exp中得用64位无符号整数掩码<code>0xFFFFFFFFFFFFFFFF</code>来模拟溢出，以防影响数值计算，</p>
+<p>最终的exp：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">solve_correct</span>():</span><br><span class="line">    K = <span class="string">&quot;012ab9c3478d56ef&quot;</span></span><br><span class="line">    fib_mod16 = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">13</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">1</span>]</span><br><span class="line">    v11 = <span class="number">1</span></span><br><span class="line">    MASK = <span class="number">0xFFFFFFFFFFFFFFFF</span></span><br><span class="line">    flag_parts = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        idx = v11 % <span class="number">24</span></span><br><span class="line">        val = fib_mod16[idx]</span><br><span class="line">        flag_parts.append(K[val])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> [<span class="number">7</span>, <span class="number">12</span>, <span class="number">17</span>, <span class="number">22</span>]:</span><br><span class="line">            flag_parts.append(<span class="string">&quot;-&quot;</span>)</span><br><span class="line">            </span><br><span class="line">        v11 = (v11 * <span class="number">8</span> + i + <span class="number">64</span>) &amp; MASK</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;flag&#123;&quot;</span> + <span class="string">&quot;&quot;</span>.join(flag_parts) + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(solve_correct())</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag: flag&#123;10632674-1d219-09f29-14769-f60219a24&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+<h2 id="REVERSE"><a href="#REVERSE" class="headerlink" title="REVERSE"></a>REVERSE</h2><h3 id="babygame"><a href="#babygame" class="headerlink" title="babygame"></a>babygame</h3><hr>
+<p>请找出隐藏的Flag。请注意只有收集了所有的金币，才能验证flag。</p>
+<hr>
+<p>下载附件，是一个游戏：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_re1.png"
+                      alt="ccb_re1"
+                ></p>
+<p>收集完金币才能得到flag，想着直接逆向游戏，</p>
+<p>尝试用CE修改金币值来得到flag.</p>
+<p>发现自己对CE不熟练，直接点<code>查看内存</code>，得到游戏使用引擎：<code>Godot Engine</code>。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_re2.png"
+                      alt="ccb_re2"
+                ></p>
+<p>网上搜索到相关逆向工具<code>gdsdecomp</code>，github上下载并开始反编译，</p>
+<p>翻阅目录，得到<code>flag.gdc</code>和<code>flag.sin</code>，</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_re3.png"
+                      alt="ccb_re3"
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_re4.png"
+                      alt="ccb_re4"
+                ></p>
+<p>本来想着用第一张图，将<code>false</code>改成<code>true</code>，在菜单直接显示flag，但是不知道咋改后重编译；选第二种方法，得到flag的加密方式为<code>AES_ECB</code>，密钥给了，只是后面的函数让<code>A</code>改为<code>B</code>，</p>
+<p>直接在<code>ToolsFx</code>上解密，得到flag：flag{wOW~youAregrEaT!}</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_re5.png"
+                      alt="ccb_re5"
+                ></p>
+<h2 id="Forensics"><a href="#Forensics" class="headerlink" title="Forensics"></a>Forensics</h2><h3 id="SnakeBackdoor-1"><a href="#SnakeBackdoor-1" class="headerlink" title="SnakeBackdoor-1"></a>SnakeBackdoor-1</h3><hr>
+<p>题目描述：近期发现公司网络出口出现了异常的通信，现需要通过分析出口流量包，对失陷服务器进行定位。现在需要你从网络攻击数据包中找出漏洞攻击的会话，分析会话编写exp或数据包重放，查找服务器上安装的后门木马，然后分析木马外联地址和通信密钥以及木马启动项位置。</p>
+<p>攻击者爆破成功的后台密码是什么？，结果提交形式：flag{xxxxxxxxx}</p>
+<hr>
+<p>下载附件，打开流量包</p>
+<p>直接搜索所有<strong>http</strong>流量包，搜索<code>login</code>相关流量：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for1.png"
+                      alt="ccb_for1"
+                ></p>
+<p>得到攻击者的<strong>IP地址</strong>为<code>192.168.1.111</code>，</p>
+<p>因为是爆破成功，按照时间顺序，往下找最后一个login的<code>http请求包</code>，即可找到密码：zxcvbnm123</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for2.png"
+                      alt="ccb_for2"
+                ></p>
+<h3 id="SnakeBackdoor-2"><a href="#SnakeBackdoor-2" class="headerlink" title="SnakeBackdoor-2"></a>SnakeBackdoor-2</h3><hr>
+<p>题目描述：攻击者通过漏洞利用获取Flask应用的 <code>SECRET_KEY</code> 是什么，结果提交形式：flag{xxxxxxxxxx}</p>
+<hr>
+<p>既然是<code>SECRET_KEY</code>，想着直接搜索<code>SECRET_KEY</code>试试，结果只搜到一个流量包，Bravo!</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for3.png"
+                      alt="ccb_for3"
+                ></p>
+<p>右键–追踪流–TCP Stream，往下滑即可看到<code>SECRET_KEY</code>字段</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for4.png"
+                      alt="ccb_for4"
+                ></p>
+<p>得到第二个flag：c6242af0-6891-4510-8432-e1cdf051f160</p>
+<h3 id="SnakeBackdoor-3"><a href="#SnakeBackdoor-3" class="headerlink" title="SnakeBackdoor-3"></a>SnakeBackdoor-3</h3><hr>
+<p>题目描述：攻击者植入的木马使用了加密算法来隐藏通讯内容。请分析注入Payload，给出该加密算法使用的<strong>密钥字符串(Key)</strong> ，结果提交形式：flag{xxxxxxxx}</p>
+<hr>
+<p>使用了<strong>加密算法</strong>，肯定是已经爆破成功后的流量包了，往下翻</p>
+<p>注意<code>/admin/preview</code>的流量包中有<strong>SSTI注入</strong>，</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for5.png"
+                      alt="ccb_for5"
+                ></p>
+<p>于是继续往下翻，看到了<code>&#123;&#123;config&#125;&#125;</code>字样，最后看到了疑似加密算法的内容</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for6.png"
+                      alt="ccb_for6"
+                ></p>
+<p>手写<code>Base64</code>解密脚本：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">encoded_string = <span class="string">&quot;XyA9IGxhbWJkYSBfXyA6IF9faW1wb3J0X18oJ3psaWInKS5kZWNvbXByZXNzKF9faW1wb3J0X18oJ2Jhc2U2NCcpLmI2NGRlY29kZShfX1s6Oi0xXSkpOwpleGVjKChfKShiJz1jNENVM3hQKy8vdlB6ZnR2OGdyaTYzNWEwVDFyUXZNbEtHaTNpaUJ3dm02VEZFdmFoZlFFMlBFajdGT2NjVElQSThUR3FaTUMrbDlBb1lZR2VHVUFNY2Fyd1NpVHZCQ3YzN3lzK04xODVOb2NmbWpFL2ZPSGVpNE9uZTBDTDVUWndKb3BFbEp4THI5VkZYdlJsb2E1UXZyamlUUUtlRytTR2J5Wm0rNXpUay9WM25aMEc2TmVhcDdIdDZudSthY3hxc3Ivc2djNlJlRUZ4ZkVlMnAzMFlibXl5aXMzdWFWMXArQWowaUZ2cnRTc01Va2hKVzlWOVMvdE8rMC82OGdmeUtNL3lFOWhmNlM5ZUNEZFFwU3lMbktrRGlRazk3VFV1S0RQc09SM3BRbGRCL1VydmJ0YzRXQTFELzljdFpBV2NKK2pISkwxaytOcEN5dktHVmh4SDhETEw3bHZ1K3c5SW5VLzl6dDFzWC9Uc1VSVjdWMHhFWFpOU2xsWk1acjFrY0xKaFplQjhXNTl5bXhxZ3FYSkpZV0ppMm45NmhLdFNhMmRhYi9GMHhCdVJpWmJUWEZJRm1ENmtuR3ovb1B4ZVBUenVqUHE1SVd0OE5abXZ5TTVYRGcvTDhKVS9tQzRQU3ZYQStncWV1RHhMQ2x6Uk5ESEpVbXZ0a2FMYkp2YlpjU2c3VGdtN1VTZUpXa0NRb2pTaStJTklFajVjTjErRkZncEtSWG40Z1I5eXAzL1Y3OVduU2VFRklPNkM0aGNKYzRtd3BrKzA5dDF5dWU0K21BbGJobHhuWE0xUGZrK3NHQm1hVUZFMWtFak9wbmZHbnFzVithdU9xakpnY0RzaXZJZCt3SFBIYXp0NU1WczRySFJoWUJPQjZ5WGp1R1liRkhpM1hLV2hiN0FmTVZ2aHg3RjlhUGpObUlpR3FCVS9oUkZVdU1xQkNHK1ZWVVZBYmQ1cEZEVFpKM1A4d1V5bTZRQUFZUXZ4RytaSkRSU1F5cE9oWEsvTDRlRkZ0RXppdWZaUFN5cllQSldKbEFRc0RPK2RsaTQ2Y24xdTVBNUh5cWZuNHZ3N3pTcWUrVlVRL1JpL0tudjBwUW9XSDFkOWRHSndEZnFtZ3ZuS2krZ05SdWdjZlVqRzczVjZzL3RpaGx0OEIyM0t2bUp6cWlMUHptdWhyMFJGVUpLWmpHYTczaUxYVDRPdmxoTFJhU2JUVDR0cS9TQ2t0R1J5akxWbVNqMmtyMEdTc3FUamxMMmw2Yy9jWEtXalJNdDFrTUNtQ0NUVithSmU0bnB2b0I5OU9NbktuWlI0WXM1MjZtVEZUb1N3YTVqbXhCbWtSWUNtQTgyR0ZLN2FrNmJJUlRmRE1zV0dzWnZBRVh2M1BmdjVOUnpjSUZOTzN0YlFrZUIvTElWT1c1TGZBa21SNjgvNnpyTDBEWm9QanpGWkk1VkxmcTBydjlDd1VlSmtSM1BIY3VqKytkL2xPdms4L2gzSHpTZ1lUR0N3bDF1ano4aDRvVWlQeUdUNzROamJZN2ZKOHZVSHFOeitaVmZPdFZ3L3ozUk11cVNVekVBS3JqY1UyRE5RZWhCMG9ZN3hJbE9UOXU5QlQ0Uk9vREZvKzVaRjZ6Vm9IQTRlSWNrWFVPUDN5cFF2NXBFWUcrMHBXNE15SG1BUWZzT2FXeU1kZk1vcWJ3L005b0ltZEdLZEt5MVdxM2FxK3QreHV5VmROQVFNaG9XMkE3elF6b2I4WEdBM0c4VnVvS0hHT2NjMjVIQ2IvRlllU3hkd3lJZWRBeGtsTExZTUJIb2pUU3BEMWRFeG96ZGk4OUdpa2h6MzMwNW5kVG1FQ3YwWm9VT0hhY25xdFVVaEpseTdWZ3ZYK0psYXdBWTlvck5QVW1aTTdRS2JkT2tUZi9vOGFRbFM1RmUveFFrT01KR200TlhxTGVoaVJJYjkyNXNUZlZ4d29OZlA1djFNR2xhcllNaWZIbDJyRXA1QzcxaXBGanBBR2FFcDluUmowSmdFYTRsU1R1WWVWWHdxYlpRVDNPZlF2Z3QvYkhKbEFndXFTV3lzR2hxaElUSllNNlQxMG03MUppd2ZRSDVpTFhINVhiRms1M1FHY0cyY0FuRnJXeTcweEV2YWJtZjB1MGlrUXdwVTJzY1A4TG9FYS9DbEpuUFN1V3dpY01rVkxya1pHcW5CdmJrNkpUZzdIblQwdkdVY1Y2a2ZmSUw2Q0szYkUxRnkwUjZzbCtVUG9ZdmprZ1NJM1ViZkQ2N2JSeEl4ZWdCcFlUenlDRHpQeXRTRSthNzdzZHhzZ2hMcFVDNWh4ejRaZVhkeUlyYm1oQXFRdzVlRW5CdUFTRTVxVE1Ka1RwLy9oa3krZFQycGNpT0JZbi9BQ1NMeHByTFowQXkxK3pobCtYeVY5V0ZMNE5nQm9IMzRidmt4SDM2bmN0c3pvcFdHUHlkMTRSaVM0ZDBFcU5vY3F2dFd1M1l4a05nUCs4Zk0vZC9CMGlreEt4aC9HamttUVhhU1gvQis0MFU0YmZTYnNFSnBWT3NUSFR5NnUwTnI2N1N3N0J2Und1VnZmVDAvOGo3M2dZSEJPMmZHU0lKNDdBcllWbTIrTHpSVDBpSDVqN3lWUm1wdGNuQW44S2t4SjYzV0JHYjd1M2JkK0QrM3lsbm0xaDRBUjdNR042cjZMeHBqTmxBWDExd2EvWEIxek44Y1dVTm5DM1ZjemZ3VUV3UGZpNWR5bzluRUM1V085VW03OFdLUnJtM2M0OEl2VFVoZ2ROZVFFRG9zSWZoTVNtaWtFbHVRWDhMY0NSY0s5ZVVUODVidnI1SjVyekViK0R1aUdZeURGRzdQWmVmdkliM3czM3UycTh6bHhsdFdDU3RjNU80cThpV3JWSTd0YVpIeG93VHc1ekpnOVRkaEJaK2ZRclF0YzB5ZHJCbHZBbG5ZMTB2RUNuRlVCQSt5MWxXc1ZuOGNLeFVqVGRhdGk0QUYzaU0vS3VFdFE2Wm44Ykk0TFl3TWxHbkNBMVJHODhKOWw3RzRkSnpzV3I5eE9pRDhpTUkyTjFlWmQvUVV5NDNZc0lMV3g4MHlpQ3h6K0c0YlhmMnFOUkZ2Tk9hd1BTbnJwdjZRMG9GRVpvamx1UHg3Y09VMjdiQWJncHdUS28wVlV5SDZHNCt5c3ZpUXpVN1NSZDUxTEdHM1U2Y1QwWURpZFFtejJld3Ria2tLY0dWY1N5WU9lQ2xWNkNSejZiZEYvR20zVDIrUTkxNC9sa1piS3gxOVduWDc4cit4dzZicGp6V0xyMEUxZ2puS0NWeFcwWFNud2UraUc5ZGtHOG5DRmZqVWxoZFRhUzFnSjdMRnNtVWpuOHUvdlJRYlJMdy95NjZJcnIveW5LT0N6Uk9jZ3JuREZ4SDN6M0pUUVFwVGlEcGV5elJzRjRTbkdCTXY1SGJyK2NLNllUYTRNSWJmemo1VGkzRk1nSk5xZ0s1WGs5aHNpbEdzVTZ0VWJucDZTS2lKaFV2SjhicXluVU1Fem5kbCtTK09WUkNhSDJpSmw4VTNXanlCNjhScTRIQVRrL2NLN0xrSkhITWpDM1c3ZFRtT0JwZm9XTVZFTGFMK1JrcVdZdjBDcFc1cUVOTGxuT1BCckdhR05lSVphaHpibnJ1RVBJSVhHa0d6MWZFNWQ0Mk1hS1pzQ1VZdDF4WGlhaTkrY2JLR2ovZDBsSUNxN3VjN2JSaEVCeDQ2RHlCWFR6MWdmSm5UMnVyNng0QXZiNXdZMnBjWXJjRDJPUjZBaWtNdm0yYzBiaGFiSkI2bzBEaE9OSjRsQ3htS2RHQnp1d3J0czF1MEQyeXVvMzd5TExmc0dEdXllcE53OGx5VE5jMm55aENWQmZXMjNEbkJRbVdjMVFMQ29ScHBWaGpLWHdPcE9ES084UjhZSG5RTStyTGs2RU9hYkNkR0s1N2lSek1jVDN3YzQzNmtWbUhYRGNJMFpzWUdZNWFJQzVEYmRXalV0Mlp1VTBMbXVMd3pDVFM5OXpoT29POERLTnFiSzRiSU5MeUFJMlg5Mjh4aWIraG1JT3FwM29TZ0MyUGRGYzh5cXRoTjlTNTVvbXRleDJ4a0VlOENZNDhDNno0SnRxVnRxaFBRV1E4a3RlNnhsZXBpVllDcUliRTJWZzRmTi8vTC9mZi91Ly85cDRMejd1cTQ2eVdlbmtKL3g5MGovNW1FSW9yczVNY1N1Rmk5ZHlneXlSNXdKZnVxR2hPZnNWVndKZScpKQ==&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    decoded_bytes = base64.b64decode(encoded_string)</span><br><span class="line">    decoded_string = decoded_bytes.decode()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;解码后的字符串:&quot;</span>, decoded_string)</span><br><span class="line"><span class="keyword">except</span> base64.binascii.Error:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;无效的 Base64 编码字符串！&quot;</span>)</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#解码后的字符串: _ = lambda __ : __import__(&#x27;zlib&#x27;).decompress(__import__(&#x27;base64&#x27;).b64decode(__[::-1]));</span></span><br><span class="line"><span class="built_in">exec</span>((_)(<span class="string">b&#x27;=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&#x27;</span>))</span><br></pre></td></tr></table></figure></div>
+
+<p>可以得到的信息有<code>zlib解压</code>以及<code>字符串反转</code>，继续解码：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"></span><br><span class="line">cipher = <span class="string">b&quot;&quot;&quot;=c4CU3xP+//vPzftv8gri635a0T1rQvMlKGi3iiBwvm6TFEvahfQE2PEj7FOccTIPI8TGqZMC+l9AoYYGeGUAMcarwSiTvBCv37ys+N185NocfmjE/fOHei4One0CL5TZwJopElJxLr9VFXvRloa5QvrjiTQKeG+SGbyZm+5zTk/V3nZ0G6Neap7Ht6nu+acxqsr/sgc6ReEFxfEe2p30Ybmyyis3uaV1p+Aj0iFvrtSsMUkhJW9V9S/tO+0/68gfyKM/yE9hf6S9eCDdQpSyLnKkDiQk97TUuKDPsOR3pQldB/Urvbtc4WA1D/9ctZAWcJ+jHJL1k+NpCyvKGVhxH8DLL7lvu+w9InU/9zt1sX/TsURV7V0xEXZNSllZMZr1kcLJhZeB8W59ymxqgqXJJYWJi2n96hKtSa2dab/F0xBuRiZbTXFIFmD6knGz/oPxePTzujPq5IWt8NZmvyM5XDg/L8JU/mC4PSvXA+gqeuDxLClzRNDHJUmvtkaLbJvbZcSg7Tgm7USeJWkCQojSi+INIEj5cN1+FFgpKRXn4gR9yp3/V79WnSeEFIO6C4hcJc4mwpk+09t1yue4+mAlbhlxnXM1Pfk+sGBmaUFE1kEjOpnfGnqsV+auOqjJgcDsivId+wHPHazt5MVs4rHRhYBOB6yXjuGYbFHi3XKWhb7AfMVvhx7F9aPjNmIiGqBU/hRFUuMqBCG+VVUVAbd5pFDTZJ3P8wUym6QAAYQvxG+ZJDRSQypOhXK/L4eFFtEziufZPSyrYPJWJlAQsDO+dli46cn1u5A5Hyqfn4vw7zSqe+VUQ/Ri/Knv0pQoWH1d9dGJwDfqmgvnKi+gNRugcfUjG73V6s/tihlt8B23KvmJzqiLPzmuhr0RFUJKZjGa73iLXT4OvlhLRaSbTT4tq/SCktGRyjLVmSj2kr0GSsqTjlL2l6c/cXKWjRMt1kMCmCCTV+aJe4npvoB99OMnKnZR4Ys526mTFToSwa5jmxBmkRYCmA82GFK7ak6bIRTfDMsWGsZvAEXv3Pfv5NRzcIFNO3tbQkeB/LIVOW5LfAkmR68/6zrL0DZoPjzFZI5VLfq0rv9CwUeJkR3PHcuj++d/lOvk8/h3HzSgYTGCwl1ujz8h4oUiPyGT74NjbY7fJ8vUHqNz+ZVfOtVw/z3RMuqSUzEAKrjcU2DNQehB0oY7xIlOT9u9BT4ROoDFo+5ZF6zVoHA4eIckXUOP3ypQv5pEYG+0pW4MyHmAQfsOaWyMdfMoqbw/M9oImdGKdKy1Wq3aq+t+xuyVdNAQMhoW2A7zQzob8XGA3G8VuoKHGOcc25HCb/FYeSxdwyIedAxklLLYMBHojTSpD1dExozdi89Gikhz3305ndTmECv0ZoUOHacnqtUUhJly7VgvX+JlawAY9orNPUmZM7QKbdOkTf/o8aQlS5Fe/xQkOMJGm4NXqLehiRIb925sTfVxwoNfP5v1MGlarYMifHl2rEp5C71ipFjpAGaEp9nRj0JgEa4lSTuYeVXwqbZQT3OfQvgt/bHJlAguqSWysGhqhITJYM6T10m71JiwfQH5iLXH5XbFk53QGcG2cAnFrWy70xEvabmf0u0ikQwpU2scP8LoEa/ClJnPSuWwicMkVLrkZGqnBvbk6JTg7HnT0vGUcV6kffIL6CK3bE1Fy0R6sl+UPoYvjkgSI3UbfD67bRxIxegBpYTzyCDzPytSE+a77sdxsghLpUC5hxz4ZeXdyIrbmhAqQw5eEnBuASE5qTMJkTp//hky+dT2pciOBYn/ACSLxprLZ0Ay1+zhl+XyV9WFL4NgBoH34bvkxH36nctszopWGPyd14RiS4d0EqNocqvtWu3YxkNgP+8fM/d/B0ikxKxh/GjkmQXaSX/B+40U4bfSbsEJpVOsTHTy6u0Nr67Sw7BvRwuVvfT0/8j73gYHBO2fGSIJ47ArYVm2+LzRT0iH5j7yVRmptcnAn8KkxJ63WBGb7u3bd+D+3ylnm1h4AR7MGN6r6LxpjNlAX11wa/XB1zN8cWUNnC3VczfwUEwPfi5dyo9nEC5WO9Um78WKRrm3c48IvTUhgdNeQEDosIfhMSmikEluQX8LcCRcK9eUT85bvr5J5rzEb+DuiGYyDFG7PZefvIb3w33u2q8zlxltWCStc5O4q8iWrVI7taZHxowTw5zJg9TdhBZ+fQrQtc0ydrBlvAlnY10vECnFUBA+y1lWsVn8cKxUjTdati4AF3iM/KuEtQ6Zn8bI4LYwMlGnCA1RG88J9l7G4dJzsWr9xOiD8iMI2N1eZd/QUy43YsILWx80yiCxz+G4bXf2qNRFvNOawPSnrpv6Q0oFEZojluPx7cOU27bAbgpwTKo0VUyH6G4+ysviQzU7SRd51LGG3U6cT0YDidQmz2ewtbkkKcGVcSyYOeClV6CRz6bdF/Gm3T2+Q914/lkZbKx19WnX78r+xw6bpjzWLr0E1gjnKCVxW0XSnwe+iG9dkG8nCFfjUlhdTaS1gJ7LFsmUjn8u/vRQbRLw/y66Irr/ynKOCzROcgrnDFxH3z3JTQQpTiDpeyzRsF4SnGBMv5Hbr+cK6YTa4MIbfzj5Ti3FMgJNqgK5Xk9hsilGsU6tUbnp6SKiJhUvJ8bqynUMEzndl+S+OVRCaH2iJl8U3WjyB68Rq4HATk/cK7LkJHHMjC3W7dTmOBpfoWMVELaL+RkqWYv0CpW5qENLlnOPBrGaGNeIZahzbnruEPIIXGkGz1fE5d42MaKZsCUYt1xXiai9+cbKGj/d0lICq7uc7bRhEBx46DyBXTz1gfJnT2ur6x4Avb5wY2pcYrcD2OR6AikMvm2c0bhabJB6o0DhONJ4lCxmKdGBzuwrts1u0D2yuo37yLLfsGDuyepNw8lyTNc2nyhCVBfW23DnBQmWc1QLCoRppVhjKXwOpODKO8R8YHnQM+rLk6EOabCdGK57iRzMcT3wc436kVmHXDcI0ZsYGY5aIC5DbdWjUt2ZuU0LmuLwzCTS99zhOoO8DKNqbK4bINLyAI2X928xib+hmIOqp3oSgC2PdFc8yqthN9S55omtex2xkEe8CY48C6z4JtqVtqhPQWQ8kte6xlepiVYCqIbE2Vg4fN//L/ff/u//9p4Lz7uq46yWenkJ/x90j/5mEIors5McSuFi9dygyyR5wJfuqGhOfsVVwJe&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">cipher = <span class="string">b&quot;&quot;</span>.join(cipher.split())</span><br><span class="line">rev = cipher[::-<span class="number">1</span>]</span><br><span class="line">rev = rev.lstrip(<span class="string">b&#x27;=&#x27;</span>)</span><br><span class="line">rev += <span class="string">b&#x27;=&#x27;</span> * ((<span class="number">4</span> - <span class="built_in">len</span>(rev) % <span class="number">4</span>) % <span class="number">4</span>)</span><br><span class="line">data = base64.b64decode(rev)</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> data[:<span class="number">2</span>] <span class="keyword">in</span> (<span class="string">b&#x27;\x78\x9c&#x27;</span>, <span class="string">b&#x27;\x78\xda&#x27;</span>, <span class="string">b&#x27;\x78\x01&#x27;</span>)</span><br><span class="line">plaintext = zlib.decompress(data)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;========== DECRYPTED PAYLOAD ==========&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(plaintext.decode(<span class="string">&quot;utf-8&quot;</span>, errors=<span class="string">&quot;replace&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;=======================================&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#========== DECRYPTED PAYLOAD ==========</span></span><br><span class="line"><span class="comment">#exec((_)   (b&#x27;=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&#x27;))</span></span><br><span class="line">=======================================</span><br></pre></td></tr></table></figure></div>
+
+<p>可以得到是循环加密，反转+移除非法<code>=</code>+补齐<code>padding</code>，最后<code>base64</code>解码，写循环解码脚本：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">encoded = <span class="string">&quot;=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&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decode_loop</span>(<span class="params">data, iteration=<span class="number">1</span></span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;\n<span class="subst">&#123;<span class="string">&#x27;=&#x27;</span>*<span class="number">60</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;第 <span class="subst">&#123;iteration&#125;</span> 次解码:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;<span class="string">&#x27;=&#x27;</span>*<span class="number">60</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        reversed_data = data[::-<span class="number">1</span>]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;1. 反转后 (前100字节): <span class="subst">&#123;reversed_data[:<span class="number">100</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        decoded_b64 = base64.b64decode(reversed_data)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;2. Base64解码后 (前100字节): <span class="subst">&#123;decoded_b64[:<span class="number">100</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        decompressed = zlib.decompress(decoded_b64)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;3. zlib解压后 (前200字节): <span class="subst">&#123;decompressed[:<span class="number">200</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        result_str = decompressed.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;4. 解码结果 (前500字符):&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(result_str[:<span class="number">500</span>])</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">b&#x27;=c4CU3&#x27;</span> <span class="keyword">in</span> decompressed <span class="keyword">or</span> </span><br><span class="line">            <span class="string">b&#x27;eJy&#x27;</span> <span class="keyword">in</span> decompressed <span class="keyword">or</span> </span><br><span class="line">            <span class="string">b&#x27;H4sI&#x27;</span> <span class="keyword">in</span> decompressed):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;\n检测到可能包含压缩数据，继续解码...&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> decode_loop(decompressed, iteration + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">elif</span> <span class="string">&#x27;_ = lambda __&#x27;</span> <span class="keyword">in</span> result_str <span class="keyword">or</span> <span class="string">&#x27;exec&#x27;</span> <span class="keyword">in</span> result_str:</span><br><span class="line">            pattern = <span class="string">r&quot;exec\(\(_\)\(b&#x27;([^&#x27;]+)&#x27;\)\)&quot;</span></span><br><span class="line">            <span class="keyword">match</span> = re.search(pattern, result_str)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">                new_encoded = <span class="keyword">match</span>.group(<span class="number">1</span>).encode()</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;找到新的编码数据，长度: <span class="subst">&#123;<span class="built_in">len</span>(new_encoded)&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="keyword">return</span> decode_loop(new_encoded, iteration + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pattern2 = <span class="string">r&quot;b&#x27;([A-Za-z0-9+/=]+)&#x27;&quot;</span></span><br><span class="line">                match2 = re.search(pattern2, result_str)</span><br><span class="line">                <span class="keyword">if</span> match2 <span class="keyword">and</span> <span class="built_in">len</span>(match2.group(<span class="number">1</span>)) &gt; <span class="number">100</span>:</span><br><span class="line">                    new_encoded = match2.group(<span class="number">1</span>).encode()</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">f&quot;找到新的编码数据，长度: <span class="subst">&#123;<span class="built_in">len</span>(new_encoded)&#125;</span>&quot;</span>)</span><br><span class="line">                    <span class="keyword">return</span> decode_loop(new_encoded, iteration + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result_str</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;解码过程中出错: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Starting decoding process...&quot;</span>)</span><br><span class="line">result = decode_loop(encoded)</span><br><span class="line"><span class="keyword">if</span> result:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;\n<span class="subst">&#123;<span class="string">&#x27;=&#x27;</span>*<span class="number">60</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;最终解码结果:&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;<span class="string">&#x27;=&#x27;</span>*<span class="number">60</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\n解码过程结束&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p>最终得到密钥字符串<code>v1p3r_5tr1k3_k3y</code>，即为最终flag。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for7.png"
+                      alt="ccb_for7"
+                ></p>
+<h3 id="SnakeBackdoor-4"><a href="#SnakeBackdoor-4" class="headerlink" title="SnakeBackdoor-4"></a>SnakeBackdoor-4</h3><hr>
+<p>题目描述：攻击者上传了一个二进制后门，请写出木马进程执行的本体文件的名称，结果提交形式：flag{xxxxx}，仅写文件名不加路径</p>
+<hr>
+<p>从以上分析得知，是<code>RC4算法</code>，密钥是<code>v1p3r_5tr1k3_k3y</code>，继续看后面的流量包</p>
+<p>在后面的<code>/admin/stats</code>上看到可疑数据</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ccb_for8.png"
+                      alt="ccb_for8"
+                ></p>
+<p>拿到<strong>ToolsFx</strong>里解密，得到执行的文件本体，即为flag：python3.13</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="E:\001-hexo-D'b8Gr-blog\source\images\ccb_for9.png"
+                      alt="ccb_for9"
+                ></p>
+
+		</div>
+
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">#比赛个人WP</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="../../17/Re%E7%BB%83%E4%B9%A0%E4%B9%8B%E8%8A%B1%E6%8C%87%E4%BB%A4/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">Re练习之花指令</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '../../../../js/libs/waline.mjs';
+
+      function loadWaline() {
+        init({
+          el: '#waline',
+          serverURL: 'https://waline-pi-blue-88.vercel.app/',
+          dark: 'body[class~="dark-mode"]',
+          reaction: true,
+          requiredMeta: ['nick', 'mail'],
+          emoji: [],
+                    lang: 'zh-CN',
+        });
+      }
+
+      if (typeof swup !== 'undefined') {
+        loadWaline();
+      } else {
+        window.addEventListener('DOMContentLoaded', loadWaline);
+      }
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">2025ciscn初赛部分WP</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CRYPTO"><span class="nav-number">1.</span> <span class="nav-text">CRYPTO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECDSA"><span class="nav-number">1.1.</span> <span class="nav-text">ECDSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EzFlag"><span class="nav-number">1.2.</span> <span class="nav-text">EzFlag</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REVERSE"><span class="nav-number">2.</span> <span class="nav-text">REVERSE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#babygame"><span class="nav-number">2.1.</span> <span class="nav-text">babygame</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Forensics"><span class="nav-number">3.</span> <span class="nav-text">Forensics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SnakeBackdoor-1"><span class="nav-number">3.1.</span> <span class="nav-text">SnakeBackdoor-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SnakeBackdoor-2"><span class="nav-number">3.2.</span> <span class="nav-text">SnakeBackdoor-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SnakeBackdoor-3"><span class="nav-number">3.3.</span> <span class="nav-text">SnakeBackdoor-3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SnakeBackdoor-4"><span class="nav-number">3.4.</span> <span class="nav-text">SnakeBackdoor-4</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2025&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">debu8ger</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        24 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="js/build/libs/Swup.min.js"></script>
+
+<script src="js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="js/build/utils.js" type="module"></script>
+
+<script src="js/build/main.js" type="module"></script>
+
+<script src="js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="js/build/tools/runtime.js"></script>
+
+    
+<script src="js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="js/build/libs/Typed.min.js"></script>
+
+  
+<script src="js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+    
+<script src="js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+    
+<script src="js/build/layouts/bookmarkNav.js" type="module"></script>
+
+
+	
+</body>
+
+</html>
