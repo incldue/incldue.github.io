@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en, zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    
+    <meta name="author" content="debu8ger">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes ASAP (before DOMContentLoaded)
+            (function() {
+                const addBodyClass = () => {
+                    const b = document.body;
+                    if (!b) return false;
+                    b.classList.add(theme + "-mode");
+                    return true;
+                };
+
+                // Try immediately
+                if (addBodyClass()) return;
+
+                // Observe until body exists
+                const mo = new MutationObserver(() => {
+                    if (addBodyClass()) mo.disconnect();
+                });
+                mo.observe(document.documentElement, { childList: true, subtree: true });
+            })();
+        })();
+    </script>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://incldue.github.io/2025/12/17/re练习之花指令/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+        
+        <meta name="description" content="debu8ger&#39;s CTF tech blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Re练习之花指令">
+<meta property="og:url" content="https://incldue.github.io/2025/12/17/Re%E7%BB%83%E4%B9%A0%E4%B9%8B%E8%8A%B1%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="debu8ger&#39;s CTF tech blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/static/bgimage/night.png">
+<meta property="article:published_time" content="2025-12-17T13:41:32.000Z">
+<meta property="article:modified_time" content="2026-03-11T14:08:58.865Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="CTF知识分享">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="日常练习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://incldue.github.io/static/bgimage/night.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="../../../../static/avatar/avatar.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../static/avatar/avatar.png">
+    <meta name="theme-color" content="#3CB371">
+    <link rel="shortcut icon" href="../../../../static/avatar/avatar.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Re练习之花指令 | D&#39;b8Gr的小站
+        
+    </title>
+
+    
+<link rel="stylesheet" href="fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="../../../../css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+        
+<script src="js/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"incldue.github.io","root":"/","language":"en, zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"2.8rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"atom-one-light","dark":"monokai-sublime"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#3CB371","secondary":"#41697D","default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1050px","sidebar_width":"230px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"欢迎来到debu8gerのCTF小站"},"side_tools":{"gear_rotation":true,"auto_expand":true},"open_graph":{"enable":true,"image":"/static/bgimage/night.png","description":"debu8ger's CTF tech blog"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/static/bgimage/night.png","dark":"/static/bgimage/night.png"},"title":"D'b8Gr的小站","subtitle":{"text":["my way to record my learning experience","welcome"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn?c=e&c=k"},"typing_speed":100,"backing_speed":80,"starting_delay":300,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"center","links":[{"icon":"fa-brands fa-github","url":"https://github.com/incldue"},{"icon":"fa-brands fa-twitter","url":"https://x.com/JonathanHu70782"},{"icon":"fa-brands fa-bilibili","url":"https://space.bilibili.com/2114835832"},{"icon":"fa-brands fa-qq","url":"524633948@qq.com"},{"icon":"fa-solid fa-at","url":"h52463398@outlook.com"}],"qrs":null}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1","theme":{"light":"default","dark":"dark"}}},"version":"2.9.0","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"首页":{"path":"//incldue.github.io","icon":"fa-regular fa-house"},"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"关于":{"icon":"fa-regular fa-user","submenus":{"我":"/about","github":"https://github.com/incldue","朋友们":"/friends"}},"书签":{"icon":"fa-regular fa-bookmark","path":"/bookmarks/"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur","masonry":{"batch_size":12,"initial_batch_size":24},"bookmarks_column":2},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"穿过一扇扇门，不断认识新的自己.be your personal best!","show_on_mobile":true,"links":{"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":100,"categories":{"enable":true,"limit":4},"tags":{"enable":true,"limit":4}},"footer":{"runtime":true,"icon":"<i class=\"fa-solid fa-heart fa-beat\" style=\"--fa-animation-duration: 0.5s; color: #f54545\"></i>","start":"2024/10/13","statistics":true,"customize":null,"icp":{"enable":false,"number":null,"url":null}},"footerStart":"2024/10/13","mermaid":{"style":{"light":"default","dark":"dark"}}};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.i18n = {"search":"Search...","toc":"On this page","prev":"Prev","next":"Next","prev_posts":"Prev posts","next_posts":"Next posts","page":"Page %d","recent_posts":"Recent Posts","share":"Share","powered_by":"POWERED BY %s","theme":"THEME","rss_feed":"RSS Feed","category":"Category","categories":"Categories","tag":"Tag","tags":"Tags","post":"Post","posts":"Posts","tagcloud":"Tag Cloud","comment":"Comment","comments":"Comments","home":"Home","archive":"Archive","archives":"Archives","top":"TOP","sticky":"Sticky","go-back-home":"Go Back Home","masonry_loading":"Loading photos...","image_viewer":"Image viewer","close":"Close","exif":{"title":"EXIF","cards":{"camera":"Camera","lens":"Lens","exposure":"Exposure","other":"Other"},"fields":{"make":"Brand","model":"Model","date_taken":"Date taken","lens_model":"Lens","focal_length":"Focal length","focus_mode":"Focus mode","shutter":"Shutter","aperture":"Aperture","iso":"ISO","exposure_program":"Exposure program","exposure_compensation":"Exposure compensation","metering_mode":"Metering mode","flash":"Flash","white_balance":"White balance","latitude":"Latitude","longitude":"Longitude","altitude":"Altitude"},"status":{"loading":"Loading...","no_exif":"No EXIF available","library_missing":"EXIF library not loaded","image_source_missing":"Image source unavailable","unavailable":"EXIF unavailable (blocked by CORS or missing metadata)","flag_unavailable":"EXIF unavailable"}},"about":"About","changelog":"Changelog","links":"Links","link":"Link","friends":"Friends","friend":"Friend","timeline":"Timeline","shuoshuo":"Shuoshuo","bookmarks":"Bookmarks","site_uv":"VISITOR COUNT","site_pv":"TOTAL PAGE VIEWS","read_more":"Read more","wordcount":"Words","min2read":"Mins","status":"Status","runtime":"Blog up for","days":"days","hours":"hrs","minutes":"Min","seconds":"Sec","optimized_by":"and Optimized by Evan","rights":"All Rights Reserved","site_posts":"%s posts in total","site_wordcount":"%s words in total","copyright":{"author":"Author","title":"Title","link":"Link","create_time":"Created at","update_time":"Updated at","license_title":"License","license_content":"This work is licensed under %s.","all_rights_reserved":"All Rights Reserved &#169; %s","public_domain":"This work is in the public domain."},"ago":{"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"},"create_time":"Created","update_time":"Updated","expired":"This post is written %s days ago, and the content may not be up to date."};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/regular.min.css">
+
+    
+    
+    
+        
+<link rel="stylesheet" href="fontawesome/duotone.min.css">
+
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+	<div class="progress-bar-container">
+	
+	<span class="scroll-progress-bar"></span>
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        欢迎来到debu8gerのCTF小站
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
+                    <img src="../../../../static/avatar/avatar0.jpg" class="w-full h-full rounded-xs">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                D&#39;b8Gr的小站
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="//incldue.github.io"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="../../../../about">
+                                                    我
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/incldue">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="../../../../friends">
+                                                    朋友们
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../bookmarks/"
+                                        >
+                                    <i class="fa-regular fa-bookmark fa-fw"></i>
+                                    书签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="//incldue.github.io"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-关于"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-关于">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="../../../../about">我</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/incldue">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="../../../../friends">朋友们</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../bookmarks/"
+                        >
+                            <span>
+                                书签
+                            </span>
+                            
+                                <i class="fa-regular fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="../../../../tags"
+                        >
+                            <span>标签</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="../../../../categories"
+                        >
+                            <span>分类</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">12</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">26</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Re练习之花指令</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] shrink-0 rounded-medium border border-border-color p-px">
+				<img src="../../../../static/avatar/avatar0.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">debu8ger</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-12-17 21:41</span>
+        <span class="mobile">2025-12-17 21:41</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-03-11 22:08</span>
+            <span class="mobile">2026-03-11 22:08</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="../../../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">CTF知识分享</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="../../../../tags/Reverse/">Reverse</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="../../../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">日常练习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h2 id="一些概念的介绍"><a href="#一些概念的介绍" class="headerlink" title="一些概念的介绍"></a>一些概念的介绍</h2><h3 id="反编译器原理"><a href="#反编译器原理" class="headerlink" title="反编译器原理"></a>反编译器原理</h3><p>从exe文件的入口<code>AddressOfEntryPoint</code>开始，依序扫描字节码，并将其转换为汇编代码。</p>
+<p>比如第一个16进制字节码为<code>0xE8</code>(其一般代表<code>CALL</code>指令)，且后面跟着的4个字节数据都与<code>地址</code>有关，则反编译器就读取该5个字节，而且反编译为<code>CALL 0x地址</code>。</p>
+<h3 id="线性反编译"><a href="#线性反编译" class="headerlink" title="线性反编译"></a>线性反编译</h3><p>若反编译过程中只要一个地方反编译出错，例如两条指令之间多了<code>0xE8</code>，那么反编译器则会将其后跟着的<strong>4个字节</strong>处理为<code>CALL</code>指令地址相关数据给反编译成<code>CALL 0x地址</code>指令。</p>
+<p>但实际上<code>0xE8</code>后面的四个字节为<strong>单独</strong>的字节码指令。</p>
+<h3 id="线性扫描"><a href="#线性扫描" class="headerlink" title="线性扫描"></a>线性扫描</h3><p>从入口开始，一次解析一条指令，遇到分支指令<strong>不会</strong>递归进入分支</p>
+<h3 id="递归下降"><a href="#递归下降" class="headerlink" title="递归下降"></a>递归下降</h3><p>当使用线性扫描时，遇到<code>call</code>或<code>jmp</code>时，不会跳转到对应地址进行反编译，而是反编译其后下一条指令。</p>
+<p>递归下降分析，当遇到分支指令时，会递归进入分支进行反汇编。</p>
+<h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p><strong>花指令</strong>，从字面上看就是干扰正常程序内容阅读、反编译的一些代码块。是CTF中企图隐藏出题人不想被基础逆向操作所反编译出的一种方法，在正常代码之中加入垃圾代码，又可以保证原有程序正确执行。</p>
+<p>花指令不会阻碍动态调试，但会加大了静态分析的难度</p>
+<p>从出题人的角度看，构造有效花指令的思路就是构造<strong>使源程序逻辑不受影响的内联汇编代码</strong>，同时在内联汇编代码中嵌入<code>jmp</code>、<code>call</code>、<code>ret</code>之类的对应机器码，使反汇编器在反汇编时错误识别，影响正常流程。</p>
+<p>典型的花指令一般是一些操作指令<strong>具有相同的操作数</strong>，但执行无作用的运算：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">mov eax,eax;</span><br><span class="line">xchg esp,esp;</span><br><span class="line">jmp rva=0;		//E9 00 00 00 00</span><br><span class="line">xor eax,0;		//任何数与0异或等于本身，相当于没运算</span><br><span class="line"></span><br><span class="line">db thunkcode1;		//垃圾数据</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><h3 id="可执行的花指令"><a href="#可执行的花指令" class="headerlink" title="可执行的花指令"></a>可执行的花指令</h3><p>指能够正常运行，不改变原始程序逻辑性以及任何寄存器的值、同时反汇编器等能正确反汇编的无用代码块。</p>
+<p>这种花指令常常在病毒的变形引擎中(病毒在传播时通过其随机产生一组此花指令来改变<strong>特征码</strong>)</p>
+<h3 id="不可执行的花指令"><a href="#不可执行的花指令" class="headerlink" title="不可执行的花指令"></a>不可执行的花指令</h3><p>指插入到原始代码中的能正常运行、不改变程序逻辑以及任何寄存器值、反汇编器<strong>会错误反汇编</strong>的无用字节块。</p>
+<p>也是最常见、最常考的。</p>
+<p>根据反汇编的原理，只有花指令同正常指令的开始几个字节被反汇编器识别成<strong>一条指令</strong>时，才能有效破坏反汇编，所以插入的花指令为<strong>不完整的指令</strong>。</p>
+<h3 id="堆栈的平衡"><a href="#堆栈的平衡" class="headerlink" title="堆栈的平衡"></a>堆栈的平衡</h3><p><code>push</code>、<code>pop</code>指令都遵循出入栈规则<code>后进先出</code>。</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">push ebp ----把基址指针寄存器压入堆栈</span><br><span class="line">pop ebp ----把基址指针寄存器弹出堆栈</span><br><span class="line">push eax ----把数据寄存器压入堆栈</span><br><span class="line">pop eax ----把数据寄存器弹出堆栈</span><br><span class="line">nop -----不执行(最常用)</span><br><span class="line">add esp,1 -----指针寄存器加1</span><br><span class="line">sub esp,-1 -----指针寄存器加1</span><br><span class="line">add esp,-1 --------指针寄存器减1</span><br><span class="line">sub esp,1 -----指针寄存器减1</span><br><span class="line">inc ecx -----计数器加1</span><br><span class="line">dec ecx -----计数器减1</span><br><span class="line">sub esp,1 ----指针寄存器-1</span><br><span class="line">sub esp,-1 ----指针寄存器加1</span><br><span class="line">jmp 入口地址 ----跳到程序入口地址</span><br><span class="line">push 入口地址 ---把入口地址压入堆栈</span><br><span class="line">retn ------ 反回到入口地址,效果与jmp 入口地址一样</span><br><span class="line">mov eax,入口地址 ------把入口地址转送到数据寄存器中.</span><br><span class="line">jmp eax ----- 跳到程序入口地址</span><br><span class="line">jb 入口地址</span><br><span class="line">jnb 入口地址 ------效果和jmp 入口地址一样,直接跳到程序入口地址</span><br><span class="line">xor eax,eax ------寄存器EAX清0</span><br><span class="line">CALL 空白命令的地址 ------无效call</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="简单跳转"><a href="#简单跳转" class="headerlink" title="简单跳转"></a>简单跳转</h3><p>对以下汇编代码，很明显看得出，把<code>ebx</code>压入栈后，先对其进行<code>xor</code>，再进行<code>test</code>比较，<code>zf标志位</code>肯定为<code>1</code>，就一定执行<code>jz LABEL8</code>，也就是说明<code>byte_401161</code>之间的<code>0xC7h</code>永远不会执行。</p>
+<p>要注意的是，保存<code>ebx</code>的值时先将<code>ebx</code>压入栈，即<code>push ebx</code>，最后得<code>pop ebx</code>把其<code>pop</code>出来。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re2.png"
+                      alt="train_re2"
+                ></p>
+<h3 id="永真-永假"><a href="#永真-永假" class="headerlink" title="永真&amp;永假"></a>永真&amp;永假</h3><p>通过设置永真或永假，使程序一定会执行，由于IDA反汇编会<strong>优先反汇编false分支</strong>，</p>
+<p>也可以调用函数会返回确定值，来达到<strong>永真或永假</strong>条件。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re3.png"
+                      alt="train_re3"
+                ></p>
+<p>其中<code>call</code>指令的本质：<code>push 函数返回地址</code>，然后<code>jmp 函数地址</code></p>
+<p><code>ret</code>指令的本质：<code>pop eip</code></p>
+<p>汇编代码里的<code>esp存储</code>的即为函数返回地址，对<code>[esp] + 8</code>，就是指函数的返回地址<code>+ 8</code>，同时也可以刚好盖过其中的函数指令&amp;垃圾数据。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="一、-HZNUCTF-2023-final-虽然他送了我玫瑰花"><a href="#一、-HZNUCTF-2023-final-虽然他送了我玫瑰花" class="headerlink" title="一、[HZNUCTF 2023 final]虽然他送了我玫瑰花"></a>一、[HZNUCTF 2023 final]虽然他送了我玫瑰花</h3><p>拿到附件，拖到IDA中查看：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re4.png"
+                      alt="train_re4"
+                ></p>
+<p>可以从旁边的函数栏中看到并没有<code>_main</code>函数，推测有花指令阻碍了反汇编，</p>
+<p>定位到<code>_main</code>函数的反汇编代码，框出来的就是典型的<strong>简单永真条件跳转</strong>。</p>
+<p>既然一定会执行<code>jz LABEL</code>，说明<code>byte_401155</code>中的<code>0xC7h</code>根本没执行</p>
+<p>把涉及跳转的<code>0x401151</code>到<code>0x401156</code>都<code>NOP</code>掉，</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re5.png"
+                      alt="train_re5"
+                ></p>
+<p>然后再对整个<code>_main</code>函数按<strong>p</strong>键重新创建函数，可以看到函数列表出现了<code>_main</code>函数</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re6.png"
+                      alt="train_re6"
+                ></p>
+<p>按<code>F5</code>反汇编，成功了！</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="code"><pre><span class="line">_main函数</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> v3; <span class="comment">// bl</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// esi</span></span><br><span class="line">  <span class="type">int</span> v5; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">char</span> *v7; <span class="comment">// [esp-8h] [ebp-100h]</span></span><br><span class="line">  <span class="type">char</span> v8; <span class="comment">// [esp+0h] [ebp-F8h]</span></span><br><span class="line">  _BYTE v9[<span class="number">100</span>]; <span class="comment">// [esp+Ch] [ebp-ECh]</span></span><br><span class="line">  __int128 v10; <span class="comment">// [esp+70h] [ebp-88h]</span></span><br><span class="line">  <span class="type">int</span> v11; <span class="comment">// [esp+80h] [ebp-78h]</span></span><br><span class="line">  <span class="type">int</span> v12; <span class="comment">// [esp+84h] [ebp-74h]</span></span><br><span class="line">  <span class="type">int</span> v13; <span class="comment">// [esp+88h] [ebp-70h]</span></span><br><span class="line">  <span class="type">char</span> v14; <span class="comment">// [esp+8Ch] [ebp-6Ch]</span></span><br><span class="line">  <span class="type">char</span> Arglist[<span class="number">100</span>]; <span class="comment">// [esp+90h] [ebp-68h] BYREF</span></span><br><span class="line"></span><br><span class="line">  sub_401020((<span class="type">char</span> *)&amp;Format, v8);</span><br><span class="line">  sub_401050(<span class="string">&quot;%s&quot;</span>, (<span class="type">char</span>)Arglist);</span><br><span class="line">  v11 = <span class="number">-171171450</span>;</span><br><span class="line">  v12 = <span class="number">-669748952</span>;</span><br><span class="line">  v13 = <span class="number">1651994351</span>;</span><br><span class="line">  v14 = <span class="number">-6</span>;</span><br><span class="line">  v10 = xmmword_402170;					<span class="comment">//下断点</span></span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(Arglist) == <span class="number">29</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">29</span>; ++i )</span><br><span class="line">      v9[i] = funcs_40117E[i % <span class="number">5u</span>](Arglist[i]);</span><br><span class="line">    v5 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ( v9[v5] == *((_BYTE *)&amp;v10 + v5) )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( ++v5 &gt;= <span class="number">29</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        sub_401020(v7, (<span class="type">char</span>)<span class="string">&quot;Congratulations!!\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sub_401020(v7, (<span class="type">char</span>)<span class="string">&quot;try again\n&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    sub_401020(<span class="string">&quot;wwwhhhaaattt???\n&quot;</span>, v3);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>代码中<code>v10</code>代表的<code>xmmword_402170</code>即为密文，点进去，结合后面的长度<code>29</code>发现实际并不足29</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">.rdata:00402170 xmmword_402170  xmmword 6CE1CA267159DFE8247A4EFBCE517E7Fh</span><br></pre></td></tr></table></figure></div>
+
+<p>于是，动态调试</p>
+<p>在<code>v10 = xmmword_402170;</code>下断点，<code>F8</code>单步跳过，查看完整的<code>xmmword_402170</code>值</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re7.png"
+                      alt="train_re7"
+                ></p>
+<p>从<code>008FF704</code>一直数29位到<code>008FF720</code>，即为完整的密文，右键点<code>Convert</code>提取数据：<code>[0x7F, 0x7E, 0x51, 0xCE, 0xFB, 0x4E, 0x7A, 0x24, 0xE8, 0xDF, 0x59, 0x71, 0x26, 0xCA, 0xE1, 0x6C, 0x86, 0x21, 0xCC, 0xF5, 0x28, 0x71, 0x14, 0xD8, 0xEF, 0x6E, 0x77, 0x62, 0xFA]</code></p>
+<p>回到汇编代码上，看到<code>funcs_40117E</code>对密文进行了一番操作</p>
+<p>点开看有五个不同运算的函数，</p>
+<p>因为是逆向，所以原来正的，现在解密，得反着函数来</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/train_re1.png"
+                      alt="train_re1"
+                ></p>
+<p>编写最终EXP：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line">enc_data = [<span class="number">0x7F</span>, <span class="number">0x7E</span>, <span class="number">0x51</span>, <span class="number">0xCE</span>, <span class="number">0xFB</span>, <span class="number">0x4E</span>, <span class="number">0x7A</span>, <span class="number">0x24</span>, <span class="number">0xE8</span>, <span class="number">0xDF</span>, <span class="number">0x59</span>, <span class="number">0x71</span>, <span class="number">0x26</span>, <span class="number">0xCA</span>, <span class="number">0xE1</span>, <span class="number">0x6C</span>, </span><br><span class="line">            <span class="number">0x86</span>, <span class="number">0x21</span>, <span class="number">0xCC</span>, <span class="number">0xF5</span>, <span class="number">0x28</span>, <span class="number">0x71</span>, <span class="number">0x14</span>, <span class="number">0xD8</span>, <span class="number">0xEF</span>, <span class="number">0x6E</span>, <span class="number">0x77</span>, <span class="number">0x62</span>, <span class="number">0xFA</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(enc_data)):</span><br><span class="line">    a = i  % <span class="number">5</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">0</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>(enc_data[i] ^ <span class="number">0x19</span>)</span><br><span class="line">    <span class="keyword">elif</span> a == <span class="number">1</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>(enc_data[i] - <span class="number">18</span>)</span><br><span class="line">    <span class="keyword">elif</span> a == <span class="number">2</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>(enc_data[i] + <span class="number">16</span>)</span><br><span class="line">    <span class="keyword">elif</span> a == <span class="number">3</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>((enc_data[i]&gt;&gt;<span class="number">1</span>) &amp; <span class="number">0x7F</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag += <span class="built_in">chr</span>(enc_data[i] ^ <span class="number">0x80</span>)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag: flag&#123;Wh4t_@_6eaut1fu1_$lower&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+
+
+<h2 id="To-be-continued"><a href="#To-be-continued" class="headerlink" title="To be continued"></a>To be continued</h2><p>之前联合战队面试，遇到了一个花指令的题，还没完全搞透，所以直接爆零 :(</p>
+<p>以后遇到了不同类型的，争取继续补上…</p>
+<!--more-->
+		</div>
+
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">#CTF知识分享</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/Reverse/">#Reverse</a>&nbsp;
+			</li>
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">#日常练习</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="../../29/2025ciscn%E5%88%9D%E8%B5%9B%E9%83%A8%E5%88%86WP/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">2025ciscn初赛部分WP</span>
+						<span class="post-nav-item">Prev posts</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="../MysteryFile-WP%20by-debu8ger/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">MysteryFile-WP by Debu8ger</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '../../../../js/libs/waline.js';
+
+      (function() {
+        const startPath = location.pathname;
+        const startTime = Date.now();
+        const retryDelay = 200;
+        const retryLimit = 5000;
+
+        const runWaline = () => {
+          if (location.pathname !== startPath) {
+            return;
+          }
+
+          const container = document.getElementById('waline');
+          if (!container) {
+            if (Date.now() - startTime < retryLimit) {
+              setTimeout(runWaline, retryDelay);
+            }
+            return;
+          }
+
+          if (window.redefineWalineInstance?.destroy) {
+            window.redefineWalineInstance.destroy();
+          }
+
+          container.innerHTML = '';
+          window.redefineWalineInstance = init({
+            el: '#waline',
+            serverURL: 'https://waline-pi-blue-88.vercel.app/',
+            path: location.pathname,
+            dark: 'body[class~="dark-mode"]',
+            reaction: true,
+            requiredMeta: ['nick', 'mail'],
+            emoji: [],
+                      lang: 'zh-CN',
+          });
+        };
+
+        runWaline();
+      })();
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">Re练习之花指令</div>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一些概念的介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">反编译器原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%8F%8D%E7%BC%96%E8%AF%91"><span class="nav-number">1.2.</span> <span class="nav-text">线性反编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%89%AB%E6%8F%8F"><span class="nav-number">1.3.</span> <span class="nav-text">线性扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D"><span class="nav-number">1.4.</span> <span class="nav-text">递归下降</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84%E8%8A%B1%E6%8C%87%E4%BB%A4"><span class="nav-number">3.1.</span> <span class="nav-text">可执行的花指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84%E8%8A%B1%E6%8C%87%E4%BB%A4"><span class="nav-number">3.2.</span> <span class="nav-text">不可执行的花指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%A0%88%E7%9A%84%E5%B9%B3%E8%A1%A1"><span class="nav-number">3.3.</span> <span class="nav-text">堆栈的平衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E8%B7%B3%E8%BD%AC"><span class="nav-number">3.4.</span> <span class="nav-text">简单跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B8%E7%9C%9F-%E6%B0%B8%E5%81%87"><span class="nav-number">3.5.</span> <span class="nav-text">永真&amp;永假</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81-HZNUCTF-2023-final-%E8%99%BD%E7%84%B6%E4%BB%96%E9%80%81%E4%BA%86%E6%88%91%E7%8E%AB%E7%91%B0%E8%8A%B1"><span class="nav-number">4.1.</span> <span class="nav-text">一、[HZNUCTF 2023 final]虽然他送了我玫瑰花</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To-be-continued"><span class="nav-number">5.</span> <span class="nav-text">To be continued</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">debu8ger</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        26 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.9.0</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container" role="dialog" aria-modal="true" aria-label="Image viewer">
+	<button class="image-viewer-close" type="button" aria-label="Close">
+		<i class="fa-solid fa-xmark"></i>
+	</button>
+	<button class="image-viewer-prev" type="button" aria-label="Prev">
+		<i class="fa-solid fa-chevron-left"></i>
+	</button>
+	<div class="image-viewer-frame">
+		<img src="" alt="">
+	</div>
+	<div class="image-viewer-exif-panel hidden absolute left-1/2 bottom-20 -translate-x-1/2 w-[min(92vw,420px)] max-h-[60vh] overflow-hidden rounded-2xl bg-background-color-transparent-80 p-4 text-left shadow-redefine-flat backdrop-blur-md" role="dialog" aria-label="EXIF" aria-hidden="true">
+		<div class="flex items-center justify-between mb-3">
+			<span class="text-sm font-semibold text-first-text-color">EXIF</span>
+			<button class="image-viewer-exif-close flex h-8 w-8 items-center justify-center rounded-full bg-background-color-transparent-80 text-first-text-color transition hover:bg-background-color-transparent-40" type="button" aria-label="Close">
+				<i class="fa-solid fa-xmark text-[0.65rem]"></i>
+			</button>
+		</div>
+		<div class="image-viewer-exif-cards grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pr-1 scrollbar-hide"></div>
+		<template class="image-viewer-exif-card-template">
+			<div class="rounded-lg bg-background-color-transparent-40 px-3 py-2">
+				<div class="image-viewer-exif-card-header flex items-center gap-2 mb-1">
+					<i class="image-viewer-exif-card-icon fa-solid fa-circle-info text-xs text-third-text-color"></i>
+					<div class="image-viewer-exif-card-title text-xs font-semibold text-first-text-color"></div>
+				</div>
+				<div class="image-viewer-exif-card-items flex flex-col gap-1"></div>
+			</div>
+		</template>
+	</div>
+	<button class="image-viewer-exif-toggle flex items-center gap-2 hidden absolute left-1/2 bottom-6 -translate-x-1/2 rounded-full border border-border-color bg-background-color-transparent-80 px-4 py-2 text-first-text-color backdrop-blur-md transition hover:bg-background-color-transparent-40" type="button" aria-label="EXIF" aria-expanded="false">
+		<i class="fa-solid fa-circle-info text-xs"></i>
+		<span class="text-xs font-semibold uppercase tracking-wider">EXIF</span>
+	</button>
+	<button class="image-viewer-next" type="button" aria-label="Next">
+		<i class="fa-solid fa-chevron-right"></i>
+	</button>
+</div>
+
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="js/libs/Swup.min.js"></script>
+
+<script src="js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    window.swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+
+    window.dispatchEvent(
+        new CustomEvent("redefine:swup:ready", {
+            detail: {
+                swup: window.swup,
+            },
+        }),
+    );
+</script>
+
+
+
+
+	
+<script src="js/main.js" type="module"></script>
+
+
+
+    
+<script src="js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="assets/odometer-theme-minimal.css">
+
+
+
+
+
+
+
+  
+<script src="js/libs/Typed.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script src="js/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+
+	
+</body>
+
+</html>

@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en, zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    
+    <meta name="author" content="debu8ger">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes ASAP (before DOMContentLoaded)
+            (function() {
+                const addBodyClass = () => {
+                    const b = document.body;
+                    if (!b) return false;
+                    b.classList.add(theme + "-mode");
+                    return true;
+                };
+
+                // Try immediately
+                if (addBodyClass()) return;
+
+                // Observe until body exists
+                const mo = new MutationObserver(() => {
+                    if (addBodyClass()) mo.disconnect();
+                });
+                mo.observe(document.documentElement, { childList: true, subtree: true });
+            })();
+        })();
+    </script>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://incldue.github.io/2025/01/21/xaut2025 全国大学生信息安全竞赛新生预选 赛-wp/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+        
+        <meta name="description" content="debu8ger&#39;s CTF tech blog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP">
+<meta property="og:url" content="https://incldue.github.io/2025/01/21/XAUT2025%20%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%96%B0%E7%94%9F%E9%A2%84%E9%80%89%20%E8%B5%9B-WP/index.html">
+<meta property="og:site_name" content="D&#39;b8Gr的小站~">
+<meta property="og:description" content="debu8ger&#39;s CTF tech blog">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/static/bgimage/night.png">
+<meta property="article:published_time" content="2025-01-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-27T13:50:05.114Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="比赛个人WP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://incldue.github.io/static/bgimage/night.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="../../../../static/avatar/avatar.png" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../static/avatar/avatar.png">
+    <meta name="theme-color" content="#3CB371">
+    <link rel="shortcut icon" href="../../../../static/avatar/avatar.png">
+    <!--- Page Info-->
+    
+    <title>
+        
+            XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP | D&#39;b8Gr的小站
+        
+    </title>
+
+    
+<link rel="stylesheet" href="fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="../../../../css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+        
+<script src="js/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"incldue.github.io","root":"/","language":"en, zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"2.8rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"atom-one-light","dark":"monokai-sublime"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":false,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#3CB371","secondary":"#41697D","default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1050px","sidebar_width":"230px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"欢迎来到debu8gerのCTF小站"},"side_tools":{"gear_rotation":true,"auto_expand":true},"open_graph":{"enable":true,"image":"/static/bgimage/night.png","description":"debu8ger's CTF tech blog"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/static/bgimage/night.png","dark":"/static/bgimage/night.png"},"title":"D'b8Gr的小站","subtitle":{"text":["my way to record my learning experience","welcome"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn?c=e&c=k"},"typing_speed":100,"backing_speed":80,"starting_delay":300,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"center","links":[{"icon":"fa-brands fa-github","url":"https://github.com/incldue"},{"icon":"fa-brands fa-twitter","url":"https://x.com/JonathanHu70782"},{"icon":"fa-brands fa-bilibili","url":"https://space.bilibili.com/2114835832"},{"icon":"fa-brands fa-qq","url":"524633948@qq.com"},{"icon":"fa-solid fa-at","url":"h52463398@outlook.com"}],"qrs":null}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1","theme":{"light":"default","dark":"dark"}}},"version":"2.9.0","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":40},"width":{"home":"1200px","pages":"1000px"},"links":{"首页":{"path":"//incldue.github.io","icon":"fa-regular fa-house"},"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"关于":{"icon":"fa-regular fa-user","submenus":{"我":"/about","github":"https://github.com/incldue","朋友们":"/friends"}},"书签":{"icon":"fa-regular fa-bookmark","path":"/bookmarks/"}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur","masonry":{"batch_size":12,"initial_batch_size":24},"bookmarks_column":2},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"穿过一扇扇门，不断认识新的自己.be your personal best!","show_on_mobile":true,"links":{"归档":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":100,"categories":{"enable":true,"limit":4},"tags":{"enable":true,"limit":4}},"footer":{"runtime":true,"icon":"<i class=\"fa-solid fa-heart fa-beat\" style=\"--fa-animation-duration: 0.5s; color: #f54545\"></i>","start":"2024/10/13","statistics":true,"customize":null,"icp":{"enable":false,"number":null,"url":null}},"footerStart":"2024/10/13","mermaid":{"style":{"light":"default","dark":"dark"}}};
+    window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    window.i18n = {"search":"Search...","toc":"On this page","prev":"Prev","next":"Next","prev_posts":"Prev posts","next_posts":"Next posts","page":"Page %d","recent_posts":"Recent Posts","share":"Share","powered_by":"POWERED BY %s","theme":"THEME","rss_feed":"RSS Feed","category":"Category","categories":"Categories","tag":"Tag","tags":"Tags","post":"Post","posts":"Posts","tagcloud":"Tag Cloud","comment":"Comment","comments":"Comments","home":"Home","archive":"Archive","archives":"Archives","top":"TOP","sticky":"Sticky","go-back-home":"Go Back Home","masonry_loading":"Loading photos...","image_viewer":"Image viewer","close":"Close","exif":{"title":"EXIF","cards":{"camera":"Camera","lens":"Lens","exposure":"Exposure","other":"Other"},"fields":{"make":"Brand","model":"Model","date_taken":"Date taken","lens_model":"Lens","focal_length":"Focal length","focus_mode":"Focus mode","shutter":"Shutter","aperture":"Aperture","iso":"ISO","exposure_program":"Exposure program","exposure_compensation":"Exposure compensation","metering_mode":"Metering mode","flash":"Flash","white_balance":"White balance","latitude":"Latitude","longitude":"Longitude","altitude":"Altitude"},"status":{"loading":"Loading...","no_exif":"No EXIF available","library_missing":"EXIF library not loaded","image_source_missing":"Image source unavailable","unavailable":"EXIF unavailable (blocked by CORS or missing metadata)","flag_unavailable":"EXIF unavailable"}},"about":"About","changelog":"Changelog","links":"Links","link":"Link","friends":"Friends","friend":"Friend","timeline":"Timeline","shuoshuo":"Shuoshuo","bookmarks":"Bookmarks","site_uv":"VISITOR COUNT","site_pv":"TOTAL PAGE VIEWS","read_more":"Read more","wordcount":"Words","min2read":"Mins","status":"Status","runtime":"Blog up for","days":"days","hours":"hrs","minutes":"Min","seconds":"Sec","optimized_by":"and Optimized by Evan","rights":"All Rights Reserved","site_posts":"%s posts in total","site_wordcount":"%s words in total","copyright":{"author":"Author","title":"Title","link":"Link","create_time":"Created at","update_time":"Updated at","license_title":"License","license_content":"This work is licensed under %s.","all_rights_reserved":"All Rights Reserved &#169; %s","public_domain":"This work is in the public domain."},"ago":{"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"},"create_time":"Created","update_time":"Updated","expired":"This post is written %s days ago, and the content may not be up to date."};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="fontawesome/regular.min.css">
+
+    
+    
+    
+        
+<link rel="stylesheet" href="fontawesome/duotone.min.css">
+
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+	<div class="progress-bar-container">
+	
+	<span class="scroll-progress-bar"></span>
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        欢迎来到debu8gerのCTF小站
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/">
+                    <img src="../../../../static/avatar/avatar0.jpg" class="w-full h-full rounded-xs">
+                </a>
+            
+            <a class="logo-title" href="/">
+                
+                D&#39;b8Gr的小站
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="//incldue.github.io"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="../../../../about">
+                                                    我
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/incldue">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="../../../../friends">
+                                                    朋友们
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="../../../../bookmarks/"
+                                        >
+                                    <i class="fa-regular fa-bookmark fa-fw"></i>
+                                    书签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="//incldue.github.io"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-关于"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-关于">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="../../../../about">我</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/incldue">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="../../../../friends">朋友们</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="../../../../bookmarks/"
+                        >
+                            <span>
+                                书签
+                            </span>
+                            
+                                <i class="fa-regular fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="../../../../tags"
+                        >
+                            <span>标签</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="../../../../categories"
+                        >
+                            <span>分类</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">12</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">4</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="../../../../archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">26</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			<div class="w-full flex items-center pt-6 justify-start">
+				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] shrink-0 rounded-medium border border-border-color p-px">
+				<img src="../../../../static/avatar/avatar0.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">debu8ger</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv3</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2025-01-21 00</span>
+        <span class="mobile">2025-01-21 00</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2025-09-27 21:50</span>
+            <span class="mobile">2025-09-27 21:50</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<p>作者： debu8ger </p>
+<p>队伍： GeekPwn02 </p>
+<p>总排名： 5</p>
+<p>排名： 1</p>
+<p>得分： 2563 </p>
+<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><hr>
+<h3 id="SignIn"><a href="#SignIn" class="headerlink" title="SignIn"></a>SignIn</h3><hr>
+<p>题目描述： </p>
+<p>%58%41%55%54%43%54%46%7B%57%65%31%63%30%6D%65%5F%74%30%5F%58%41%55%54 %43%54%46%7D </p>
+<hr>
+<p>直接拿到随波逐流里一把梭得到 flag </p>
+<h3 id="try"><a href="#try" class="headerlink" title="try"></a>try</h3><hr>
+<p>题目描述：黑客意外获得了 Peng 常用密码的前 5位<code> 13897</code> ，但不知道具体的位数，请你尝试恢复出完整 的密码。</p>
+<hr>
+<p>下载附件后， zip 文件加了密，拖到 ARCHPR 里。 根据题目描述，联想到用掩码 ,设置掩码为 13897??? ，不断尝试密码位数，最后为 13897?????? ，得出密码 为13897564231 。</p>
+<p>用密码得出 flag </p>
+<h3 id="沙滩，海洋，大冒险！"><a href="#沙滩，海洋，大冒险！" class="headerlink" title="沙滩，海洋，大冒险！"></a>沙滩，海洋，大冒险！</h3><hr>
+<p>题目描述： “Play, play, and a little competition ！”</p>
+<p>一到假期， BR 就迫不急待跑出去玩了！可恶，校赛题还没有出完呢，这怎么能行？！ </p>
+<p>BR 不愿意透露自己去哪里玩了，但是我们通过一些社会工程学手段打听到了一些信息。 现在你需要基于题目附件给出的提示推断出 BR 去哪里玩了，并且找到 BR 出发时 乘坐的那一班飞机！ flag 为： XAUTCTF{ 搭乘的飞机航班号 }</p>
+<p>示例：假如搭乘的是 1月31 日07:00-09:15 从北京首都国际机场飞往上海浦东国际机场的东航 MU5100 ，则flag 为： XAUTCTF{MU5100} </p>
+<hr>
+<p>附件下载后是几张图片，根据图片里的 “南沙湖景区 ”，在浏览器搜索得出在汉中的飞机场，再根据聊天记 录中的时间 1.7 出发， 22 ：50 的飞机得出航班为 GX8898 </p>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h3 id="开心解方程"><a href="#开心解方程" class="headerlink" title="开心解方程"></a>开心解方程</h3><hr>
+<p>题目描述：解方程谁不会啊！我靠，这么大的数！ </p>
+<hr>
+<p>下载附件后打开： </p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"> <span class="keyword">from</span> flag <span class="keyword">import</span> real_flag</span><br><span class="line"> <span class="keyword">import</span> random</span><br><span class="line"> <span class="keyword">def</span> <span class="title function_">get_random_number</span>():</span><br><span class="line"> <span class="keyword">return</span> random.randint(<span class="number">10</span>**<span class="number">1000</span>,<span class="number">10</span>**<span class="number">1001</span>)</span><br><span class="line"> a = bytes_to_long(real_flag)</span><br><span class="line"> b = get_random_number()</span><br><span class="line"> c = get_random_number()</span><br><span class="line"> d = get_random_number()</span><br><span class="line"> n1 = a*b</span><br><span class="line"> n2 = b*c</span><br><span class="line"> n3 = c*d</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">f&quot;n1 = <span class="subst">&#123;n1&#125;</span>&quot;</span>)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">f&quot;n2 = <span class="subst">&#123;n2&#125;</span>&quot;</span>)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">f&quot;n3 = <span class="subst">&#123;n3&#125;</span>&quot;</span>)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">f&quot;d = <span class="subst">&#123;d&#125;</span>&quot;</span>)</span><br><span class="line"> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">n1 = </span></span><br><span class="line"><span class="string">660450239937627676472423152753088762866493652912175035499026181480010556008370227</span></span><br><span class="line"><span class="string"> 132820692782941399020078286652999758917091413843420294288183682337794567181698378</span></span><br><span class="line"><span class="string"> 005190614956144552666986460330953742492949504762378684649291608293382476170196507</span></span><br><span class="line"><span class="string"> 203860717478415630531428751980788146515223279726281602812659703309762797436048496</span></span><br><span class="line"><span class="string"> 627911598377385262782778046800188003103442375618916707142674221670302396972922283</span></span><br><span class="line"><span class="string"> 520054905593166294022196546718266472584050053300607686206198014313391408445437435</span></span><br><span class="line"><span class="string"> 461419478264326992928539518498208034077320792110599071386379968059173966168861863</span></span><br><span class="line"><span class="string"> 310563929045344315395731430000393330742178273782030232137271829338224042312738785</span></span><br><span class="line"><span class="string"> 152236946900306968280222576625839634537180837030960604009475268281037277121979859</span></span><br><span class="line"><span class="string"> 481286561762653987805286800510140743673637571353114984679475017659746968187968573</span></span><br><span class="line"><span class="string"> 057934009318669305996594873342826450526329996481608343739819045332409118504519002</span></span><br><span class="line"><span class="string"> 207477400866719610003935048350194103918864656918681643952118946067692088906775185</span></span><br><span class="line"><span class="string"> 346231362247690338142322966940992512356418386457476687916237422414439983444353705</span></span><br><span class="line"><span class="string"> 38812516231728525148001841752921696848750</span></span><br><span class="line"><span class="string"> n2 = </span></span><br><span class="line"><span class="string">132055559948771408099604477174510908640912495019380611591004400217163913272136993</span></span><br><span class="line"><span class="string"> 624283235079308020015173158191553338936753084171134908531165485921070874516834813</span></span><br><span class="line"><span class="string"> 976117599430837900823335294479519533702907533849170522341798957404618239390485873</span></span><br><span class="line"><span class="string"> 877756550985342946026048577994521995745243228888275945684197374335095889775900584</span></span><br><span class="line"><span class="string"> 018493535693551635367739929894727124030411094267858058173324359095354142826060871</span></span><br><span class="line"><span class="string"> 855025402896480786226652143721749604469688715048143841581073559139793591057386368</span></span><br><span class="line"><span class="string"> 662003982514297359734502803119229221447469362191444625907240976754170723813555216</span></span><br><span class="line"><span class="string"> 696259448226530794490426262235682192406211548384519179216913469272608133976730073</span></span><br><span class="line"><span class="string"> 740693350965705743473429521428183071140252726519187867319209698168797844265454686</span></span><br><span class="line"><span class="string"> 604650858647625651544844781172441114327730413909755610663851775805294677760337341</span></span><br><span class="line"><span class="string"> 471874320104145726238738815997034116160241320481623424055329647756212404950138137</span></span><br><span class="line"><span class="string"> 201755652092058647070154954508993527680392400884226430281062546126537770580183644</span></span><br><span class="line"><span class="string"> 562443912059541003914708424230090569341055501736533553073746674313903992403503206</span></span><br><span class="line"><span class="string"> 857916767617208494549796807961852733026405952427948517952448304611149342659684628</span></span><br><span class="line"><span class="string"> 569240855038143599794523207383276344355059600817779494420269353407710918628882281</span></span><br><span class="line"><span class="string"> 209710568248306625094302589083556130775420236298436946727954741207366382680753425</span></span><br><span class="line"><span class="string"> 658694529323561705425881551718193904002607996920204879424398104325533927369289415</span></span><br><span class="line"><span class="string"> 066917692493833507884186060259837106601569745744140016374319263631306625671259175</span></span><br><span class="line"><span class="string"> 725749415499428033183980555918740839725077368686680281827054943319958962854368269</span></span><br><span class="line"><span class="string"> 697061677855152125336416555541049194632983874540006015609081285573904886020380480</span></span><br><span class="line"><span class="string"> 815939450727082808598371168705113292836650171896662288041545378376290705384280571</span></span><br><span class="line"><span class="string"> 907349030484957785736384072797454874730966709528617139563145541483208207493168201</span></span><br><span class="line"><span class="string"> 036502003863127289159200256458071082412659606747201219742648312696937511042470016</span></span><br><span class="line"><span class="string"> 665970393829748900730673247488465176447873096543614566319875241944650936502266014</span></span><br><span class="line"><span class="string"> 7218357448783598847793577903599742398436141520668329522500</span></span><br><span class="line"><span class="string">n3 = </span></span><br><span class="line"><span class="string">249410272713998803165754891640007600846974535132227413971910865147969418539888390</span></span><br><span class="line"><span class="string"> 073195689606460962553558928312743817847989934263100229022376128133508659027145332</span></span><br><span class="line"><span class="string"> 511026307508686380224842234337426552003909228705197467042081026039559458721425938</span></span><br><span class="line"><span class="string"> 098730849518727610240511003769836456879846902229417814578214601487649676894922723</span></span><br><span class="line"><span class="string"> 462954711576107249045920865021523357612453775914962100509145273182613952283062735</span></span><br><span class="line"><span class="string"> 895326241387273776619073614869159145539227349333374466068545601681226017756778478</span></span><br><span class="line"><span class="string"> 970656850557932065579658939902181207185042720135934511308625418584279218810969482</span></span><br><span class="line"><span class="string"> 187360886196754252103439195563518876634644835852209538418218191912157245441621484</span></span><br><span class="line"><span class="string"> 746534825636136256651467843529859284555352243328258765980117242641670660964203471</span></span><br><span class="line"><span class="string"> 733964221141765428089495089015946263582880444097689977702505016847310236571510768</span></span><br><span class="line"><span class="string"> 439660043606739100605659424426677991950824300152769387504462598723123583198993392</span></span><br><span class="line"><span class="string"> 920491550064242470431710380838595074587484332709028700667374217858019338913770751</span></span><br><span class="line"><span class="string"> 233780840991911748572040679879955312564101137264045108984589666328288716593695705</span></span><br><span class="line"><span class="string"> 628987313346676289541168447603290206899000688718335042566310836818080249745939265</span></span><br><span class="line"><span class="string"> 766878889098243823775754170428574336166853448019828193151415593388977747007521853</span></span><br><span class="line"><span class="string"> 462627419876286500597076433888660170265722292820282769078749796486423267732929410</span></span><br><span class="line"><span class="string"> 579782033440976060073930532384320862660899912815510485687067091261411753169539876</span></span><br><span class="line"><span class="string"> 689833347677430308001021169722778003692862579513640957940092905357037836527451598</span></span><br><span class="line"><span class="string"> 294841312550447400930034141425085131602165292124625826119147029246119569825071322</span></span><br><span class="line"><span class="string"> 961239430304131377656956479972476980119731750167986534701212222821155552705687935</span></span><br><span class="line"><span class="string"> 372081227591635388891661558276169595275715422113441207510282320593295030888415098</span></span><br><span class="line"><span class="string"> 837302380595809009588072616229131468353596837635562957862923207068829417296231130</span></span><br><span class="line"><span class="string"> 002134233287119398969022114042157048675352691161235874217937559447389382292290724</span></span><br><span class="line"><span class="string"> 611250564692584551972664442684936608785858133466701256968233101458604112191821224</span></span><br><span class="line"><span class="string"> 2373332106875529757752615031856738830163693909495716952252</span></span><br><span class="line"><span class="string"> d = </span></span><br><span class="line"><span class="string">433649372657589561562736809113004896168988647467520522913503121627765152775872617</span></span><br><span class="line"><span class="string"> 601174780309978948487118630623329285993553677703405155275957279564069754922608153</span></span><br><span class="line"><span class="string"> 154985338337687221891537104845929137385323656737740520069497836713892798151396178</span></span><br><span class="line"><span class="string"> 503110905146427254229932668338319430728026724929326990940122153602546409602279757</span></span><br><span class="line"><span class="string"> 590528474512032428065493660727706292350992848548454374097053296992399965219450980</span></span><br><span class="line"><span class="string"> 279948354644467259044536527730448427845444122562421182834303885763776785213056778</span></span><br><span class="line"><span class="string"> 206306776574403086432100135804575686894687978437505218130338350044882355907368727</span></span><br><span class="line"><span class="string"> 497314999595347129061253373714169034744396871198566741632582508619413746765301690</span></span><br><span class="line"><span class="string"> 848796950206844814814100377730903357480581057890708058699990419019558244478361014</span></span><br><span class="line"><span class="string"> 643171912366628244865206104432518650743908058177170171276657980747433307972075558</span></span><br><span class="line"><span class="string"> 617764047083267897091305898360989080598358610366787147875243647574664400539203394</span></span><br><span class="line"><span class="string"> 508901718521693792584822114894193675290489292453184418407413481891188937735907286</span></span><br><span class="line"><span class="string"> 65799522362650234927535765626</span></span><br><span class="line"><span class="string"> &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>通过代码审计，看到 n1 、n2 ，n3 已知，上面的 b、c、d是生成的随机数， n1 和n2 、n3 则是它们相乘，可 以用 GCD 算法逆向得出 a，即为真正的 flag 。</p>
+<p>得出 exp ：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"> <span class="keyword">from</span> math <span class="keyword">import</span> gcd</span><br><span class="line">n1 = </span><br><span class="line"><span class="number">660450239937627676472423152753088762866493652912175035499026181480010556008370227</span></span><br><span class="line"> <span class="number">132820692782941399020078286652999758917091413843420294288183682337794567181698378</span></span><br><span class="line"> 005190614956144552666986460330953742492949504762378684649291608293382476170196507</span><br><span class="line"> <span class="number">203860717478415630531428751980788146515223279726281602812659703309762797436048496</span></span><br><span class="line"> <span class="number">627911598377385262782778046800188003103442375618916707142674221670302396972922283</span></span><br><span class="line"> <span class="number">520054905593166294022196546718266472584050053300607686206198014313391408445437435</span></span><br><span class="line"> <span class="number">461419478264326992928539518498208034077320792110599071386379968059173966168861863</span></span><br><span class="line"> <span class="number">310563929045344315395731430000393330742178273782030232137271829338224042312738785</span></span><br><span class="line"> <span class="number">152236946900306968280222576625839634537180837030960604009475268281037277121979859</span></span><br><span class="line"> <span class="number">481286561762653987805286800510140743673637571353114984679475017659746968187968573</span></span><br><span class="line"> 057934009318669305996594873342826450526329996481608343739819045332409118504519002</span><br><span class="line"> <span class="number">207477400866719610003935048350194103918864656918681643952118946067692088906775185</span></span><br><span class="line"> <span class="number">346231362247690338142322966940992512356418386457476687916237422414439983444353705</span></span><br><span class="line"> <span class="number">38812516231728525148001841752921696848750</span></span><br><span class="line"> n2 = </span><br><span class="line"><span class="number">132055559948771408099604477174510908640912495019380611591004400217163913272136993</span></span><br><span class="line"> <span class="number">624283235079308020015173158191553338936753084171134908531165485921070874516834813</span></span><br><span class="line"> <span class="number">976117599430837900823335294479519533702907533849170522341798957404618239390485873</span></span><br><span class="line"> <span class="number">877756550985342946026048577994521995745243228888275945684197374335095889775900584</span></span><br><span class="line"> 018493535693551635367739929894727124030411094267858058173324359095354142826060871</span><br><span class="line"> <span class="number">855025402896480786226652143721749604469688715048143841581073559139793591057386368</span></span><br><span class="line"> <span class="number">662003982514297359734502803119229221447469362191444625907240976754170723813555216</span></span><br><span class="line"> <span class="number">696259448226530794490426262235682192406211548384519179216913469272608133976730073</span></span><br><span class="line"> <span class="number">740693350965705743473429521428183071140252726519187867319209698168797844265454686</span></span><br><span class="line"> <span class="number">604650858647625651544844781172441114327730413909755610663851775805294677760337341</span></span><br><span class="line"> <span class="number">471874320104145726238738815997034116160241320481623424055329647756212404950138137</span></span><br><span class="line"> <span class="number">201755652092058647070154954508993527680392400884226430281062546126537770580183644</span></span><br><span class="line"> <span class="number">562443912059541003914708424230090569341055501736533553073746674313903992403503206</span></span><br><span class="line"> <span class="number">857916767617208494549796807961852733026405952427948517952448304611149342659684628</span></span><br><span class="line"> <span class="number">569240855038143599794523207383276344355059600817779494420269353407710918628882281</span></span><br><span class="line"> <span class="number">209710568248306625094302589083556130775420236298436946727954741207366382680753425</span></span><br><span class="line"> <span class="number">658694529323561705425881551718193904002607996920204879424398104325533927369289415</span></span><br><span class="line"> 066917692493833507884186060259837106601569745744140016374319263631306625671259175</span><br><span class="line"> <span class="number">725749415499428033183980555918740839725077368686680281827054943319958962854368269</span></span><br><span class="line"> <span class="number">697061677855152125336416555541049194632983874540006015609081285573904886020380480</span></span><br><span class="line"> <span class="number">815939450727082808598371168705113292836650171896662288041545378376290705384280571</span></span><br><span class="line"> <span class="number">907349030484957785736384072797454874730966709528617139563145541483208207493168201</span></span><br><span class="line"> 036502003863127289159200256458071082412659606747201219742648312696937511042470016</span><br><span class="line"> <span class="number">665970393829748900730673247488465176447873096543614566319875241944650936502266014</span></span><br><span class="line"> <span class="number">7218357448783598847793577903599742398436141520668329522500</span></span><br><span class="line">n3 = </span><br><span class="line"><span class="number">249410272713998803165754891640007600846974535132227413971910865147969418539888390</span></span><br><span class="line"> 073195689606460962553558928312743817847989934263100229022376128133508659027145332</span><br><span class="line"> <span class="number">511026307508686380224842234337426552003909228705197467042081026039559458721425938</span></span><br><span class="line"> 098730849518727610240511003769836456879846902229417814578214601487649676894922723</span><br><span class="line"> <span class="number">462954711576107249045920865021523357612453775914962100509145273182613952283062735</span></span><br><span class="line"> <span class="number">895326241387273776619073614869159145539227349333374466068545601681226017756778478</span></span><br><span class="line"> <span class="number">970656850557932065579658939902181207185042720135934511308625418584279218810969482</span></span><br><span class="line"> <span class="number">187360886196754252103439195563518876634644835852209538418218191912157245441621484</span></span><br><span class="line"> <span class="number">746534825636136256651467843529859284555352243328258765980117242641670660964203471</span></span><br><span class="line"> <span class="number">733964221141765428089495089015946263582880444097689977702505016847310236571510768</span></span><br><span class="line"> <span class="number">439660043606739100605659424426677991950824300152769387504462598723123583198993392</span></span><br><span class="line"> <span class="number">920491550064242470431710380838595074587484332709028700667374217858019338913770751</span></span><br><span class="line"> <span class="number">233780840991911748572040679879955312564101137264045108984589666328288716593695705</span></span><br><span class="line"> <span class="number">628987313346676289541168447603290206899000688718335042566310836818080249745939265</span></span><br><span class="line"> <span class="number">766878889098243823775754170428574336166853448019828193151415593388977747007521853</span></span><br><span class="line"> <span class="number">462627419876286500597076433888660170265722292820282769078749796486423267732929410</span></span><br><span class="line"> <span class="number">579782033440976060073930532384320862660899912815510485687067091261411753169539876</span></span><br><span class="line"> <span class="number">689833347677430308001021169722778003692862579513640957940092905357037836527451598</span></span><br><span class="line"> <span class="number">294841312550447400930034141425085131602165292124625826119147029246119569825071322</span></span><br><span class="line"> <span class="number">961239430304131377656956479972476980119731750167986534701212222821155552705687935</span></span><br><span class="line"> <span class="number">372081227591635388891661558276169595275715422113441207510282320593295030888415098</span></span><br><span class="line"> <span class="number">837302380595809009588072616229131468353596837635562957862923207068829417296231130</span></span><br><span class="line"> 002134233287119398969022114042157048675352691161235874217937559447389382292290724</span><br><span class="line"> <span class="number">611250564692584551972664442684936608785858133466701256968233101458604112191821224</span></span><br><span class="line"> <span class="number">2373332106875529757752615031856738830163693909495716952252</span></span><br><span class="line"> d = </span><br><span class="line"><span class="number">433649372657589561562736809113004896168988647467520522913503121627765152775872617</span></span><br><span class="line"> <span class="number">601174780309978948487118630623329285993553677703405155275957279564069754922608153</span></span><br><span class="line"> <span class="number">154985338337687221891537104845929137385323656737740520069497836713892798151396178</span></span><br><span class="line"> <span class="number">503110905146427254229932668338319430728026724929326990940122153602546409602279757</span></span><br><span class="line"> <span class="number">590528474512032428065493660727706292350992848548454374097053296992399965219450980</span></span><br><span class="line"> <span class="number">279948354644467259044536527730448427845444122562421182834303885763776785213056778</span></span><br><span class="line"> <span class="number">206306776574403086432100135804575686894687978437505218130338350044882355907368727</span></span><br><span class="line"> <span class="number">497314999595347129061253373714169034744396871198566741632582508619413746765301690</span></span><br><span class="line"> <span class="number">848796950206844814814100377730903357480581057890708058699990419019558244478361014</span></span><br><span class="line"> <span class="number">643171912366628244865206104432518650743908058177170171276657980747433307972075558</span></span><br><span class="line"> <span class="number">617764047083267897091305898360989080598358610366787147875243647574664400539203394</span></span><br><span class="line"> <span class="number">508901718521693792584822114894193675290489292453184418407413481891188937735907286</span></span><br><span class="line"> <span class="number">65799522362650234927535765626</span></span><br><span class="line"> b = gcd(n1, n2)</span><br><span class="line"> a = n1 // b</span><br><span class="line"> c = n2 // b</span><br><span class="line"> real_flag = long_to_bytes(a)</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">f&quot;THE real_flag: <span class="subst">&#123;real_flag.decode()&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure></div>
+
+<p>即可得到 flag 。</p>
+<h3 id="ezRSA"><a href="#ezRSA" class="headerlink" title="ezRSA"></a>ezRSA</h3><hr>
+<p>题目描述：这伞兵 BR 又出了什么抽象题？忍不了了！和 BR 爆了！！！ </p>
+<hr>
+<p>下载了附件后是 txt 文件，打开： </p>
+<p>e &#x3D; 65537 </p>
+<p>n &#x3D; 33896169649278787817413108531913159564802588344171700864708498661924206927271997490 45136855692986896313375718348538743048229582847210725029529834835813548058842302356 16224853229739254453896448014605235889565579360332680381264108519019900566994903905 05881187230673778366514722844167243102886788304917509722252674263436525922913096000 98944351229749957513453626264488620799659160485560680576771242990157 </p>
+<p>dp &#x3D; 40008312476670176077019320150135078093576233427810327258745387563367163532724088700 44433889118362883630676972295465773710150675576341453713705665281129523531268017856 3283946769876556761670653862586533 </p>
+<p>c &#x3D; 27517927422383474443348354524600841867994530350599275770033259060956283813207152505 38921636436471076761144030529733555087963190221733614651048234326074859224867616661 30746018102996787411650068046965914585541239006719172052235204702773905192301423559 48361827142449434679837060411450431072294284607048332335596884831364971047377659128 20183578092203043788325533521188107197615771966434225751684425810745 </p>
+<p>通过分析，已知公钥指数 e、模数 n、解密指数 dp 和密文 c，要得到明文。利用 RSA 知识 dp&#x3D;d mod(p−1) ，</p>
+<p>找到 p后，可以得到 q，计算 phi(n) 和d，</p>
+<p>最后利用中国剩余定理解密 c</p>
+<p>写exp ：         </p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> inverse, isPrime, long_to_bytes</span><br><span class="line"> e = <span class="number">65537</span></span><br><span class="line"> n = </span><br><span class="line"><span class="number">338961696492787878174131085319131595648025883441717008647084986619242069272719974</span></span><br><span class="line"> <span class="number">904513685569298689631337571834853874304822958284721072502952983483581354805884230</span></span><br><span class="line"> <span class="number">235616224853229739254453896448014605235889565579360332680381264108519019900566994</span></span><br><span class="line"> <span class="number">903905058811872306737783665147228441672431028867883049175097222526742634365259229</span></span><br><span class="line"> <span class="number">1309600098944351229749957513453626264488620799659160485560680576771242990157</span></span><br><span class="line"> dp = </span><br><span class="line"><span class="number">400083124766701760770193201501350780935762334278103272587453875633671635327240887</span></span><br><span class="line"> 004443388911836288363067697229546577371015067557634145371370566528112952353126801</span><br><span class="line"> <span class="number">78563283946769876556761670653862586533</span></span><br><span class="line">c = </span><br><span class="line"><span class="number">275179274223834744433483545246008418679945303505992757700332590609562838132071525</span></span><br><span class="line"> 053892163643647107676114403052973355508796319022173361465104823432607485922486761</span><br><span class="line"> <span class="number">666130746018102996787411650068046965914585541239006719172052235204702773905192301</span></span><br><span class="line"> <span class="number">423559483618271424494346798370604114504310722942846070483323355968848313649710473</span></span><br><span class="line"> <span class="number">7765912820183578092203043788325533521188107197615771966434225751684425810745</span></span><br><span class="line"> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, e):</span><br><span class="line"> p = (e * dp - <span class="number">1</span>) // k + <span class="number">1</span></span><br><span class="line"> <span class="keyword">if</span> (e * dp - <span class="number">1</span>) % k == <span class="number">0</span> <span class="keyword">and</span> isPrime(p) <span class="keyword">and</span> n % p == <span class="number">0</span>:</span><br><span class="line"> q = n // p</span><br><span class="line"> <span class="keyword">if</span> isPrime(q):</span><br><span class="line"> <span class="keyword">break</span></span><br><span class="line"> phi = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line"> d = inverse(e, phi)</span><br><span class="line"> dq = d % (q-<span class="number">1</span>)</span><br><span class="line"> m_p = <span class="built_in">pow</span>(c, dp, p)</span><br><span class="line"> m_q = <span class="built_in">pow</span>(c, dq, q)</span><br><span class="line"> h = (inverse(q, p) * (m_p - m_q)) % p</span><br><span class="line"> m = (m_q + h * q)</span><br><span class="line"> flag = long_to_bytes(m).decode()</span><br><span class="line"> <span class="built_in">print</span>(<span class="string">&quot;解密后的flag:&quot;</span>, flag)</span><br></pre></td></tr></table></figure></div>
+
+<p>得到 flag </p>
+<h3 id="private-key"><a href="#private-key" class="headerlink" title="private key"></a>private key</h3><hr>
+<p>题目描述：众所周知，公钥加密，私钥解密，那么没有私钥，这怎么解密？ </p>
+<p>hint: 私钥生成所需要的 p，q如何从公钥的 n中获得呢？ </p>
+<hr>
+<p>下载附件得到三个文件： attachment.py 、flag.enc 和public_key.pem ，这个题是已知公钥，无私钥，则我们要得到私钥后才能解密 flag.enc ，放到 kali 中,</p>
+<p>可以看到已得出了 private_key.pem ，但是用 kali 自带的貌似解出来不对，</p>
+<p> 于是我用 python 写了一段解密 exp ：</p>
+<div class="code-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> PKCS1_OAEP</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dec</span>():</span><br><span class="line">	private_key = RSA.importKey(<span class="built_in">open</span>(<span class="string">&#x27;private.pem&#x27;</span>, <span class="string">&#x27;r&#x27;</span>).read())</span><br><span class="line"> 	rsa_decryptor = PKCS1_OAEP.new(private_key)</span><br><span class="line"> 	<span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;flag.enc&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> fp:</span><br><span class="line"> 		encrypted_data = fp.read()</span><br><span class="line"> 	decrypted = rsa_decryptor.decrypt(encrypted_data)</span><br><span class="line"> 	<span class="built_in">print</span>(<span class="string">&quot;解密后的 flag:&quot;</span>, decrypted.decode())</span><br><span class="line">dec()</span><br></pre></td></tr></table></figure></div>
+
+<p>得出 flag </p>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h3 id="unser"><a href="#unser" class="headerlink" title="unser"></a>unser</h3><hr>
+<p>题目描述：小李是一位初学编程的小伙子，刚接触一种新语言。他发现这门语言操作数据的方式很特 别，可以把复杂的信息转化为看似简单的文本，又能轻松恢复成原来的样子。 为了练习，他写了一个小程序，记录好友的名字和生日。小李把这些信息转换成一个奇怪的格式保存起 来。几天后，他用程序还原了这些数据，发现好友的生日一条不少。他很开心，觉得自己迈出了学习的 第一步。 这次成功让小李充满信心，他开始觉得学编程并没有想象中那么难嘛！ </p>
+<hr>
+<p> 得到题目实例：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class login&#123;</span><br><span class="line">	public $user;</span><br><span class="line"> 	public $pass;</span><br><span class="line"> 	function __construct($user,$pass)&#123;</span><br><span class="line"> 		$this-&gt;user=$user;</span><br><span class="line"> 		$this-&gt;pass=$pass;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	function login()&#123;</span><br><span class="line"> 		if ($this-&gt;user==&quot;admin&quot; and $this-&gt;pass==&quot;admin123&quot;)&#123;</span><br><span class="line"> 			return True;</span><br><span class="line"> 		&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;flag&#x27;]))</span><br><span class="line">&#123;</span><br><span class="line">	$a=unserialize($_GET[&#x27;flag&#x27;]);</span><br><span class="line">	if($a-&gt;login())</span><br><span class="line">	&#123;</span><br><span class="line">		echo $flag;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p> 经典的反序列化漏洞， 写一手逆向代码，</p>
+<p>得到payload ：<strong>O:5:”login”:2: {s:4:”user”;s:5:”admin”;s:4:”pass”;s:8:”admin123”;}</strong> </p>
+<p>得到 flag </p>
+<h3 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h3><hr>
+<p>题目描述：坏了，我不会 java ，这怎么打？？？ </p>
+<p>hint: 容器启动较慢，请耐心等候，完全启动预计需要 10min flag 位于 &#x2F;flag </p>
+<p>在网上看看有没有现成的 poc 之类的？</p>
+<hr>
+<p>等网页加载完后是经典的登陆界面，利用网络资源有 poc ，</p>
+<p>首先在前端页面输入 <strong>jnlpJars&#x2F;jenkins-cli.jar</strong> ，可以下载到 jar 文件， </p>
+<p>然后再打开 kali ，在命令行中输入：<strong>java -jar ‘&#x2F;..&#x2F;..&#x2F;..&#x2F;jenkins-cli.jar -s -http 47.121.201.96:50527 help 1 “@&#x2F;flag’’</strong> </p>
+<p>得到 flag </p>
+<p>#参考了 <a class="link"   target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/jenkins-cve-2024-23897.html" >Jenkins 文件读取漏洞拾遗（ CVE-2024-23897 ） | 离别歌<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> </p>
+<h1 id="Forensics-（附件忘了保存了-）"><a href="#Forensics-（附件忘了保存了-）" class="headerlink" title="Forensics （附件忘了保存了 :( ）"></a>Forensics （附件忘了保存了 :( ）</h1><h3 id="应急响应-1-钓鱼邮件"><a href="#应急响应-1-钓鱼邮件" class="headerlink" title="应急响应 -1 钓鱼邮件"></a>应急响应 -1 钓鱼邮件</h3><hr>
+<p>近日， Peng 的个人电脑遭到黑客攻击，请你帮 Peng 溯源攻击链。 黑客发送的钓鱼邮件的发件地址是？</p>
+<p> 例： XAUTCTF{ <a class="link"   href="mailto:&#x31;&#x32;&#51;&#52;&#53;&#54;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#109;" >123456@qq.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>} </p>
+<p>hint ：部分文件为真实病毒样本，请不要在物理机运行 </p>
+<p>翻一翻 <code>此电脑 </code></p>
+<hr>
+<p>挂载虚拟机后进入，</p>
+<p> 根据提示，点击此电脑，有一个寒假通知，点击后即可看到邮件地址。 </p>
+<h3 id="应急响应-2-一句话木马"><a href="#应急响应-2-一句话木马" class="headerlink" title="应急响应 -2 一句话木马"></a>应急响应 -2 一句话木马</h3><hr>
+<p>题目描述：黑客写入的一句话木马的连接密码是？ </p>
+<p>例： XAUTCTF{cmd} </p>
+<hr>
+<p>在虚拟机上下载 D盾，查找后门文件可以看到有两个可疑文件， </p>
+<p>点开可以看到一句话马 🐎 ，得到是 POST 的easyshell ，为 flag </p>
+<h3 id="应急响应-3-后门用户"><a href="#应急响应-3-后门用户" class="headerlink" title="应急响应 -3 后门用户"></a>应急响应 -3 后门用户</h3><hr>
+<p>题目描述：黑客的添加的后门用户是？ </p>
+<p>例： XAUTCTF{hacker} </p>
+<hr>
+<p>在虚拟机上的控制面板的用户账户可得到后门用户 wshcaker$ </p>
+<h3 id="应急响应-4-病毒文件"><a href="#应急响应-4-病毒文件" class="headerlink" title="应急响应 -4 病毒文件"></a>应急响应 -4 病毒文件</h3><hr>
+<p>题目描述：黑客植入的病毒程序的外连 ip 及端口是 </p>
+<hr>
+<p>在cmd 里输入 netstat -naob 可得到外连 IP 地址 </p>
+<h3 id="应急响应-5-勒索钱包"><a href="#应急响应-5-勒索钱包" class="headerlink" title="应急响应 -5 勒索钱包"></a>应急响应 -5 勒索钱包</h3><hr>
+<p>题目描述：黑客留下的勒索钱包地址是？ </p>
+<p>例： XAUTCTF{1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa} </p>
+<hr>
+<p>直接点击桌面上的 readme.txt 可得到</p>
+<!--more-->
+		</div>
+
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">#比赛个人WP</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="../../../04/26/%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89%E7%A8%8B%E5%BA%8F%E5%91%98%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0%E7%9A%8410%E4%BB%B6%E4%BA%8B/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]</span>
+						<span class="post-nav-item">Prev posts</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="../../../../2024/10/24/%E5%A4%A7%E5%AD%A6%E7%9A%84%E8%BF%91%E6%9C%9Fcoding%E4%B9%8B%E6%97%85%E5%8F%8A%E9%9A%8F%E7%AC%94-2024%E5%B9%B4/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">大学的近期Coding之旅及随笔(2024年)</span>
+						<span class="post-nav-item">Next posts</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+		<div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+			<div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        Comments
+    </div>
+    
+
+        
+            
+    <div id="waline"></div>
+    <script type="module" data-swup-reload-script>
+      import { init } from '../../../../js/libs/waline.js';
+
+      (function() {
+        const startPath = location.pathname;
+        const startTime = Date.now();
+        const retryDelay = 200;
+        const retryLimit = 5000;
+
+        const runWaline = () => {
+          if (location.pathname !== startPath) {
+            return;
+          }
+
+          const container = document.getElementById('waline');
+          if (!container) {
+            if (Date.now() - startTime < retryLimit) {
+              setTimeout(runWaline, retryDelay);
+            }
+            return;
+          }
+
+          if (window.redefineWalineInstance?.destroy) {
+            window.redefineWalineInstance.destroy();
+          }
+
+          container.innerHTML = '';
+          window.redefineWalineInstance = init({
+            el: '#waline',
+            serverURL: 'https://waline-pi-blue-88.vercel.app/',
+            path: location.pathname,
+            dark: 'body[class~="dark-mode"]',
+            reaction: true,
+            requiredMeta: ['nick', 'mail'],
+            emoji: [],
+                      lang: 'zh-CN',
+          });
+        };
+
+        runWaline();
+      })();
+    </script>
+
+
+
+        
+    
+</div>
+
+		</div>
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">On this page</div>
+		<div class="page-title">XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MISC"><span class="nav-number">1.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SignIn"><span class="nav-number">1.0.1.</span> <span class="nav-text">SignIn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#try"><span class="nav-number">1.0.2.</span> <span class="nav-text">try</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%99%E6%BB%A9%EF%BC%8C%E6%B5%B7%E6%B4%8B%EF%BC%8C%E5%A4%A7%E5%86%92%E9%99%A9%EF%BC%81"><span class="nav-number">1.0.3.</span> <span class="nav-text">沙滩，海洋，大冒险！</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Crypto"><span class="nav-number">2.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%BF%83%E8%A7%A3%E6%96%B9%E7%A8%8B"><span class="nav-number">2.0.1.</span> <span class="nav-text">开心解方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ezRSA"><span class="nav-number">2.0.2.</span> <span class="nav-text">ezRSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#private-key"><span class="nav-number">2.0.3.</span> <span class="nav-text">private key</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web"><span class="nav-number">3.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unser"><span class="nav-number">3.0.1.</span> <span class="nav-text">unser</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins"><span class="nav-number">3.0.2.</span> <span class="nav-text">Jenkins</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Forensics-%EF%BC%88%E9%99%84%E4%BB%B6%E5%BF%98%E4%BA%86%E4%BF%9D%E5%AD%98%E4%BA%86-%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Forensics （附件忘了保存了 :( ）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-1-%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6"><span class="nav-number">4.0.1.</span> <span class="nav-text">应急响应 -1 钓鱼邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-2-%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="nav-number">4.0.2.</span> <span class="nav-text">应急响应 -2 一句话木马</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-3-%E5%90%8E%E9%97%A8%E7%94%A8%E6%88%B7"><span class="nav-number">4.0.3.</span> <span class="nav-text">应急响应 -3 后门用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-4-%E7%97%85%E6%AF%92%E6%96%87%E4%BB%B6"><span class="nav-number">4.0.4.</span> <span class="nav-text">应急响应 -4 病毒文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94-5-%E5%8B%92%E7%B4%A2%E9%92%B1%E5%8C%85"><span class="nav-number">4.0.5.</span> <span class="nav-text">应急响应 -5 勒索钱包</span></a></li></ol></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2024</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">debu8ger</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        26 posts in total
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.9.0</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+		<li class="go-comment">
+			<i class="fa-regular fa-comments"></i>
+		</li>
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container" role="dialog" aria-modal="true" aria-label="Image viewer">
+	<button class="image-viewer-close" type="button" aria-label="Close">
+		<i class="fa-solid fa-xmark"></i>
+	</button>
+	<button class="image-viewer-prev" type="button" aria-label="Prev">
+		<i class="fa-solid fa-chevron-left"></i>
+	</button>
+	<div class="image-viewer-frame">
+		<img src="" alt="">
+	</div>
+	<div class="image-viewer-exif-panel hidden absolute left-1/2 bottom-20 -translate-x-1/2 w-[min(92vw,420px)] max-h-[60vh] overflow-hidden rounded-2xl bg-background-color-transparent-80 p-4 text-left shadow-redefine-flat backdrop-blur-md" role="dialog" aria-label="EXIF" aria-hidden="true">
+		<div class="flex items-center justify-between mb-3">
+			<span class="text-sm font-semibold text-first-text-color">EXIF</span>
+			<button class="image-viewer-exif-close flex h-8 w-8 items-center justify-center rounded-full bg-background-color-transparent-80 text-first-text-color transition hover:bg-background-color-transparent-40" type="button" aria-label="Close">
+				<i class="fa-solid fa-xmark text-[0.65rem]"></i>
+			</button>
+		</div>
+		<div class="image-viewer-exif-cards grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto pr-1 scrollbar-hide"></div>
+		<template class="image-viewer-exif-card-template">
+			<div class="rounded-lg bg-background-color-transparent-40 px-3 py-2">
+				<div class="image-viewer-exif-card-header flex items-center gap-2 mb-1">
+					<i class="image-viewer-exif-card-icon fa-solid fa-circle-info text-xs text-third-text-color"></i>
+					<div class="image-viewer-exif-card-title text-xs font-semibold text-first-text-color"></div>
+				</div>
+				<div class="image-viewer-exif-card-items flex flex-col gap-1"></div>
+			</div>
+		</template>
+	</div>
+	<button class="image-viewer-exif-toggle flex items-center gap-2 hidden absolute left-1/2 bottom-6 -translate-x-1/2 rounded-full border border-border-color bg-background-color-transparent-80 px-4 py-2 text-first-text-color backdrop-blur-md transition hover:bg-background-color-transparent-40" type="button" aria-label="EXIF" aria-expanded="false">
+		<i class="fa-solid fa-circle-info text-xs"></i>
+		<span class="text-xs font-semibold uppercase tracking-wider">EXIF</span>
+	</button>
+	<button class="image-viewer-next" type="button" aria-label="Next">
+		<i class="fa-solid fa-chevron-right"></i>
+	</button>
+</div>
+
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Search..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="js/libs/Swup.min.js"></script>
+
+<script src="js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    window.swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+
+    window.dispatchEvent(
+        new CustomEvent("redefine:swup:ready", {
+            detail: {
+                swup: window.swup,
+            },
+        }),
+    );
+</script>
+
+
+
+
+	
+<script src="js/main.js" type="module"></script>
+
+
+
+    
+<script src="js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="assets/odometer-theme-minimal.css">
+
+
+
+
+
+
+
+  
+<script src="js/libs/Typed.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script src="js/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+
+	
+</body>
+
+</html>
