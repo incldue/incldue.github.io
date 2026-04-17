@@ -428,7 +428,7 @@ img[lazyload] {
 }
 .markdown-body {
   font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
 }
 .markdown-body blockquote:not(.not-markdown) {
   box-sizing: border-box;
@@ -578,7 +578,7 @@ img[lazyload] {
   font-size: 3.2rem;
   font-weight: 650;
   border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: 2.8rem;
+  margin-top: 2.4rem;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
   line-height: 1.2;
@@ -596,7 +596,7 @@ img[lazyload] {
   font-weight: 650;
   padding: 3px 0;
   border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: 2.4rem;
+  margin-top: 2.1rem;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
   line-height: 1.1;
