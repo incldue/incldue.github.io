@@ -296,7 +296,7 @@ body {
   font-family: Geist Variable, Noto Sans SC, -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial;
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.2;
   scrollbar-gutter: stable;
   --navbar-height: 70px;
 }
@@ -330,14 +330,14 @@ body::-webkit-scrollbar-thumb:hover {
   html,
   body {
     font-size: 15.36px;
-    line-height: 1.44;
+    line-height: 1.152;
   }
 }
 @media (max-width: 640px) {
   html,
   body {
     font-size: 14.4px;
-    line-height: 1.35;
+    line-height: 1.08;
   }
 }
 html .navbar-shrink,
@@ -428,7 +428,7 @@ img[lazyload] {
 }
 .markdown-body {
   font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
 }
 .markdown-body blockquote:not(.not-markdown) {
   box-sizing: border-box;
@@ -446,7 +446,7 @@ img[lazyload] {
   padding: 5px 5px 5px 10px;
 }
 .markdown-body p:not(.not-markdown) {
-  line-height: 1.5;
+  line-height: 1.2;
   color: var(--default-text-color);
   font-weight: 400;
   margin-bottom: 1rem;
@@ -555,7 +555,7 @@ img[lazyload] {
 .markdown-body .h6:not(.not-markdown) {
   font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif, sans-serif;
   color: var(--second-text-color);
-  line-height: 1.5;
+  line-height: 1.2;
 }
 @media (max-width: 768px) {
   .markdown-body h1:not(.not-markdown),
@@ -570,7 +570,7 @@ img[lazyload] {
   .markdown-body .h4:not(.not-markdown),
   .markdown-body .h5:not(.not-markdown),
   .markdown-body .h6:not(.not-markdown) {
-    line-height: 1.44;
+    line-height: 1.152;
   }
 }
 .markdown-body h1:not(.not-markdown),
@@ -578,7 +578,7 @@ img[lazyload] {
   font-size: 3.2rem;
   font-weight: 650;
   border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: 2.8rem;
+  margin-top: 2.6rem;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
   line-height: 1.2;
@@ -1485,7 +1485,7 @@ pre .deletion {
   min-height: 90vh;
 }
 .home-banner-container .content .description {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   line-height: 1.2;
   color: var(--home-banner-text-color);
 }
@@ -1496,15 +1496,15 @@ pre .deletion {
   font-weight: 350;
 }
 .home-banner-container .content .description p i {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-style: normal;
 }
 .home-banner-container .content .description p span {
-  font-size: 1.575rem;
+  font-size: 1.47rem;
 }
 @media (max-width: 768px) {
   .home-banner-container .content .description {
-    font-size: 2.52rem;
+    font-size: 2.34rem;
   }
 }
 .image-viewer-container {
