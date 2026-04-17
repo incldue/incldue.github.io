@@ -428,7 +428,7 @@ img[lazyload] {
 }
 .markdown-body {
   font-family: 'Geist Variable', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
 }
 .markdown-body blockquote:not(.not-markdown) {
   box-sizing: border-box;
@@ -578,7 +578,7 @@ img[lazyload] {
   font-size: 3.2rem;
   font-weight: 650;
   border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: 2.4rem;
+  margin-top: 2.6rem;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
   line-height: 1.2;
@@ -596,7 +596,7 @@ img[lazyload] {
   font-weight: 650;
   padding: 3px 0;
   border-bottom: solid 2px var(--fourth-text-color);
-  margin-top: 2.1rem;
+  margin-top: 2.4rem;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -612,7 +612,7 @@ img[lazyload] {
 .markdown-body .h3:not(.not-markdown) {
   font-size: 1.8rem;
   font-weight: 600;
-  margin-top: 1.8rem;
+  margin-top: 1.9rem;
   margin-bottom: 0.75rem;
   letter-spacing: -0.025em;
   line-height: 1.3;
@@ -628,7 +628,7 @@ img[lazyload] {
 .markdown-body .h4:not(.not-markdown) {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-top: 1.5rem;
+  margin-top: 1.6rem;
   margin-bottom: 0.75rem;
   line-height: 1.4;
 }
@@ -643,7 +643,7 @@ img[lazyload] {
 .markdown-body .h5:not(.not-markdown) {
   font-size: 1.28rem;
   font-weight: 600;
-  margin-top: 1.3rem;
+  margin-top: 1.4rem;
   margin-bottom: 0.5rem;
   line-height: 1.3;
 }
@@ -658,7 +658,7 @@ img[lazyload] {
 .markdown-body .h6:not(.not-markdown) {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-top: 1.1rem;
+  margin-top: 1.3rem;
   margin-bottom: 0.5rem;
   line-height: 1.2;
 }
@@ -1485,7 +1485,7 @@ pre .deletion {
   min-height: 90vh;
 }
 .home-banner-container .content .description {
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   line-height: 1.2;
   color: var(--home-banner-text-color);
 }
@@ -1496,15 +1496,15 @@ pre .deletion {
   font-weight: 350;
 }
 .home-banner-container .content .description p i {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-style: normal;
 }
 .home-banner-container .content .description p span {
-  font-size: 1.26rem;
+  font-size: 1.47rem;
 }
 @media (max-width: 768px) {
   .home-banner-container .content .description {
-    font-size: 2.16rem;
+    font-size: 2.34rem;
   }
 }
 .image-viewer-container {
