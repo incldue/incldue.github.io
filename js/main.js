@@ -252,9 +252,9 @@ onVisitStart(() => {
 var OriginTitle = document.title;
 document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
-        document.title = '╭(°A°`)╮ 跑哪儿去了~ 快回来!';
+        document.title = '╭(°A°`)╮ 跑哪儿去了?';
     }else {
-        document.title = '(ฅ>ω<*ฅ) 终于回来了！抓到你啦～';
+        document.title = '(ฅ>ω<*ฅ) 👀欢迎回来吖~';
         setTimeout(function () {
             if(!document.hidden){
                 document.title = OriginTitle;
