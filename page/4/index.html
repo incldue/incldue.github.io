@@ -88,10 +88,10 @@
     try {
       var typed = new Typed("#subtitle", {
         strings: ['I hack,therefore I am.', '', ''],
-        startDelay: 1000,
-        typeSpeed: 200,
+        startDelay: 800,
+        typeSpeed: 300,
         loop: true,
-        backSpeed: 100,
+        backSpeed: 200,
         showCursor: true
       });
     } catch (err) {
@@ -113,6 +113,22 @@
     
 </ul>
   
+  
+  
+
+<div class="notice">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
   
   <article class="articles">
     
@@ -167,7 +183,7 @@
       
         SRC挖洞第一步，知己知彼---信息收集
         
-        <a class="article-more-link" href="../../2025/06/11/SRC%E6%8C%96%E6%B4%9E01--%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86_1/">显示更多...</a>
+        <a class="article-more-link" href="../../2025/06/11/SRC%E6%8C%96%E6%B4%9E01--%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86_1/">click to read more...</a>
         
       
 
@@ -245,7 +261,7 @@
       
         之前只是了解知识点，这回做了赛题才发现有很多没懂的...
         
-        <a class="article-more-link" href="../../2025/06/07/CTF--%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9EPLUS/">显示更多...</a>
+        <a class="article-more-link" href="../../2025/06/07/CTF--%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9EPLUS/">click to read more...</a>
         
       
 
@@ -323,7 +339,7 @@
       
         只是简单的announce一下，开始学习SRC挖洞咯~~
         
-        <a class="article-more-link" href="../../2025/06/03/SRC%E6%8C%96%E6%B4%9E00/">显示更多...</a>
+        <a class="article-more-link" href="../../2025/06/03/SRC%E6%8C%96%E6%B4%9E00/">click to read more...</a>
         
       
 
@@ -401,7 +417,7 @@
       
         学习OOP时的一些知识点，涉及继承&多态&文件与流
         
-        <a class="article-more-link" href="../../2025/06/02/C++%E5%AD%A6%E4%B9%A002/">显示更多...</a>
+        <a class="article-more-link" href="../../2025/06/02/C++%E5%AD%A6%E4%B9%A002/">click to read more...</a>
         
       
 
@@ -479,7 +495,7 @@
       
         ...reboot...
         
-        <a class="article-more-link" href="../../2025/06/01/Db8Gr%E7%9A%84blog01/">显示更多...</a>
+        <a class="article-more-link" href="../../2025/06/01/Db8Gr%E7%9A%84blog01/">click to read more...</a>
         
       
 
@@ -515,7 +531,7 @@
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="../3/">上一页</a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><a class="page-number" href="../3/">3</a><span class="page-number current">4</span><a class="page-number" href="../5/">5</a><a class="page-number" href="../6/">6</a><a class="extend next" rel="next" href="../5/">下一页</a>
+    <a class="extend prev" rel="prev" href="../3/">上一页aa</a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><a class="page-number" href="../3/">3</a><span class="page-number current">4</span><a class="page-number" href="../5/">5</a><a class="page-number" href="../6/">6</a><a class="extend next" rel="next" href="../5/">下一页</a>
   </nav>
   
 </section>
@@ -631,13 +647,6 @@
          href="../../about"
          
       >关于本站</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link"
-         href="../../about"
-         
-      >关于本站&amp;我</a>
     </li>
     
   </ul>
@@ -895,6 +904,23 @@
 </script>
 
 
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=2228795231&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
     
     
 
