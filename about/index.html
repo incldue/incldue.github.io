@@ -22,8 +22,6 @@
 <meta property="article:author" content="debu8ger">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="../atom.xml" title="D&#39;b8Gr的小站~" type="application/atom+xml">
-  
   
     <link rel="icon" href="../static/avatar/avatar1.png">
   
@@ -50,6 +48,7 @@
 
   
 
+<link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 
 <body>
@@ -77,7 +76,9 @@
 			
 				<li><a href="../index.html" >主页</a></li>
 			
-				<li><a href="../archives" >归档</a></li>
+				<li><a href="../ibooks/" >分个人书签</a></li>
+			
+				<li><a href="../archives/" >归档</a></li>
 			
 			</ul>
 		</nav>
@@ -87,6 +88,8 @@
 					<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
 				
 			
+				
+					<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
 				
 			
 				
@@ -172,6 +175,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -216,12 +221,14 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="../index.html">主页</a></li>
+					<li style="width: 33.333333333333336%"><a href="../index.html">主页</a></li>
 		        
-					<li style="width: 50%"><a href="../archives">归档</a></li>
+					<li style="width: 33.333333333333336%"><a href="../ibooks/">分个人书签</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="../archives/">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -299,7 +306,7 @@
 <h3 id="关于爱好"><a href="#关于爱好" class="headerlink" title="关于爱好"></a>关于爱好</h3><p>热爱<code>跑步</code>，尤其喜欢<code>CTF</code>、<code>健身</code>、<code>听歌</code>、<code>电影</code>、<code>旅行</code>。</p>
 <h3 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h3><ul>
 <li>Blog: <a href="https://incldue.github.io/">D’b8Gr的小站~</a></li>
-<li>Email: <a href="mailto:&#x68;&#53;&#50;&#52;&#x36;&#x33;&#x33;&#57;&#x38;&#x40;&#x6f;&#117;&#116;&#108;&#111;&#x6f;&#107;&#x2e;&#99;&#x6f;&#x6d;">h52463398@outlook.com</a></li>
+<li>Email: <a href="mailto:&#104;&#53;&#x32;&#x34;&#54;&#x33;&#x33;&#x39;&#56;&#x40;&#111;&#x75;&#x74;&#x6c;&#111;&#x6f;&#x6b;&#x2e;&#x63;&#x6f;&#x6d;">h52463398@outlook.com</a></li>
 <li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/incldue">debu8ger</a></li>
 <li>Twitter: <a target="_blank" rel="noopener" href="https://x.com/JonathanHu70782">debu8ger</a></li>
 </ul>
@@ -505,6 +512,8 @@
       
     
       
+      
+      
     
       
       
@@ -516,13 +525,15 @@
     
     
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
       
         
       
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
         
       
-      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
       
         
     </ul>
@@ -547,15 +558,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">比赛个人WP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CTF知识分享</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">CTF赛题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">比赛个人WP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -633,6 +644,44 @@
     	</section>
     
 
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="../incldue.github.io/ibooks/" target="_blank" 
+                class="search-title" title="记录自己在CTF刷题时遇到的有趣题目和解题思路，还有对萌新的入门建议&amp;AI推荐，欢迎交流~">
+                
+                  <i class="icon-link icon"></i>
+                
+                个人书签
+              </a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://github.com/incldue" target="_blank" 
+                class="search-title" >
+                
+                  <i class="icon-link icon"></i>
+                
+                GitHub
+              </a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://blog.csdn.net/m0_57882332?type=blog" target="_blank" 
+                class="search-title" >
+                
+                  <i class="icon-link icon"></i>
+                
+                CSDN
+              </a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
     
 
     
