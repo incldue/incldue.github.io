@@ -1,233 +1,180 @@
 <!DOCTYPE html>
-<html lang="en, zh-CN">
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="referrer" content="no-referrer">
-
-<title>ISCTF2025 部分题WP | D&#39;b8Gr的小站~</title>
-
-
-<meta name="description" content="h3llo_w0rld">
-
-
-<meta name="author" content="debu8ger">
-
-
-
-<!-- Canonical -->
-<link rel="canonical" href="">
-
-<!-- Favicon -->
-<link rel="icon" href="../../../../images/favicon.ico">
-
-<!-- RSS -->
-
-<link rel="alternate" type="application/rss+xml" title="D&#39;b8Gr的小站~" href="../../../../atom.xml">
-
-
-<!-- Open Graph -->
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ISCTF2025 部分题WP">
-<meta property="og:url" content="">
+<meta property="og:url" content="https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/index.html">
 <meta property="og:site_name" content="D&#39;b8Gr的小站~">
-
-<meta property="og:description" content="h3llo_w0rld">
-
-
-<!-- Twitter Card -->
+<meta property="og:description" content="这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:(">
+<meta property="og:locale">
+<meta property="og:image" content="https://incldue.github.io/images/ISCTF-re1.png">
+<meta property="article:published_time" content="2025-12-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-29T15:47:18.219Z">
+<meta property="article:author" content="debu8ger">
+<meta property="article:tag" content="比赛个人WP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ISCTF2025 部分题WP">
+<meta name="twitter:image" content="https://incldue.github.io/images/ISCTF-re1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="../../../../static/avatar/avatar1.png">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="../../../../static/avatar/avatar1.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="../../../../static/avatar/avatar1.png">
+        
+      
+    
+    <!-- title -->
+    <title>ISCTF2025 部分题WP</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
 
-<meta name="twitter:description" content="h3llo_w0rld">
+
+    <!-- Umami Analytics -->
 
 
-<!-- Theme Color -->
-<meta name="theme-color" content="#1d1f21">
-<meta name="msapplication-TileColor" content="#1d1f21">
-
-<!-- Stylesheets -->
-
+    <!-- styles -->
+    
 <link rel="stylesheet" href="../../../../css/style.css">
 
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
+</head>
 
-<!-- Custom Layout Variables -->
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="القائمة"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="القائمة"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="الأعلى" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="../../../../index.html">Startseite</a></li><!--
+     --><!--
+       --><li><a href="../../../../about/">Über diese Webseite</a></li><!--
+     --><!--
+       --><li><a href="../../../../archives/">Artikel</a></li><!--
+     --><!--
+       --><li><a href="../../../../tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="../../../../categories/">Kategorie</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/incldue">Projekte</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Vorheriger Beitrag" href="../../17/MysteryFile-WP%20by-debu8ger/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Nächster Beitrag" href="../../../11/07/Re%E7%BB%83%E4%B9%A0%E4%B9%8BASM%E6%B1%87%E7%BC%96%E9%80%86%E5%90%91/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Zurück zum Anfang" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Beitrag teilen" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Vorheriger Beitrag</span>
+      <span id="i-next" class="info" style="display:none;">Nächster Beitrag</span>
+      <span id="i-top" class="info" style="display:none;">Zurück zum Anfang</span>
+      <span id="i-share" class="info" style="display:none;">Beitrag teilen</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&text=ISCTF2025 部分题WP"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&is_video=false&description=ISCTF2025 部分题WP"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ISCTF2025 部分题WP&body=Check out this article: https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&name=ISCTF2025 部分题WP&description=这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:("><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&t=ISCTF2025 部分题WP"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<style>
-:root {
-  --page-width: 80rem;
-  --content-width: 950px;
-  --mobile-padding: 12px;
-}
-</style>
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SIGNIN"><span class="toc-number">1.</span> <span class="toc-text">SIGNIN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ez-Caesar"><span class="toc-number">1.1.</span> <span class="toc-text">Ez_Caesar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RC4%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">小蓝鲨的RC4系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-number">2.</span> <span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess%EF%BC%81"><span class="toc-number">2.1.</span> <span class="toc-text">Guess！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REVERSE"><span class="toc-number">3.</span> <span class="toc-text">REVERSE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ezzz-math"><span class="toc-number">3.1.</span> <span class="toc-text">ezzz_math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ezpy"><span class="toc-number">3.2.</span> <span class="toc-text">ezpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MysteriousStream"><span class="toc-number">3.3.</span> <span class="toc-text">MysteriousStream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRYPTO"><span class="toc-number">4.</span> <span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easy-RSA"><span class="toc-number">4.1.</span> <span class="toc-text">easy_RSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84LFSR%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.2.</span> <span class="toc-text">小蓝鲨的LFSR系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RSA%E5%AF%86%E6%96%87"><span class="toc-number">4.3.</span> <span class="toc-text">小蓝鲨的RSA密文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baby-math"><span class="toc-number">4.4.</span> <span class="toc-text">baby_math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84%E8%B4%B9%E9%A9%AC%E8%B0%9C%E9%A2%98"><span class="toc-number">4.5.</span> <span class="toc-text">小蓝鲨的费马谜题</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
 
-<!-- Analytics -->
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        ISCTF2025 部分题WP
+    </h1>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133464311-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-133464311-1');
-</script>
 
 
-<meta name="generator" content="Hexo 7.3.0"></head>
-<body class="theme-dark">
-  <div class="container">
-    <header class="header">
-  <div class="header-inner">
-    <div class="header-brand">
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">debu8ger</span>
+      </span>
       
-        <a href="../../../../index.html" class="logo">
-          <img src="../../../../static/avatar/avatar1.png"
-               width="100"
-               height="100"
-               alt="D&#39;b8Gr的小站~">
-        </a>
+    <div class="postdate">
       
-      <a href="../../../../index.html" class="site-title">
-        D&#39;b8Gr的小站~
-      </a>
+        <time datetime="2025-12-06T16:00:00.000Z" class="dt-published" itemprop="datePublished">2025-12-07</time>
+        
+        (Updated: <time datetime="2025-12-29T15:47:18.219Z" class="dt-updated" itemprop="dateModified">2025-12-29</time>)
+        
+      
     </div>
 
-    <nav class="nav">
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
 
-      <ul class="nav-menu" id="nav-menu">
-        
-          
-          
-            
-            <li class="nav-item">
-              <a href="../../../../index.html"
-                 class="nav-link"
-                 >
-                主页
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../about/"
-                 class="nav-link"
-                 >
-                关于我
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../archives/"
-                 class="nav-link"
-                 >
-                归档
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../atom.xml"
-                 class="nav-link"
-                 >
-                RSS
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../categories/"
-                 class="nav-link"
-                 >
-                分类
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../bookmarks/"
-                 class="nav-link"
-                 >
-                个人书签
-              </a>
-            </li>
-            
-          
-        
-      </ul>
-    </nav>
-  </div>
-</header>
-
-
-    <main class="main">
       
-        <div class="page-layout">
-          <article class="post">
-  <header class="post-header">
-  <h1 class="post-title">ISCTF2025 部分题WP</h1>
-
-  <div class="post-meta">
-    <span class="meta-item">
-      <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
-      <time datetime="2025-12-07">
-        2025-12-07
-      </time>
-    </span>
-
-    
-      <span class="meta-item">
-        <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>
-        <time datetime="2025-12-29">
-          Updated on 2025-12-29
-        </time>
-      </span>
-    
-
-    
-      <span class="meta-item">
-        <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-        
-          <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
-        
-      </span>
-    
-  </div>
-</header>
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
+    </div>
 
 
-  
-    <nav class="toc">
-  <h3 class="toc-title">Table of Contents</h3>
-  <div class="toc-list">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SIGNIN"><span class="toc-text">SIGNIN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ez-Caesar"><span class="toc-text">Ez_Caesar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RC4%E7%B3%BB%E7%BB%9F"><span class="toc-text">小蓝鲨的RC4系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess%EF%BC%81"><span class="toc-text">Guess！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REVERSE"><span class="toc-text">REVERSE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ezzz-math"><span class="toc-text">ezzz_math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ezpy"><span class="toc-text">ezpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MysteriousStream"><span class="toc-text">MysteriousStream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRYPTO"><span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easy-RSA"><span class="toc-text">easy_RSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84LFSR%E7%B3%BB%E7%BB%9F"><span class="toc-text">小蓝鲨的LFSR系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RSA%E5%AF%86%E6%96%87"><span class="toc-text">小蓝鲨的RSA密文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baby-math"><span class="toc-text">baby_math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84%E8%B4%B9%E9%A9%AC%E8%B0%9C%E9%A2%98"><span class="toc-text">小蓝鲨的费马谜题</span></a></li></ol></li></ol>
-  </div>
-</nav>
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" rel="tag">比赛个人WP</a>
+    </div>
 
+
+    </div>
+  </header>
   
 
-  <div class="post-content">
-  <h2 id="SIGNIN"><a href="#SIGNIN" class="headerlink" title="SIGNIN"></a>SIGNIN</h2><h3 id="Ez-Caesar"><a href="#Ez-Caesar" class="headerlink" title="Ez_Caesar"></a>Ez_Caesar</h3><hr>
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="SIGNIN"><a href="#SIGNIN" class="headerlink" title="SIGNIN"></a>SIGNIN</h2><h3 id="Ez-Caesar"><a href="#Ez-Caesar" class="headerlink" title="Ez_Caesar"></a>Ez_Caesar</h3><hr>
 <p>题目描述：小蓝鲨看你们牢底坐穿决定送你们一点分。</p>
 <hr>
 <p>下载附件：</p>
@@ -388,135 +335,151 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> gcd</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes, inverse</span><br><span class="line"></span><br><span class="line">path = <span class="string">&quot;D:\\task\\output.txt&quot;</span> </span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    txt = f.read()</span><br><span class="line"></span><br><span class="line">m_n = re.search(<span class="string">r&quot;n\s*=\s*([0-9]+)&quot;</span>, txt)</span><br><span class="line">m_e = re.search(<span class="string">r&quot;e\s*=\s*([0-9]+)&quot;</span>, txt)</span><br><span class="line">m_c = re.search(<span class="string">r&quot;c\s*=\s*([0-9]+)&quot;</span>, txt)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (m_n <span class="keyword">and</span> m_e <span class="keyword">and</span> m_c):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;未能从文件中读取 n/e/c，请确认输出格式与样例一致。&quot;</span>)</span><br><span class="line">    <span class="keyword">raise</span> SystemExit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">int</span>(m_n.group(<span class="number">1</span>))</span><br><span class="line">e = <span class="built_in">int</span>(m_e.group(<span class="number">1</span>))</span><br><span class="line">c = <span class="built_in">int</span>(m_c.group(<span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Loaded n,e,c&quot;</span>)</span><br><span class="line"></span><br><span class="line">hint_tuples = re.findall(<span class="string">r&quot;Hint\s*\d+:\s*(\d+),\s*(\d+),\s*([0-9]+)&quot;</span>, txt)</span><br><span class="line">hints = [(<span class="built_in">int</span>(a), <span class="built_in">int</span>(b), <span class="built_in">int</span>(val)) <span class="keyword">for</span> (a,b,val) <span class="keyword">in</span> hint_tuples]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Loaded&quot;</span>, <span class="built_in">len</span>(hints), <span class="string">&quot;hints&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">groups1 = defaultdict(<span class="built_in">list</span>)</span><br><span class="line">groups2 = defaultdict(<span class="built_in">list</span>)</span><br><span class="line"><span class="keyword">for</span> idx, (a,b,val) <span class="keyword">in</span> <span class="built_in">enumerate</span>(hints, start=<span class="number">1</span>):</span><br><span class="line">    groups1[a].append((idx,a,b,val))</span><br><span class="line">    groups2[b].append((idx,a,b,val))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">try_pairs</span>(<span class="params">pairs</span>):</span><br><span class="line">    results = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(pairs)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>, <span class="built_in">len</span>(pairs)):</span><br><span class="line">            idx1,a1,b1,H1 = pairs[i]</span><br><span class="line">            idx2,a2,b2,H2 = pairs[j]</span><br><span class="line">            delta = (H1 - H2) % n</span><br><span class="line">            g = gcd(delta, n)</span><br><span class="line">            <span class="keyword">if</span> <span class="number">1</span> &lt; g &lt; n:</span><br><span class="line">                results.append((idx1, a1,b1, idx2, a2,b2, g))</span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line">found = []</span><br><span class="line"><span class="keyword">for</span> a, items <span class="keyword">in</span> groups1.items():</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(items) &gt;= <span class="number">2</span>:</span><br><span class="line">        res = try_pairs(items)</span><br><span class="line">        <span class="keyword">if</span> res:</span><br><span class="line">            found.extend(res)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> found:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Found factor(s) by matching same base1:&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> found:</span><br><span class="line">        <span class="built_in">print</span>(it)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No factor found by matching same base1. Trying same base2...&quot;</span>)</span><br><span class="line">    found2 = []</span><br><span class="line">    <span class="keyword">for</span> b, items <span class="keyword">in</span> groups2.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(items) &gt;= <span class="number">2</span>:</span><br><span class="line">            res = try_pairs(items)</span><br><span class="line">            <span class="keyword">if</span> res:</span><br><span class="line">                found2.extend(res)</span><br><span class="line">    <span class="keyword">if</span> found2:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Found factor(s) by matching same base2:&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> it <span class="keyword">in</span> found2:</span><br><span class="line">            <span class="built_in">print</span>(it)</span><br><span class="line">        found = found2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> found:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No factor found by same-base heuristics. Scanning all pairs (this may take some seconds)...&quot;</span>)</span><br><span class="line">    all_pairs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(hints)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>, <span class="built_in">len</span>(hints)):</span><br><span class="line">            a1,b1,H1 = hints[i]</span><br><span class="line">            a2,b2,H2 = hints[j]</span><br><span class="line">            delta = (H1 - H2) % n</span><br><span class="line">            g = gcd(delta, n)</span><br><span class="line">            <span class="keyword">if</span> <span class="number">1</span> &lt; g &lt; n:</span><br><span class="line">                all_pairs.append((i+<span class="number">1</span>,a1,b1,j+<span class="number">1</span>,a2,b2,g))</span><br><span class="line">    <span class="keyword">if</span> all_pairs:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Found by scanning all pairs:&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> it <span class="keyword">in</span> all_pairs:</span><br><span class="line">            <span class="built_in">print</span>(it)</span><br><span class="line">        found = all_pairs</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;每个 base1 的 hint 数量：&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> a, items <span class="keyword">in</span> <span class="built_in">sorted</span>(groups1.items()):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;base1 =&quot;</span>, a, <span class="string">&quot;count =&quot;</span>, <span class="built_in">len</span>(items))</span><br><span class="line">        <span class="keyword">raise</span> SystemExit(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">g = found[<span class="number">0</span>][-<span class="number">1</span>]</span><br><span class="line">p = <span class="built_in">int</span>(g)</span><br><span class="line"><span class="keyword">if</span> n % p != <span class="number">0</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;警告: gcd 没能整除n:&quot;</span>, p)</span><br><span class="line">    <span class="keyword">raise</span> SystemExit(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">q = n // p</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\nRecovered p =&quot;</span>, p)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Recovered q =&quot;</span>, q)</span><br><span class="line"></span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = inverse(e, phi)</span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    flag = long_to_bytes(m)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;\nflag (bytes):&quot;</span>, flag)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;flag (utf-8):&quot;</span>, flag.decode())</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;转换为 bytes 失败，m 的值:&quot;</span>, m)</span><br><span class="line">    <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># flag: ISCTF&#123;M0dIFi3D_f3RM47_7H30r3m_I5_fUn_8U7_h4rD3r!&#125;</span></span><br></pre></td></tr></table></figure>
 
 <!--more-->
-</div>
-
-
-  <footer class="post-footer">
-  
-    <div class="post-categories">
-      <span class="meta-label">Categories: </span>
-      
-        <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/" class="category">CTF相关</a>
-      
-    </div>
-  
-  
-    <div class="post-tags">
-      <span class="meta-label">Tags: </span>
-      
-        <a href="../../../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/" class="tag">比赛个人WP</a>
-      
-    </div>
-  
-</footer>
-
-
-  
-<nav class="post-nav">
-  
-    <div class="post-nav-item prev">
-      <span class="post-nav-label">&larr; Prev</span>
-      <a href="../../17/MysteryFile-WP%20by-debu8ger/" class="post-nav-title">
-        MysteryFile-WP by Debu8ger
-      </a>
-    </div>
-  
-
-  
-    <div class="post-nav-item next">
-      <span class="post-nav-label">Next &rarr;</span>
-      <a href="../../../11/07/Re%E7%BB%83%E4%B9%A0%E4%B9%8BASM%E6%B1%87%E7%BC%96%E9%80%86%E5%90%91/" class="post-nav-title">
-        Re练习之ASM汇编逆向
-      </a>
-    </div>
-  
-</nav>
-
-
-
-  
+  </div>
 </article>
 
-        </div>
-      
-    </main>
 
-    <footer class="footer">
-  <div class="footer-content">
-    <div class="footer-left">
-      
-      <span class="copyright">
-        &copy; 2024 - 2026 debu8ger
-      </span>
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="../../../../index.html">Startseite</a></li>
+        
+          <li><a href="../../../../about/">Über diese Webseite</a></li>
+        
+          <li><a href="../../../../archives/">Artikel</a></li>
+        
+          <li><a href="../../../../tags/">Tag</a></li>
+        
+          <li><a href="../../../../categories/">Kategorie</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/incldue">Projekte</a></li>
+        
+      </ul>
     </div>
 
-    <div class="footer-right">
-      
-        <span class="powered">
-          Powered by Hexo <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
-        </span>
-      
-      
-        <span class="theme-info">
-          Theme <a href="https://github.com/WinMin/hexo-theme-Bloom" target="_blank" rel="noopener">Bloom</a>
-        </span>
-      
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SIGNIN"><span class="toc-number">1.</span> <span class="toc-text">SIGNIN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ez-Caesar"><span class="toc-number">1.1.</span> <span class="toc-text">Ez_Caesar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RC4%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">小蓝鲨的RC4系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-number">2.</span> <span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Guess%EF%BC%81"><span class="toc-number">2.1.</span> <span class="toc-text">Guess！</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REVERSE"><span class="toc-number">3.</span> <span class="toc-text">REVERSE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ezzz-math"><span class="toc-number">3.1.</span> <span class="toc-text">ezzz_math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ezpy"><span class="toc-number">3.2.</span> <span class="toc-text">ezpy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MysteriousStream"><span class="toc-number">3.3.</span> <span class="toc-text">MysteriousStream</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRYPTO"><span class="toc-number">4.</span> <span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#easy-RSA"><span class="toc-number">4.1.</span> <span class="toc-text">easy_RSA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84LFSR%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.2.</span> <span class="toc-text">小蓝鲨的LFSR系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RSA%E5%AF%86%E6%96%87"><span class="toc-number">4.3.</span> <span class="toc-text">小蓝鲨的RSA密文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baby-math"><span class="toc-number">4.4.</span> <span class="toc-text">baby_math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84%E8%B4%B9%E9%A9%AC%E8%B0%9C%E9%A2%98"><span class="toc-number">4.5.</span> <span class="toc-text">小蓝鲨的费马谜题</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&text=ISCTF2025 部分题WP"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&is_video=false&description=ISCTF2025 部分题WP"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ISCTF2025 部分题WP&body=Check out this article: https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&title=ISCTF2025 部分题WP"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&name=ISCTF2025 部分题WP&description=这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:("><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://incldue.github.io/2025/12/07/ISCTF2025%20%E9%83%A8%E5%88%86%E9%A2%98WP/&t=ISCTF2025 部分题WP"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menü</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Teilen</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Nach oben</a>
+    </div>
+
   </div>
+</div>
 
-  
-    <div class="footer-social">
-      
-        <a href="https://github.com/incldue" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        </a>
-      
-      
-        <a href="https://x.com/JonathanHu70782" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-      
-      
-      
-        <a href="mailto:52463398@outlook.com" class="social-link" aria-label="Email">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
-      
-      
-        <a href="../../../../atom.xml" class="social-link" aria-label="RSS">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
-        </a>
-      
-    </div>
-  
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024-2026
+    debu8ger
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="../../../../index.html">Startseite</a></li><!--
+     --><!--
+       --><li><a href="../../../../about/">Über diese Webseite</a></li><!--
+     --><!--
+       --><li><a href="../../../../archives/">Artikel</a></li><!--
+     --><!--
+       --><li><a href="../../../../tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="../../../../categories/">Kategorie</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/incldue">Projekte</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-  </div>
+    </div>
+    <!-- styles -->
 
-  <!-- Main Script -->
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"In die Zwischenablage kopiert!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Kopiert!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 
 <script src="../../../../js/main.js"></script>
 
-
-<!-- Search -->
-
-
-<script src="../../../../js/search.js"></script>
-
-
+<!-- search -->
 
 <!-- Baidu Analytics -->
 
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?2e6da3c375c8a87f5b664cea6d4cb29c";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
 
 </body>
 </html>
