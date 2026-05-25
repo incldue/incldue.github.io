@@ -1,250 +1,113 @@
-/* main function */
-import initBookmarkNav from "./layouts/bookmarkNav.js";
-import initCategoryList from "./layouts/categoryList.js";
-import initEssays from "./layouts/essays.js";
-import initHomeBanner from "./layouts/homeBanner.js";
-import initLazyLoad from "./layouts/lazyload.js";
-import { initTOC } from "./layouts/toc.js";
-import { navbarShrink } from "./layouts/navbarShrink.js";
-import initMasonry from "./plugins/masonry.js";
-import initMermaid from "./plugins/mermaid.js";
-import initPangu from "./plugins/pangu.js";
-import initTabs from "./plugins/tabs.js";
-import initTyped from "./plugins/typed.js";
-import initCopyCode from "./tools/codeBlock.js";
-import initExpirationDate from "./tools/expirationDate.js";
-import initModeToggle from "./tools/lightDarkSwitch.js";
-import {
-  initLocalSearchGlobals,
-  initLocalSearchPage,
-} from "./tools/localSearch.js";
-import initFooterRuntime from "./tools/runtime.js";
-import initScrollTopBottom from "./tools/scrollTopBottom.js";
-import initImageViewer from "./tools/imageViewer.js";
-import { initTocToggle } from "./tools/tocToggle.js";
-import { initUtilsGlobals, initUtilsPage } from "./utils.js";
-import {
-  onBeforeContentReplace,
-  onPageView,
-  onReady,
-  onVisitStart,
-} from "./app/lifecycle.js";
-import { abortPageScope, createPageScope, getAppSignal } from "./app/pageScope.js";
-import {
-  getStyleStatus,
-  setStyleStatus,
-  styleStatus,
-} from "./state/styleStatus.js";
-
-const safeRun = (label, callback) => {
-  try {
-    callback();
-  } catch (error) {
-    console.error(`[redefine] ${label} failed:`, error);
-  }
-};
-
-const pageRefreshEvent = "redefine:page:refresh";
-let globalsInitialized = false;
-let didInitRefreshEvent = false;
-
-const initGlobalsOnce = () => {
-  if (globalsInitialized) {
-    return;
-  }
-
-  globalsInitialized = true;
-  const appSignal = getAppSignal();
-
-  safeRun("utils:globals", () => {
-    initUtilsGlobals({ signal: appSignal });
-  });
-  safeRun("navbar:globals", () => {
-    navbarShrink.initGlobals({ signal: appSignal });
-  });
-  safeRun("tocToggle:globals", () => {
-    initTocToggle({ signal: appSignal });
-  });
-  safeRun("scrollTopBottom:globals", () => {
-    initScrollTopBottom({ signal: appSignal });
-  });
-  safeRun("tabs:globals", () => {
-    initTabs({ signal: appSignal });
-  });
-  safeRun("categoryList:globals", () => {
-    initCategoryList({ signal: appSignal });
-  });
-  safeRun("localSearch:globals", () => {
-    initLocalSearchGlobals({ signal: appSignal });
-  });
-
-  if (!didInitRefreshEvent) {
-    didInitRefreshEvent = true;
-    window.addEventListener(pageRefreshEvent, () => {
-      initPage();
-    });
-  }
-};
-
-const initPage = () => {
-  const pageSignal = createPageScope();
-  const appSignal = getAppSignal();
-
-  safeRun("utils:page", () => {
-    initUtilsPage({ signal: pageSignal });
-  });
-  safeRun("homeBanner", () => {
-    initHomeBanner({ signal: pageSignal });
-  });
-  safeRun("expirationDate", () => {
-    initExpirationDate();
-  });
-  safeRun("modeToggle", () => {
-    initModeToggle({ signal: pageSignal, appSignal });
-  });
-  safeRun("imageViewer", () => {
-    initImageViewer({ signal: pageSignal, appSignal });
-  });
-
-  navbarShrink.setNavigating(false);
-  navbarShrink.refresh();
-
-  safeRun("footerRuntime", () => {
-    if (theme.footer?.runtime) {
-      initFooterRuntime();
-    }
-  });
-
-  safeRun("toc", () => {
-    if (theme.articles?.toc?.enable) {
-      initTOC({ signal: appSignal });
-    }
-  });
-
-  safeRun("tabs", () => {
-    if (theme.articles?.toc?.enable) {
-      initTabs({ signal: appSignal });
-    }
-  });
-
-  safeRun("essays", () => {
-    if (typeof moment !== "undefined") {
-      initEssays();
-    }
-  });
-
-  safeRun("pangu", () => {
-    if (theme.articles?.pangu_js) {
-      initPangu();
-    }
-  });
-
-  safeRun("mermaid", () => {
-    if (theme.plugins?.mermaid?.enable) {
-      initMermaid();
-    }
-  });
-
-  safeRun("masonry", () => {
-    initMasonry({ signal: pageSignal });
-  });
-
-  safeRun("typed", () => {
-    const subtitleConfig = theme.home_banner?.subtitle || {};
-    const subtitleText = subtitleConfig.text;
-    const subtitleEntries = Array.isArray(subtitleText)
-      ? subtitleText
-      : subtitleText
-        ? [subtitleText]
-        : [];
-    const shouldInitTyped =
-      subtitleEntries.length !== 0 ||
-      (subtitleConfig.hitokoto && subtitleConfig.hitokoto.enable);
-
-    if (shouldInitTyped && location.pathname === config.root) {
-      initTyped("subtitle");
-    }
-  });
-
-  safeRun("localSearch", () => {
-    if (theme.navbar?.search?.enable === true) {
-      initLocalSearchPage();
-    }
-  });
-
-  safeRun("copyCode", () => {
-    if (theme.articles?.code_block?.copy === true) {
-      initCopyCode();
-    }
-  });
-
-  safeRun("lazyload", () => {
-    if (theme.articles?.lazyload === true) {
-      initLazyLoad();
-    }
-  });
-
-  safeRun("bookmarkNav", () => {
-    if (theme.bookmarks && theme.bookmarks.length !== 0) {
-      initBookmarkNav({ signal: appSignal });
-    }
-  });
-
-  safeRun("categoryList", () => {
-    initCategoryList();
-  });
-};
-
-const teardownPage = () => {
-  abortPageScope();
-};
-
-export const main = {
-  themeInfo: {
-    theme: `Redefine v${theme.version}`,
-    author: "EvanNotFound",
-    repository: "https://github.com/EvanNotFound/hexo-theme-redefine",
-  },
-  styleStatus,
-  getStyleStatus,
-  setStyleStatus,
-  printThemeInfo: () => {
-    console.log(`
-  +======================================================================================+
-  |                                                                                      |
-  |    _____ _   _ _____ __  __ _____   ____  _____ ____  _____ _____ ___ _   _ _____    |
-  |   |_   _| | | | ____|  \\/  | ____| |  _ \\| ____|  _ \\| ____|  ___|_ _| \\ | | ____|   |
-  |     | | | |_| |  _| | |\\/| |  _|   | |_) |  _| | | | |  _| | |_   | ||  \\| |  _|     |
-  |     | | |  _  | |___| |  | | |___  |  _ <| |___| |_| | |___|  _|  | || |\\  | |___    |
-  |     |_| |_| |_|_____|_|  |_|_____| |_| \\_\\_____|____/|_____|_|   |___|_| \\_|_____|   |
-  |                                                                                      |
-  |                  https://github.com/EvanNotFound/hexo-theme-redefine                 |
-  +======================================================================================+
-                  `,
-    ); // console log message
-  },
-  refresh: () => {
-    initPage();
-  },
-};
-
-export function initMain() {
-  main.printThemeInfo();
+/**
+ * Sets up Justified Gallery.
+ */
+if (!!$.prototype.justifiedGallery) {
+  var options = {
+    rowHeight: 140,
+    margins: 4,
+    lastRow: "justify"
+  };
+  $(".article-gallery").justifiedGallery(options);
 }
 
-onReady(() => {
-  initMain();
-  initGlobalsOnce();
-});
+$(document).ready(function() {
 
-onPageView(() => {
-  initPage();
-});
+  /**
+   * Shows the responsive navigation menu on mobile.
+   */
+  $("#header > #nav > ul > .icon").click(function() {
+    $("#header > #nav > ul").toggleClass("responsive");
+  });
 
-onBeforeContentReplace(() => {
-  teardownPage();
-});
 
-onVisitStart(() => {
-  navbarShrink.setNavigating(true);
+  /**
+   * Controls the different versions of  the menu in blog post articles 
+   * for Desktop, tablet and mobile.
+   */
+  if ($(".post").length) {
+    var menu = $("#menu");
+    var nav = $("#menu > #nav");
+    var menuIcon = $("#menu-icon, #menu-icon-tablet");
+
+    /**
+     * Display the menu on hi-res laptops and desktops.
+     */
+    if ($(document).width() >= 1440) {
+      menu.show();
+      menuIcon.addClass("active");
+    }
+
+    /**
+     * Display the menu if the menu icon is clicked.
+     */
+    menuIcon.click(function() {
+      if (menu.is(":hidden")) {
+        menu.show();
+        menuIcon.addClass("active");
+      } else {
+        menu.hide();
+        menuIcon.removeClass("active");
+      }
+      return false;
+    });
+
+    /**
+     * Add a scroll listener to the menu to hide/show the navigation links.
+     */
+    if (menu.length) {
+      $(window).on("scroll", function() {
+        var topDistance = menu.offset().top;
+
+        // hide only the navigation links on desktop
+        if (!nav.is(":visible") && topDistance < 50) {
+          nav.show();
+        } else if (nav.is(":visible") && topDistance > 100) {
+          nav.hide();
+        }
+
+        // on tablet, hide the navigation icon as well and show a "scroll to top
+        // icon" instead
+        if ( ! $( "#menu-icon" ).is(":visible") && topDistance < 50 ) {
+          $("#menu-icon-tablet").show();
+          $("#top-icon-tablet").hide();
+        } else if (! $( "#menu-icon" ).is(":visible") && topDistance > 100) {
+          $("#menu-icon-tablet").hide();
+          $("#top-icon-tablet").show();
+        }
+      });
+    }
+
+    /**
+     * Show mobile navigation menu after scrolling upwards,
+     * hide it again after scrolling downwards.
+     */
+    if ($( "#footer-post").length) {
+      var lastScrollTop = 0;
+      $(window).on("scroll", function() {
+        var topDistance = $(window).scrollTop();
+
+        if (topDistance > lastScrollTop){
+          // downscroll -> show menu
+          $("#footer-post").hide();
+        } else {
+          // upscroll -> hide menu
+          $("#footer-post").show();
+        }
+        lastScrollTop = topDistance;
+
+        // close all submenu"s on scroll
+        $("#nav-footer").hide();
+        $("#toc-footer").hide();
+        $("#share-footer").hide();
+
+        // show a "navigation" icon when close to the top of the page, 
+        // otherwise show a "scroll to the top" icon
+        if (topDistance < 50) {
+          $("#actions-footer > #top").hide();
+        } else if (topDistance > 100) {
+          $("#actions-footer > #top").show();
+        }
+      });
+    }
+  }
 });
