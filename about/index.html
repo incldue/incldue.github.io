@@ -79,12 +79,6 @@
 			
 				<li><a href="../archives" >归档</a></li>
 			
-				<li><a href="../categories" >分类</a></li>
-			
-				<li><a href="../tags" >标签</a></li>
-			
-				<li><a href="../bookmarks" >个人书签</a></li>
-			
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -178,12 +172,6 @@
 			
 				
 			
-				
-			
-				
-			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -228,18 +216,12 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 70%">
+				<ul style="width: 50%">
 				
 				
-					<li style="width: 20%"><a href="../index.html">主页</a></li>
+					<li style="width: 50%"><a href="../index.html">主页</a></li>
 		        
-					<li style="width: 20%"><a href="../archives">归档</a></li>
-		        
-					<li style="width: 20%"><a href="../categories">分类</a></li>
-		        
-					<li style="width: 20%"><a href="../tags">标签</a></li>
-		        
-					<li style="width: 20%"><a href="../bookmarks">个人书签</a></li>
+					<li style="width: 50%"><a href="../archives">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -317,7 +299,7 @@
 <h3 id="关于爱好"><a href="#关于爱好" class="headerlink" title="关于爱好"></a>关于爱好</h3><p>热爱<code>跑步</code>，尤其喜欢<code>CTF</code>、<code>健身</code>、<code>听歌</code>、<code>电影</code>、<code>旅行</code>。</p>
 <h3 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h3><ul>
 <li>Blog: <a href="https://incldue.github.io/">D’b8Gr的小站~</a></li>
-<li>Email: <a href="mailto:&#x68;&#x35;&#x32;&#52;&#x36;&#51;&#x33;&#x39;&#x38;&#x40;&#x6f;&#x75;&#x74;&#108;&#x6f;&#111;&#x6b;&#46;&#99;&#x6f;&#x6d;">h52463398@outlook.com</a></li>
+<li>Email: <a href="mailto:&#x68;&#53;&#50;&#52;&#x36;&#x33;&#x33;&#57;&#x38;&#x40;&#x6f;&#117;&#116;&#108;&#111;&#x6f;&#107;&#x2e;&#99;&#x6f;&#x6d;">h52463398@outlook.com</a></li>
 <li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/incldue">debu8ger</a></li>
 <li>Twitter: <a target="_blank" rel="noopener" href="https://x.com/JonathanHu70782">debu8ger</a></li>
 </ul>
@@ -561,11 +543,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">比赛个人WP</a>
+                <a href="javascript:void(0)" class="js-tag color5">编程学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编程学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">CTF知识分享</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,7 +555,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF知识分享</a>
+                <a href="javascript:void(0)" class="js-tag color2">比赛个人WP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,11 +583,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">哲思</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透测试</a>
+                <a href="javascript:void(0)" class="js-tag color3">哲思</a>
               </li>
             
             <div class="clearfix"></div>
@@ -773,6 +755,56 @@
   
   <!-- <script async type="text/javascript" size="90" alpha="0.2" zIndex="0" src="../plugins/ribbon.js/ribbon.min.js"></script> -->
   
+  
+    <script type="text/javascript" src="../plugins/live2d-widget.js/L2Dwidget.min.js"></script>
+<script type="text/javascript">
+  /**
+   * 完整配置请参考：https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init
+   */
+  var pluginModelPath = "assets/", // 模型的文件路径，无需更改
+    pluginRootPath = "../live2d_models/"; // 插件的路径，无需更改
+  //特定的模型json文件名称
+  var modelPathJson = {
+    "epsilon2_1": "Epsilon2.1",
+    "gf": "Gantzert_Felixander",
+    "haru/01": "haru01",
+    "haru/02": "haru02",
+    "nietzsche": "nietzche"
+  }
+
+  
+    var modelName = "hibiki";
+  
+
+  var modelJsonPath = "";
+  if (modelPathJson[modelName]) {
+    modelJsonPath = pluginRootPath + modelName + "/" + pluginModelPath + modelPathJson[modelName] +
+      ".model.json";
+  } else {
+    modelJsonPath = pluginRootPath + modelName + "/" + pluginModelPath + modelName + ".model.json";
+  }
+  L2Dwidget.init({
+    model: {
+      jsonPath: modelJsonPath
+    },
+    display: {
+       position: "right", 
+       width: 145, 
+       height: 315, 
+       hOffset: 50, 
+      
+    },
+    mobile: {
+       show: false, 
+       scale: 0.6 
+    },
+    react: {
+       opacity: 0.8 
+    }
+  })
+
+</script>
+
   
   
 </body>
