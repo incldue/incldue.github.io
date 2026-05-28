@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>渗透测试01 | D&#39;b8Gr的小站~</title>
+  <meta name="author" content="debu8ger">
+  
+  <meta name="description" content="h3llo_w0rld">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="渗透测试01"/>
+  <meta property="og:site_name" content="D&#39;b8Gr的小站~"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="D&#39;b8Gr的小站~" type="application/atom+xml">
+  
+  
+    <link href="//static/avatar/avatar.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">D&#39;b8Gr的小站~</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="所有文章">
+			  <i class="fa fa-archive"></i>归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="所有分类">
+			  <i class="fa fa-folder"></i>分类
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="所有标签">
+			  <i class="fa fa-tags"></i>标签
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class="fa fa-rss"></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 渗透测试01</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="渗透测试01"><a href="#渗透测试01" class="headerlink" title="渗透测试01"></a>渗透测试01</h2><h3 id="0x0-介绍"><a href="#0x0-介绍" class="headerlink" title="0x0.介绍"></a>0x0.介绍</h3><ol>
+<li><strong>渗透测试</strong>就是一种通过模拟恶意攻击者的技术&amp;方法，挫败目标系统安全控制措施、取得访问控制权、同时发现具备业务影响后果安全隐患的<strong>安全测试与评估方式</strong>。</li>
+<li>其一般需要对系统进行目标系统进行主动探测分析，以发现潜在的系统漏洞（包括不恰当的系统配置、已知或未知的软件硬件漏洞，以及在安全计划与响应过程中的操作性弱点…）</li>
+</ol>
+<h3 id="0x1-分类"><a href="#0x1-分类" class="headerlink" title="0x1.分类"></a>0x1.分类</h3><ol>
+<li><p><strong>黑盒测试</strong>（外部测试），设计为模拟一个对客户组织一无所知的攻击者所进行的渗透测试。</p>
+<p>a.采用该方式时，渗透测试人员将从一个<strong>远程网络位置</strong>来评估目标网络基础设施。值得注意的是，他们并没有任何目标网络内部拓扑等相关信息，即完全模拟外部攻击者，采用流行的攻击技术&amp;工具对目标组织进行逐步的<strong>渗透与入侵</strong>，揭示目标网络中的已知&#x2F;未知安全漏洞，并评估这些漏洞是否能被利用来<strong>获取控制权&#x2F;造成相关业务资产的损失</strong>。</p>
+<p>b.黑盒测试比较费时费力，同时也需要具备<strong>较高的技术能力</strong>。因此，也更受推崇。</p>
+</li>
+<li><p><strong>白盒测试</strong>（内部测试），设计为人员在拥有客户组织所有知识的情况下所进行的渗透测试。</p>
+<p>a.采用该方法时，渗透测试人员可以了解到关于目标环境的所以内部&amp;底层知识 &#x3D;&gt; 以最小代价发现&amp;验证系统中最严重的安全漏洞。</p>
+<p>b.白盒测试<strong>无需进行目标定位与情报搜集</strong>（在CTF中，一般是进行黑盒测试）；同时，其能够更加方便地在一次常规开发&amp;部署计划周期中集成，避免被入侵者发现利用可能存在的安全漏洞。</p>
+<p>c.其<strong>无法有效测试客户组织的应急响应程序</strong>。</p>
+</li>
+<li><p><strong>灰盒测试</strong>（白+黑的组合）</p>
+<p>a.灰盒测试需要渗透测试人员能够根据对目标系统所掌握的有限知识与信息，来评估整体安全性的<strong>最佳途径</strong>。</p>
+<p>b.简单来说，结合了黑盒测试&amp;白盒测试的各自优点。</p>
+</li>
+</ol>
+<h3 id="0x2-渗透测试阶段"><a href="#0x2-渗透测试阶段" class="headerlink" title="0x2.渗透测试阶段"></a>0x2.渗透测试阶段</h3><ol>
+<li><p><strong>前期交互</strong>：确定渗透测试的范围、目标、限制条件以及业务目标…</p>
+</li>
+<li><p><strong>情报搜集</strong>（白盒测试无）：获取更多关于目标组织<strong>网络拓扑、系统配置与安全防御措施</strong>的信息</p>
+<p>a.可以使用的方法包括公开来源信息查询、Google Hacking、社会工程学（社工，哈哈）、网络踩点、扫描探测（类似于嗅探）、被动监听、服务查点…</p>
+</li>
+<li><p><strong>威胁建模</strong>：通过共同的缜密情报分析&amp;攻击思路brainstorm，可以确定最可行的攻击通道。</p>
+</li>
+<li><p><strong>漏洞分析</strong>（如何root&#x2F;提权）：综合分析+找出攻击点+验证</p>
+</li>
+<li><p><strong>渗透攻击</strong>（真正提权）：考虑系统特性+挫败防御措施（+考虑检测机制的逃逸–黑盒）</p>
+</li>
+<li><p><strong>后渗透攻击</strong>：根据目标组织不同特点，自主设计攻击目标+寻找最具价值的信息&amp;资产，达成攻击途径。</p>
+</li>
+</ol>
+<h3 id="0x3-安全漏洞生命周期"><a href="#0x3-安全漏洞生命周期" class="headerlink" title="0x3.安全漏洞生命周期"></a>0x3.安全漏洞生命周期</h3><ol start="0">
+<li>利用安全漏洞来造成入侵&#x2F;破坏效果的程序为<em><strong>渗透代码（EXP–CTF中的老朋友了啊）</strong></em>。</li>
+<li><strong>安全漏洞研究&amp;挖掘</strong>：主要利用源代码审计（白盒测试）+逆向工程（灰盒测试）+Fuzz测试（黑盒测试）等方法，挖掘可用漏洞。</li>
+<li><strong>渗透代码开发与测试</strong>：黑客们会开发概念验证性的渗透代码 &#x3D;&gt; <em><strong>POC</strong></em>，用于验证漏洞是否存在。</li>
+<li><strong>安全漏洞&amp;渗透代码在团队内流传</strong>：“白帽”会通知厂商修补，后者给出补丁后再发布；“黑帽”以及“灰帽”则会各自进行秘密共享，以充分利用其所带来的攻击价值。</li>
+<li><strong>安全漏洞&amp;渗透代码开始扩散</strong>：安全漏洞和渗透代码最终被披露出来，在互联网上得以发布。</li>
+<li><strong>恶意程序出现+传播</strong>：“黑帽”在掌握安全漏洞&amp;渗透代码的基础上，进一步开发更易使用、更具有自动化传播能力的恶意程序，并通过社区、组织、互联网传播，进而快速扩散。</li>
+<li><strong>渗透代码&#x2F;恶意程序大规模扩散，造成危害</strong>：厂商发布补丁和安全警报让更多黑客了解，从而加以利用。</li>
+<li><strong>渗透代码&#x2F;攻击工具&#x2F;恶意程序&#x3D;&gt;消亡</strong>：检测&amp;移除机制得到广泛使用。</li>
+</ol>
+<blockquote>
+<p>[!IMPORTANT]</p>
+<p>1.<strong>Patch</strong>为补丁；</p>
+<p>2.从安全漏洞被发现到厂商发布Patch用于修补该漏洞之前的这段期间，称为<em><strong>0day</strong></em>；</p>
+<p>3.在这段时间里，黑客攻击存有“0day”漏洞的目标可达到100%成功率，同时也可以躲避检测，因此“0day”和对应的渗透代码对与黑客社区有很高价值。</p>
+</blockquote>
+<h3 id="0x4-安全漏洞资源库"><a href="#0x4-安全漏洞资源库" class="headerlink" title="0x4.安全漏洞资源库"></a>0x4.安全漏洞资源库</h3><p>国内：</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cnnvd.org.cn/">CNNVD</a></strong>:中国国家漏洞库</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cnvd.org.cn/">CNVD</a></strong>:中国国家信息安全漏洞共享平台</li>
+</ul>
+<p>国外：</p>
+<ul>
+<li><strong>CVE（通用漏洞与披露）</strong>：已成为安全漏洞命名索引的业界事实标准</li>
+<li><strong>NVD</strong>：国家漏洞数据库，是美国政府官方根据NIST的SCAP标准协议所描述的安全漏洞管理信息库</li>
+<li><strong>SecurityFocus</strong>：起源于Bugtraq邮件列表。</li>
+<li><strong>OSVDB</strong>：开源漏洞数据库，一个独立、开源的安全漏洞信息库</li>
+</ul>
+<!--more-->
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	
+		 <span  data-path="" >
+			<em class="post-meta-item-text"> Page View   <i class="waline-pageview-count"></i></em>
+		</span>
+
+	  
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2025/07/18/汇编学习01（X86）/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2025/06/11/SRC挖洞01--信息收集_1/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+-->
+	
+	
+		<section id="comments" class="comments">
+			<link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v2/dist/waline.css"
+  />
+  <div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+    var walineConfig = {"enable":true,"serverURL":"https://waline-pi-blue-88.vercel.app/","pageview":true,"lang":"en","dark":true,"requiredMeta":["nick","mail"],"locale":{"placeholder":"Comment with Email address will get notification when replied"}}
+    walineConfig.el='#waline';
+    init(walineConfig);
+  </script>
+
+		</section>
+	
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2025-06-13 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/安全相关/">安全相关<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/渗透测试/">渗透测试<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2026 debu8ger's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.json";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
