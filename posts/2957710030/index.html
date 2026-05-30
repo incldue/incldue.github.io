@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>
+        
+            Re练习之ASM汇编逆向
+        
+    </title>
+    <link rel="shortcut icon" href="#"/>
+
+    <link type="text/css" rel="stylesheet" href="/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSerifSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="/font/Roboto.css">
+    <link type="text/css" rel="stylesheet" href="/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="/css/base.css">
+    <link type="text/css" rel="stylesheet" href="/css/code.css">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
+</head>
+<body>
+    <a id="cover"></a>
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
+<div id="header" class="header">
+    <div class="vertical">
+        <div class="inner">
+            
+                <h1 class="header-subtitle">Re练习之ASM汇编逆向</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-11-07
+                        </span>
+                        
+                            
+                                <span>
+                                    <i class="iconfont icon-browse"></i> 阅读：<span class="waline-pageview-count" data-path="/posts/2957710030/"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="waline-comment-count" data-path="/posts/2957710030/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                        
+                            <span class="category-color">CTF相关</span>
+                        
+                    
+                    
+                        
+                            <span class="tag-color">CTF知识分享</span>
+                        
+                            <span class="tag-color">日常练习</span>
+                        
+                            <span class="tag-color">Reverse</span>
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+    
+</div>
+<div id="container">
+    
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>以一个耳熟能详的<code>Hello World</code>程序切入：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv [])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, world!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>gcc</code>编译为<code>ASM</code>形式并输出得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    .section .rodata</span><br><span class="line">.LC0:</span><br><span class="line">    .string &quot;Hello, world!&quot;</span><br><span class="line">    .text</span><br><span class="line">    .globl   main</span><br><span class="line">    .type    main, @function</span><br><span class="line">main:</span><br><span class="line">    push     rbp</span><br><span class="line">    mov      rbp, rsp</span><br><span class="line">    sub      rsp, 16</span><br><span class="line">    mov      DWORD PTR [rbp-4], edi			//字符串值赋给edi</span><br><span class="line">    mov      QWORD PTR [rbp-16], rsi</span><br><span class="line">    mov      edi, OFFSET FLAT:.LC0			//传参完毕</span><br><span class="line">    call     puts			//调用printf函数，输出字符串		</span><br><span class="line">    mov      eax, 0			//eax赋值为0，作为函数返回值</span><br><span class="line">    leave</span><br><span class="line">    ret</span><br></pre></td></tr></table></figure>
+
+<p>过程很简单，</p>
+<p>首先的<code>.LC0</code>定义了前面的<code>Hello World!</code>字符串，告诉编译器该字符串的<code>地址</code>。</p>
+<p>下面的则是<code>main</code>函数的汇编块：</p>
+<ol>
+<li>第8-12行为<code>初始化堆栈，开辟适合的内存区域</code>，而<code>rbp、rsp、edi</code>则是寄存器，负责<code>储存数据</code>。</li>
+<li>13行后都是执行函数。</li>
+</ol>
+<p>常见的汇编指令：<code>mov、sub、call、ret</code>等。</p>
+<ol>
+<li><code>mov</code>：赋值。格式为<code>mov   被赋值方   要赋的值</code>；</li>
+<li><code>sub</code>：递减。</li>
+<li><code>call</code>：调用。</li>
+<li><code>ret&amp;leave</code>：出栈。代表一个函数的结束。(通常在<code>wasm</code>中<code>leave</code>不常见)</li>
+</ol>
+<h3 id="常见指令"><a href="#常见指令" class="headerlink" title="常见指令"></a>常见指令</h3><h4 id="1-loop循环指令："><a href="#1-loop循环指令：" class="headerlink" title="1.loop循环指令："></a>1.<code>loop</code>循环指令：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov rax,0</span><br><span class="line">mov rcx,236</span><br><span class="line">s:</span><br><span class="line">add rax,123</span><br><span class="line">loop s</span><br><span class="line">leave</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
+
+<p>以上执行的便是对123累加236次。在上述代码中，<code>rcx</code>寄存器保存<code>循环次数</code>；<code>loop</code>指令每执行一次，<code>rcx</code> -1。</p>
+<h4 id="2-无条件跳转指令："><a href="#2-无条件跳转指令：" class="headerlink" title="2.无条件跳转指令："></a>2.无条件跳转指令：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lable:</span><br><span class="line">mov edx,0</span><br><span class="line"></span><br><span class="line">jmp lable</span><br></pre></td></tr></table></figure>
+
+<p>上述的<code>jmp</code>即为无条件跳转。</p>
+<h4 id="3-条件跳转指令："><a href="#3-条件跳转指令：" class="headerlink" title="3.条件跳转指令："></a>3.条件跳转指令：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lable:</span><br><span class="line">mov edx,1</span><br><span class="line"></span><br><span class="line">cmp ebx,0</span><br><span class="line">je lable</span><br></pre></td></tr></table></figure>
+
+<p>上述代码将<code>ebx</code>的值与<code>0</code>对比：为真，跳转至<code>lable</code>，所以<code>je</code>为条件跳转关键词。</p>
+<p>一般的条件跳转指令与<code>cmp、test</code>指令混在一起用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lable:</span><br><span class="line">mov edx,1</span><br><span class="line"></span><br><span class="line">test ebx,0</span><br><span class="line">jnz lable			//代表标志位为0则跳转</span><br></pre></td></tr></table></figure>
+
+<p>常见的<strong>条件跳转</strong>指令：</p>
+<ul>
+<li><code>je</code>：等于(Jump if Equal )</li>
+<li><code>jne</code>：不等于(Jump if Not Equal)</li>
+<li><code>jz</code>：零标志位为1(Jump if Zero)</li>
+<li><code>jnz</code>：零标志位为0(Jump if Not Zero)</li>
+<li><code>js</code>：符号标志位为1(Jump if Sign)</li>
+<li><code>jns</code>：符号标志位为0(Jump if Not Sign)</li>
+<li><code>jp</code>或<code>jpe</code>：奇偶标志位为1</li>
+<li><code>jnp</code>或<code>jpo</code>：奇偶标志位为0</li>
+<li><code>jo</code>：溢出标志位为1</li>
+<li><code>jno</code>：溢出标志位为0</li>
+<li><code>jg</code>或<code>jnle</code>：大于</li>
+<li><code>jge</code>或<code>jnl</code>：大于&#x2F;等于</li>
+<li><code>JL</code>或<code>JNGE</code>：小于</li>
+<li><code>JLE</code>或<code>JNG</code>：小于&#x2F;等于</li>
+</ul>
+<p>常见的<strong>位运算</strong>指令：</p>
+<ul>
+<li><code>AND</code>：与运算。<code>AND AX, BX</code>，即<code>AX</code>与<code>BX</code>进行逻辑与运算，保存结果至<code>AX</code></li>
+<li><code>OR</code>：或运算。<code>OR AX, BX</code>，即<code>AX</code>与<code>BX</code>进行逻辑或运算，保存结果至<code>AX</code></li>
+<li><code>XOR</code>：异或运算。<code>XOR AX, BX</code>，即异或运算，保存结果至<code>AX</code></li>
+<li><code>NOT</code>：取反操作。<code>NOT CX</code>，将<code>CX</code>取反，保存结果至<code>CX</code>中</li>
+</ul>
+<h4 id="4-函数传参："><a href="#4-函数传参：" class="headerlink" title="4.函数传参："></a>4.函数传参：</h4><p>通常函数の返回值保存在<code>ax</code>寄存器(<code>eax、rax</code>)</p>
+<p>参数一般按顺序保存在<code>cx、dx、si</code>中</p>
+<p>在64位汇编当中，则按照<code>rcx、rdx、r8、r9、r10、r11 ...</code>顺序储存</p>
+<h4 id="5-lea地址加载："><a href="#5-lea地址加载：" class="headerlink" title="5.lea地址加载："></a>5.<code>lea</code>地址加载：</h4><p>格式为<code>lea rdx, [my_var]</code>，将<code>my_var</code>地址赋值给<code>rdx</code>寄存器。</p>
+<h4 id="6-xchg数值交换："><a href="#6-xchg数值交换：" class="headerlink" title="6.xchg数值交换："></a>6.<code>xchg</code>数值交换：</h4><p>格式为<code>xchg ax, bx</code>，将<code>ax</code>与<code>bx</code>的数值交换</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一-HDCTF-2023-easy-asm"><a href="#一-HDCTF-2023-easy-asm" class="headerlink" title="一.[HDCTF 2023]easy_asm"></a>一.[HDCTF 2023]easy_asm</h4><p>IDA打开附件，只有一个<code>start</code>函数，空格切换至汇编代码：</p>
+<p><img src="/images/re_lian1.png" alt="re_lian1"></p>
+<p>和</p>
+<p><img src="/images/re_lian2.png" alt="re_lian2"></p>
+<p>很容易看到，待解密的flag就是<code>seg001</code>的内容，</p>
+<p>圈出来的便是<code>xor</code>加密逻辑：<code>al</code>存储<code>seg001</code>的值，<code>cl</code>存储异或的<code>key &quot;0x10&quot;</code>。</p>
+<p>要想解密，就得异或回去，<code>seg001 ^0x10 = decrypt_flag</code></p>
+<p>最终的exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">enc_flag = [</span><br><span class="line">  <span class="number">0x4E</span>, <span class="number">0x6F</span>, <span class="number">0x74</span>, <span class="number">0x20</span>, <span class="number">0x65</span>, <span class="number">0x71</span>, <span class="number">0x75</span>, <span class="number">0x61</span>, <span class="number">0x6C</span>, <span class="number">0x21</span>, <span class="number">0x24</span>,</span><br><span class="line">  <span class="number">0x45</span>, <span class="number">0x71</span>, <span class="number">0x75</span>, <span class="number">0x61</span>, <span class="number">0x6C</span>, <span class="number">0x21</span>, <span class="number">0x24</span>, <span class="number">0x58</span>, <span class="number">0x54</span>, <span class="number">0x53</span>, <span class="number">0x44</span>,</span><br><span class="line">  <span class="number">0x56</span>, <span class="number">0x6B</span>, <span class="number">0x5A</span>, <span class="number">0x65</span>, <span class="number">0x63</span>, <span class="number">0x64</span>, <span class="number">0x4F</span>, <span class="number">0x71</span>, <span class="number">0x4F</span>, <span class="number">0x75</span>, <span class="number">0x23</span>,</span><br><span class="line">  <span class="number">0x63</span>, <span class="number">0x69</span>, <span class="number">0x4F</span>, <span class="number">0x71</span>, <span class="number">0x43</span>, <span class="number">0x7D</span>, <span class="number">0x6D</span>, <span class="number">0x24</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">decrypt_flag = <span class="string">&#x27;&#x27;</span>.join([<span class="built_in">chr</span>(b ^ <span class="number">0x10</span>) <span class="keyword">for</span> b <span class="keyword">in</span> enc_flag])</span><br><span class="line"><span class="built_in">print</span>(decrypt_flag)</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag: HDCTF&#123;Just_a_e3sy_aSm&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>暂时只做了这一道asm逆向的，之后有做到会接着补充，嗯~ o(<em>￣▽￣</em>)o</p>
+<!--more-->
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/static/avatar/avatar0.jpg" alt="D'b8Gr">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>D'b8Gr
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="" target="_blank">Re练习之ASM汇编逆向</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>I hack,therefore I am.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                    <div class="category">
+                        分类：
+                        
+                            <a href="../../category/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
+                        
+                    </div>
+                
+                
+                    <div class="tag">
+                        标签：
+                        
+                            <a href="../../tag/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">CTF知识分享</a>
+                        
+                            <a href="../../tag/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">日常练习</a>
+                        
+                            <a href="../../tag/Reverse/">Reverse</a>
+                        
+                    </div>
+                
+                <div class="article-prev-next">
+                    
+                        <a href="../353481578/" class="prev-prefix">« </a> 上一篇：    <a href="../353481578/" title="发布于 2025-12-07 12:00">ISCTF2025 部分题WP</a>
+                        <br>
+                    
+                    
+                        <a href="../2554455252/" class="next-prefix">» </a> 下一篇：    <a href="../2554455252/" title="发布于 2025-11-05 12:00">PWN练习之ret2shellcode</a>
+                    
+                </div>
+            </div>
+            
+    <div class="article-comments">
+        
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+        <!-- 样式文件 -->
+        <link rel="stylesheet" href="/css/waline.css"/>
+        <link rel="stylesheet" href="/css/waline-custom.css"/>
+        <!-- 脚本文件 -->
+        <script type="module">
+            import { init } from "/js/waline.mjs";
+
+            const WalineInstance = init({
+                el              : ".comments-content",
+                serverURL       : "https://waline-pi-blue-88.vercel.app/",
+                path            : window.location.pathname,
+                meta            : ['nick', 'mail', 'link'],
+                requiredMeta    : ['nick', 'mail'],
+                pageSize        : 10,
+                lang            : "zh-cn",
+                locale: {
+                    admin       : "博主",
+                    anonymous   : "匿名用户",
+                    sofa        : "快来做第一个评论的人吧 ~",
+                    placeholder : "你是我一生只会遇见一次的惊喜...",
+                },
+                dark            : "html[color-scheme='dark']",
+                search          : false,
+                pageview        : true,
+                comment         : true,
+                copyright       : false,
+            });
+
+            // Waline 输入框选中动画
+            $(document).on("focus", ".wl-header-item .wl-input", function() {
+                $(this).parent().css("border-bottom-color", "var(--input-border-color-focus)");
+            });
+
+            $(document).on("blur", ".wl-header-item .wl-input", function() {
+                $(this).parent().css("border-bottom-color", "var(--input-border-color)");
+            });
+        </script>
+    
+ 
+        </div>
+    
+</div>
+    <div id="footer">
+    <div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【I hack,<span><i class='iconfont icon-like-fill'></i></span>therefore I am.】</div><div>&copy; 2024-2026 debu8ger. All Rights Reserved.</div>
+</div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        
+            <div class="menu-notice">
+                <span class="iconfont icon-notice"></span>
+                <div class="notice">
+                    <span>Bonjour, 欢迎来到debu8gerのCTF小站！</span>
+                </div>
+            </div>
+        
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar">
+                    <img src="/static/avatar/avatar0.jpg">
+                </div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user">
+                        
+                            <a href="https://incldue.github.io/" target="_blank"><span>D'b8Gr</span></a>
+                        
+                    </div>
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul>
+                    
+                        <li class=""><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首页</a></li>
+                    
+                        <li class=""><a href="/category" class="" target="_self"><span class="iconfont icon-folder-fill"></span>分类</a></li>
+                    
+                        <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
+                    
+                        <li class=""><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
+                    
+                        <li class=""><a href="/about" class="" target="_self"><span class="iconfont icon-about-fill"></span>关于</a></li>
+                    
+                        <li class=""><a href="/atom.xml" class="" target="_blank"><span class="iconfont icon-rss"></span>订阅</a></li>
+                    
+                        <li class=""><a href="javascript:;" class="search" target="_self"><span class="iconfont icon-search-menu"></span>搜索</a></li>
+                    
+                        <li class=""><a href="/comment" class="" target="_self"><span class="iconfont icon-comments-fill"></span>留言板</a></li>
+                    
+                        <li class=""><a href="/friend" class="" target="_self"><span class="iconfont icon-link"></span>友情链接</a></li>
+                    
+                </ul> 
+            </div> 
+            <div class="menu-link">
+                <div class="box">
+                    <div class="image-box"></div>
+                </div>
+                
+                    <a name="QQ" href="524633948@qq.com" class="" target="_blank" data=""><span class="iconfont icon-qq"></span></a>
+                
+                    <a name="Twitter" href="https://x.com/JonathanHu70782" class="" target="_blank" data=""><span class="iconfont icon-twitter"></span></a>
+                
+                    <a name="email" href="mailto:52463398@outlook.com" class="" target="_self" data=""><span class="iconfont icon-email"></span></a>
+                
+                    <a name="GitHub" href="https://github.com/incldue" class="" target="_blank" data=""><span class="iconfont icon-github"></span></a>
+                
+            </div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="/css/search.css">
+<script type="text/javascript" src="/js/iscroll.js"></script>
+<script type="text/javascript" src="/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+    
+    <link type="text/css" rel="stylesheet" href="/css/APlayer.css">
+    <script type="text/javascript" src="/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="/js/Meting.min.js"></script>
+    <script>
+        var meting_api = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+    </script>
+    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+
+    <div class="wrap-right">
+    <div class="wrap-right-hide">
+         <div class="wrap-right-button favorites">
+            <div class="iconbox" switch="false">
+                <span class="iconfont icon-favorites"></span>
+            </div>
+            <span class="icontext">关注</span>
+         </div>
+        <div class="wrap-right-button search">
+            <div class="iconbox">
+                <span class="iconfont icon-search-menu"></span>
+            </div>
+            <span class="icontext">搜索</span>
+        </div>
+        <div class="wrap-right-button menu-button">
+            <div class="iconbox">
+                <span class="iconfont icon-menu"></span>
+            </div>
+            <span class="icontext">菜单</span>
+        </div>
+        <div class="wrap-right-button mode">
+            <div class="light">
+                <div class="iconbox">
+                    <span class="iconfont icon-daymode"></span>
+                </div>
+                <span class="icontext">浅色模式</span>
+            </div>
+            <div class="dark">
+                <div class="iconbox">
+                    <span class="iconfont icon-nightmode-fill"></span>
+                </div>
+                <span class="icontext">深色模式</span>
+            </div>
+        </div>
+        <div class="wrap-right-button bottom">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">跳至底部</span>
+        </div>
+    </div>
+    <div class="wrap-right-show">
+        <div class="wrap-right-button set">
+            <div class="iconbox">
+                <span class="iconfont icon-setting"></span>
+            </div>
+            <span class="icontext">设置</span>
+        </div>
+        <div class="wrap-right-button top">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">返回顶部</span>
+        </div>
+    </div>
+</div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : "incldue",
+        GitHubRepositories : "incldue.github.io",
+
+        User             : "D'b8Gr",
+        UserAvatar       : "/static/avatar/avatar0.jpg",
+        WebsiteStartDate : "2025-06-01",
+        Home             : "https://incldue.github.io/",
+
+        WebsiteTitleBlur         : "(◍´ڡ`◍) Hi, there!",
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : "(*´∇｀*) 欢迎回来!",
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : {
+            light : "/static/avatar/avatar.png",
+            dark  : "/static/avatar/avatar.png"
+        },
+
+        ProgressBar : {
+            id       : "topProgressBar",
+            color    : "#77B6FF",
+            height   : "2px",
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound : {
+                tension  : 16,
+                friction : 5
+            },
+            spinner : {
+                id     : "spinner",
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : "#F0F0F0",
+                    stroke     : "#272633",
+                    base       : "",
+                    child      : "#272633"
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : "rgba(255, 255, 255, .2)",
+            clearOffset : 0.3
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : "60%",
+            colorBrightness  : "50%",
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : "random",
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                "/static/bgimage/beach.png",
+            
+                "/static/bgimage/sky.png",
+            
+                "/static/bgimage/starrysky.png",
+            
+        ],
+        HomeBannerText  : "",
+
+        ArticleHeaderImage : [
+            
+                "/static/article.png",
+            
+        ],
+
+        OtherBannerText : "",
+
+        Error : {
+            icon    : "icon-swimming",
+            title   : "PAGE NOT FOUND",
+            content : [
+                
+                    "很抱歉，您访问的页面不存在！",
+                
+                    "可能是输入地址有误或该地址已变更。",
+                
+            ],
+            buttons : [
+                
+                    {
+                        icon  : "icon-home",
+                        text  : "返回首页",
+                        href  : "/",
+                        class : ""
+                    },
+                
+            ]
+        },
+
+        MenuNotice : {
+            enable : true,
+            notice : "Bonjour, 欢迎来到debu8gerのCTF小站！",
+            speed  : 20
+        },
+        MenuList : [
+            
+                {
+                    name   : "首页",
+                    icon   : "icon-home-fill",
+                    href   : "/",
+                    type   : "index",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "分类",
+                    icon   : "icon-folder-fill",
+                    href   : "/category",
+                    type   : "category",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "标签",
+                    icon   : "icon-discount-fill",
+                    href   : "/tag",
+                    type   : "tag",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "归档",
+                    icon   : "icon-calendar-fill",
+                    href   : "/archive",
+                    type   : "archive",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "关于",
+                    icon   : "icon-about-fill",
+                    href   : "/about",
+                    type   : "about",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "订阅",
+                    icon   : "icon-rss",
+                    href   : "/atom.xml",
+                    type   : "",
+                    class  : "",
+                    target : "_blank"
+                },
+            
+                {
+                    name   : "搜索",
+                    icon   : "icon-search-menu",
+                    href   : "javascript:;",
+                    type   : "",
+                    class  : "search",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "留言板",
+                    icon   : "icon-comments-fill",
+                    href   : "/comment",
+                    type   : "comment",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "友情链接",
+                    icon   : "icon-link",
+                    href   : "/friend",
+                    type   : "friend",
+                    class  : "",
+                    target : "_self"
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        name   : "QQ",
+                        icon   : "icon-qq",
+                        href   : "524633948@qq.com",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "Twitter",
+                        icon   : "icon-twitter",
+                        href   : "https://x.com/JonathanHu70782",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "email",
+                        icon   : "icon-email",
+                        href   : "mailto:52463398@outlook.com",
+                        class  : "",
+                        target : "_self",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "GitHub",
+                        icon   : "icon-github",
+                        href   : "https://github.com/incldue",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : "<div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【I hack,<span><i class='iconfont icon-like-fill'></i></span>therefore I am.】</div><div>&copy; 2024-2026 debu8ger. All Rights Reserved.</div>",
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                "Based on cnblogs theme SimpleMemory.",
+                            
+                                "",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "SimpleMemory Author:",
+                            
+                                "BNDong",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "Theme:",
+                            
+                                "LiveForCode",
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : "",
+
+        Donate : {
+            paypal  : "",
+            bitcoin : "",
+            alipay  : "",
+            wechat  : ""
+        },
+
+        Search : {
+            applicationID : "010C3EANT8",
+            apiKey        : "c7abab9f11b79102b9aff7fe6d41447d",
+            indexName     : "Notes",
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : "搜索",
+                empty       : "未发现与 「${query}」 相关的内容",
+                stats       : "${hits} 条相关条目，使用了 ${time} 毫秒",
+            }
+        }, 
+
+        Comment : {
+            switch : true,
+            type   : "Waline",
+        },
+
+        Waline : {
+            el              : ".comments-content",
+            serverURL       : "https://waline-pi-blue-88.vercel.app/",
+            path            : window.location.pathname,
+            meta            : "['nick', 'mail', 'link']",
+            requiredMeta    : "['nick', 'mail']",
+            pageSize        : 10,
+            lang            : "zh-cn",
+            locale: {
+                admin       : "博主",
+                anonymous   : "匿名用户",
+                sofa        : "快来做第一个评论的人吧 ~",
+                placeholder : "你是我一生只会遇见一次的惊喜...",
+            },
+            dark            : "html[color-scheme='dark']",
+            search          : false,
+            pageview        : true,
+            comment         : true,
+            copyright       : false,
+        },
+
+        Valine : {
+            el             : ".comments-content",
+            appId          : "srhKtvWPQTWYKh3qX8G8M7v0-gzGzoHsz",
+            appKey         : "8uVSP1q6UlALVC5igYfIfv2h",
+            serverURLs     : "",
+            placeholder    : "你是我一生只会遇见一次的惊喜...",
+            avatar         : "mm",
+            meta           : "nick,mail,link",
+            requiredFields : "nick,mail",
+            pageSize       : 5,
+            lang           : "zh-cn",
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : ".toc",
+            contentSelector       : ".article-body",
+            headingSelector       : "h1, h2, h3, h4, h5",
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : ".toc",
+            positionFixedClass    : "toc-fixed",
+            fixedSidebarOffset    : "",
+        },
+
+        Require : {
+            baseUrl     : "/js/",
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : "Meting"
+        },
+        APlayer : {
+            container : ".aplayer",
+            fixed     : true,
+            autoplay  : false,
+            loop      : "all",
+            order     : "random",
+            preload   : "auto",
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : "Endless Tears",
+                        artist : "CLIFF EDGE",
+                        cover  : "/music/cover/Endless Tears.jpg",
+                        url    : "/music/song/Endless Tears.mp3",
+                        lrc    : "/music/lrc/Endless Tears.lrc"
+                    },
+                
+            ]
+        },
+        Meting : {
+            api      : "https://api.i-meto.com/meting/api",
+            id       : "3778678", 
+            lrcshow  : false, 
+            server   : "netease", 
+            type     : "playlist", 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : "all", 
+            order    : "random", 
+            preload  : "auto", 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        Mouse : {
+            enable  : true,
+            options : {
+                size  : 6,
+                sizeF : 24
+            }
+        },
+
+        LazyLoad : {
+            default : "/image/website/lazyload.svg"
+        },
+  
+        Style : {
+            aplayer          : "/css/APlayer.css",
+            archive          : "/css/archive.css",
+            base             : "/css/base.css",
+            clipboard        : "/css/clipboard.css",
+            code             : "/css/code.css",
+            donate           : "/css/donate.css",
+            fancybox         : "/css/jquery.fancybox.css",
+            footer           : "/css/footer.css",
+            iconfont         : "/iconfont/iconfont.css",
+            index            : "/css/index.css",
+            menuBubble       : "/css/menu-bubble.css",
+            mouse            : "/css/mouse.css",
+            page             : "/css/page.css",
+            post             : "/css/post.css",
+            search           : "/css/search.css",
+            tocbot           : "/css/tocbot.css",
+            valine           : "/css/valine.css",
+            waline           : "/css/waline.css",
+            walineCustom     : "/css/waline-custom.css"
+        },
+
+        Script: {
+            aplayer          : "/js/APlayer.min.js",
+            config           : "/js/require.config.js",
+            index            : "/js/index.js",
+            instantSearch    : "/js/instantsearch.min.js",
+            iscroll          : "/js/iscroll.js",
+            jQuery           : "/js/jquery-3.4.1.min.js",
+            loading          : "/js/loading.js",
+            meting           : "/js/Meting.min.js",
+            require          : "/js/require.min.js",
+            waline           : "/js/waline.mjs",
+            pageview         : "/js/pageview.mjs",
+            comment          : "/js/comment.mjs",
+        },
+
+        Font: {
+            LongCang    : "/font/LongCang.css",
+            Monda       : "/font/Monda.css",
+            NotoSansSC  : "/font/NotoSansSC.css",
+            NotoSerifSC : "/font/NotoSerifSC.css",
+            Playball    : "/font/Playball.css",
+            PTMono      : "/font/PTMono.css",
+            Roboto      : "/font/Roboto.css",
+            RobotoSlab  : "/font/RobotoSlab.css",
+            Rosario     : "/font/Rosario.css",
+            UbuntuMono  : "/font/UbuntuMono.css"
+        },
+
+        Suffix : {
+            about : "I hack,therefore I am."
+        },
+            
+        Theme : {
+            url  : "https://github.com/first19326/Hexo-LiveForCode",
+            name : "Hexo - Live For Code"
+        }  
+    };
+</script>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>

