@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, debu8ger</rights>
   <subtitle>I hack,therefore I am.</subtitle>
   <title>D'b8Gr的小站~</title>
-  <updated>2026-05-21T06:08:54.991Z</updated>
+  <updated>2026-05-30T17:09:56.578Z</updated>
   <entry>
     <author>
       <name>debu8ger</name>
@@ -25,7 +25,7 @@
     <published>2026-04-13T16:00:00.000Z</published>
     <summary>记录在syc的第一天收集的逆向题目</summary>
     <title>网谷杯安全极客大赛2025 NewRC4 WP</title>
-    <updated>2026-05-21T06:08:54.991Z</updated>
+    <updated>2026-05-30T17:09:56.578Z</updated>
   </entry>
   <entry>
     <author>
@@ -45,7 +45,7 @@
       <![CDATA[今天做逆向发现的&0xFF运算，找了同类型的学习一下]]>
     </summary>
     <title>浅谈逆向中关于位运算的常见问题</title>
-    <updated>2026-03-11T14:09:31.079Z</updated>
+    <updated>2026-05-30T17:09:56.586Z</updated>
   </entry>
   <entry>
     <author>
@@ -61,7 +61,7 @@
     <published>2026-03-08T16:00:00.000Z</published>
     <summary>自己出的题的WP</summary>
     <title>第五届大学生信息安全竞赛-部分WP</title>
-    <updated>2026-03-09T08:55:07.978Z</updated>
+    <updated>2026-05-30T17:09:56.590Z</updated>
   </entry>
   <entry>
     <author>
@@ -79,7 +79,7 @@
       <![CDATA[打ciscn&ccb，做了一天牢，还没做出多少，唉😔]]>
     </summary>
     <title>2025ciscn初赛部分WP</title>
-    <updated>2026-01-02T17:52:21.260Z</updated>
+    <updated>2026-05-30T17:09:56.564Z</updated>
   </entry>
   <entry>
     <author>
@@ -97,7 +97,7 @@
     <published>2025-12-17T13:41:32.000Z</published>
     <summary>关于Reverse中花指令的一些介绍以及例题讲解</summary>
     <title>Re练习之花指令</title>
-    <updated>2026-03-11T14:08:58.865Z</updated>
+    <updated>2026-05-30T17:09:56.573Z</updated>
   </entry>
   <entry>
     <author>
@@ -113,7 +113,7 @@
     <published>2025-12-16T16:00:00.000Z</published>
     <summary>ccb的选拔赛好难吖，就会一个misc，呜呜</summary>
     <title>MysteryFile-WP by Debu8ger</title>
-    <updated>2025-12-17T09:33:28.079Z</updated>
+    <updated>2026-05-30T17:09:56.569Z</updated>
   </entry>
   <entry>
     <author>
@@ -129,7 +129,7 @@
     <published>2025-12-06T16:00:00.000Z</published>
     <summary>这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:(</summary>
     <title>ISCTF2025 部分题WP</title>
-    <updated>2025-12-29T15:47:18.219Z</updated>
+    <updated>2026-05-30T17:09:56.576Z</updated>
   </entry>
   <entry>
     <author>
@@ -147,7 +147,7 @@
     <published>2025-11-06T16:00:00.000Z</published>
     <summary>关于Reverse中ASM汇编的一些介绍以及例题讲解</summary>
     <title>Re练习之ASM汇编逆向</title>
-    <updated>2026-03-11T14:08:52.527Z</updated>
+    <updated>2026-05-30T17:09:56.572Z</updated>
   </entry>
   <entry>
     <author>
@@ -165,7 +165,7 @@
     <published>2025-11-04T16:00:00.000Z</published>
     <summary>关于pwn栈溢出中三大类之一的ret3shellcode的介绍以及例题讲解</summary>
     <title>PWN练习之ret2shellcode</title>
-    <updated>2026-03-11T14:08:45.674Z</updated>
+    <updated>2026-05-30T17:09:56.570Z</updated>
   </entry>
   <entry>
     <author>
@@ -181,7 +181,7 @@
     <published>2025-10-31T16:00:00.000Z</published>
     <summary>打了?CTF2025,拿了第47，遗憾离场~</summary>
     <title>?CTF2025 week4部分WP</title>
-    <updated>2025-11-01T06:09:00.482Z</updated>
+    <updated>2026-05-30T17:09:56.583Z</updated>
   </entry>
   <entry>
     <author>
@@ -201,7 +201,7 @@
     <title>
       <![CDATA[2025 XAUTCTF新生赛 rev&algo部分WP]]>
     </title>
-    <updated>2025-10-23T16:27:22.706Z</updated>
+    <updated>2026-05-30T17:09:56.578Z</updated>
   </entry>
   <entry>
     <author>
@@ -217,7 +217,7 @@
     <published>2025-10-17T16:00:00.000Z</published>
     <summary>这次打了?CTF,week1只拿了前20，唉~</summary>
     <title>?CTF2025 week1部分WP</title>
-    <updated>2025-11-01T15:54:01.193Z</updated>
+    <updated>2026-05-30T17:09:56.581Z</updated>
   </entry>
   <entry>
     <author>
@@ -234,7 +234,7 @@
     <published>2025-09-30T01:57:00.000Z</published>
     <summary>近期在搞新生培训，为了不成为Cyber文盲，介绍一点前一年在CTF上的经验叭(doge)</summary>
     <title>关于CTFers在CTF赛制下の求生指南--计算机基础</title>
-    <updated>2026-03-11T14:09:12.150Z</updated>
+    <updated>2026-05-30T17:09:56.583Z</updated>
   </entry>
   <entry>
     <author>
@@ -250,7 +250,7 @@
     <published>2025-07-17T16:00:00.000Z</published>
     <summary>学习逆向RE的前置知识，浅浅记录一下，不定时更新~</summary>
     <title>汇编学习01</title>
-    <updated>2026-05-28T13:43:00.747Z</updated>
+    <updated>2026-05-30T17:09:56.585Z</updated>
   </entry>
   <entry>
     <author>
@@ -266,7 +266,7 @@
     <published>2025-06-12T16:00:00.000Z</published>
     <summary>对渗透测试了解的第一课，一些基础知识~</summary>
     <title>渗透测试01</title>
-    <updated>2025-06-13T09:26:21.856Z</updated>
+    <updated>2026-05-30T17:09:56.588Z</updated>
   </entry>
   <entry>
     <author>
@@ -282,7 +282,7 @@
     <published>2025-06-10T16:00:00.000Z</published>
     <summary>SRC挖洞第一步，知己知彼---信息收集</summary>
     <title>SRC挖洞01--信息收集_1</title>
-    <updated>2025-06-12T06:28:30.876Z</updated>
+    <updated>2026-05-30T17:09:56.575Z</updated>
   </entry>
   <entry>
     <author>
@@ -299,7 +299,7 @@
     <published>2025-06-06T16:00:00.000Z</published>
     <summary>之前只是了解知识点，这回做了赛题才发现有很多没懂的...</summary>
     <title>CTF--文件上传漏洞PLUS</title>
-    <updated>2026-03-11T14:08:13.851Z</updated>
+    <updated>2026-05-30T17:09:56.571Z</updated>
   </entry>
   <entry>
     <author>
@@ -315,7 +315,7 @@
     <published>2025-06-02T16:00:00.000Z</published>
     <summary>只是简单的announce一下，开始学习SRC挖洞咯~~</summary>
     <title>SRC挖洞00</title>
-    <updated>2025-06-12T06:28:46.130Z</updated>
+    <updated>2026-05-30T17:09:56.577Z</updated>
   </entry>
   <entry>
     <author>
@@ -333,7 +333,7 @@
       <![CDATA[学习OOP时的一些知识点，涉及继承&多态&文件与流]]>
     </summary>
     <title>C++学习02</title>
-    <updated>2025-06-12T06:27:11.440Z</updated>
+    <updated>2026-05-30T17:09:56.566Z</updated>
   </entry>
   <entry>
     <author>
@@ -349,6 +349,6 @@
     <published>2025-05-31T16:00:00.000Z</published>
     <summary>...reboot...</summary>
     <title>Db8Gr的blog01</title>
-    <updated>2025-06-12T14:33:28.015Z</updated>
+    <updated>2026-05-30T17:09:56.568Z</updated>
   </entry>
 </feed>
