@@ -1,11 +1,11 @@
 <!doctype html>
 
-<html lang="en, zh-CN">
+<html lang="en, zh-CN" data-fancybox-enabled="1">
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f7f3e9">
-<title>D&#39;b8Gr的小站~</title>
+<title>汇编学习02 | D&#39;b8Gr的小站~</title>
 
   <meta name="description" content="h3llo_w0rld">
 
@@ -35,13 +35,16 @@
   
 
   
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
 
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 
 <body
-  class="is-list tag-style-tape"
+  class="is-post tag-style-tape"
   data-default-accent="green"
   data-code-theme="dark"
   data-note-style="flat"
@@ -116,7 +119,7 @@
       
     
       
-        <div class="site-nav-item has-children active">
+        <div class="site-nav-item has-children">
           <button class="site-nav-link site-nav-parent" type="button" aria-haspopup="true" aria-expanded="false">
             
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
@@ -139,7 +142,7 @@
                 <span>标签</span>
               </a>
             
-              <a role="menuitem" class="active" href="../../archives/">
+              <a role="menuitem" class="" href="../../archives/">
                 
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
 
@@ -198,7 +201,7 @@
 
 
   
-  <main class="paper-shell ">
+  <main class="paper-shell paper-shell--article">
     
 
 <aside id="paper-sidebar-drawer" class="paper-sidebar paper-sidebar--right" aria-label="侧边栏">
@@ -261,8 +264,8 @@
         
       
         
-          <div class="drawer-nav-group is-open active">
-            <button class="drawer-nav-parent" type="button" aria-expanded="true">
+          <div class="drawer-nav-group">
+            <button class="drawer-nav-parent" type="button" aria-expanded="false">
               
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
 
@@ -284,7 +287,7 @@
                   <span>标签</span>
                 </a>
               
-                <a class="active" href="../../archives/">
+                <a class="" href="../../archives/">
                   
 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
 
@@ -416,75 +419,13 @@
   
 
   
-    <section class="side-card categories-card">
+    <section class="side-card toc-card">
       <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-分类</h2>
-      
-        <a href="../../categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
-          <span class="dot dot-0"></span>
-          <strong>程序设计</strong>
-          <em>2</em>
-        </a>
-      
-        <a href="../../categories/CTF%E7%9B%B8%E5%85%B3/">
-          <span class="dot dot-1"></span>
-          <strong>CTF相关</strong>
-          <em>19</em>
-        </a>
-      
-        <a href="../../categories/%E6%9D%82%E8%B0%88/">
-          <span class="dot dot-2"></span>
-          <strong>杂谈</strong>
-          <em>4</em>
-        </a>
-      
-        <a href="../../categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">
-          <span class="dot dot-3"></span>
-          <strong>安全相关</strong>
-          <em>3</em>
-        </a>
-      
-    </section>
-
-    <section class="side-card tag-card">
-      <header class="tag-card__head">
-        <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-热门标签</h2>
-        <a class="tag-card__more" href="../../tags/">
-          <span>查看全部</span>
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-
-        </a>
-      </header>
-      <div class="tag-cloud">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-table-of-contents" aria-hidden="true"><path d="M16 12H3"/><path d="M16 18H3"/><path d="M16 6H3"/><path d="M21 12h.01"/><path d="M21 18h.01"/><path d="M21 6h.01"/></svg>
+文章目录</h2>
+      <div class="toc-content">
         
-        
-          <a class="tag-chip tag-chip-0" href="../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">CTF知识分享</a>
-        
-          <a class="tag-chip tag-chip-1" href="../../tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>
-        
-          <a class="tag-chip tag-chip-2" href="../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">日常练习</a>
-        
-          <a class="tag-chip tag-chip-3" href="../../tags/%E9%9A%8F%E7%AC%94/">随笔</a>
-        
-          <a class="tag-chip tag-chip-4" href="../../tags/Reverse/">Reverse</a>
-        
-          <a class="tag-chip tag-chip-5" href="../../tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
-        
-          <a class="tag-chip tag-chip-0" href="../../tags/SRC%E6%8C%96%E6%B4%9E/">SRC挖洞</a>
-        
-          <a class="tag-chip tag-chip-1" href="../../tags/CTF%E8%B5%9B%E9%A2%98/">CTF赛题</a>
-        
-          <a class="tag-chip tag-chip-2" href="../../tags/pwn/">pwn</a>
-        
-          <a class="tag-chip tag-chip-3" href="../../tags/CTF%E5%85%A5%E9%97%A8/">CTF入门</a>
-        
-          <a class="tag-chip tag-chip-4" href="../../tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
-        
-          <a class="tag-chip tag-chip-5" href="../../tags/%E5%93%B2%E6%80%9D/">哲思</a>
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%8A%B6%E6%80%81%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">一、状态寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%9B%B4%E6%8E%A5%E6%A0%87%E5%BF%97%E8%BD%AC%E7%A7%BB"><span class="toc-text">二、直接标志转移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%97%B4%E6%8E%A5%E6%A0%87%E5%BF%97%E8%BD%AC%E7%A7%BB-8%E4%BD%8D%E5%AF%BB%E5%9D%80"><span class="toc-text">三、间接标志转移 (8位寻址)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%97%A0%E6%9D%A1%E4%BB%B6%E8%BD%AC%E7%A7%BB"><span class="toc-text">四、无条件转移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%83%E7%A7%8D%E5%AF%BB%E5%9D%80%E6%96%B9%E5%BC%8F"><span class="toc-text">五、七种寻址方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%8F%A6%EF%BC%9A%E6%8C%87%E4%BB%A4%E9%9B%86%E6%9E%B6%E6%9E%84-%E5%A4%84%E7%90%86%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="toc-text">六、另：指令集架构 (处理器架构)</span></a></li></ol>
         
       </div>
     </section>
@@ -496,276 +437,420 @@
 
     <section class="paper-main">
       
-<section class="archive-paper">
-  <h1>归档</h1>
-  <div class="archive-list">
+
+<div class="article-tape-wrap">
+<span class="tape tape--top-right" aria-hidden="true"></span>
+<article class="article-paper">
+  <header class="article-header">
     
-      <a class="archive-item" href="../../posts/981996043/">
-        <span>2026-06-06</span>
-        <strong>汇编学习02</strong>
-        <em></em>
+      <a class="label-pill" href="../../categories/CTF%E7%9B%B8%E5%85%B3/">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+
+        CTF相关
       </a>
     
-      <a class="archive-item" href="../../posts/520274505/">
-        <span>2026-04-14</span>
-        <strong>网谷杯安全极客大赛2025 NewRC4 WP</strong>
-        <em></em>
-      </a>
-    
-      <a class="archive-item" href="../../posts/2751307781/">
-        <span>2026-03-11</span>
-        <strong>浅谈逆向中关于位运算的常见问题</strong>
-        <em></em>
-      </a>
-    
-      <a class="archive-item" href="../../posts/2775448412/">
-        <span>2026-03-09</span>
-        <strong>第五届大学生信息安全竞赛-部分WP</strong>
-        <em></em>
-      </a>
-    
+    <h1>汇编学习02</h1>
+    <div class="meta-line meta-line--article">
+      <span class="meta-date">
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+2026-06-06</span>
+      
+        <span class="meta-tags">
+          
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+
+          <a class="meta-tag-link" href="../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">#CTF知识分享</a>
+        </span>
+      
+    </div>
+  </header>
+
+  
+
+
+  <div class="article-content">
+    <h3 id="一、状态寄存器"><a href="#一、状态寄存器" class="headerlink" title="一、状态寄存器"></a>一、状态寄存器</h3><p><strong>PSW</strong>程序状态字寄存器为<code>16位</code>寄存器，由条件码标志和控制标志构成</p>
+<h4 id="条件码："><a href="#条件码：" class="headerlink" title="条件码："></a>条件码：</h4><ul>
+<li><strong>OF</strong>：溢出标志。溢出时为<code>1</code>，否则置<code>0</code>f</li>
+<li><strong>SF (Sign Flag)</strong>：符号标志。结果为负时置<code>1</code>，否则置<code>0</code></li>
+<li><strong>ZF (Zero Flag)</strong>：零标志。结果为<code>0</code> ZF 位置<code>1</code>,否则置<code>0</code></li>
+<li><strong>CF (Carry Flag)</strong>：进位标志。进位时置<code>1</code>，否则置<code>0</code></li>
+<li><strong>AF (Auxiliary carry Flag)</strong>：辅助进位标志。记录运算时第三位 (半个字节) 产生的进位置。有进位时<code>1</code>，否则置<code>0</code></li>
+<li><strong>PF (Parity Flag)</strong>：奇偶标志。操作数中<code>1</code>的个数为偶数时置<code>1</code>，否则置<code>0</code></li>
+</ul>
+<h4 id="控制标志位："><a href="#控制标志位：" class="headerlink" title="控制标志位："></a>控制标志位：</h4><ul>
+<li><strong>DF (Direction Flag)</strong>：方向标志。在<code>串处理指令</code>中控制信息的方向</li>
+<li><strong>IF (Interrupt Flag)</strong>：中断标志</li>
+<li><strong>TF (Trap Flag)</strong>：陷阱标志</li>
+</ul>
+<p><img src="/images/huibian1.png" alt="huibian1"></p>
+<h3 id="二、直接标志转移"><a href="#二、直接标志转移" class="headerlink" title="二、直接标志转移"></a>二、直接标志转移</h3><table>
+<thead>
+<tr>
+<th>指令格式</th>
+<th>机器码</th>
+<th>测试条件</th>
+<th>如…则转移</th>
+<th></th>
+<th>指令格式</th>
+<th>机器码</th>
+<th>测试条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JC</td>
+<td>72</td>
+<td>C&#x3D;1</td>
+<td>有进位</td>
+<td>JNS</td>
+<td>79</td>
+<td>S&#x3D;0</td>
+<td>正号</td>
+</tr>
+<tr>
+<td>JNC</td>
+<td>73</td>
+<td>C&#x3D;0</td>
+<td>无进位</td>
+<td>JO</td>
+<td>70</td>
+<td>O&#x3D;1</td>
+<td>有溢出</td>
+</tr>
+<tr>
+<td>JZ&#x2F;JE</td>
+<td>74</td>
+<td>Z&#x3D;1</td>
+<td>零&#x2F;等于</td>
+<td>JNO</td>
+<td>71</td>
+<td>O&#x3D;0</td>
+<td>无溢出</td>
+</tr>
+<tr>
+<td>JNZ&#x2F;JNE</td>
+<td>75</td>
+<td>Z&#x3D;0</td>
+<td>不为零&#x2F;不等于</td>
+<td>JP&#x2F;JPE</td>
+<td>7A</td>
+<td>P&#x3D;1</td>
+<td>奇偶位为偶</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>78</td>
+<td>S&#x3D;1</td>
+<td>负号</td>
+<td>JNP&#x2F;IPO</td>
+<td>7B</td>
+<td>P&#x3D;0</td>
+<td>奇偶位为奇</td>
+</tr>
+</tbody></table>
+<h3 id="三、间接标志转移-8位寻址"><a href="#三、间接标志转移-8位寻址" class="headerlink" title="三、间接标志转移 (8位寻址)"></a>三、间接标志转移 (8位寻址)</h3><table>
+<thead>
+<tr>
+<th>指令格式</th>
+<th>机器码</th>
+<th>测试格式</th>
+<th>如…则转移</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JA&#x2F;JNBE(比较无符号数)</td>
+<td>77</td>
+<td>C或Z&#x3D;0</td>
+<td>&gt; 　高于&#x2F;不低于或等于</td>
+</tr>
+<tr>
+<td>JAE&#x2F;JNB(比较无符号数)</td>
+<td>73</td>
+<td>C&#x3D;0</td>
+<td>&gt;&#x3D;　 高于或等于&#x2F;不低于</td>
+</tr>
+<tr>
+<td>JB&#x2F;JNAE(比较无符号数)</td>
+<td>72</td>
+<td>C&#x3D;1</td>
+<td>&lt; 　低于&#x2F;不高于或等于</td>
+</tr>
+<tr>
+<td>JBE&#x2F;JNA(比较无符号数)</td>
+<td>76</td>
+<td>C或Z&#x3D;1</td>
+<td>&lt;&#x3D;　 低于或等于&#x2F;不高于</td>
+</tr>
+<tr>
+<td>JG&#x2F;JNLE(比较带符号数)</td>
+<td>7F</td>
+<td>(S异或O）或Z&#x3D;0</td>
+<td>&gt; 　大于&#x2F;不小于或等于</td>
+</tr>
+<tr>
+<td>JGE&#x2F;JNL(比较带符号数)</td>
+<td>7D</td>
+<td>S异或O&#x3D;0</td>
+<td>&gt;&#x3D;　 大于或等于&#x2F;不小于</td>
+</tr>
+<tr>
+<td>JL&#x2F;JNGE(比较带符号数)</td>
+<td>7C</td>
+<td>S异或O&#x3D;1</td>
+<td>&lt; 　小于&#x2F;不大于或等于</td>
+</tr>
+<tr>
+<td>JLE&#x2F;JNG(比较带符号数)</td>
+<td>7E</td>
+<td>(S异或O)或Z&#x3D;1</td>
+<td>&lt;&#x3D;　 小于或等于&#x2F;不大于</td>
+</tr>
+</tbody></table>
+<h3 id="四、无条件转移"><a href="#四、无条件转移" class="headerlink" title="四、无条件转移"></a>四、无条件转移</h3><table>
+<thead>
+<tr>
+<th>操作码</th>
+<th>伪码指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EB 　cb</td>
+<td>JMP rel8</td>
+<td>相对短跳转（8位），使rel8处的代码位下一条指令</td>
+</tr>
+<tr>
+<td>E9 　cw</td>
+<td>JMP rel16</td>
+<td>相对跳转（16位），使rel16处的代码位下一条指令</td>
+</tr>
+<tr>
+<td>FF 　&#x2F;4</td>
+<td>JMP r&#x2F;m16</td>
+<td>绝对跳转（16位），下一指令地址在r&#x2F;m16中给出</td>
+</tr>
+<tr>
+<td>FF 　&#x2F;4</td>
+<td>JMP r&#x2F;m32</td>
+<td>绝对跳转（32位），下一指令地址在r&#x2F;m32中给出</td>
+</tr>
+<tr>
+<td>EA 　cb</td>
+<td>JMP ptr16:16</td>
+<td>远距离绝对跳转， 下一指令地址在操作数中</td>
+</tr>
+<tr>
+<td>EA 　cb</td>
+<td>JMP ptr16:32</td>
+<td>远距离绝对跳转， 下一指令地址在操作数中</td>
+</tr>
+<tr>
+<td>FF 　&#x2F;5</td>
+<td>JMP m16:16</td>
+<td>远距离绝对跳转， 下一指令地址在内存m16:16中</td>
+</tr>
+<tr>
+<td>FF　 &#x2F;5</td>
+<td>JMP m16:32</td>
+<td>远距离绝对跳转， 下一指令地址在内存m16:32中</td>
+</tr>
+</tbody></table>
+<h3 id="五、七种寻址方式"><a href="#五、七种寻址方式" class="headerlink" title="五、七种寻址方式"></a>五、七种寻址方式</h3><h4 id="1-立即寻址："><a href="#1-立即寻址：" class="headerlink" title="1.立即寻址："></a>1.立即寻址：</h4><p>操作数包含在指令里，作为指令的一部分，跟在操作码后<code>存放</code>在代码段。</p>
+<p>这种操作数称为立即数，可以是<code>8位</code>，也可以为<code>16位</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MOV AX, 1234H</span><br><span class="line">#则 AX = 1234H</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-寄存器寻址："><a href="#2-寄存器寻址：" class="headerlink" title="2.寄存器寻址："></a>2.寄存器寻址：</h4><p>操作数在<code>CPU</code>内部的寄存器中，指令指定寄存器型号</p>
+<p>对于<code>16位操作数</code>，可以是<code>AX, BX, CX, DX, DI, SI, SP, BP</code>；</p>
+<p>对于<code>8位操作数</code>，可以是<code>AL, AH, BL, BH, CL, CH, DL, DH</code>。</p>
+<p>由于操作数就在寄存器中，无需访问存储器来取得操作数 –&gt; 较高的运算数度</p>
+<h4 id="3-直接寻址："><a href="#3-直接寻址：" class="headerlink" title="3.直接寻址："></a>3.直接寻址：</h4><p>操作数在寄存器中，指令直接包含有操作数的<code>有效地址</code> (偏移地址)</p>
+<p>所以操作数的地址<code>由DS加上指令中直接给出的16位偏移</code>得到。</p>
+<p>若采用段超越前缀，则操作数也可包含在<code>数据外段</code>的其他段中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MOV AX, [8054]		#如(DS) = 2000H</span><br><span class="line">(AX) = 3050H		#(物理地址 = 20000 + 8054 = 28054H)</span><br><span class="line">28054H里的内容为3050H</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-寄存器间接寻址："><a href="#4-寄存器间接寻址：" class="headerlink" title="4.寄存器间接寻址："></a>4.寄存器间接寻址：</h4><p>操作数在寄存器中，其有效地址在<code>SI, DI, BX, BP</code>其中之一里。</p>
+<p>一般情况下，若有效地址在<code>SI, DI, BX</code>中，则以<code>DS段寄存器</code>的内容为段值；若有效地址在<code>BP</code>中，则以<code>SS段寄存器</code>的内容为段值。</p>
+<h4 id="5-寄存器相对寻址："><a href="#5-寄存器相对寻址：" class="headerlink" title="5.寄存器相对寻址："></a>5.寄存器相对寻址：</h4><p>操作数在存储器里，其有效地址为<code>基址寄存器 (BX、BP)</code>或者<code>变址寄存器 (SI、DI)</code>的内容加上指令给定的<code>8位/16位</code>位移量之和</p>
+<p>一般情况下，若<code>SI, DI, BX</code>中的内容作为有效地址的一部分，则引用的段寄存器为<code>DS</code>；若<code>BP</code>中的内容作为有效地址的一部分，则所引用的段寄存器为<code>SS</code>。</p>
+<p>在指令中给定的<code>8位/16位</code>位移量采用<code>补码</code>形式表示。在计算有效地址时，若位移量为<code>8位</code>，则会被带符号扩展成为<code>16位</code>。</p>
+<p>下面指令中，源操作数采用寄存器相对寻址，引用的段寄存器为<code>SS</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV BX, [BP-4]</span><br></pre></td></tr></table></figure>
+
+<p>下面指令中，目的操作数采用寄存器相对寻址，引用的段寄存器为<code>ES</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV ES:[BX+5], AL</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-基址-变址寻址："><a href="#6-基址-变址寻址：" class="headerlink" title="6.基址+变址寻址："></a>6.基址+变址寻址：</h4><p>操作数在寄存器中，操作数的有效地址由<code>基址寄存器之一的内容 + 变址寄存器之一的内容</code></p>
+<p>一般情况下，若<code>BP</code>中内容作为有效地址的一部分，以<code>SS</code>中内容为段值，否则以<code>DS</code>为段值</p>
+<p>下面指令中，目的操作数采用<code>基址+变址</code>寻址，引用的段寄存器为<code>DS</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV DS:[BP+SI], AL</span><br></pre></td></tr></table></figure>
+
+<p>而在下面指令中，源操作数采用<code>基址+变址</code>寻址，引用的为<code>ES</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MOV AX, ES:[BX+SI]</span><br></pre></td></tr></table></figure>
+
+<p>这种寻址方式使用<code>数组/表格</code>处理，用基址寄存器存放<code>首地址</code>，用变址寄存器<code>定位数组各元素</code>，反之也可</p>
+<h4 id="7-相对基址-变址寻址："><a href="#7-相对基址-变址寻址：" class="headerlink" title="7.相对基址+变址寻址："></a>7.相对基址+变址寻址：</h4><p>操作数在存储器中，其有效地址由<code>基址寄存器之一的内容 + 变址寄存器之一的内容 + 指令中给定的8位/16位位移量</code>得到</p>
+<p>一般情况下，如果<code>BP</code>中内容作为有效地址的一部分，则以<code>SS</code>段寄存器中的内容为段值，否则以<code>DS</code>段寄存器中的内容为段值。</p>
+<p>在计算有效地址时，若位移量为<code>8位</code>，则会被带符号扩展为<code>16位</code></p>
+<p>当所得有效地址操作<code>FFFFH</code>时，取其<code>64K</code>的模</p>
+<h3 id="六、另：指令集架构-处理器架构"><a href="#六、另：指令集架构-处理器架构" class="headerlink" title="六、另：指令集架构 (处理器架构)"></a>六、另：指令集架构 (处理器架构)</h3><p>是计算机体系结构中与程序设计相关的部分，包含<code>基本数据类型、指令集、寄存器、寻址模式、存储体系、中断、异常处理、外部 I/O</code>，常见的架构如下：</p>
+<ul>
+<li><p><strong>x86的32位 -&gt; IA32</strong> CISC</p>
+<p><code>Intel</code>的 32 位架构 (<strong>IA-32</strong>)，是 8086 架构的衍生版本，可支持32位运算</p>
+</li>
+<li><p><strong>x86的64位 -&gt; x86-64 &#x2F; x64 &#x2F; amd64</strong> CISC</p>
+</li>
+<li><p><strong>IA64</strong></p>
+<p>该架构与<code>x86以及x86-64</code>不相容，不多见</p>
+</li>
+<li><p><strong>ARM架构</strong> RISC</p>
+<p>主要应用于移动端、嵌入式，价格低，能耗低</p>
+</li>
+<li><p><strong>MIPS架构</strong> RISC</p>
+<p>龙芯，用于电子产品、网络设备、商业设备</p>
+</li>
+<li><p><strong>PowerPC架构</strong> RISC</p>
+<p>曾用于<code>Xbox</code>、<code>mac</code>的处理器和服务器等</p>
+</li>
+</ul>
+<!-- more -->
+
   </div>
-</section>
+
+  <footer class="article-reactions">
+    <div class="reaction-group">
+      <button type="button" class="reaction reaction--comment" aria-label="跳转到评论区" data-action="scroll-to-comments">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+
+      </button>
+      <span class="reaction-label">评论</span>
+      
+    </div>
+    <div class="reaction-group reaction-group--right">
+      
+      <button type="button" class="reaction reaction--share" aria-label="分享" data-action="share">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+
+      </button>
+      <span class="reaction-label">分享</span>
+    </div>
+  </footer>
+
+  
 
 
+  <nav class="article-actions">
+    
+      <span class="article-action article-action--prev is-disabled" aria-disabled="true">
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+
+        <span class="action-label">上一篇</span>
+        <span class="action-title">没有更早的文章了</span>
+      </span>
+    
+    
+      <a class="article-action article-action--next" href="../520274505/">
+        <span class="action-label">下一篇</span>
+        <span class="action-title">网谷杯安全极客大赛2025 NewRC4 WP</span>
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a>
+    
+  </nav>
+</article>
+</div>
+
+
+  <section class="related-paper">
+    <header class="related-paper__head">
+      <h2>
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+相关文章</h2>
+      <a class="related-paper__more" href="../../archives/">
+        <span>查看更多</span>
+        
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+
+      </a>
+    </header>
+    <div class="related-paper__grid">
+      
+        <a class="related-card" href="../2751307781/">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="/images/weiyunsuan1.png" alt="浅谈逆向中关于位运算的常见问题" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">浅谈逆向中关于位运算的常见问题</strong>
+            <em class="related-card__date">2026-03-11</em>
+          </span>
+        </a>
+      
+        <a class="related-card" href="../3037537631/">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-1 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="/images/train_re2.png" alt="Re练习之花指令" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">Re练习之花指令</strong>
+            <em class="related-card__date">2025-12-17</em>
+          </span>
+        </a>
+      
+        <a class="related-card" href="../2957710030/">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-2 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="/images/re_lian1.png" alt="Re练习之ASM汇编逆向" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">Re练习之ASM汇编逆向</strong>
+            <em class="related-card__date">2025-11-07</em>
+          </span>
+        </a>
+      
+        <a class="related-card" href="../2554455252/">
+          <span class="related-card__thumb">
+            
+<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
+  
+    <img class="paper-thumb__img" src="/images/pwn1.png" alt="PWN练习之ret2shellcode" loading="lazy" referrerpolicy="no-referrer">
+  
+</div>
+
+          </span>
+          <span class="related-card__body">
+            <strong class="related-card__title">PWN练习之ret2shellcode</strong>
+            <em class="related-card__date">2025-11-05</em>
+          </span>
+        </a>
+      
+    </div>
+  </section>
 
 
       
 
 
     </section>
-    
-      <aside class="paper-sidebar paper-sidebar--left">
-  
-  
-
-  <section class="side-card recent-card" data-random-posts-limit="6">
-    <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle" aria-hidden="true"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.6-8.6C14.1 6.6 15.2 6 16.6 6H22"/><path d="M2 6h1.9c.9 0 1.8.4 2.4 1.1l1.4 1.8"/><path d="M22 18h-5.4c-1.3 0-2.5-.6-3.3-1.7l-.5-.7"/></svg>
-随机文章</h2>
-    <ul class="recent-list js-random-posts">
-      
-        <li>
-          <a class="recent-item" href="../../posts/981996043/">
-            <strong>汇编学习02</strong>
-            <em>2026-06-06</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="../../posts/520274505/">
-            <strong>网谷杯安全极客大赛2025 NewRC4 WP</strong>
-            <em>2026-04-14</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="../../posts/2751307781/">
-            <strong>浅谈逆向中关于位运算的常见问题</strong>
-            <em>2026-03-11</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="../../posts/2775448412/">
-            <strong>第五届大学生信息安全竞赛-部分WP</strong>
-            <em>2026-03-09</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="../../posts/1447712357/">
-            <strong>2025ciscn初赛部分WP</strong>
-            <em>2025-12-29</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="../../posts/3037537631/">
-            <strong>Re练习之花指令</strong>
-            <em>2025-12-17</em>
-          </a>
-        </li>
-      
-    </ul>
-    <script type="application/json" class="js-random-posts-data">
-    [
-    
-      {
-        "title": "汇编学习02",
-        "url": "../../posts/981996043/",
-        "date": "2026-06-06"
-      },
-    
-      {
-        "title": "网谷杯安全极客大赛2025 NewRC4 WP",
-        "url": "../../posts/520274505/",
-        "date": "2026-04-14"
-      },
-    
-      {
-        "title": "浅谈逆向中关于位运算的常见问题",
-        "url": "../../posts/2751307781/",
-        "date": "2026-03-11"
-      },
-    
-      {
-        "title": "第五届大学生信息安全竞赛-部分WP",
-        "url": "../../posts/2775448412/",
-        "date": "2026-03-09"
-      },
-    
-      {
-        "title": "2025ciscn初赛部分WP",
-        "url": "../../posts/1447712357/",
-        "date": "2025-12-29"
-      },
-    
-      {
-        "title": "Re练习之花指令",
-        "url": "../../posts/3037537631/",
-        "date": "2025-12-17"
-      },
-    
-      {
-        "title": "MysteryFile-WP by Debu8ger",
-        "url": "../../posts/836249775/",
-        "date": "2025-12-17"
-      },
-    
-      {
-        "title": "ISCTF2025 部分题WP",
-        "url": "../../posts/353481578/",
-        "date": "2025-12-07"
-      },
-    
-      {
-        "title": "Re练习之ASM汇编逆向",
-        "url": "../../posts/2957710030/",
-        "date": "2025-11-07"
-      },
-    
-      {
-        "title": "PWN练习之ret2shellcode",
-        "url": "../../posts/2554455252/",
-        "date": "2025-11-05"
-      },
-    
-      {
-        "title": "?CTF2025 week4部分WP",
-        "url": "../../posts/4126005536/",
-        "date": "2025-11-01"
-      },
-    
-      {
-        "title": "2025 XAUTCTF新生赛 rev&algo部分WP",
-        "url": "../../posts/3068727186/",
-        "date": "2025-10-24"
-      },
-    
-      {
-        "title": "?CTF2025 week1部分WP",
-        "url": "../../posts/3212483695/",
-        "date": "2025-10-18"
-      },
-    
-      {
-        "title": "关于CTFers在CTF赛制下の求生指南--计算机基础",
-        "url": "../../posts/2308601283/",
-        "date": "2025-09-30"
-      },
-    
-      {
-        "title": "汇编学习01",
-        "url": "../../posts/2743157681/",
-        "date": "2025-07-18"
-      },
-    
-      {
-        "title": "渗透测试01",
-        "url": "../../posts/4218951844/",
-        "date": "2025-06-13"
-      },
-    
-      {
-        "title": "SRC挖洞01--信息收集_1",
-        "url": "../../posts/76317812/",
-        "date": "2025-06-11"
-      },
-    
-      {
-        "title": "CTF--文件上传漏洞PLUS",
-        "url": "../../posts/4052251796/",
-        "date": "2025-06-07"
-      },
-    
-      {
-        "title": "SRC挖洞00",
-        "url": "../../posts/713376343/",
-        "date": "2025-06-03"
-      },
-    
-      {
-        "title": "C++学习02",
-        "url": "../../posts/3271170847/",
-        "date": "2025-06-02"
-      },
-    
-      {
-        "title": "Db8Gr的blog01",
-        "url": "../../posts/3709781461/",
-        "date": "2025-06-01"
-      },
-    
-      {
-        "title": "C++学习01",
-        "url": "../../posts/1542671013/",
-        "date": "2025-05-23"
-      },
-    
-      {
-        "title": "CTF--Web的请求头伪造（简单的Wp）",
-        "url": "../../posts/3089169962/",
-        "date": "2025-05-16"
-      },
-    
-      {
-        "title": "CTF-文件上传漏洞",
-        "url": "../../posts/951957238/",
-        "date": "2025-05-13"
-      },
-    
-      {
-        "title": "程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]",
-        "url": "../../posts/2569029955/",
-        "date": "2025-04-26"
-      },
-    
-      {
-        "title": "XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP",
-        "url": "../../posts/2599651092/",
-        "date": "2025-01-21"
-      },
-    
-      {
-        "title": "大学的近期Coding之旅及随笔(2024年)",
-        "url": "../../posts/1146697123/",
-        "date": "2024-10-24"
-      },
-    
-      {
-        "title": "第一次blog的Hello World(留作纪念~~)",
-        "url": "../../posts/4008351067/",
-        "date": "2024-10-13"
-      }
-    
-    ]
-    </script>
-  </section>
-
-
-</aside>
-
     
   </main>
 
@@ -806,196 +891,196 @@
 
   {
     "title": "汇编学习02",
-    "url": "../../posts/981996043/",
+    "url": "",
     "date": "2026-06-06",
     "text": "学习逆向RE的前置知识，之前用x64dbg看汇编，右上角的寄存器没咋看懂，这次来学习一下。"
   },
 
   {
     "title": "网谷杯安全极客大赛2025 NewRC4 WP",
-    "url": "../../posts/520274505/",
+    "url": "../520274505/",
     "date": "2026-04-14",
     "text": "记录在syc的第一天收集的逆向题目"
   },
 
   {
     "title": "浅谈逆向中关于位运算的常见问题",
-    "url": "../../posts/2751307781/",
+    "url": "../2751307781/",
     "date": "2026-03-11",
     "text": "今天做逆向发现的&0xFF运算，找了同类型的学习一下"
   },
 
   {
     "title": "第五届大学生信息安全竞赛-部分WP",
-    "url": "../../posts/2775448412/",
+    "url": "../2775448412/",
     "date": "2026-03-09",
     "text": "自己出的题的WP"
   },
 
   {
     "title": "2025ciscn初赛部分WP",
-    "url": "../../posts/1447712357/",
+    "url": "../1447712357/",
     "date": "2025-12-29",
     "text": "打ciscn&ccb，做了一天牢，还没做出多少，唉😔"
   },
 
   {
     "title": "Re练习之花指令",
-    "url": "../../posts/3037537631/",
+    "url": "../3037537631/",
     "date": "2025-12-17",
     "text": "关于Reverse中花指令的一些介绍以及例题讲解"
   },
 
   {
     "title": "MysteryFile-WP by Debu8ger",
-    "url": "../../posts/836249775/",
+    "url": "../836249775/",
     "date": "2025-12-17",
     "text": "ccb的选拔赛好难吖，就会一个misc，呜呜"
   },
 
   {
     "title": "ISCTF2025 部分题WP",
-    "url": "../../posts/353481578/",
+    "url": "../353481578/",
     "date": "2025-12-07",
     "text": "这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:("
   },
 
   {
     "title": "Re练习之ASM汇编逆向",
-    "url": "../../posts/2957710030/",
+    "url": "../2957710030/",
     "date": "2025-11-07",
     "text": "关于Reverse中ASM汇编的一些介绍以及例题讲解"
   },
 
   {
     "title": "PWN练习之ret2shellcode",
-    "url": "../../posts/2554455252/",
+    "url": "../2554455252/",
     "date": "2025-11-05",
     "text": "关于pwn栈溢出中三大类之一的ret3shellcode的介绍以及例题讲解"
   },
 
   {
     "title": "?CTF2025 week4部分WP",
-    "url": "../../posts/4126005536/",
+    "url": "../4126005536/",
     "date": "2025-11-01",
     "text": "打了?CTF2025,拿了第47，遗憾离场~"
   },
 
   {
     "title": "2025 XAUTCTF新生赛 rev&algo部分WP",
-    "url": "../../posts/3068727186/",
+    "url": "../3068727186/",
     "date": "2025-10-24",
     "text": "今年XAUTCTF新生赛rev&algo部分WP"
   },
 
   {
     "title": "?CTF2025 week1部分WP",
-    "url": "../../posts/3212483695/",
+    "url": "../3212483695/",
     "date": "2025-10-18",
     "text": "这次打了?CTF,week1只拿了前20，唉~"
   },
 
   {
     "title": "关于CTFers在CTF赛制下の求生指南--计算机基础",
-    "url": "../../posts/2308601283/",
+    "url": "../2308601283/",
     "date": "2025-09-30",
     "text": "近期在搞新生培训，为了不成为Cyber文盲，介绍一点前一年在CTF上的经验叭(doge)"
   },
 
   {
     "title": "汇编学习01",
-    "url": "../../posts/2743157681/",
+    "url": "../2743157681/",
     "date": "2025-07-18",
     "text": "学习逆向RE的前置知识，浅浅记录一下，不定时更新~"
   },
 
   {
     "title": "渗透测试01",
-    "url": "../../posts/4218951844/",
+    "url": "../4218951844/",
     "date": "2025-06-13",
     "text": "对渗透测试了解的第一课，一些基础知识~"
   },
 
   {
     "title": "SRC挖洞01--信息收集_1",
-    "url": "../../posts/76317812/",
+    "url": "../76317812/",
     "date": "2025-06-11",
     "text": "SRC挖洞第一步，知己知彼---信息收集"
   },
 
   {
     "title": "CTF--文件上传漏洞PLUS",
-    "url": "../../posts/4052251796/",
+    "url": "../4052251796/",
     "date": "2025-06-07",
     "text": "之前只是了解知识点，这回做了赛题才发现有很多没懂的..."
   },
 
   {
     "title": "SRC挖洞00",
-    "url": "../../posts/713376343/",
+    "url": "../713376343/",
     "date": "2025-06-03",
     "text": "只是简单的announce一下，开始学习SRC挖洞咯~~"
   },
 
   {
     "title": "C++学习02",
-    "url": "../../posts/3271170847/",
+    "url": "../3271170847/",
     "date": "2025-06-02",
     "text": "学习OOP时的一些知识点，涉及继承&多态&文件与流"
   },
 
   {
     "title": "Db8Gr的blog01",
-    "url": "../../posts/3709781461/",
+    "url": "../3709781461/",
     "date": "2025-06-01",
     "text": "...reboot..."
   },
 
   {
     "title": "C++学习01",
-    "url": "../../posts/1542671013/",
+    "url": "../1542671013/",
     "date": "2025-05-23",
     "text": "学习OOP时记录的一些知识点，涉及内存模型&函数"
   },
 
   {
     "title": "CTF--Web的请求头伪造（简单的Wp）",
-    "url": "../../posts/3089169962/",
+    "url": "../3089169962/",
     "date": "2025-05-16",
     "text": "Web的HTTP请求头伪造"
   },
 
   {
     "title": "CTF-文件上传漏洞",
-    "url": "../../posts/951957238/",
+    "url": "../951957238/",
     "date": "2025-05-13",
     "text": "文件上传漏洞之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。"
   },
 
   {
     "title": "程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]",
-    "url": "../../posts/2569029955/",
+    "url": "../2569029955/",
     "date": "2025-04-26",
     "text": "感觉写得真挺好的，“never too old to learn”！！！"
   },
 
   {
     "title": "XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP",
-    "url": "../../posts/2599651092/",
+    "url": "../2599651092/",
     "date": "2025-01-21",
     "text": "打了学校的校赛，拿了这届新生的NO.1，险胜，以下为个人部分WP..."
   },
 
   {
     "title": "大学的近期Coding之旅及随笔(2024年)",
-    "url": "../../posts/1146697123/",
+    "url": "../1146697123/",
     "date": "2024-10-24",
     "text": "也算是2024年1024程序员节的一篇投稿:)"
   },
 
   {
     "title": "第一次blog的Hello World(留作纪念~~)",
-    "url": "../../posts/4008351067/",
+    "url": "../4008351067/",
     "date": "2024-10-13",
     "text": "Hello blog~"
   }
