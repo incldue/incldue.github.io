@@ -118,6 +118,10 @@ var DB8GR_I18N = (function () {
     var resetChance = options.resetChance || 0.965;
     var ratioLimit = options.ratioLimit || 1.2;
     var speed = options.speed || 0.72;
+    var trailLength = options.trailLength || 18;
+    var tailOpacity = options.tailOpacity || 0.72;
+    var fontWeight = options.fontWeight || "700";
+    var shadowBlur = options.shadowBlur || 8;
     var drops = [];
     var raf = 0;
     var lastNow = 0;
@@ -136,13 +140,15 @@ var DB8GR_I18N = (function () {
       canvas.style.width = width + "px";
       canvas.style.height = height + "px";
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.font = fontSize + "px Consolas, Courier New, monospace";
+      ctx.font = fontWeight + " " + fontSize + "px Consolas, Courier New, monospace";
       ctx.textBaseline = "top";
+      ctx.shadowColor = mainColor;
+      ctx.shadowBlur = shadowBlur;
 
       columns = Math.ceil(width / fontSize);
       drops = [];
       for (var i = 0; i < columns; i += 1) {
-        drops[i] = Math.random() * -height;
+        drops[i] = Math.random() * -(height / fontSize);
       }
     }
 
@@ -164,15 +170,23 @@ var DB8GR_I18N = (function () {
       ctx.fillRect(0, 0, width, height);
 
       for (var i = 0; i < columns; i += 1) {
-        var text = chars[(Math.random() * chars.length) | 0];
         var x = i * fontSize;
-        var y = drops[i] * fontSize;
 
-        ctx.fillStyle = Math.random() > hotChance ? hotColor : mainColor;
-        ctx.fillText(text, x, y);
+        for (var tail = 0; tail < trailLength; tail += 1) {
+          var y = (drops[i] - tail) * fontSize;
+          if (y < -fontSize || y > height + fontSize) continue;
 
-        if (y > height && Math.random() > resetChance) {
-          drops[i] = 0;
+          var text = chars[(Math.random() * chars.length) | 0];
+          var fade = Math.pow(1 - (tail / trailLength), 1.75);
+          ctx.globalAlpha = tail === 0 ? 1 : fade * tailOpacity;
+          ctx.fillStyle = tail === 0 || Math.random() > hotChance ? hotColor : mainColor;
+          ctx.fillText(text, x, y);
+        }
+
+        ctx.globalAlpha = 1;
+
+        if ((drops[i] - trailLength) * fontSize > height && Math.random() > resetChance) {
+          drops[i] = Math.random() * -trailLength;
         }
         drops[i] += speed * delta;
       }
@@ -208,14 +222,18 @@ var DB8GR_I18N = (function () {
   function startAmbientRain() {
     if (stopAmbient) return;
     stopAmbient = startMatrix(ambientCanvas, {
-      fontSize: 42,
-      ratioLimit: 0.55,
-      speed: 0.32,
-      trail: "rgba(5, 9, 11, 0.24)",
+      fontSize: 20,
+      ratioLimit: 0.85,
+      speed: 0.58,
+      trail: "rgba(5, 9, 11, 0.16)",
       mainColor: "#008da8",
-      hotColor: "#5deaff",
-      hotChance: 0.992,
-      resetChance: 0.976
+      hotColor: "#e8fff2",
+      hotChance: 0.988,
+      resetChance: 0.982,
+      trailLength: 26,
+      tailOpacity: 0.68,
+      shadowBlur: 10,
+      chars: "01abcdefABCDEF{}[]<>/\\\\|#$%&*+-=rootbashgrep"
     });
   }
 
@@ -266,7 +284,9 @@ var DB8GR_I18N = (function () {
         mainColor: "#00d7ff",
         hotColor: "#e8fdff",
         hotChance: 0.98,
-        resetChance: 0.958
+        resetChance: 0.958,
+        trailLength: 18,
+        tailOpacity: 0.76
       });
       typeBoot(function () {
         onReady(function () {
@@ -328,9 +348,9 @@ var DB8GR_I18N = (function () {
     var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
     if (!viewportWidth || !viewportHeight) return;
 
-    var targetWidth = viewportWidth * 0.8;
+    var targetWidth = viewportWidth * 0.75;
     var heroHeight = Math.max(hero.getBoundingClientRect().height || 0, viewportHeight);
-    var targetHeight = heroHeight * 0.8;
+    var targetHeight = heroHeight * 0.75;
 
     frame.style.width = targetWidth.toFixed(2) + "px";
     logo.style.setProperty("--ascii-logo-size", baseFont + "px");
