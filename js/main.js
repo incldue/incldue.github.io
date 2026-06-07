@@ -311,6 +311,54 @@ var DB8GR_I18N = (function () {
 })();
 
 (function () {
+  var frame = document.querySelector(".ascii-frame");
+  var logo = document.querySelector(".ascii-logo");
+  var hero = document.querySelector(".terminal-hero");
+  if (!frame || !logo || !hero) return;
+
+  var baseFont = 16;
+  var minFont = 6;
+  var maxFont = 96;
+  var resizeRaf = 0;
+
+  function fitAsciiLogo() {
+    resizeRaf = 0;
+
+    var viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+    var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (!viewportWidth || !viewportHeight) return;
+
+    var targetWidth = viewportWidth * 0.8;
+    var heroHeight = Math.max(hero.getBoundingClientRect().height || 0, viewportHeight);
+    var targetHeight = heroHeight * 0.8;
+
+    frame.style.width = targetWidth.toFixed(2) + "px";
+    logo.style.setProperty("--ascii-logo-size", baseFont + "px");
+
+    var naturalWidth = logo.scrollWidth || logo.getBoundingClientRect().width;
+    var naturalHeight = logo.scrollHeight || logo.getBoundingClientRect().height;
+    if (!naturalWidth || !naturalHeight) return;
+
+    var fit = Math.min(targetWidth / naturalWidth, targetHeight / naturalHeight);
+    var fontSize = Math.max(minFont, Math.min(maxFont, baseFont * fit));
+    logo.style.setProperty("--ascii-logo-size", fontSize.toFixed(2) + "px");
+  }
+
+  function requestFit() {
+    if (resizeRaf) return;
+    resizeRaf = window.requestAnimationFrame(fitAsciiLogo);
+  }
+
+  requestFit();
+  window.addEventListener("resize", requestFit, { passive: true });
+  window.addEventListener("orientationchange", requestFit, { passive: true });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(requestFit).catch(function () {});
+  }
+})();
+
+(function () {
   var contentBlocks = document.querySelectorAll(".terminal-content");
   if (!contentBlocks.length) return;
 
