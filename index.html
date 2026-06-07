@@ -1,1427 +1,330 @@
-<!doctype html>
 
+<!DOCTYPE html>
 <html lang="en, zh-CN">
 <head>
   <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f7f3e9">
-<title>D&#39;b8Gr的小站~</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="h3llo_w0rld">
-
-
-<script>
-  (function () {
-    var accents = { green: 1, pink: 1, blue: 1, orange: 1, sakura: 1, black: 1 };
-    var match = document.cookie.match(/(?:^|;\s*)flatpaper-accent=([^;]+)/);
-    var accent = match ? decodeURIComponent(match[1]) : 'green';
-    if (!accents[accent]) accent = 'green';
-    document.documentElement.setAttribute('data-accent', accent);
-    try {
-      if (localStorage.getItem('flatpaper-mode') === 'dark') {
-        document.documentElement.classList.add('dark-mode');
-      }
-    } catch (e) {}
-  })();
-</script>
-
+  <title>D&#39;b8Gr的小站~</title>
+  
 <link rel="stylesheet" href="css/style.css">
 
-
   
-
-  
-
-  
-
-  
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
-
-<body
-  class="is-home tag-style-tape"
-  data-default-accent="green"
-  data-code-theme="dark"
-  data-note-style="flat"
-  data-note-icons="on"
->
-  <div class="page-grain"></div>
-  <header class="site-header">
+<body class="theme-db8gr layout-page">
+  <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
-  <button class="icon-button js-sidebar-toggle sidebar-toggle" type="button" aria-label="打开侧边栏" aria-controls="paper-sidebar-drawer" aria-expanded="false">
-    
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu" aria-hidden="true"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg>
-
-  </button>
-
-  <div class="brand">
-    <div class="brand-mark-wrapper">
-      
-        <button class="brand-mark" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="brand-nav-menu">
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg>
-
-        </button>
-        <div class="brand-nav-menu" id="brand-nav-menu" role="menu">
-          
-            <div class="brand-nav-group">
-              <div class="brand-nav-title">Project</div>
-              
-                <a role="menuitem" href="https://github.com/incldue" target="_blank" rel="noopener noreferrer">
-                  
-                    
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-
-                  
-                  <span>自己写的一些工具</span>
-                </a>
-              
-            </div>
-          
-        </div>
-      
-    </div>
-    <a class="brand-text" href="index.html">D&#39;b8Gr的小站~</a>
+<div class="boot-loader" id="boot-loader" data-once="true">
+  <canvas id="matrix-rain" aria-hidden="true"></canvas>
+  <div class="boot-glass" role="status" aria-live="polite">
+    <span class="boot-prefix">root@debu8ger:</span><span id="boot-type" data-text="initing..."></span><span class="boot-cursor">_</span>
   </div>
+</div>
 
-  <nav class="site-nav" aria-label="Primary navigation">
-    
-      
-        <a class="site-nav-link active" href="index.html">
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9 21v-6h6v6"/></svg>
 
-          <span>首页</span>
-        </a>
-      
-    
-      
-        <a class="site-nav-link " href="/links/">
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-
-          <span>友链</span>
-        </a>
-      
-    
-      
-        <a class="site-nav-link " href="/about/">
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-
-          <span>关于</span>
-        </a>
-      
-    
-      
-        <div class="site-nav-item has-children">
-          <button class="site-nav-link site-nav-parent" type="button" aria-haspopup="true" aria-expanded="false">
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-            <span>文章</span>
-          </button>
-          <div class="site-nav-menu" role="menu">
-            
-              <a role="menuitem" class="" href="/categories/">
-                
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-                <span>分类</span>
-              </a>
-            
-              <a role="menuitem" class="" href="/tags/">
-                
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
-
-                <span>标签</span>
-              </a>
-            
-              <a role="menuitem" class="" href="/archives/">
-                
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
-
-                <span>归档</span>
-              </a>
-            
-          </div>
-        </div>
-      
-    
-  </nav>
-
-  <div class="header-tools">
-    <button class="icon-button js-search-open" type="button" aria-label="搜索文章">
-      
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-
-    </button>
-    <div class="accent-picker">
-      <button class="icon-button accent-toggle" type="button" aria-label="选择主题色" title="选择主题色" aria-haspopup="true" aria-expanded="false" aria-controls="accent-menu">
-        
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 5.9 2 10.8c0 3.3 2.7 6 6 6h1.2c.8 0 1.4.6 1.4 1.4 0 .4-.2.8-.2 1.2 0 .8.6 1.6 1.6 1.6 5.5 0 10-4.2 10-9.4C22 6.3 17.5 2 12 2Z"/></svg>
-
+  
+<header class="terminal-nav" id="db8gr-nav">
+  <div class="nav-glass">
+    <div class="nav-head">
+      <a class="nav-brand" href="index.html" aria-label="Back to home">
+        <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <div class="accent-menu" id="accent-menu" role="menu" aria-label="主题色">
-        <button type="button" class="accent-option" role="menuitemradio" aria-label="绿色" aria-checked="false" data-accent-option="green">
-          <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="accent-option" role="menuitemradio" aria-label="粉色" aria-checked="false" data-accent-option="pink">
-          <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="accent-option" role="menuitemradio" aria-label="樱花粉" aria-checked="false" data-accent-option="sakura">
-          <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="accent-option" role="menuitemradio" aria-label="蓝色" aria-checked="false" data-accent-option="blue">
-          <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="accent-option" role="menuitemradio" aria-label="橙色" aria-checked="false" data-accent-option="orange">
-          <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
-        </button>
-        <button type="button" class="accent-option" role="menuitemradio" aria-label="黑色" aria-checked="false" data-accent-option="black">
-          <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
-        </button>
-      </div>
     </div>
-    <button class="theme-toggle" type="button" aria-label="切换颜色模式">
-      <span class="theme-icon theme-icon--sun">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-</span>
-      <span class="theme-icon theme-icon--moon">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-</span>
-    </button>
+    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <div class="nav-item nav-dropdown">
+        <a class="nav-link dropdown-trigger" href="/archives/">Posts</a>
+        <div class="dropdown-menu" aria-label="Posts submenu">
+          <a href="/categories/">Categories</a>
+          <a href="/tags/">Tags</a>
+          <a href="/archives/">Archives</a>
+        </div>
+      </div>
+      <a class="nav-link" href="/links/">Friends</a>
+      <a class="nav-link" href="/about/">About</a>
+    </nav>
   </div>
 </header>
 
-
-  
-  <main class="paper-shell ">
+  <main class="site-main">
     
 
-<aside id="paper-sidebar-drawer" class="paper-sidebar paper-sidebar--right" aria-label="侧边栏">
-  <div class="drawer-toolbar" aria-label="侧边栏工具">
-    <div class="drawer-accent-options" role="group" aria-label="主题色">
-      <button type="button" class="accent-option" aria-label="绿色" aria-pressed="false" data-accent-option="green">
-        <span class="accent-swatch accent-swatch--green" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="accent-option" aria-label="粉色" aria-pressed="false" data-accent-option="pink">
-        <span class="accent-swatch accent-swatch--pink" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="accent-option" aria-label="樱花粉" aria-pressed="false" data-accent-option="sakura">
-        <span class="accent-swatch accent-swatch--sakura" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="accent-option" aria-label="蓝色" aria-pressed="false" data-accent-option="blue">
-        <span class="accent-swatch accent-swatch--blue" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="accent-option" aria-label="橙色" aria-pressed="false" data-accent-option="orange">
-        <span class="accent-swatch accent-swatch--orange" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="accent-option" aria-label="黑色" aria-pressed="false" data-accent-option="black">
-        <span class="accent-swatch accent-swatch--black" aria-hidden="true"></span>
-      </button>
+<section class="terminal-hero" id="top">
+  <div class="hero-panel">
+    <p class="terminal-line"><span class="line-prefix">root@debu8ger:~$</span> ./blog --boot --theme=db8gr_terminal</p>
+    <div class="ascii-frame">
+      <pre class="ascii-logo" aria-label="D&#39;b8Gr">
+██████╗ ██╗██████╗  █████╗  ██████╗ ██████╗
+██╔══██╗╚═╝██╔══██╗██╔══██╗██╔════╝ ██╔══██╗
+██║  ██║   ██████╔╝╚█████╔╝██║  ███╗██████╔╝
+██║  ██║   ██╔══██╗██╔══██╗██║   ██║██╔══██╗
+██████╔╝   ██████╔╝╚█████╔╝╚██████╔╝██║  ██║
+╚═════╝    ╚═════╝  ╚════╝  ╚═════╝ ╚═╝  ╚═╝
+
+      </pre>
     </div>
-    <button class="icon-button drawer-close js-sidebar-close" type="button" aria-label="关闭侧边栏">
-      
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-
-    </button>
+    <div class="hero-terminal-input" id="visitor-terminal" aria-label="Simulated terminal input"
+      data-home="index.html"
+      data-posts="/archives/"
+      data-archives="/archives/"
+      data-tags="/tags/"
+      data-categories="/categories/"
+      data-about="/about/"
+      data-links="/links/"
+      data-search="/search.json">
+      <div class="visitor-output" id="visitor-output">
+        <div><span class="visitor-muted">type</span> <span class="visitor-command">help</span> <span class="visitor-muted">to list commands</span></div>
+      </div>
+      <form class="visitor-form" id="visitor-form" autocomplete="off">
+        <span class="visitor-prompt">guest@visitor:</span><span class="visitor-path">~$</span>
+        <input class="visitor-input" id="visitor-input" name="command" type="text" placeholder="help" spellcheck="false" aria-label="Terminal command">
+        <span class="visitor-cursor" aria-hidden="true">_</span>
+      </form>
+    </div>
   </div>
+</section>
 
-  <section class="side-card nav-card">
-    <nav class="site-nav-drawer" aria-label="移动端导航">
+
+<section class="home-feed" id="posts">
+  <div class="post-column">
+    
       
         
-          <a class="active" href="index.html">
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/><path d="M9 21v-6h6v6"/></svg>
-
-            <span>首页</span>
-          </a>
-        
-      
-        
-          <a class="" href="/links/">
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-
-            <span>友链</span>
-          </a>
-        
-      
-        
-          <a class="" href="/about/">
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-
-            <span>关于</span>
-          </a>
-        
-      
-        
-          <div class="drawer-nav-group">
-            <button class="drawer-nav-parent" type="button" aria-expanded="false">
+        <a class="post-card" href="posts/981996043/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2026-06-06</time>
               
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-              <span>文章</span>
-            </button>
-            <div class="drawer-nav-children">
-              
-                <a class="" href="/categories/">
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-                  <span>分类</span>
-                </a>
-              
-                <a class="" href="/tags/">
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
-
-                  <span>标签</span>
-                </a>
-              
-                <a class="" href="/archives/">
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
-
-                  <span>归档</span>
-                </a>
+                <span>/</span>
+                <span>CTF相关</span>
               
             </div>
-          </div>
-        
-      
-    </nav>
-  </section>
-
-  <section class="side-card profile-card">
-    
-      <div class="avatar avatar--image avatar--circle">
-        <img src="/static/avatar/avatar0.jpg" alt="debu8ger" loading="lazy" referrerpolicy="no-referrer">
-      </div>
-    
-    <h3>debu8ger</h3>
-    <p class="profile-role">菜菜的CTFer</p>
-    <p>I hack,therefore I am.</p>
-    
-      <div class="site-info" aria-label="站点信息">
-        
-          
-            <a class="site-info__item" href="/archives/">
-              <strong>28</strong>
-              <span>文章</span>
-            </a>
-          
-        
-          
-            <a class="site-info__item" href="/categories/">
-              <strong>4</strong>
-              <span>分类</span>
-            </a>
-          
-        
-          
-            <a class="site-info__item" href="/tags/">
-              <strong>12</strong>
-              <span>标签</span>
-            </a>
-          
-        
-      </div>
-    
-    <div class="socials">
-      
-        <a href="https://github.com/incldue" target="_blank" rel="noopener" aria-label="GitHub">
-          
+            <h2 class="post-title">汇编学习02</h2>
+            <div class="post-excerpt">学习逆向RE的前置知识，之前用x64dbg看汇编，右上角的寄存器没咋看懂，这次来学习一下。</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
             
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-
-          
-        </a>
-      
-        <a href="mailto:52463398@outlook.com" target="_blank" rel="noopener" aria-label="Email">
-          
+              <img src="/images/huibian1.png" alt="" loading="lazy" decoding="async">
             
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-
-          
+          </figure>
         </a>
       
-        <a href="https://x.com/JonathanHu70782" target="_blank" rel="noopener" aria-label="X">
-          
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-x-twitter" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-
-          
-        </a>
-      
-        <a href="https://youtube.com/@JonathanHu-b8l" target="_blank" rel="noopener" aria-label="YouTube">
-          
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-youtube" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-
-          
-        </a>
-      
-        <a href="https://space.bilibili.com/2114835832" target="_blank" rel="noopener" aria-label="Bilibili">
-          
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-bilibili" aria-hidden="true"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.787 1.894v7.52c.018.748.28 1.38.787 1.887.507.506 1.134.769 1.88.787h13.334c.746-.018 1.373-.28 1.88-.787.506-.507.769-1.13.787-1.887v-7.52c-.018-.747-.28-1.378-.787-1.894-.507-.515-1.134-.773-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.387-.947.258-.257.574-.386.946-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg>
-
-          
-        </a>
-      
-        <a href="https://www.weibo.com/u/7959351651" target="_blank" rel="noopener" aria-label="Weibo">
-          
-            
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-weibo" aria-hidden="true"><path d="M10.098 20.323c-3.977.391-7.414-1.406-7.672-4.02-.259-2.609 2.759-5.047 6.74-5.441 3.979-.394 7.413 1.404 7.671 4.018.259 2.6-2.759 5.046-6.737 5.443zm9.482-9.227c-.34-.1-.572-.169-.395-.622.385-.992.425-1.844.011-2.448-.781-1.139-2.918-1.076-5.364-.046 0 0-.766.335-.57-.27.378-1.214.323-2.231-.266-2.819-1.342-1.343-4.916.045-7.983 3.111C2.715 10.302 1.398 12.79 1.398 14.939c0 4.107 5.262 6.608 10.408 6.608 6.738 0 11.229-3.926 11.229-7.034 0-1.878-1.581-2.94-3.456-3.408zm1.378-6.51c-1.671-1.854-4.115-2.541-6.376-2.069-.522.109-.857.626-.748 1.146.11.522.626.858 1.149.748 1.609-.336 3.351.154 4.546 1.475 1.195 1.32 1.514 3.108.989 4.65-.171.5.097 1.044.598 1.214.5.171 1.044-.097 1.213-.598.739-2.166.292-4.712-1.378-6.566zm-2.873 2.585c-.814-.903-2.013-1.246-3.114-1.014a.835.835 0 1 0 .342 1.634c.539-.114 1.125.058 1.519.494.396.439.477 1.039.272 1.541-.171.426.034.91.46 1.084.422.17.908-.034 1.083-.46.418-1.025.252-2.246-.554-3.279zM9.34 13.812c-2.187.279-3.834 1.74-3.681 3.265.155 1.523 2.057 2.533 4.243 2.255 2.188-.279 3.835-1.74 3.681-3.265-.156-1.523-2.057-2.534-4.243-2.255zm-.453 4.439c-.51.078-1.005-.119-1.105-.439-.099-.32.234-.643.745-.722.51-.079 1.005.119 1.105.438.099.32-.234.643-.745.722zm.972-1.667c-.183.103-.41.085-.508-.041-.097-.125-.024-.31.159-.413.184-.103.41-.084.508.041.097.126.025.31-.159.413z"/></svg>
-
-          
-        </a>
-      
-      
-        <a href="/atom.xml" aria-label="RSS feed" title="RSS">
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-
-        </a>
-      
-    </div>
-  </section>
-
-  
-    <section class="side-card brand-link-card" aria-label="站点链接">
-      
-        <div class="brand-link-group">
-          <div class="brand-link-title">Project</div>
-          <div class="brand-link-list">
-            
-              <a href="https://github.com/incldue" target="_blank" rel="noopener noreferrer">
-                
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-
-                
-                <span>自己写的一些工具</span>
-              </a>
-            
-          </div>
-        </div>
-      
-    </section>
-  
-
-  
-    <section class="side-card categories-card">
-      <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-分类</h2>
-      
-        <a href="categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/">
-          <span class="dot dot-0"></span>
-          <strong>程序设计</strong>
-          <em>2</em>
-        </a>
-      
-        <a href="categories/CTF%E7%9B%B8%E5%85%B3/">
-          <span class="dot dot-1"></span>
-          <strong>CTF相关</strong>
-          <em>19</em>
-        </a>
-      
-        <a href="categories/%E6%9D%82%E8%B0%88/">
-          <span class="dot dot-2"></span>
-          <strong>杂谈</strong>
-          <em>4</em>
-        </a>
-      
-        <a href="categories/%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3/">
-          <span class="dot dot-3"></span>
-          <strong>安全相关</strong>
-          <em>3</em>
-        </a>
-      
-    </section>
-
-    <section class="side-card tag-card">
-      <header class="tag-card__head">
-        <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
-热门标签</h2>
-        <a class="tag-card__more" href="tags/">
-          <span>查看全部</span>
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-
-        </a>
-      </header>
-      <div class="tag-cloud">
         
-        
-          <a class="tag-chip tag-chip-0" href="tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">CTF知识分享</a>
-        
-          <a class="tag-chip tag-chip-1" href="tags/%E6%AF%94%E8%B5%9B%E4%B8%AA%E4%BA%BAWP/">比赛个人WP</a>
-        
-          <a class="tag-chip tag-chip-2" href="tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">日常练习</a>
-        
-          <a class="tag-chip tag-chip-3" href="tags/%E9%9A%8F%E7%AC%94/">随笔</a>
-        
-          <a class="tag-chip tag-chip-4" href="tags/Reverse/">Reverse</a>
-        
-          <a class="tag-chip tag-chip-5" href="tags/%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/">编程学习</a>
-        
-          <a class="tag-chip tag-chip-0" href="tags/SRC%E6%8C%96%E6%B4%9E/">SRC挖洞</a>
-        
-          <a class="tag-chip tag-chip-1" href="tags/CTF%E8%B5%9B%E9%A2%98/">CTF赛题</a>
-        
-          <a class="tag-chip tag-chip-2" href="tags/pwn/">pwn</a>
-        
-          <a class="tag-chip tag-chip-3" href="tags/CTF%E5%85%A5%E9%97%A8/">CTF入门</a>
-        
-          <a class="tag-chip tag-chip-4" href="tags/%E5%93%B2%E6%80%9D/">哲思</a>
-        
-          <a class="tag-chip tag-chip-5" href="tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a>
-        
-      </div>
-    </section>
-  
-
-  
-
-</aside>
-
-    <section class="paper-main">
-      
-
-
-  <section
-    class="featured-carousel has-multiple"
-    data-autoplay="5000"
-    aria-label="精选文章"
-  >
-    <div class="featured-track">
-      
-        <article class="featured-paper is-active" data-index="0">
-          <span class="tape tape--top-left" aria-hidden="true"></span>
-          <div class="featured-copy">
-            <span class="label-pill">置顶</span>
-            <h1><a href="posts/2308601283/">关于CTFers在CTF赛制下の求生指南--计算机基础</a></h1>
-            <p>近期在搞新生培训，为了不成为Cyber文盲，介绍一点前一年在CTF上的经验叭(doge)</p>
-            <div class="meta-line">
-              <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-09-30</span>
+        <a class="post-card" href="posts/520274505/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2026-04-14</time>
               
-                <span class="meta-cat">
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-                  <a class="meta-cat-link" href="categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
-                </span>
+                <span>/</span>
+                <span>CTF相关</span>
               
-              <a class="read-more" href="posts/2308601283/"><span>阅读全文</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-</a>
             </div>
-          </div>
-          <div class="featured-thumb featured-thumb--zigzag">
+            <h2 class="post-title">网谷杯安全极客大赛2025 NewRC4 WP</h2>
+            <div class="post-excerpt">记录在syc的第一天收集的逆向题目</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
             
-<div class="paper-thumb paper-thumb-0 paper-thumb--large paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/cover/hacker.jpg" alt="关于CTFers在CTF赛制下の求生指南--计算机基础" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-          </div>
-        </article>
+              <img src="/images/syc_1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
       
-        <article class="featured-paper" data-index="1">
-          <span class="tape tape--top-left" aria-hidden="true"></span>
-          <div class="featured-copy">
-            <span class="label-pill">置顶</span>
-            <h1><a href="posts/2751307781/">浅谈逆向中关于位运算的常见问题</a></h1>
-            <p>今天做逆向发现的&amp;0xFF运算，找了同类型的学习一下</p>
-            <div class="meta-line">
-              <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2026-03-11</span>
+        
+        <a class="post-card" href="posts/2751307781/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2026-03-11</time>
               
-                <span class="meta-cat">
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-                  <a class="meta-cat-link" href="categories/CTF%E7%9B%B8%E5%85%B3/">CTF相关</a>
-                </span>
+                <span>/</span>
+                <span>CTF相关</span>
               
-              <a class="read-more" href="posts/2751307781/"><span>阅读全文</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-</a>
             </div>
-          </div>
-          <div class="featured-thumb featured-thumb--zigzag">
+            <h2 class="post-title">浅谈逆向中关于位运算的常见问题</h2>
+            <div class="post-excerpt">今天做逆向发现的&0xFF运算，找了同类型的学习一下</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
             
-<div class="paper-thumb paper-thumb-1 paper-thumb--large paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/weiyunsuan1.png" alt="浅谈逆向中关于位运算的常见问题" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-          </div>
-        </article>
+              <img src="/images/weiyunsuan1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
       
-        <article class="featured-paper" data-index="2">
-          <span class="tape tape--top-left" aria-hidden="true"></span>
-          <div class="featured-copy">
-            <span class="label-pill">置顶</span>
-            <h1><a href="posts/2569029955/">程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]</a></h1>
-            <p>感觉写得真挺好的，“never too old to learn”！！！</p>
-            <div class="meta-line">
-              <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-04-26</span>
+        
+        <a class="post-card" href="posts/2775448412/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2026-03-09</time>
               
-                <span class="meta-cat">
-                  
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-
-                  <a class="meta-cat-link" href="categories/%E6%9D%82%E8%B0%88/">杂谈</a>
-                </span>
+                <span>/</span>
+                <span>CTF相关</span>
               
-              <a class="read-more" href="posts/2569029955/"><span>阅读全文</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-</a>
             </div>
-          </div>
-          <div class="featured-thumb featured-thumb--zigzag">
+            <h2 class="post-title">第五届大学生信息安全竞赛-部分WP</h2>
+            <div class="post-excerpt">自己出的题的WP</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
             
-<div class="paper-thumb paper-thumb-2 paper-thumb--large paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/cover/sunrise_WallpapersCraft_001_abc81286.jpg" alt="程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-          </div>
-        </article>
+              <img src="/images/xiaosai_re1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
       
-    </div>
-
-    
-      <button type="button" class="carousel-arrow carousel-prev" aria-label="上一张">
         
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-
-      </button>
-      <button type="button" class="carousel-arrow carousel-next" aria-label="下一张">
+        <a class="post-card" href="posts/1447712357/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2025-12-29</time>
+              
+                <span>/</span>
+                <span>CTF相关</span>
+              
+            </div>
+            <h2 class="post-title">2025ciscn初赛部分WP</h2>
+            <div class="post-excerpt">打ciscn&ccb，做了一天牢，还没做出多少，唉😔</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
+            
+              <img src="/images/ccb_re1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
+      
         
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-
-      </button>
-      <div class="carousel-dots" role="tablist">
+        <a class="post-card" href="posts/3037537631/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2025-12-17</time>
+              
+                <span>/</span>
+                <span>CTF相关</span>
+              
+            </div>
+            <h2 class="post-title">Re练习之花指令</h2>
+            <div class="post-excerpt">关于Reverse中花指令的一些介绍以及例题讲解</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
+            
+              <img src="/images/train_re2.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
+      
         
-          <button type="button" class="carousel-dot is-active" data-index="0" aria-label="第 1 张"></button>
+        <a class="post-card" href="posts/836249775/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2025-12-17</time>
+              
+                <span>/</span>
+                <span>CTF相关</span>
+              
+            </div>
+            <h2 class="post-title">MysteryFile-WP by Debu8ger</h2>
+            <div class="post-excerpt">ccb的选拔赛好难吖，就会一个misc，呜呜</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
+            
+              <img src="/images/xuanba_1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
+      
         
-          <button type="button" class="carousel-dot" data-index="1" aria-label="第 2 张"></button>
+        <a class="post-card" href="posts/353481578/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2025-12-07</time>
+              
+                <span>/</span>
+                <span>CTF相关</span>
+              
+            </div>
+            <h2 class="post-title">ISCTF2025 部分题WP</h2>
+            <div class="post-excerpt">这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:(</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
+            
+              <img src="/images/ISCTF-re1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
+      
         
-          <button type="button" class="carousel-dot" data-index="2" aria-label="第 3 张"></button>
+        <a class="post-card" href="posts/2957710030/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2025-11-07</time>
+              
+                <span>/</span>
+                <span>CTF相关</span>
+              
+            </div>
+            <h2 class="post-title">Re练习之ASM汇编逆向</h2>
+            <div class="post-excerpt">关于Reverse中ASM汇编的一些介绍以及例题讲解</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
+            
+              <img src="/images/re_lian1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
+      
         
-      </div>
-    
-  </section>
-
-
-
-  <section class="section-head">
-    <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
-最新文章</h2>
-  </section>
-
-
-
-  <div class="post-list">
-    
+        <a class="post-card" href="posts/2554455252/">
+          <article class="post-card-body">
+            <div class="post-meta">
+              <time>2025-11-05</time>
+              
+                <span>/</span>
+                <span>CTF相关</span>
+              
+            </div>
+            <h2 class="post-title">PWN练习之ret2shellcode</h2>
+            <div class="post-excerpt">关于pwn栈溢出中三大类之一的ret3shellcode的介绍以及例题讲解</div>
+          </article>
+          <figure class="post-visual" aria-hidden="true">
+            
+              <img src="/images/pwn1.png" alt="" loading="lazy" decoding="async">
+            
+          </figure>
+        </a>
       
-<a class="post-card" href="posts/981996043/" data-title="汇编学习02" aria-label="汇编学习02">
-  <span class="post-thumb-link" aria-hidden="true">
     
-<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/huibian1.png" alt="汇编学习02" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>汇编学习02</h3>
-    <p>学习逆向RE的前置知识，之前用x64dbg看汇编，右上角的寄存器没咋看懂，这次来学习一下。</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2026-06-06</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
 
     
-      
-<a class="post-card" href="posts/520274505/" data-title="网谷杯安全极客大赛2025 NewRC4 WP" aria-label="网谷杯安全极客大赛2025 NewRC4 WP">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-1 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/syc_1.png" alt="网谷杯安全极客大赛2025 NewRC4 WP" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>网谷杯安全极客大赛2025 NewRC4 WP</h3>
-    <p>记录在syc的第一天收集的逆向题目</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2026-04-14</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/2751307781/" data-title="浅谈逆向中关于位运算的常见问题" aria-label="浅谈逆向中关于位运算的常见问题">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-2 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/weiyunsuan1.png" alt="浅谈逆向中关于位运算的常见问题" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>浅谈逆向中关于位运算的常见问题</h3>
-    <p>今天做逆向发现的&amp;0xFF运算，找了同类型的学习一下</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2026-03-11</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/2775448412/" data-title="第五届大学生信息安全竞赛-部分WP" aria-label="第五届大学生信息安全竞赛-部分WP">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/xiaosai_re1.png" alt="第五届大学生信息安全竞赛-部分WP" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>第五届大学生信息安全竞赛-部分WP</h3>
-    <p>自己出的题的WP</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2026-03-09</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/1447712357/" data-title="2025ciscn初赛部分WP" aria-label="2025ciscn初赛部分WP">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-1 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/ccb_re1.png" alt="2025ciscn初赛部分WP" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>2025ciscn初赛部分WP</h3>
-    <p>打ciscn&amp;ccb，做了一天牢，还没做出多少，唉😔</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-12-29</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/3037537631/" data-title="Re练习之花指令" aria-label="Re练习之花指令">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-2 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/train_re2.png" alt="Re练习之花指令" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>Re练习之花指令</h3>
-    <p>关于Reverse中花指令的一些介绍以及例题讲解</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-12-17</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/836249775/" data-title="MysteryFile-WP by Debu8ger" aria-label="MysteryFile-WP by Debu8ger">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/xuanba_1.png" alt="MysteryFile-WP by Debu8ger" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>MysteryFile-WP by Debu8ger</h3>
-    <p>ccb的选拔赛好难吖，就会一个misc，呜呜</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-12-17</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/353481578/" data-title="ISCTF2025 部分题WP" aria-label="ISCTF2025 部分题WP">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-1 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/ISCTF-re1.png" alt="ISCTF2025 部分题WP" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>ISCTF2025 部分题WP</h3>
-    <p>这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:(</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-12-07</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/2957710030/" data-title="Re练习之ASM汇编逆向" aria-label="Re练习之ASM汇编逆向">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-2 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/re_lian1.png" alt="Re练习之ASM汇编逆向" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>Re练习之ASM汇编逆向</h3>
-    <p>关于Reverse中ASM汇编的一些介绍以及例题讲解</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-11-07</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-      
-<a class="post-card" href="posts/2554455252/" data-title="PWN练习之ret2shellcode" aria-label="PWN练习之ret2shellcode">
-  <span class="post-thumb-link" aria-hidden="true">
-    
-<div class="paper-thumb paper-thumb-0 paper-thumb--cover">
-  
-    <img class="paper-thumb__img" src="/images/pwn1.png" alt="PWN练习之ret2shellcode" loading="lazy" referrerpolicy="no-referrer">
-  
-</div>
-
-  </span>
-  <div class="post-card-copy">
-    <h3>PWN练习之ret2shellcode</h3>
-    <p>关于pwn栈溢出中三大类之一的ret3shellcode的介绍以及例题讲解</p>
-    <div class="meta-line">
-      <span class="meta-date">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
-2025-11-05</span>
-      <span class="meta-cat">
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-CTF相关</span>
-    </div>
-  </div>
-</a>
-
-    
-  </div>
-
-
-
-  <nav class="pager" aria-label="文章分页">
-    
-      <span class="pager-link pager-link--prev is-disabled" aria-disabled="true">
+      <nav class="pager" aria-label="Pagination">
         
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-
-        <span>上一页</span>
-      </span>
-    
-
-    <span class="pager-pages">1 / 3</span>
-
-    
-      <a class="pager-link pager-link--next" href="page/2/">
-        <span>下一页</span>
         
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-
-      </a>
-    
-  </nav>
-
-
-      
-
-
-    </section>
-    
-      <aside class="paper-sidebar paper-sidebar--left">
-  
-    
-    <section class="welcome-card">
-      <div class="welcome-thumb welcome-thumb--image" aria-hidden="true">
+          <a href="page/2/">older &gt;</a>
         
-          <img src="/static/bgimage/nature_WallpapersCraft_001_a920e029.jpg" alt="" loading="lazy" referrerpolicy="no-referrer">
-        
-      </div>
-      <p class="hello"><span class="green-dot"></span>学习记录</p>
-      <h1>D&#39;b8Gr的小站~</h1>
-      <p class="welcome-text">一点一点记录我的cyberssecurity学习记录。</p>
-      <a class="welcome-cta" href="archives/"><span>开始阅读</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-</a>
-    </section>
-  
-  
+      </nav>
+    
+  </div>
+  <aside class="feed-spacer" aria-hidden="true"></aside>
+</section>
 
-  <section class="side-card recent-card" data-random-posts-limit="6">
-    <h2>
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle" aria-hidden="true"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.6-8.6C14.1 6.6 15.2 6 16.6 6H22"/><path d="M2 6h1.9c.9 0 1.8.4 2.4 1.1l1.4 1.8"/><path d="M22 18h-5.4c-1.3 0-2.5-.6-3.3-1.7l-.5-.7"/></svg>
-随机文章</h2>
-    <ul class="recent-list js-random-posts">
-      
-        <li>
-          <a class="recent-item" href="posts/981996043/">
-            <strong>汇编学习02</strong>
-            <em>2026-06-06</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="posts/520274505/">
-            <strong>网谷杯安全极客大赛2025 NewRC4 WP</strong>
-            <em>2026-04-14</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="posts/2751307781/">
-            <strong>浅谈逆向中关于位运算的常见问题</strong>
-            <em>2026-03-11</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="posts/2775448412/">
-            <strong>第五届大学生信息安全竞赛-部分WP</strong>
-            <em>2026-03-09</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="posts/1447712357/">
-            <strong>2025ciscn初赛部分WP</strong>
-            <em>2025-12-29</em>
-          </a>
-        </li>
-      
-        <li>
-          <a class="recent-item" href="posts/3037537631/">
-            <strong>Re练习之花指令</strong>
-            <em>2025-12-17</em>
-          </a>
-        </li>
-      
-    </ul>
-    <script type="application/json" class="js-random-posts-data">
-    [
-    
-      {
-        "title": "汇编学习02",
-        "url": "posts/981996043/",
-        "date": "2026-06-06"
-      },
-    
-      {
-        "title": "网谷杯安全极客大赛2025 NewRC4 WP",
-        "url": "posts/520274505/",
-        "date": "2026-04-14"
-      },
-    
-      {
-        "title": "浅谈逆向中关于位运算的常见问题",
-        "url": "posts/2751307781/",
-        "date": "2026-03-11"
-      },
-    
-      {
-        "title": "第五届大学生信息安全竞赛-部分WP",
-        "url": "posts/2775448412/",
-        "date": "2026-03-09"
-      },
-    
-      {
-        "title": "2025ciscn初赛部分WP",
-        "url": "posts/1447712357/",
-        "date": "2025-12-29"
-      },
-    
-      {
-        "title": "Re练习之花指令",
-        "url": "posts/3037537631/",
-        "date": "2025-12-17"
-      },
-    
-      {
-        "title": "MysteryFile-WP by Debu8ger",
-        "url": "posts/836249775/",
-        "date": "2025-12-17"
-      },
-    
-      {
-        "title": "ISCTF2025 部分题WP",
-        "url": "posts/353481578/",
-        "date": "2025-12-07"
-      },
-    
-      {
-        "title": "Re练习之ASM汇编逆向",
-        "url": "posts/2957710030/",
-        "date": "2025-11-07"
-      },
-    
-      {
-        "title": "PWN练习之ret2shellcode",
-        "url": "posts/2554455252/",
-        "date": "2025-11-05"
-      },
-    
-      {
-        "title": "?CTF2025 week4部分WP",
-        "url": "posts/4126005536/",
-        "date": "2025-11-01"
-      },
-    
-      {
-        "title": "2025 XAUTCTF新生赛 rev&algo部分WP",
-        "url": "posts/3068727186/",
-        "date": "2025-10-24"
-      },
-    
-      {
-        "title": "?CTF2025 week1部分WP",
-        "url": "posts/3212483695/",
-        "date": "2025-10-18"
-      },
-    
-      {
-        "title": "关于CTFers在CTF赛制下の求生指南--计算机基础",
-        "url": "posts/2308601283/",
-        "date": "2025-09-30"
-      },
-    
-      {
-        "title": "汇编学习01",
-        "url": "posts/2743157681/",
-        "date": "2025-07-18"
-      },
-    
-      {
-        "title": "渗透测试01",
-        "url": "posts/4218951844/",
-        "date": "2025-06-13"
-      },
-    
-      {
-        "title": "SRC挖洞01--信息收集_1",
-        "url": "posts/76317812/",
-        "date": "2025-06-11"
-      },
-    
-      {
-        "title": "CTF--文件上传漏洞PLUS",
-        "url": "posts/4052251796/",
-        "date": "2025-06-07"
-      },
-    
-      {
-        "title": "SRC挖洞00",
-        "url": "posts/713376343/",
-        "date": "2025-06-03"
-      },
-    
-      {
-        "title": "C++学习02",
-        "url": "posts/3271170847/",
-        "date": "2025-06-02"
-      },
-    
-      {
-        "title": "Db8Gr的blog01",
-        "url": "posts/3709781461/",
-        "date": "2025-06-01"
-      },
-    
-      {
-        "title": "C++学习01",
-        "url": "posts/1542671013/",
-        "date": "2025-05-23"
-      },
-    
-      {
-        "title": "CTF--Web的请求头伪造（简单的Wp）",
-        "url": "posts/3089169962/",
-        "date": "2025-05-16"
-      },
-    
-      {
-        "title": "CTF-文件上传漏洞",
-        "url": "posts/951957238/",
-        "date": "2025-05-13"
-      },
-    
-      {
-        "title": "程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]",
-        "url": "posts/2569029955/",
-        "date": "2025-04-26"
-      },
-    
-      {
-        "title": "XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP",
-        "url": "posts/2599651092/",
-        "date": "2025-01-21"
-      },
-    
-      {
-        "title": "大学的近期Coding之旅及随笔(2024年)",
-        "url": "posts/1146697123/",
-        "date": "2024-10-24"
-      },
-    
-      {
-        "title": "第一次blog的Hello World(留作纪念~~)",
-        "url": "posts/4008351067/",
-        "date": "2024-10-13"
-      }
-    
-    ]
-    </script>
-  </section>
-
-
-</aside>
-
-    
   </main>
-
-  <div class="sidebar-backdrop js-sidebar-close" aria-hidden="true"></div>
-
-  
-<footer class="site-footer">
-  <span class="site-footer__left">© 2026 By debu8ger</span>
-  <span class="site-footer__right">Powered by Theme <a href="https://github.com/Homulilly/hexo-theme-flatpaper" target="_blank" rel="noopener">FlatPaper</a></span>
+  <div class="site-toolbar" id="site-toolbar" aria-label="页面工具栏">
+    <button class="toolbar-top" id="back-to-top" type="button" aria-label="回到页面顶部">↑</button>
+    <span class="toolbar-percent" id="scroll-percent">0%</span>
+  </div>
+  <footer class="site-footer">
+  <span>root@debu8ger:~$ uptime</span>
+  <span class="footer-sep">/</span>
+  <span>&copy; 2024-2026 debu8ger</span>
 </footer>
-
-  <div class="search-panel" aria-hidden="true">
-  <div class="search-backdrop js-search-close"></div>
-  <section class="search-dialog" role="dialog" aria-modal="true" aria-label="搜索文章">
-    <span class="tape tape--top-left" aria-hidden="true"></span>
-    <header class="search-head">
-      <h2><span class="green-dot"></span>搜索文章</h2>
-      <button class="icon-button js-search-close" type="button" aria-label="关闭搜索">
-        
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-
-      </button>
-    </header>
-    <label class="search-field">
-      
-<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-
-      <input id="flatpaper-search" class="search-input" type="search" placeholder="输入关键词，按 Esc 关闭" autocomplete="off">
-    </label>
-    <div class="search-results" data-empty="输入关键词后显示匹配的文章">
-      <p class="search-empty">输入关键词后显示匹配的文章</p>
-    </div>
-  </section>
-</div>
-
-<script type="application/json" id="flatpaper-post-index">
-[
-
-  {
-    "title": "汇编学习02",
-    "url": "posts/981996043/",
-    "date": "2026-06-06",
-    "text": "学习逆向RE的前置知识，之前用x64dbg看汇编，右上角的寄存器没咋看懂，这次来学习一下。"
-  },
-
-  {
-    "title": "网谷杯安全极客大赛2025 NewRC4 WP",
-    "url": "posts/520274505/",
-    "date": "2026-04-14",
-    "text": "记录在syc的第一天收集的逆向题目"
-  },
-
-  {
-    "title": "浅谈逆向中关于位运算的常见问题",
-    "url": "posts/2751307781/",
-    "date": "2026-03-11",
-    "text": "今天做逆向发现的&0xFF运算，找了同类型的学习一下"
-  },
-
-  {
-    "title": "第五届大学生信息安全竞赛-部分WP",
-    "url": "posts/2775448412/",
-    "date": "2026-03-09",
-    "text": "自己出的题的WP"
-  },
-
-  {
-    "title": "2025ciscn初赛部分WP",
-    "url": "posts/1447712357/",
-    "date": "2025-12-29",
-    "text": "打ciscn&ccb，做了一天牢，还没做出多少，唉😔"
-  },
-
-  {
-    "title": "Re练习之花指令",
-    "url": "posts/3037537631/",
-    "date": "2025-12-17",
-    "text": "关于Reverse中花指令的一些介绍以及例题讲解"
-  },
-
-  {
-    "title": "MysteryFile-WP by Debu8ger",
-    "url": "posts/836249775/",
-    "date": "2025-12-17",
-    "text": "ccb的选拔赛好难吖，就会一个misc，呜呜"
-  },
-
-  {
-    "title": "ISCTF2025 部分题WP",
-    "url": "posts/353481578/",
-    "date": "2025-12-07",
-    "text": "这次打了ISCTF,因为还同时在准备期末、四级，只拿了前50，:("
-  },
-
-  {
-    "title": "Re练习之ASM汇编逆向",
-    "url": "posts/2957710030/",
-    "date": "2025-11-07",
-    "text": "关于Reverse中ASM汇编的一些介绍以及例题讲解"
-  },
-
-  {
-    "title": "PWN练习之ret2shellcode",
-    "url": "posts/2554455252/",
-    "date": "2025-11-05",
-    "text": "关于pwn栈溢出中三大类之一的ret3shellcode的介绍以及例题讲解"
-  },
-
-  {
-    "title": "?CTF2025 week4部分WP",
-    "url": "posts/4126005536/",
-    "date": "2025-11-01",
-    "text": "打了?CTF2025,拿了第47，遗憾离场~"
-  },
-
-  {
-    "title": "2025 XAUTCTF新生赛 rev&algo部分WP",
-    "url": "posts/3068727186/",
-    "date": "2025-10-24",
-    "text": "今年XAUTCTF新生赛rev&algo部分WP"
-  },
-
-  {
-    "title": "?CTF2025 week1部分WP",
-    "url": "posts/3212483695/",
-    "date": "2025-10-18",
-    "text": "这次打了?CTF,week1只拿了前20，唉~"
-  },
-
-  {
-    "title": "关于CTFers在CTF赛制下の求生指南--计算机基础",
-    "url": "posts/2308601283/",
-    "date": "2025-09-30",
-    "text": "近期在搞新生培训，为了不成为Cyber文盲，介绍一点前一年在CTF上的经验叭(doge)"
-  },
-
-  {
-    "title": "汇编学习01",
-    "url": "posts/2743157681/",
-    "date": "2025-07-18",
-    "text": "学习逆向RE的前置知识，浅浅记录一下，不定时更新~"
-  },
-
-  {
-    "title": "渗透测试01",
-    "url": "posts/4218951844/",
-    "date": "2025-06-13",
-    "text": "对渗透测试了解的第一课，一些基础知识~"
-  },
-
-  {
-    "title": "SRC挖洞01--信息收集_1",
-    "url": "posts/76317812/",
-    "date": "2025-06-11",
-    "text": "SRC挖洞第一步，知己知彼---信息收集"
-  },
-
-  {
-    "title": "CTF--文件上传漏洞PLUS",
-    "url": "posts/4052251796/",
-    "date": "2025-06-07",
-    "text": "之前只是了解知识点，这回做了赛题才发现有很多没懂的..."
-  },
-
-  {
-    "title": "SRC挖洞00",
-    "url": "posts/713376343/",
-    "date": "2025-06-03",
-    "text": "只是简单的announce一下，开始学习SRC挖洞咯~~"
-  },
-
-  {
-    "title": "C++学习02",
-    "url": "posts/3271170847/",
-    "date": "2025-06-02",
-    "text": "学习OOP时的一些知识点，涉及继承&多态&文件与流"
-  },
-
-  {
-    "title": "Db8Gr的blog01",
-    "url": "posts/3709781461/",
-    "date": "2025-06-01",
-    "text": "...reboot..."
-  },
-
-  {
-    "title": "C++学习01",
-    "url": "posts/1542671013/",
-    "date": "2025-05-23",
-    "text": "学习OOP时记录的一些知识点，涉及内存模型&函数"
-  },
-
-  {
-    "title": "CTF--Web的请求头伪造（简单的Wp）",
-    "url": "posts/3089169962/",
-    "date": "2025-05-16",
-    "text": "Web的HTTP请求头伪造"
-  },
-
-  {
-    "title": "CTF-文件上传漏洞",
-    "url": "posts/951957238/",
-    "date": "2025-05-13",
-    "text": "文件上传漏洞之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。"
-  },
-
-  {
-    "title": "程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]",
-    "url": "posts/2569029955/",
-    "date": "2025-04-26",
-    "text": "感觉写得真挺好的，“never too old to learn”！！！"
-  },
-
-  {
-    "title": "XAUT2025全国大学生信息安全竞赛新生预选赛-个人WP",
-    "url": "posts/2599651092/",
-    "date": "2025-01-21",
-    "text": "打了学校的校赛，拿了这届新生的NO.1，险胜，以下为个人部分WP..."
-  },
-
-  {
-    "title": "大学的近期Coding之旅及随笔(2024年)",
-    "url": "posts/1146697123/",
-    "date": "2024-10-24",
-    "text": "也算是2024年1024程序员节的一篇投稿:)"
-  },
-
-  {
-    "title": "第一次blog的Hello World(留作纪念~~)",
-    "url": "posts/4008351067/",
-    "date": "2024-10-13",
-    "text": "Hello blog~"
-  }
-
-]
-</script>
 
   
 <script src="js/main.js"></script>
 
-  
 </body>
 </html>
