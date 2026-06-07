@@ -157,7 +157,7 @@
 <p>#参考了 <a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/jenkins-cve-2024-23897.html">Jenkins 文件读取漏洞拾遗（ CVE-2024-23897 ） | 离别歌</a> </p>
 <h1 id="Forensics-（附件忘了保存了-）"><a href="#Forensics-（附件忘了保存了-）" class="headerlink" title="Forensics （附件忘了保存了 :( ）"></a>Forensics （附件忘了保存了 :( ）</h1><h3 id="应急响应-1-钓鱼邮件"><a href="#应急响应-1-钓鱼邮件" class="headerlink" title="应急响应 -1 钓鱼邮件"></a>应急响应 -1 钓鱼邮件</h3><hr>
 <p>近日， Peng 的个人电脑遭到黑客攻击，请你帮 Peng 溯源攻击链。 黑客发送的钓鱼邮件的发件地址是？</p>
-<p> 例： XAUTCTF{ <a href="mailto:&#x31;&#x32;&#x33;&#52;&#x35;&#54;&#x40;&#113;&#113;&#x2e;&#x63;&#111;&#x6d;">123456@qq.com</a>} </p>
+<p> 例： XAUTCTF{ <a href="mailto:&#x31;&#50;&#x33;&#x34;&#53;&#54;&#x40;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;">123456@qq.com</a>} </p>
 <p>hint ：部分文件为真实病毒样本，请不要在物理机运行 </p>
 <p>翻一翻 <code>此电脑 </code></p>
 <hr>
@@ -243,46 +243,6 @@
 
   
 
-
-  <section class="comment-panel" id="comments" data-provider="waline">
-    <div class="comment-head">
-      <span class="feed-kicker">comment.pipe</span>
-      <h2>comments.output</h2>
-      <p>provider: <span>waline</span></p>
-    </div>
-    <div class="comment-box" id="db8gr-comment">
-      <div class="comment-status">loading comment system...</div>
-    </div>
-  </section>
-
-  <script>
-    window.DB8GR_COMMENT = {
-      provider: "waline",
-      path: "",
-      options: {"serverURL":"https://waline-pi-blue-88.vercel.app/","lang":"zh-CN","reaction":true,"pageview":true}
-    };
-  </script>
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@3.15.2/dist/waline.css">
-    <script type="module">
-      import { init } from "https://unpkg.com/@waline/client@3.15.2/dist/waline.js";
-
-      (function () {
-        var cfg = window.DB8GR_COMMENT || {};
-        var target = document.getElementById("db8gr-comment");
-        if (!target) return;
-        if (!cfg.options || !cfg.options.serverURL) {
-          target.innerHTML = '<div class="comment-status">Waline serverURL is not configured.</div>';
-          return;
-        }
-        init(Object.assign({}, cfg.options, {
-          el: "#db8gr-comment",
-          path: cfg.path || window.location.pathname
-        }));
-      })();
-    </script>
-  
 
 
 </article>

@@ -230,46 +230,6 @@
   
 
 
-  <section class="comment-panel" id="comments" data-provider="waline">
-    <div class="comment-head">
-      <span class="feed-kicker">comment.pipe</span>
-      <h2>comments.output</h2>
-      <p>provider: <span>waline</span></p>
-    </div>
-    <div class="comment-box" id="db8gr-comment">
-      <div class="comment-status">loading comment system...</div>
-    </div>
-  </section>
-
-  <script>
-    window.DB8GR_COMMENT = {
-      provider: "waline",
-      path: "",
-      options: {"serverURL":"https://waline-pi-blue-88.vercel.app/","lang":"zh-CN","reaction":true,"pageview":true}
-    };
-  </script>
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/@waline/client@3.15.2/dist/waline.css">
-    <script type="module">
-      import { init } from "https://unpkg.com/@waline/client@3.15.2/dist/waline.js";
-
-      (function () {
-        var cfg = window.DB8GR_COMMENT || {};
-        var target = document.getElementById("db8gr-comment");
-        if (!target) return;
-        if (!cfg.options || !cfg.options.serverURL) {
-          target.innerHTML = '<div class="comment-status">Waline serverURL is not configured.</div>';
-          return;
-        }
-        init(Object.assign({}, cfg.options, {
-          el: "#db8gr-comment",
-          path: cfg.path || window.location.pathname
-        }));
-      })();
-    </script>
-  
-
 
 </article>
 
