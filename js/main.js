@@ -337,7 +337,7 @@ var DB8GR_I18N = (function () {
   if (!frame || !logo || !hero) return;
 
   var baseFont = 16;
-  var minFont = 6;
+  var minFont = 10;
   var maxFont = 96;
   var resizeRaf = 0;
 
@@ -348,7 +348,7 @@ var DB8GR_I18N = (function () {
     var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
     if (!viewportWidth || !viewportHeight) return;
 
-    var targetWidth = viewportWidth * 0.75;
+    var targetWidth = Math.min(viewportWidth - 28, viewportWidth * 0.82);
     var heroHeight = Math.max(hero.getBoundingClientRect().height || 0, viewportHeight);
     var targetHeight = heroHeight * 0.75;
 

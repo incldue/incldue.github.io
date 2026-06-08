@@ -655,8 +655,14 @@ body.is-booting.is-ready .site-footer {
   width: 75vw;
   max-width: calc(100vw - 28px);
   min-width: 0;
-  overflow: visible;
+  overflow-x: auto;
+  overflow-y: visible;
   padding: 0 0 6px;
+  scrollbar-width: none;
+}
+
+.ascii-frame::-webkit-scrollbar {
+  display: none;
 }
 
 .ascii-logo {
@@ -679,11 +685,13 @@ body.is-booting.is-ready .site-footer {
   font-size: var(--ascii-logo-size, clamp(9px, min(2.85vw, 6.2svh), 52px));
   font-weight: 900;
   line-height: 0.98;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.045em;
   white-space: pre;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
   filter:
     drop-shadow(3px 3px 0 #252938)
     drop-shadow(2px 2px 0 rgba(0, 215, 255, 0.72))
@@ -1915,7 +1923,7 @@ html.js-enabled .post-card.is-revealed {
 
   .ascii-logo {
     font-size: var(--ascii-logo-size, clamp(8px, min(2.85vw, 5.8svh), 28px));
-    letter-spacing: -0.09em;
+    letter-spacing: -0.045em;
   }
 
   .home-feed {
