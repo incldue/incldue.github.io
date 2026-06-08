@@ -239,12 +239,12 @@ var DB8GR_I18N = (function () {
 
   function typeBoot(done) {
     if (!typed || reducedMotion) {
-      if (typed) typed.textContent = typed.getAttribute("data-text") || "initing...";
+      if (typed) typed.textContent = typed.getAttribute("data-text") || "initiating...";
       done();
       return;
     }
 
-    var text = typed.getAttribute("data-text") || "initing...";
+    var text = typed.getAttribute("data-text") || "initiating...";
     var i = 0;
     typed.textContent = "";
 
