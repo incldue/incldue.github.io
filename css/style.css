@@ -811,7 +811,7 @@ body.is-booting.is-ready .site-footer {
 }
 
 .post-column {
-  width: 85%;
+  width: 88%;
   min-width: 0;
 }
 
@@ -1027,6 +1027,10 @@ html.js-enabled .post-card.is-revealed {
   width: min(980px, calc(100vw - 32px));
   margin: 0 auto;
   padding: 132px 0 96px;
+}
+
+.terminal-post {
+  width: min(1080px, calc(100vw - 32px));
 }
 
 .page-header {
