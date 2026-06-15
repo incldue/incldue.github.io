@@ -21,17 +21,16 @@ var DB8GR_I18N = (function () {
     searchLoadFailed: "搜索索引加载失败",
     searchCommandLabel: "搜索文章",
     openCommandLabel: "打开搜索结果",
-    copyCode: "COPY",
-    copiedCode: "OK",
-    copyFailed: "ERR",
-    collapseCode: "-",
+    copyCode: "⧉",
+    copiedCode: "✓",
+    copyFailed: "×",
+    collapseCode: "−",
     expandCode: "+",
     expandNav: "展开导航",
     collapseNav: "收起导航",
     routeNames: {
       home: "首页",
       posts: "文章",
-      roadmap: "路线",
       archives: "归档",
       categories: "分类",
       tags: "标签",
@@ -55,17 +54,16 @@ var DB8GR_I18N = (function () {
     searchLoadFailed: "failed to load search index",
     searchCommandLabel: "search posts",
     openCommandLabel: "open search result",
-    copyCode: "COPY",
-    copiedCode: "OK",
-    copyFailed: "ERR",
-    collapseCode: "-",
+    copyCode: "⧉",
+    copiedCode: "✓",
+    copyFailed: "×",
+    collapseCode: "−",
     expandCode: "+",
     expandNav: "Open navigation",
     collapseNav: "Close navigation",
     routeNames: {
       home: "home",
       posts: "posts",
-      roadmap: "roadmap",
       archives: "archives",
       categories: "categories",
       tags: "tags",
@@ -241,12 +239,12 @@ var DB8GR_I18N = (function () {
 
   function typeBoot(done) {
     if (!typed || reducedMotion) {
-      if (typed) typed.textContent = typed.getAttribute("data-text") || "initiating...";
+      if (typed) typed.textContent = typed.getAttribute("data-text") || "initing...";
       done();
       return;
     }
 
-    var text = typed.getAttribute("data-text") || "initiating...";
+    var text = typed.getAttribute("data-text") || "initing...";
     var i = 0;
     typed.textContent = "";
 
@@ -492,7 +490,7 @@ var DB8GR_I18N = (function () {
     var shell = document.createElement("div");
     shell.className = "table-shell";
     shell.setAttribute("role", "region");
-    shell.setAttribute("aria-label", "鍙í鍚戞粴鍔ㄧ殑鏁版嵁琛ㄦ牸");
+    shell.setAttribute("aria-label", "可横向滚动的数据表格");
 
     table.parentNode.insertBefore(shell, table);
     shell.appendChild(table);
@@ -564,7 +562,6 @@ var DB8GR_I18N = (function () {
   var routes = {
     home: terminal.getAttribute("data-home") || "/",
     posts: terminal.getAttribute("data-posts") || "/archives/",
-    roadmap: terminal.getAttribute("data-roadmap") || "/roadmap/",
     archives: terminal.getAttribute("data-archives") || "/archives/",
     tags: terminal.getAttribute("data-tags") || "/tags/",
     categories: terminal.getAttribute("data-categories") || "/categories/",
@@ -575,11 +572,6 @@ var DB8GR_I18N = (function () {
   var aliases = {
     article: "posts",
     articles: "posts",
-    road: "roadmap",
-    route: "roadmap",
-    roadmap: "roadmap",
-    skill: "roadmap",
-    skills: "roadmap",
     archive: "archives",
     category: "categories",
     tag: "tags",
@@ -607,11 +599,11 @@ var DB8GR_I18N = (function () {
 
   function help() {
     var r = DB8GR_I18N.routeNames;
-    print('<span class="visitor-muted">' + DB8GR_I18N.commands + '</span><div class="visitor-command-list"><span><b>home</b> - ' + r.home + '</span><span><b>posts</b> - ' + r.posts + '</span><span><b>roadmap</b> - ' + r.roadmap + '</span><span><b>archives</b> - ' + r.archives + '</span><span><b>categories</b> - ' + r.categories + '</span><span><b>tags</b> - ' + r.tags + '</span><span><b>links</b> - ' + r.links + '</span><span><b>about</b> - ' + r.about + '</span><span><b>search</b> / <b>s</b> - ' + DB8GR_I18N.searchCommandLabel + '</span><span><b>open</b> - ' + DB8GR_I18N.openCommandLabel + '</span><span><b>ls</b> - ' + DB8GR_I18N.listRoutes + '</span><span><b>pwd</b> / <b>whoami</b> / <b>date</b></span><span><b>clear</b> - ' + DB8GR_I18N.clearOutput + '</span></div>');
+    print('<span class="visitor-muted">' + DB8GR_I18N.commands + '</span><div class="visitor-command-list"><span><b>home</b> - ' + r.home + '</span><span><b>posts</b> - ' + r.posts + '</span><span><b>archives</b> - ' + r.archives + '</span><span><b>categories</b> - ' + r.categories + '</span><span><b>tags</b> - ' + r.tags + '</span><span><b>links</b> - ' + r.links + '</span><span><b>about</b> - ' + r.about + '</span><span><b>search</b> / <b>s</b> - ' + DB8GR_I18N.searchCommandLabel + '</span><span><b>open</b> - ' + DB8GR_I18N.openCommandLabel + '</span><span><b>ls</b> - ' + DB8GR_I18N.listRoutes + '</span><span><b>pwd</b> / <b>whoami</b> / <b>date</b></span><span><b>clear</b> - ' + DB8GR_I18N.clearOutput + '</span></div>');
   }
 
   function listRoutes() {
-    print('<span class="visitor-muted">' + DB8GR_I18N.routes + '</span><div class="visitor-command-list"><span>/home</span><span>/posts</span><span>/roadmap</span><span>/archives</span><span>/categories</span><span>/tags</span><span>/links</span><span>/about</span></div>');
+    print('<span class="visitor-muted">' + DB8GR_I18N.routes + '</span><div class="visitor-command-list"><span>/home</span><span>/posts</span><span>/archives</span><span>/categories</span><span>/tags</span><span>/links</span><span>/about</span></div>');
   }
 
   function loadSearchIndex() {
@@ -891,47 +883,6 @@ var DB8GR_I18N = (function () {
       ticking = false;
     });
   }, { passive: true });
-})();
-
-(function () {
-  var page = document.querySelector(".roadmap-page");
-  if (!page) return;
-
-  var filters = Array.prototype.slice.call(page.querySelectorAll("[data-roadmap-filter]"));
-  var tracks = Array.prototype.slice.call(page.querySelectorAll(".roadmap-track"));
-  var visibleCount = page.querySelector(".roadmap-visible-count");
-
-  function setFilter(filter) {
-    var visible = 0;
-
-    filters.forEach(function (button) {
-      var active = button.getAttribute("data-roadmap-filter") === filter;
-      button.classList.toggle("is-active", active);
-      button.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-
-    tracks.forEach(function (track) {
-      var match = filter === "all" || track.getAttribute("data-track") === filter;
-      track.hidden = !match;
-      if (match) visible += 1;
-    });
-
-    if (visibleCount) visibleCount.textContent = visible;
-  }
-
-  filters.forEach(function (button) {
-    button.addEventListener("click", function () {
-      setFilter(button.getAttribute("data-roadmap-filter") || "all");
-    });
-  });
-
-  Array.prototype.slice.call(page.querySelectorAll(".roadmap-node")).forEach(function (node) {
-    node.addEventListener("toggle", function () {
-      node.classList.toggle("is-open", node.open);
-    });
-  });
-
-  setFilter("all");
 })();
 
 (function () {
