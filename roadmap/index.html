@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="en, zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="h3llo_w0rld">
+  <title>学习路线 | D&#39;b8Gr的小站~</title>
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
+  
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
+</head>
+<body class="theme-db8gr layout-roadmap">
+  <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  
+<div class="boot-loader" id="boot-loader" data-once="true">
+  <canvas id="matrix-rain" aria-hidden="true"></canvas>
+  <div class="boot-glass" role="status" aria-live="polite">
+    <span class="boot-prefix">root@debu8ger:</span><span id="boot-type" data-text="initiating..."></span><span class="boot-cursor">_</span>
+  </div>
+</div>
+
+
+  
+<header class="terminal-nav" id="db8gr-nav">
+  <div class="nav-glass">
+    <div class="nav-head">
+      <a class="nav-brand" href="../index.html" aria-label="Back to home">
+        <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
+      <a class="nav-link" href="../index.html">Home</a>
+      <div class="nav-item nav-dropdown">
+        <a class="nav-link dropdown-trigger" href="../archives/">Posts</a>
+        <div class="dropdown-menu" aria-label="Posts submenu">
+          <a href="../categories/">Categories</a>
+          <a href="../tags/">Tags</a>
+          <a href="../archives/">Archives</a>
+        </div>
+      </div>
+      <a class="nav-link" href="../roadmap/">Roadmap</a>
+      <a class="nav-link" href="../links/">Friends</a>
+      <a class="nav-link" href="../about/">About</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="site-main">
+    
+<section class="terminal-page roadmap-page">
+  <header class="page-header roadmap-hero">
+    <p class="terminal-line"><span class="line-prefix">root@debu8ger:roadmap$ ./trace --skill-tree</span></p>
+    <h1>学习路线 / Skill Tree</h1>
+    <p class="roadmap-subtitle">把 CTF、逆向、安全与编程学习拆成可追踪节点，方便按阶段复盘。</p>
+  </header>
+
+  <section class="roadmap-dashboard" aria-label="学习路线概览">
+    <div class="roadmap-kpi">
+      <span class="kpi-label">nodes</span>
+      <strong>24</strong>
+      <small>tracked</small>
+    </div>
+    <div class="roadmap-kpi">
+      <span class="kpi-label">done</span>
+      <strong>4</strong>
+      <small>finished</small>
+    </div>
+    <div class="roadmap-kpi">
+      <span class="kpi-label">learning</span>
+      <strong>10</strong>
+      <small>active</small>
+    </div>
+    <div class="roadmap-progress-card">
+      <div class="roadmap-progress-head">
+        <span>overall progress</span>
+        <strong>38%</strong>
+      </div>
+      <div class="roadmap-progress" aria-hidden="true"><span style="width: 38%"></span></div>
+      <p><span class="roadmap-visible-count">6</span> tracks visible</p>
+    </div>
+  </section>
+
+  <div class="roadmap-filters" aria-label="路线筛选">
+    <button class="roadmap-filter is-active" type="button" data-roadmap-filter="all">All</button>
+    
+      <button class="roadmap-filter" type="button" data-roadmap-filter="reverse">Reverse</button>
+    
+      <button class="roadmap-filter" type="button" data-roadmap-filter="pwn">Pwn</button>
+    
+      <button class="roadmap-filter" type="button" data-roadmap-filter="web">Web Security</button>
+    
+      <button class="roadmap-filter" type="button" data-roadmap-filter="crypto-misc">Crypto / Misc</button>
+    
+      <button class="roadmap-filter" type="button" data-roadmap-filter="programming">Programming</button>
+    
+      <button class="roadmap-filter" type="button" data-roadmap-filter="src">SRC / 渗透</button>
+    
+  </div>
+
+  <div class="roadmap-grid">
+    
+      <section class="roadmap-track" data-track="reverse">
+        <div class="roadmap-track-head">
+          <div>
+            <p class="terminal-line"><span class="line-prefix">root@debu8ger:reverse$</span> ida64 ./unknown.bin</p>
+            <h2>Reverse</h2>
+          </div>
+          <span class="track-count">4 steps</span>
+        </div>
+        <p class="track-desc">从汇编、文件格式、调试到混淆对抗，主线保持持续推进。</p>
+
+        <div class="roadmap-nodes">
+          
+            <details class="roadmap-node status-done" data-track="reverse" data-status="done">
+              <summary>
+                <span class="node-index">01</span>
+                <span class="node-main">
+                  <strong>汇编与程序结构</strong>
+                  <small>base</small>
+                </span>
+                <span class="node-status">已完成</span>
+              </summary>
+              <div class="node-detail">
+                <p>熟悉寄存器、栈帧、函数调用约定、基础控制流与常见位运算。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="reverse" data-status="learning">
+              <summary>
+                <span class="node-index">02</span>
+                <span class="node-main">
+                  <strong>静态分析工具链</strong>
+                  <small>tool</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>继续打磨 IDA / Ghidra / strings / x64dbg 的组合工作流。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="reverse" data-status="learning">
+              <summary>
+                <span class="node-index">03</span>
+                <span class="node-main">
+                  <strong>动态调试与 Patch</strong>
+                  <small>practice</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>训练断点、内存观察、条件跳转修改、脚本辅助分析。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="reverse" data-status="todo">
+              <summary>
+                <span class="node-index">04</span>
+                <span class="node-main">
+                  <strong>混淆与反调试</strong>
+                  <small>advanced</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>花指令、壳、VM、反调试检测等专题化整理。</p>
+                
+              </div>
+            </details>
+          
+        </div>
+      </section>
+    
+      <section class="roadmap-track" data-track="pwn">
+        <div class="roadmap-track-head">
+          <div>
+            <p class="terminal-line"><span class="line-prefix">root@debu8ger:pwn$</span> checksec ./chall</p>
+            <h2>Pwn</h2>
+          </div>
+          <span class="track-count">4 steps</span>
+        </div>
+        <p class="track-desc">以二进制漏洞利用基础为主，先把栈与 ROP 链条打通。</p>
+
+        <div class="roadmap-nodes">
+          
+            <details class="roadmap-node status-done" data-track="pwn" data-status="done">
+              <summary>
+                <span class="node-index">01</span>
+                <span class="node-main">
+                  <strong>Linux 与调试基础</strong>
+                  <small>base</small>
+                </span>
+                <span class="node-status">已完成</span>
+              </summary>
+              <div class="node-detail">
+                <p>熟悉 ELF、gdb、pwndbg、进程内存布局和基础系统调用。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="pwn" data-status="learning">
+              <summary>
+                <span class="node-index">02</span>
+                <span class="node-main">
+                  <strong>栈溢出与 ret2shellcode</strong>
+                  <small>practice</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>稳定复现偏移定位、payload 构造、交互脚本编写。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="pwn" data-status="todo">
+              <summary>
+                <span class="node-index">03</span>
+                <span class="node-main">
+                  <strong>ROP / ret2libc</strong>
+                  <small>core</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>补齐泄露地址、libc 版本判断、栈迁移等常见打法。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="pwn" data-status="todo">
+              <summary>
+                <span class="node-index">04</span>
+                <span class="node-main">
+                  <strong>Heap 入门</strong>
+                  <small>advanced</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>先建立 chunk / bin / tcache 认知，再做题型总结。</p>
+                
+              </div>
+            </details>
+          
+        </div>
+      </section>
+    
+      <section class="roadmap-track" data-track="web">
+        <div class="roadmap-track-head">
+          <div>
+            <p class="terminal-line"><span class="line-prefix">root@debu8ger:web$</span> burpsuite --scope blog-lab</p>
+            <h2>Web Security</h2>
+          </div>
+          <span class="track-count">4 steps</span>
+        </div>
+        <p class="track-desc">从 CTF Web 到真实漏洞思路，逐步形成请求、代码与环境三线分析习惯。</p>
+
+        <div class="roadmap-nodes">
+          
+            <details class="roadmap-node status-done" data-track="web" data-status="done">
+              <summary>
+                <span class="node-index">01</span>
+                <span class="node-main">
+                  <strong>HTTP 与请求伪造</strong>
+                  <small>base</small>
+                </span>
+                <span class="node-status">已完成</span>
+              </summary>
+              <div class="node-detail">
+                <p>梳理 Header、Cookie、代理、来源 IP 与身份边界。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="web" data-status="learning">
+              <summary>
+                <span class="node-index">02</span>
+                <span class="node-main">
+                  <strong>文件上传漏洞</strong>
+                  <small>core</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>总结扩展名、MIME、内容检测、解析差异、路径控制等绕过方式。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="web" data-status="todo">
+              <summary>
+                <span class="node-index">03</span>
+                <span class="node-main">
+                  <strong>注入与反序列化</strong>
+                  <small>core</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>计划按 SQLi、SSTI、XXE、反序列化分专题整理。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="web" data-status="learning">
+              <summary>
+                <span class="node-index">04</span>
+                <span class="node-main">
+                  <strong>真实场景复盘</strong>
+                  <small>advanced</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>将 SRC 挖洞中的信息收集、验证与报告流程沉淀成 checklist。</p>
+                
+              </div>
+            </details>
+          
+        </div>
+      </section>
+    
+      <section class="roadmap-track" data-track="crypto-misc">
+        <div class="roadmap-track-head">
+          <div>
+            <p class="terminal-line"><span class="line-prefix">root@debu8ger:crypto-misc$</span> python solve.py</p>
+            <h2>Crypto / Misc</h2>
+          </div>
+          <span class="track-count">4 steps</span>
+        </div>
+        <p class="track-desc">保持比赛常见题型手感，重点记录参数、脚本与复盘过程。</p>
+
+        <div class="roadmap-nodes">
+          
+            <details class="roadmap-node status-done" data-track="crypto-misc" data-status="done">
+              <summary>
+                <span class="node-index">01</span>
+                <span class="node-main">
+                  <strong>古典密码与编码</strong>
+                  <small>base</small>
+                </span>
+                <span class="node-status">已完成</span>
+              </summary>
+              <div class="node-detail">
+                <p>归纳常见编码、替换、异或、压缩包与文件头判断。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="crypto-misc" data-status="learning">
+              <summary>
+                <span class="node-index">02</span>
+                <span class="node-main">
+                  <strong>RSA / ECC 基础</strong>
+                  <small>core</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>整理常见弱参数、广播、小指数、ECDSA nonce 等套路。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="crypto-misc" data-status="todo">
+              <summary>
+                <span class="node-index">03</span>
+                <span class="node-main">
+                  <strong>流量与取证</strong>
+                  <small>practice</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>Wireshark、日志、内存镜像和隐藏信息提取按题型归档。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="crypto-misc" data-status="todo">
+              <summary>
+                <span class="node-index">04</span>
+                <span class="node-main">
+                  <strong>自动化脚本库</strong>
+                  <small>tool</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>沉淀常用 decode、爆破、解方程、文件修复脚本。</p>
+                
+              </div>
+            </details>
+          
+        </div>
+      </section>
+    
+      <section class="roadmap-track" data-track="programming">
+        <div class="roadmap-track-head">
+          <div>
+            <p class="terminal-line"><span class="line-prefix">root@debu8ger:programming$</span> g++ main.cpp -O2</p>
+            <h2>Programming</h2>
+          </div>
+          <span class="track-count">4 steps</span>
+        </div>
+        <p class="track-desc">用 C/C++、脚本与工程能力支撑安全学习和博客维护。</p>
+
+        <div class="roadmap-nodes">
+          
+            <details class="roadmap-node status-learning" data-track="programming" data-status="learning">
+              <summary>
+                <span class="node-index">01</span>
+                <span class="node-main">
+                  <strong>C++ OOP 基础</strong>
+                  <small>base</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>继续补齐内存模型、继承、多态、文件流和 STL。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="programming" data-status="learning">
+              <summary>
+                <span class="node-index">02</span>
+                <span class="node-main">
+                  <strong>Python 解题脚本</strong>
+                  <small>tool</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>形成快速解析数据、构造 payload、批量处理文件的脚本习惯。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-learning" data-track="programming" data-status="learning">
+              <summary>
+                <span class="node-index">03</span>
+                <span class="node-main">
+                  <strong>前端与 Hexo 主题</strong>
+                  <small>practice</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>通过维护博客练习 HTML / CSS / JS 与静态站点工程化。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="programming" data-status="todo">
+              <summary>
+                <span class="node-index">04</span>
+                <span class="node-main">
+                  <strong>项目化输出</strong>
+                  <small>advanced</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>把零散笔记整理成系列文章、工具仓库或可复现 demo。</p>
+                
+              </div>
+            </details>
+          
+        </div>
+      </section>
+    
+      <section class="roadmap-track" data-track="src">
+        <div class="roadmap-track-head">
+          <div>
+            <p class="terminal-line"><span class="line-prefix">root@debu8ger:src$</span> nmap --top-ports 100 target</p>
+            <h2>SRC / 渗透</h2>
+          </div>
+          <span class="track-count">4 steps</span>
+        </div>
+        <p class="track-desc">从信息收集到漏洞验证，强调授权边界、证据链和报告质量。</p>
+
+        <div class="roadmap-nodes">
+          
+            <details class="roadmap-node status-learning" data-track="src" data-status="learning">
+              <summary>
+                <span class="node-index">01</span>
+                <span class="node-main">
+                  <strong>信息收集</strong>
+                  <small>base</small>
+                </span>
+                <span class="node-status">学习中</span>
+              </summary>
+              <div class="node-detail">
+                <p>子域、资产、指纹、目录、接口、历史泄露信息的结构化记录。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="src" data-status="todo">
+              <summary>
+                <span class="node-index">02</span>
+                <span class="node-main">
+                  <strong>漏洞验证</strong>
+                  <small>core</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>按最小影响原则验证漏洞，并保留清晰复现证据。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="src" data-status="todo">
+              <summary>
+                <span class="node-index">03</span>
+                <span class="node-main">
+                  <strong>报告写作</strong>
+                  <small>practice</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>训练影响说明、复现步骤、修复建议和截图证据组织。</p>
+                
+              </div>
+            </details>
+          
+            <details class="roadmap-node status-todo" data-track="src" data-status="todo">
+              <summary>
+                <span class="node-index">04</span>
+                <span class="node-main">
+                  <strong>复盘知识库</strong>
+                  <small>advanced</small>
+                </span>
+                <span class="node-status">计划中</span>
+              </summary>
+              <div class="node-detail">
+                <p>将每次实践转成 checklist、payload 模板和防御建议。</p>
+                
+              </div>
+            </details>
+          
+        </div>
+      </section>
+    
+  </div>
+
+  
+    <div class="terminal-content roadmap-note">
+      <p>这里会动态展示当前学习路线、节点状态和后续补强方向。</p>
+
+    </div>
+  
+</section>
+
+  </main>
+  <div class="site-toolbar" id="site-toolbar" aria-label="页面工具栏">
+    <button class="toolbar-top" id="back-to-top" type="button" aria-label="回到页面顶部">↑</button>
+    <span class="toolbar-percent" id="scroll-percent">0%</span>
+  </div>
+  <footer class="site-footer">
+  <span>root@debu8ger:~$ uptime</span>
+  <span class="footer-sep">/</span>
+  <span>&copy; 2024-2026 debu8ger</span>
+</footer>
+
+  
+<script src="../js/main.js"></script>
+
+</body>
+</html>
