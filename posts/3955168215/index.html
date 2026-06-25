@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="../../css/style.css">
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
-  
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 <body class="theme-db8gr layout-post">
@@ -79,17 +77,17 @@
       <h3 id="零、前言"><a href="#零、前言" class="headerlink" title="零、前言"></a>零、前言</h3><p>随着现在<code>Agent</code>、<code>vibe coding</code>、<code>MCP</code>等概念词汇的出现，以及<code>AI</code>算力、智力指数级的井喷式爆发，不管是作为计算机专业的学生，还是一名摸爬滚打的 CTFer ,我是肯定要去体验一下所谓<code>Agent</code>和<code>vibe coding</code>到底怎样，以及用完之后可能的后遗症…</p>
 <h3 id="一、开始的开始"><a href="#一、开始的开始" class="headerlink" title="一、开始的开始"></a>一、开始的开始</h3><p>最开始使用所谓<code>MCP</code>是在打完软件系统安全赛的初赛后，同队的lzq建议我给<code>IDA Pro</code>安装一个<strong>mcp</strong>，说是可以辅助逆向分析，甚至可以直接出 flag 。我一听可以直出 flag ，于是就上<code>github</code>搜了一下这个<strong>mcp</strong> (具体是这个项目 <a target="_blank" rel="noopener" href="https://github.com/mrexodia/ida-pro-mcp">ida-pro-mcp</a> )，好家伙，将近 10K 的<strong>Star</strong>。话不多说，我直接下载了之后找了一个教程全套安装了下来，进行了初次体验。</p>
 <p>根据这篇博客<a target="_blank" rel="noopener" href="https://www.cnblogs.com/alexander17/p/19089720">IDAPro–MCP详细配置教程(通杀) - Alexander17 - 博客园</a>，我使用的配置就是基础的<code>IDA Pro 9.0 + VS Code + Trae</code>。当时的条件非常的艰苦(bushi)，啥也不懂，完全就是一个在AI时代的原始人（虽然能用上<code>GPT</code>、<code>Gemini</code>，但都是网页版的），所以在用了这个逆向方向的<code>MCP</code>得到一个 flag 后，那种感觉还是蛮爽的，虽然不是自己手搓的，但还是有成就感在的（这里附上一张用 MCP得到逆向题flag的图）</p>
-<p><img src="/images/AI1.png" alt="AI1"></p>
+<p><img decoding="async" loading="lazy" src="/images/AI1.png" alt="AI1"></p>
 <p>这之后，虽说这个<code>ida-pro-mcp</code>能够使逆向过程自动化，但很大程度取决于你用的AI的强大程度。像之前我只用得起<code>Qwen3 coder</code>啥的，所以…结果摆在这，有时还不如我自己眼睛看代码并手搓EXP，这样有的时候说实话还快一点拿到 flag ，所以就暂时不用了。</p>
 <h3 id="二、开始！"><a href="#二、开始！" class="headerlink" title="二、开始！"></a>二、开始！</h3><p>后来稍微开智了一点，从同学那儿了解到了有<code>opencode</code>这么一个智能体，也就是<code>Agent</code>。于是觉得新鲜就自己下了一个玩玩，配置非常的简单，界面也比较的容易上手</p>
-<p><img src="/images/AI2.png" alt="AI2"></p>
+<p><img decoding="async" loading="lazy" src="/images/AI2.png" alt="AI2"></p>
 <p>记得当时手搓了一个全局的配置 <strong>opencode.json</strong> ，然后用这个<code>opencode</code>写了蛮多的小工具，包括还有学校专业课的一些作业、实验作业和选修课的论文啥的，效果都蛮好，速度快，鲁棒性也可以，感觉自己老厉害了。</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;$schema&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://opencode.ai/config.json&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;mcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;ida-pro-mcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">	    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;local&quot;</span><span class="punctuation">,</span></span><br><span class="line">	    <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">	  	  <span class="string">&quot;~\\IDA\\python311\\python.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">	  	  <span class="string">&quot;~\\IDA\\python311\\Lib\\site-packages\\ida_pro_mcp\\server.py&quot;</span><span class="punctuation">,</span></span><br><span class="line">		    <span class="string">&quot;--ida-rpc&quot;</span><span class="punctuation">,</span></span><br><span class="line">		    <span class="string">&quot;http://127.0.0.1:13337&quot;</span></span><br><span class="line">	    <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;agent&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;IDA-agent&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;IDA Pro 逆向分析智能体&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;prompt&quot;</span><span class="punctuation">:</span> <span class="string">&quot;你的任务是在...&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;tools&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;write&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;edit&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;autoupdate&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;skills&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;~\\.opencode\\skills&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>当时是有佬开源了<code>MiniMax M2.7</code>的 <strong>API</strong>，可以爽爽蹬，所以就用的蛮多的次数，基本上每天都有在跟这个<code>opencode</code>对话。包括那段时间比赛也有蛮多，也可以用这个分析。</p>
 <h3 id="三、稍微进阶"><a href="#三、稍微进阶" class="headerlink" title="三、稍微进阶"></a>三、稍微进阶</h3><p>再之后也是了解到了<code>cc-switch</code>，能够在不同的供应商之间灵活切换，也满足了有时有不止一个供应商的需求，特别是如果有一个供应商的额度蹬完后还得手动编写 json 文件来配置就很麻烦，而<code>cc-switch</code>则可以解决这个问题，直接切换不同供应商；同时这个里面还可以配置多个<code>MCP</code>、<code>Agent</code>还有多种提示词、<code>Skills</code>，满足了不同场景的编码方式、代码侧重点的需求。</p>
 <p>在宿主机上，我安装了有七十几个skills，都是关于CTF、逆向、前端+后端、代码审计啥的，</p>
-<p><img src="/images/AI3.png" alt="AI3"></p>
+<p><img decoding="async" loading="lazy" src="/images/AI3.png" alt="AI3"></p>
 <p>还记得有一天晚上拿着刚下的关于实网渗透的skills尝试拿一个<strong>EDUSRC</strong>，他还真就有模有样的渗透了某某大学的官网，然后横向、纵向渗透…到后面编写了报告，我交上去，被拒绝了！哼哼…</p>
 <p>然后学长就告诫我说要小心这玩意整出什么幺蛾子出来，因为我当时并不知道我给的权限是多少，所以没太当回事.</p>
 <h3 id="四、天塌了！"><a href="#四、天塌了！" class="headerlink" title="四、天塌了！"></a>四、天塌了！</h3><p>在打”有名”的<strong>ISCC</strong>期间，我再次尝试用我亲爱的<code>opencode</code>分析二进制程序、编写Writeup和 (批量生产 EXP)。期间，我想着美化一下我的UI界面，于是让他自己修改UI界面的代码，也就是编写美化插件。中间出错了，我输入“删除所有之前涉及修改的代码，回退到上一步”，然后坐等回复。。。</p>
@@ -97,11 +95,11 @@
 <p>cnm！我赶紧找了数据恢复软件尝试恢复数据。虽然说完整的文件结构和文件名都恢复出来了，就连文件大小都一样，<code>SHA256</code>和<code>CRC32</code>等一样，但是用记事本（没错，记事本yyds）打开全是乱码，就连原本在md软件里打开是可读字符的现在也是乱码。。。</p>
 <p>无奈之下，我只好一个一个软件重装了，不过幸好虚拟机没给我删了 :(</p>
 <h3 id="五、新的开始"><a href="#五、新的开始" class="headerlink" title="五、新的开始"></a>五、新的开始</h3><p>经过了上一次的惨痛教训，我把全部的<code>Agent</code>都安在了虚拟机里，在<code>Ubuntu</code>里安装了<strong>opencode</strong>、<strong>claude</strong>、<strong>codex</strong>，最初还安装了<strong>openclaw</strong>来着</p>
-<p><img src="/images/AI4.png" alt="AI4"></p>
+<p><img decoding="async" loading="lazy" src="/images/AI4.png" alt="AI4"></p>
 <p>当然，如果是用<code>VS Code + SSH</code>的话，我一般还是用里面的<strong>opencode</strong>，毕竟有免费的可以薅…</p>
 <p>在虚拟机安装的话，有一点就是得多保存点快照，以防有什么意外发生</p>
 <p>在<code>Windows</code>虚拟机里我就安装了<strong>codex</strong>，以精为主</p>
-<p><img src="/images/AI5.png" alt="AI5"></p>
+<p><img decoding="async" loading="lazy" src="/images/AI5.png" alt="AI5"></p>
 <p>这时就会有人问了，为啥现在吃这么好了，都用上<strong>gpt5.5</strong>了？其实算是真正开智了，用上中转站了。毕竟如果在官网或者官方渠道买套餐、<code>Plan</code>啥的虽然很稳定，但就是贵了。虽然像国模（<strong>deepseek V4</strong>、<strong>GLM 5.1</strong>这之类）便宜，但质量方面不敢保证。。。所以还是选择了中转站</p>
 <p>但有一点是中转站毕竟是中转，额度、速度方面没法保证跟官方一样，一分钱一分货，大不了就是每天少用点，每天定时领取额度。</p>
 <h3 id="六、心得"><a href="#六、心得" class="headerlink" title="六、心得"></a>六、心得</h3><p>最近靠着<strong>codex</strong>的中转福利，我也是搓了几个小工具，包括像图片下载助手、CTF逆向工具箱这种，还顺便更新了一下我的博客站点，目前还准备搓一个适配鸿蒙端的codex-mini应用，并支持在智能穿戴设备上同步、输入并等待输出。。。</p>
@@ -181,8 +179,6 @@
   <span>&copy; 2024-2026 debu8ger</span>
 </footer>
 
-  
-<script src="../../js/main.js"></script>
-
+  <script defer src="../../js/main.js"></script>
 </body>
 </html>

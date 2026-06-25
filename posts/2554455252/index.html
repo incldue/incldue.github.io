@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="../../css/style.css">
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
-  
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 <body class="theme-db8gr layout-post">
@@ -85,7 +83,7 @@
 </ul>
 <h4 id="2-注入shellcode至bss段中"><a href="#2-注入shellcode至bss段中" class="headerlink" title="2.注入shellcode至bss段中"></a>2.注入shellcode至bss段中</h4><p>在虚拟内存当中，<code>bss段</code>主要保存无初值的全局变量&#x2F;静态变量(在assmbly中以<code>占位符？</code>声明)。若程序的bss段可写、可执行，则可以把shellcode写入全局变量&#x2F;静态变量中。</p>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一-GDOUCTF-2023-Shellcode"><a href="#一-GDOUCTF-2023-Shellcode" class="headerlink" title="一.[GDOUCTF 2023]Shellcode"></a>一.[GDOUCTF 2023]Shellcode</h4><p>拿到二进制文件，习惯性的<code>checksec</code>一下，看栈…的保护措施：</p>
-<p><img src="/images/pwn1.png" alt="pwn1"></p>
+<p><img decoding="async" loading="lazy" src="/images/pwn1.png" alt="pwn1"></p>
 <p>加了<strong>NX</strong>，不过没啥关系，</p>
 <p>放到IDA中反编译，定位到<code>main函数</code>：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  _BYTE buf[<span class="number">10</span>]; <span class="comment">// [rsp+6h] [rbp-Ah] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Please.&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;name, <span class="number">0x25uLL</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Nice to meet you.&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Let&#x27;s start!&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, buf, <span class="number">0x40uLL</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -111,7 +109,7 @@
 
 
 <h4 id="二-HNCTF-2022-Week1-safe-shellcode"><a href="#二-HNCTF-2022-Week1-safe-shellcode" class="headerlink" title="二.[HNCTF 2022 Week1]safe_shellcode"></a>二.[HNCTF 2022 Week1]safe_shellcode</h4><p>拿到附件，<code>checksec</code>一下，</p>
-<p><img src="/images/pwn2.png" alt="pwn2"></p>
+<p><img decoding="async" loading="lazy" src="/images/pwn2.png" alt="pwn2"></p>
 <p>保护得还算少，</p>
 <p>IDA中反编译，定位<code>main函数</code>：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> v3; <span class="comment">// rbx</span></span><br><span class="line">  <span class="type">char</span> s[<span class="number">524</span>]; <span class="comment">// [rsp+0h] [rbp-220h] BYREF</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+20Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setbuf</span>(stdin, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stderr, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">setbuf</span>(stdout, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">mprotect</span>((<span class="type">void</span> *)((<span class="type">unsigned</span> __int64)&amp;stdout &amp; <span class="number">0xFFFFFFFFFFFFF000LL</span>), <span class="number">0x1000uLL</span>, <span class="number">7</span>);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="number">0x200uLL</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, s, <span class="number">0x300uLL</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = i;</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[i] &lt;= <span class="number">47</span> || s[i] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;Hacker!!!&quot;</span>);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">strcpy</span>(buff, s);</span><br><span class="line">  (*(<span class="built_in">void</span> (**)(<span class="type">void</span>))buff)();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -192,9 +190,9 @@
         
           <a href="../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">#CTF知识分享</a>
         
-          <a href="../../tags/pwn/">#pwn</a>
-        
           <a href="../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">#日常练习</a>
+        
+          <a href="../../tags/pwn/">#pwn</a>
         
       </div>
     
@@ -253,8 +251,6 @@
   <span>&copy; 2024-2026 debu8ger</span>
 </footer>
 
-  
-<script src="../../js/main.js"></script>
-
+  <script defer src="../../js/main.js"></script>
 </body>
 </html>

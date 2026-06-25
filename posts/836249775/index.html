@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="../../css/style.css">
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
-  
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 <body class="theme-db8gr layout-post">
@@ -81,9 +79,9 @@
 <p>​		   hint：xor</p>
 <hr>
 <p>下载附件，尝试用010打开，</p>
-<p><img src="/images/xuanba_1.png" alt="xuanba1"></p>
+<p><img decoding="async" loading="lazy" src="/images/xuanba_1.png" alt="xuanba1"></p>
 <p>全是<code>0x66</code>和<code>ffff</code>啥的，再拖到IDA里看</p>
-<p><img src="/images/xuanba_2.png" alt="xuanba2"></p>
+<p><img decoding="async" loading="lazy" src="/images/xuanba_2.png" alt="xuanba2"></p>
 <p>最上面的<code>0x00</code>是<code>db 72h</code>，而根据提示的异或<code>0x72 ^ 0x66 = 0x14</code>，对应ZIP文件格式，</p>
 <p>小端序存储，逆序输出</p>
 <p>所以想着将从<code>0x20</code>到<code>0xC8</code>的所有数据按小端序提取出来，再与<code>0x66</code>异或，</p>
@@ -93,11 +91,11 @@
 
 <p>OK，得到了zip文件，试着解压缩，发现要密码 :(</p>
 <p>接着用010打开，</p>
-<p><img src="/images/xuanba_3.png" alt="xuanba3"></p>
+<p><img decoding="async" loading="lazy" src="/images/xuanba_3.png" alt="xuanba3"></p>
 <p>可以由<code>08 00</code>和<code>00 00</code>处知道其实是<strong>无加密</strong>的；在<code>50 4B 01 02</code>后面看到<code>09 00 </code>，得到是<strong>有加密</strong></p>
 <p>一前一后，<strong>ZIP伪加密</strong>无疑了</p>
 <p>把<code>09 00</code>改为<code>00 00</code>，变为偶数，也就无加密了</p>
-<p><img src="/images/xuanba_4.png" alt="xuanba4"></p>
+<p><img decoding="async" loading="lazy" src="/images/xuanba_4.png" alt="xuanba4"></p>
 <p>得到无密码的zip文件，解压后即可得到flag：XAUTCTF{x0r_is_s0_easy}</p>
 <!--more-->
     </div>
@@ -174,8 +172,6 @@
   <span>&copy; 2024-2026 debu8ger</span>
 </footer>
 
-  
-<script src="../../js/main.js"></script>
-
+  <script defer src="../../js/main.js"></script>
 </body>
 </html>

@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="../../css/style.css">
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
-  
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 <body class="theme-db8gr layout-post">
@@ -138,9 +136,9 @@
 <h4 id="5-lea地址加载："><a href="#5-lea地址加载：" class="headerlink" title="5.lea地址加载："></a>5.<code>lea</code>地址加载：</h4><p>格式为<code>lea rdx, [my_var]</code>，将<code>my_var</code>地址赋值给<code>rdx</code>寄存器。</p>
 <h4 id="6-xchg数值交换："><a href="#6-xchg数值交换：" class="headerlink" title="6.xchg数值交换："></a>6.<code>xchg</code>数值交换：</h4><p>格式为<code>xchg ax, bx</code>，将<code>ax</code>与<code>bx</code>的数值交换</p>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="一-HDCTF-2023-easy-asm"><a href="#一-HDCTF-2023-easy-asm" class="headerlink" title="一.[HDCTF 2023]easy_asm"></a>一.[HDCTF 2023]easy_asm</h4><p>IDA打开附件，只有一个<code>start</code>函数，空格切换至汇编代码：</p>
-<p><img src="/images/re_lian1.png" alt="re_lian1"></p>
+<p><img decoding="async" loading="lazy" src="/images/re_lian1.png" alt="re_lian1"></p>
 <p>和</p>
-<p><img src="/images/re_lian2.png" alt="re_lian2"></p>
+<p><img decoding="async" loading="lazy" src="/images/re_lian2.png" alt="re_lian2"></p>
 <p>很容易看到，待解密的flag就是<code>seg001</code>的内容，</p>
 <p>圈出来的便是<code>xor</code>加密逻辑：<code>al</code>存储<code>seg001</code>的值，<code>cl</code>存储异或的<code>key &quot;0x10&quot;</code>。</p>
 <p>要想解密，就得异或回去，<code>seg001 ^0x10 = decrypt_flag</code></p>
@@ -168,9 +166,9 @@
         
           <a href="../../tags/CTF%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/">#CTF知识分享</a>
         
-          <a href="../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">#日常练习</a>
-        
           <a href="../../tags/Reverse/">#Reverse</a>
+        
+          <a href="../../tags/%E6%97%A5%E5%B8%B8%E7%BB%83%E4%B9%A0/">#日常练习</a>
         
       </div>
     
@@ -229,8 +227,6 @@
   <span>&copy; 2024-2026 debu8ger</span>
 </footer>
 
-  
-<script src="../../js/main.js"></script>
-
+  <script defer src="../../js/main.js"></script>
 </body>
 </html>
