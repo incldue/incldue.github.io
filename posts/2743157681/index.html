@@ -14,7 +14,10 @@
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
-<body class="theme-db8gr layout-post">
+<body
+  class="theme-db8gr layout-post"
+  data-lazyload="true"
+  data-lazyload-root-margin="240px 0px">
   <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
@@ -30,27 +33,27 @@
 <header class="terminal-nav" id="db8gr-nav">
   <div class="nav-glass">
     <div class="nav-head">
-      <a class="nav-brand" href="../../index.html" aria-label="Back to home">
+      <a class="nav-brand" href="../../index.html" aria-label="返回首页">
         <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="展开导航">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
-    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
-      <a class="nav-link" href="../../index.html">Home</a>
+    <nav class="nav-links" id="nav-menu" aria-label="主导航">
+      <a class="nav-link" href="../../index.html">首页</a>
       <div class="nav-item nav-dropdown">
-        <a class="nav-link dropdown-trigger" href="../../archives/">Posts</a>
-        <div class="dropdown-menu" aria-label="Posts submenu">
-          <a href="../../categories/">Categories</a>
-          <a href="../../tags/">Tags</a>
-          <a href="../../archives/">Archives</a>
+        <a class="nav-link dropdown-trigger" href="../../archives/">文章</a>
+        <div class="dropdown-menu" aria-label="文章子菜单">
+          <a href="../../categories/">分类</a>
+          <a href="../../tags/">标签</a>
+          <a href="../../archives/">归档</a>
         </div>
       </div>
-      <a class="nav-link" href="../../links/">Friends</a>
-      <a class="nav-link" href="../../about/">About</a>
+      <a class="nav-link" href="../../links/">友链</a>
+      <a class="nav-link" href="../../about/">关于</a>
     </nav>
   </div>
 </header>
@@ -64,9 +67,9 @@
     <div class="post-meta">
       <time>2025-07-18</time>
       <span>/</span>
-      <span>3514 words</span>
+      <span>约 3514 字</span>
       <span>/</span>
-      <span>12 min read</span>
+      <span>12 分钟阅读</span>
       
         <span>/</span>
         <span>CTF相关</span>
@@ -79,7 +82,7 @@
       <h2 id="汇编学习01（X86）"><a href="#汇编学习01（X86）" class="headerlink" title="汇编学习01（X86）"></a><strong>汇编学习01（X86）</strong></h2><h3 id="0x01-寄存器-Registers"><a href="#0x01-寄存器-Registers" class="headerlink" title="0x01 寄存器(Registers)"></a>0x01 寄存器(Registers)</h3><ol>
 <li>现代的x86处理器有8个32位通用寄存器：</li>
 </ol>
-<p><img src="/images/%E6%B1%87%E7%BC%961.png" alt="huibian1"></p>
+<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/%E6%B1%87%E7%BC%961.png" alt="huibian1"></p>
 <p>​	同时，在里面<strong>EAX</strong>也被称为<em><strong>累加器</strong></em> ；<strong>ECX</strong>为 <em><strong>计数器</strong></em>，其被用为保存循环的索引（次数）。</p>
 <ol start="2">
 <li>对于EAX、EBX、ECX以及EDX，它们可被分段开来使用。例如，可以把EAX的最低2位字节视为<strong>16位寄存器（AX）</strong>，也可将AX的最低位1位字节视为<strong>8位寄存器（AL）</strong>，同时AX的高位1个字节也可看成<strong>8位寄存器（AH）</strong>。当2字节大小的数据放入DX中，原本DH、DL、EDX的数据会受到相应的影响。</li>
@@ -158,7 +161,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">call &amp;lt;label</span><br><span class="line">ret5</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>调用约定(关于如何从例程调用&amp;返回的协议)：分为两组:第一组是<strong>面向子例程的调用者的</strong>；第二组则是<strong>面向子例程的编写者，即被调用者</strong>。</p>
-<p><img src="/images/%E6%B1%87%E7%BC%9602.png" alt="huibian2"></p>
+<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/%E6%B1%87%E7%BC%9602.png" alt="huibian2"></p>
 <p>a.<strong>调用者约定</strong>：要调用子例程，请使用<code>call</code>指令(将返回地址存到栈上，并跳转到子程序的代码，其中子程序应遵循<strong>被调用者约定</strong>)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例子：</span><br><span class="line">push (%ebx) ;最后一个参数最先入栈</span><br><span class="line">push $216 ;把第二个参数入栈</span><br><span class="line">push %eax ;第一个参数最后入栈</span><br><span class="line">call myFunc ;调用这个函数(假设以C语言模式命名)</span><br><span class="line">add $12, %esp ;清理栈内存</span><br></pre></td></tr></table></figure>
 
@@ -173,8 +176,8 @@
     </div>
 
     
-      <aside class="post-toc" aria-label="Table of contents">
-        <div class="toc-title">TOC</div>
+      <aside class="post-toc" aria-label="目录">
+        <div class="toc-title">目录</div>
         <ol class="post-toc-list"><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#%E6%B1%87%E7%BC%96%E5%AD%A6%E4%B9%A001%EF%BC%88X86%EF%BC%89"><span class="post-toc-list-text">汇编学习01（X86）</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#0x01-%E5%AF%84%E5%AD%98%E5%99%A8-Registers"><span class="post-toc-list-text">0x01 寄存器(Registers)</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#0x02-%E5%86%85%E5%AD%98-%E5%AF%BB%E5%9D%80%E6%A8%A1%E5%BC%8F"><span class="post-toc-list-text">0x02 内存&amp;寻址模式</span></a></li></ol></li></ol>
       </aside>
     
@@ -198,7 +201,7 @@
       
     </div>
     
-      <section class="related-posts" aria-label="Related posts">
+      <section class="related-posts" aria-label="相关文章">
         <div class="related-title">RELATED.LOG</div>
         <div class="related-list">
           
