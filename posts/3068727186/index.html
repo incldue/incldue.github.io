@@ -14,10 +14,7 @@
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
-<body
-  class="theme-db8gr layout-post"
-  data-lazyload="true"
-  data-lazyload-root-margin="240px 0px">
+<body class="theme-db8gr layout-post">
   <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
@@ -33,27 +30,27 @@
 <header class="terminal-nav" id="db8gr-nav">
   <div class="nav-glass">
     <div class="nav-head">
-      <a class="nav-brand" href="../../index.html" aria-label="返回首页">
+      <a class="nav-brand" href="../../index.html" aria-label="Back to home">
         <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="展开导航">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
-    <nav class="nav-links" id="nav-menu" aria-label="主导航">
-      <a class="nav-link" href="../../index.html">首页</a>
+    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
+      <a class="nav-link" href="../../index.html">Home</a>
       <div class="nav-item nav-dropdown">
-        <a class="nav-link dropdown-trigger" href="../../archives/">文章</a>
-        <div class="dropdown-menu" aria-label="文章子菜单">
-          <a href="../../categories/">分类</a>
-          <a href="../../tags/">标签</a>
-          <a href="../../archives/">归档</a>
+        <a class="nav-link dropdown-trigger" href="../../archives/">Posts</a>
+        <div class="dropdown-menu" aria-label="Posts submenu">
+          <a href="../../categories/">Categories</a>
+          <a href="../../tags/">Tags</a>
+          <a href="../../archives/">Archives</a>
         </div>
       </div>
-      <a class="nav-link" href="../../links/">友链</a>
-      <a class="nav-link" href="../../about/">关于</a>
+      <a class="nav-link" href="../../links/">Friends</a>
+      <a class="nav-link" href="../../about/">About</a>
     </nav>
   </div>
 </header>
@@ -67,9 +64,9 @@
     <div class="post-meta">
       <time>2025-10-24</time>
       <span>/</span>
-      <span>约 2574 字</span>
+      <span>2574 words</span>
       <span>/</span>
-      <span>9 分钟阅读</span>
+      <span>9 min read</span>
       
         <span>/</span>
         <span>CTF相关</span>
@@ -151,14 +148,14 @@
 <hr>
 <p>下载附件，用IDA打开，查看字符串，很遗憾，你被骗了 T_T</p>
 <p>本题有<strong>两种解法</strong>：直接用<code>strings</code>看&#x2F;将十六进制转换</p>
-<p>第一种<strong>转换</strong>：进入main函数，<img fetchpriority="low" decoding="async" loading="lazy" src="/images/re1.png" alt="re1"></p>
+<p>第一种<strong>转换</strong>：进入main函数，<img src="/images/re1.png" alt="re1"></p>
 <p>v6数组存储的字符串就是加密后的flag,即 <code>xmmword_2080</code>、<code>xmmword_2090</code>、<code>xmmword_20A0</code>。</p>
 <p>单击进入，得到小端序的flag十六进制字节：</p>
-<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/re2.png" alt="re2"></p>
+<p><img src="/images/re2.png" alt="re2"></p>
 <p>我们把这些数值反转，再转换为ASCII字符，</p>
 <p>得到flag：XAUTCTF{W3c0me_T0_tH3_w0r1d_oF_R3verSe_3nGineErin9!!!}</p>
 <p>第二种<strong>直接strings命令</strong>：在命令行输入<code>strings welcome_rev</code>，即可得到flag。</p>
-<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/re3.png" alt="re3"></p>
+<p><img src="/images/re3.png" alt="re3"></p>
 <h3 id="你喜欢贝斯吗"><a href="#你喜欢贝斯吗" class="headerlink" title="你喜欢贝斯吗"></a>你喜欢贝斯吗</h3><hr>
 <p>题目描述：听说贝斯蛮好听的，一起来听吧！</p>
 <hr>
@@ -171,7 +168,7 @@
 <hr>
 <p>IDA中打开，查看main函数，代码逻辑为用<code>base58字母表加密base64表</code>，<code>然后再用解密后的base64表去加密flag</code>，得到密文。</p>
 <p>知道了逻辑，只需找到对应的字符串即可，</p>
-<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/re4.png" alt="re4"></p>
+<p><img src="/images/re4.png" alt="re4"></p>
 <p>先用base58标准字母表解密base64加密表(注意，上下两个字符串都是表，base64表为64个字符)得<code>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/</code></p>
 <p>再用解密后的表解密密文得到flag：XAUTCTF{|_|nu5U@L_b@sE}</p>
 <h3 id="Eeeeazy"><a href="#Eeeeazy" class="headerlink" title="Eeeeazy"></a>Eeeeazy</h3><hr>
@@ -187,21 +184,21 @@
 <p>很明显是一个加密函数，你可以选择解密这一段代码，逻辑是<code>将v4数组的奇数索引的值作为低位，偶数为高位，一起组成一个64位的整数v6，以二进制位图打印出图形</code>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v4 = [<span class="number">140540</span>,-<span class="number">2008399303</span>,<span class="number">141956</span>,<span class="number">139457077</span>,<span class="number">262023</span>,-<span class="number">2008923597</span>,<span class="number">143749</span>,<span class="number">2118271985</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">    n = ((v4[i*<span class="number">2</span>] &amp; <span class="number">0xFFFFFFFF</span>) &lt;&lt; <span class="number">32</span>) | (v4[i*<span class="number">2</span>+<span class="number">1</span>] &amp; <span class="number">0xFFFFFFFF</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(<span class="string">&#x27; *&#x27;</span>[((n &gt;&gt; (<span class="number">49</span>-j)) &amp; <span class="number">1</span>)] + <span class="string">&#x27; &#x27;</span>*(j%<span class="number">5</span>==<span class="number">4</span>) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">50</span>)))</span><br></pre></td></tr></table></figure>
 
-<p>运行看到flag为 HACKIT4FUN ：<img fetchpriority="low" decoding="async" loading="lazy" src="/images/re5.png" alt="re5"></p>
+<p>运行看到flag为 HACKIT4FUN ：<img src="/images/re5.png" alt="re5"></p>
 <p>但本题真正考察IDA的动态调试。</p>
-<p>通过看该附件的<code>_main函数</code>汇编代码，<img fetchpriority="low" decoding="async" loading="lazy" src="/images/re6.png" alt="re6">，在<code>0x401773</code>下断点，让我们能在main函数执行完成前暂停程序；</p>
+<p>通过看该附件的<code>_main函数</code>汇编代码，<img src="/images/re6.png" alt="re6">，在<code>0x401773</code>下断点，让我们能在main函数执行完成前暂停程序；</p>
 <p>然后，再看<code>_ques函数</code>，先记下<code>_ques</code>开始的位置<code>0x401520</code>，这里汇编语言中<code>pop ebp</code>即为将<code>把基址指针寄存器弹出堆栈</code>，也就是将我们之前所说的 v6 所包含的值剥开来，呈现在命令行里。所以，我们要想在运行时得到位图，就得在<code>pop</code>这儿下断点，即<code>0x401723</code>，方便查看最终的flag。</p>
-<p>我们运行程序，来到该界面：<img fetchpriority="low" decoding="async" loading="lazy" src="/images/re8.png" alt="re8"></p>
-<p>将<code>General registers</code>里<code>0x0401773</code>修改EIP为刚刚我们记下的<code>_ques</code>开始的位置<code>0x0401520</code>，然后点击继续运行，即可得到二进制位图flag XAUTCTF{HACKIT4FUN} ：<img fetchpriority="low" decoding="async" loading="lazy" src="/images/re10.png" alt="re10"></p>
+<p>我们运行程序，来到该界面：<img src="/images/re8.png" alt="re8"></p>
+<p>将<code>General registers</code>里<code>0x0401773</code>修改EIP为刚刚我们记下的<code>_ques</code>开始的位置<code>0x0401520</code>，然后点击继续运行，即可得到二进制位图flag XAUTCTF{HACKIT4FUN} ：<img src="/images/re10.png" alt="re10"></p>
 <h3 id="糖衣炸弹"><a href="#糖衣炸弹" class="headerlink" title="糖衣炸弹"></a>糖衣炸弹</h3><hr>
 <p>题目描述：听说每一位新成员都会得到一颗SS-Team定制糖果吗？</p>
 <p>​		   真的有那么善良吗？</p>
 <p>​		   “不要随便吃糖，有毒咋办？”妈妈说。</p>
 <p>​		  hint：U konw Packed Xanadu?(用UPX脱壳)</p>
 <hr>
-<p>下载附件，先查查有无加壳，放到Exeinfo里查壳，<img fetchpriority="low" decoding="async" loading="lazy" src="/images/re11.png" alt="re11">，得到有UPX的壳。</p>
+<p>下载附件，先查查有无加壳，放到Exeinfo里查壳，<img src="/images/re11.png" alt="re11">，得到有UPX的壳。</p>
 <p>于是，我们到upx指定目录下，运行<code>./upx -d candy.exe</code>给其脱壳(<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bonelee/p/16407794.html">关于UPX相关介绍</a>)，</p>
-<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/re12.png" alt="re12"></p>
+<p><img src="/images/re12.png" alt="re12"></p>
 <p>然后再IDA打开，定位到主函数(这里不是<code>main</code>)：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">v7 = __readfsqword(<span class="number">0x28u</span>);</span><br><span class="line">  <span class="built_in">sub_405450</span>(<span class="string">&quot;Welcome to XAUT simple XOR crackme!&quot;</span>);</span><br><span class="line">  <span class="built_in">sub_405450</span>(<span class="string">&quot;Enter the secret code to reveal the flag:&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">sub_4050B0</span>(v6, <span class="number">64LL</span>, off_4B06D8) )</span><br><span class="line">  &#123;</span><br><span class="line">    v6[<span class="built_in">sub_401140</span>(v6, <span class="string">&quot;\r\n&quot;</span>)] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="type">unsigned</span> <span class="type">int</span>)<span class="built_in">sub_401A90</span>(v6) )</span><br><span class="line">    &#123;</span><br><span class="line">      *(__m128i *)v5 = _mm_load_si128((<span class="type">const</span> __m128i *)&amp;xmmword_48AA40);</span><br><span class="line">      *(__m128i *)&amp;v5[<span class="number">9</span>] = _mm_load_si128((<span class="type">const</span> __m128i *)&amp;xmmword_48AA50);</span><br><span class="line">      v0 = <span class="built_in">sub_4108A0</span>(<span class="number">26LL</span>);</span><br><span class="line">      <span class="keyword">if</span> ( v0 )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">for</span> ( i = <span class="number">0LL</span>; i != <span class="number">25</span>; ++i )</span><br><span class="line">          *(_BYTE *)(v0 + i) = v5[i] ^ <span class="number">0x5A</span>;</span><br><span class="line">        *(_BYTE *)(v0 + <span class="number">25</span>) = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">sub_41BFA0</span>(<span class="number">2</span>, (<span class="type">unsigned</span> <span class="type">int</span>)<span class="string">&quot;Good job! The flag is:\n%s\n&quot;</span>, v0, (<span class="type">unsigned</span> <span class="type">int</span>)v5, v1, v2, v5[<span class="number">0</span>]);</span><br><span class="line">        <span class="built_in">sub_410FB0</span>(v0);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">sub_405450</span>(<span class="string">&quot;Wrong secret. Try reversing the binary!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( v7 != __readfsqword(<span class="number">0x28u</span>) )</span><br><span class="line">    <span class="built_in">sub_41C070</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -213,8 +210,8 @@
     </div>
 
     
-      <aside class="post-toc" aria-label="目录">
-        <div class="toc-title">目录</div>
+      <aside class="post-toc" aria-label="Table of contents">
+        <div class="toc-title">TOC</div>
         <ol class="post-toc-list"><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#algo"><span class="post-toc-list-text">algo</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#ezzz-base"><span class="post-toc-list-text">ezzz_base</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#e%E5%92%8B%E4%B8%8D%E6%98%AF65537%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="post-toc-list-text">e咋不是65537？？？</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Close-Enough"><span class="post-toc-list-text">Close Enough</span></a></li></ol></li><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#rev"><span class="post-toc-list-text">rev</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#SignIn"><span class="post-toc-list-text">SignIn</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Welcome-to-Reverse-World"><span class="post-toc-list-text">Welcome to Reverse World</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E4%BD%A0%E5%96%9C%E6%AC%A2%E8%B4%9D%E6%96%AF%E5%90%97"><span class="post-toc-list-text">你喜欢贝斯吗</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#base-revenge"><span class="post-toc-list-text">base_revenge</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Eeeeazy"><span class="post-toc-list-text">Eeeeazy</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E7%B3%96%E8%A1%A3%E7%82%B8%E5%BC%B9"><span class="post-toc-list-text">糖衣炸弹</span></a></li></ol></li></ol>
       </aside>
     
@@ -238,7 +235,7 @@
       
     </div>
     
-      <section class="related-posts" aria-label="相关文章">
+      <section class="related-posts" aria-label="Related posts">
         <div class="related-title">RELATED.LOG</div>
         <div class="related-list">
           

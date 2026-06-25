@@ -14,10 +14,7 @@
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
-<body
-  class="theme-db8gr layout-post"
-  data-lazyload="true"
-  data-lazyload-root-margin="240px 0px">
+<body class="theme-db8gr layout-post">
   <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
@@ -33,27 +30,27 @@
 <header class="terminal-nav" id="db8gr-nav">
   <div class="nav-glass">
     <div class="nav-head">
-      <a class="nav-brand" href="../../index.html" aria-label="返回首页">
+      <a class="nav-brand" href="../../index.html" aria-label="Back to home">
         <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="展开导航">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
-    <nav class="nav-links" id="nav-menu" aria-label="主导航">
-      <a class="nav-link" href="../../index.html">首页</a>
+    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
+      <a class="nav-link" href="../../index.html">Home</a>
       <div class="nav-item nav-dropdown">
-        <a class="nav-link dropdown-trigger" href="../../archives/">文章</a>
-        <div class="dropdown-menu" aria-label="文章子菜单">
-          <a href="../../categories/">分类</a>
-          <a href="../../tags/">标签</a>
-          <a href="../../archives/">归档</a>
+        <a class="nav-link dropdown-trigger" href="../../archives/">Posts</a>
+        <div class="dropdown-menu" aria-label="Posts submenu">
+          <a href="../../categories/">Categories</a>
+          <a href="../../tags/">Tags</a>
+          <a href="../../archives/">Archives</a>
         </div>
       </div>
-      <a class="nav-link" href="../../links/">友链</a>
-      <a class="nav-link" href="../../about/">关于</a>
+      <a class="nav-link" href="../../links/">Friends</a>
+      <a class="nav-link" href="../../about/">About</a>
     </nav>
   </div>
 </header>
@@ -67,9 +64,9 @@
     <div class="post-meta">
       <time>2025-12-07</time>
       <span>/</span>
-      <span>约 9610 字</span>
+      <span>9610 words</span>
       <span>/</span>
-      <span>33 分钟阅读</span>
+      <span>33 min read</span>
       
         <span>/</span>
         <span>CTF相关</span>
@@ -147,7 +144,7 @@
 
 <p>生成<strong>RC4的S-box</strong>，写入<code>v8[i]</code>，然后执行<code>cipher[i] = plain[i] XOR RC4_next()</code>。</p>
 <p>查看汇编代码，得到<code>byte_36F4D4050</code>的数据：</p>
-<p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/ISCTF-re1.png" alt="re1"></p>
+<p><img src="/images/ISCTF-re1.png" alt="re1"></p>
 <p>最终的EXP：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">cipher = <span class="built_in">bytes</span>([</span><br><span class="line">    <span class="number">0x1D</span>,<span class="number">0xD5</span>,<span class="number">0x38</span>,<span class="number">0x33</span>,<span class="number">0xAF</span>,<span class="number">0xB5</span>,<span class="number">0x51</span>,<span class="number">0xF3</span>,<span class="number">0x2C</span>,<span class="number">0x6B</span>,</span><br><span class="line">    <span class="number">0x6E</span>,<span class="number">0xFE</span>,<span class="number">0x41</span>,<span class="number">0x24</span>,<span class="number">0x43</span>,<span class="number">0xD2</span>,<span class="number">0x71</span>,<span class="number">0xCF</span>,<span class="number">0xA4</span>,<span class="number">0x4C</span>,</span><br><span class="line">    <span class="number">0xE3</span>,<span class="number">0x9A</span>,<span class="number">0x9A</span>,<span class="number">0xB5</span>,<span class="number">0x31</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">key = <span class="string">b&quot;ISCTF2025&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rc4_ksa</span>(<span class="params">key</span>):</span><br><span class="line">    S = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">256</span>))</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">        j = (j + S[i] + key[i % <span class="built_in">len</span>(key)]) &amp; <span class="number">0xFF</span></span><br><span class="line">        S[i], S[j] = S[j], S[i]</span><br><span class="line">    <span class="keyword">return</span> S</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rc4_prga</span>(<span class="params">S, n</span>):</span><br><span class="line">    i = j = <span class="number">0</span></span><br><span class="line">    out = []</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        i = (i + <span class="number">1</span>) &amp; <span class="number">0xFF</span></span><br><span class="line">        j = (j + S[i]) &amp; <span class="number">0xFF</span></span><br><span class="line">        S[i], S[j] = S[j], S[i]</span><br><span class="line">        K = S[(S[i] + S[j]) &amp; <span class="number">0xFF</span>]</span><br><span class="line">        out.append(K)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">bytes</span>(out)</span><br><span class="line"></span><br><span class="line">S = rc4_ksa(key)</span><br><span class="line">keystream = rc4_prga(S, <span class="built_in">len</span>(cipher))</span><br><span class="line"></span><br><span class="line">plain = <span class="built_in">bytes</span>([c ^ k <span class="keyword">for</span> c, k <span class="keyword">in</span> <span class="built_in">zip</span>(cipher, keystream)])</span><br><span class="line"><span class="built_in">print</span>(plain)</span><br><span class="line"></span><br><span class="line"><span class="comment"># flag: ISCTF&#123;Y0U_GE7_7HE_PYD!!!&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -243,8 +240,8 @@
     </div>
 
     
-      <aside class="post-toc" aria-label="目录">
-        <div class="toc-title">目录</div>
+      <aside class="post-toc" aria-label="Table of contents">
+        <div class="toc-title">TOC</div>
         <ol class="post-toc-list"><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#SIGNIN"><span class="post-toc-list-text">SIGNIN</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Ez-Caesar"><span class="post-toc-list-text">Ez_Caesar</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RC4%E7%B3%BB%E7%BB%9F"><span class="post-toc-list-text">小蓝鲨的RC4系统</span></a></li></ol></li><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#MISC"><span class="post-toc-list-text">MISC</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Guess%EF%BC%81"><span class="post-toc-list-text">Guess！</span></a></li></ol></li><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#REVERSE"><span class="post-toc-list-text">REVERSE</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#ezzz-math"><span class="post-toc-list-text">ezzz_math</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#ezpy"><span class="post-toc-list-text">ezpy</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#MysteriousStream"><span class="post-toc-list-text">MysteriousStream</span></a></li></ol></li><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#CRYPTO"><span class="post-toc-list-text">CRYPTO</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#easy-RSA"><span class="post-toc-list-text">easy_RSA</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84LFSR%E7%B3%BB%E7%BB%9F"><span class="post-toc-list-text">小蓝鲨的LFSR系统</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84RSA%E5%AF%86%E6%96%87"><span class="post-toc-list-text">小蓝鲨的RSA密文</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#baby-math"><span class="post-toc-list-text">baby_math</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E5%B0%8F%E8%93%9D%E9%B2%A8%E7%9A%84%E8%B4%B9%E9%A9%AC%E8%B0%9C%E9%A2%98"><span class="post-toc-list-text">小蓝鲨的费马谜题</span></a></li></ol></li></ol>
       </aside>
     
@@ -268,7 +265,7 @@
       
     </div>
     
-      <section class="related-posts" aria-label="相关文章">
+      <section class="related-posts" aria-label="Related posts">
         <div class="related-title">RELATED.LOG</div>
         <div class="related-list">
           

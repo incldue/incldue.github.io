@@ -14,10 +14,7 @@
   
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
-<body
-  class="theme-db8gr layout-post"
-  data-lazyload="true"
-  data-lazyload-root-margin="240px 0px">
+<body class="theme-db8gr layout-post">
   <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
@@ -33,27 +30,27 @@
 <header class="terminal-nav" id="db8gr-nav">
   <div class="nav-glass">
     <div class="nav-head">
-      <a class="nav-brand" href="../../index.html" aria-label="返回首页">
+      <a class="nav-brand" href="../../index.html" aria-label="Back to home">
         <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
       </a>
-      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="展开导航">
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="Open navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
     </div>
-    <nav class="nav-links" id="nav-menu" aria-label="主导航">
-      <a class="nav-link" href="../../index.html">首页</a>
+    <nav class="nav-links" id="nav-menu" aria-label="Main navigation">
+      <a class="nav-link" href="../../index.html">Home</a>
       <div class="nav-item nav-dropdown">
-        <a class="nav-link dropdown-trigger" href="../../archives/">文章</a>
-        <div class="dropdown-menu" aria-label="文章子菜单">
-          <a href="../../categories/">分类</a>
-          <a href="../../tags/">标签</a>
-          <a href="../../archives/">归档</a>
+        <a class="nav-link dropdown-trigger" href="../../archives/">Posts</a>
+        <div class="dropdown-menu" aria-label="Posts submenu">
+          <a href="../../categories/">Categories</a>
+          <a href="../../tags/">Tags</a>
+          <a href="../../archives/">Archives</a>
         </div>
       </div>
-      <a class="nav-link" href="../../links/">友链</a>
-      <a class="nav-link" href="../../about/">关于</a>
+      <a class="nav-link" href="../../links/">Friends</a>
+      <a class="nav-link" href="../../about/">About</a>
     </nav>
   </div>
 </header>
@@ -67,9 +64,9 @@
     <div class="post-meta">
       <time>2025-05-13</time>
       <span>/</span>
-      <span>约 880 字</span>
+      <span>880 words</span>
       <span>/</span>
-      <span>3 分钟阅读</span>
+      <span>3 min read</span>
       
         <span>/</span>
         <span>CTF相关</span>
@@ -79,7 +76,7 @@
 
   <div class="post-shell">
     <div class="terminal-content post-content">
-      <p><img fetchpriority="low" decoding="async" loading="lazy" src="/images/cover/girl_WallpapersCraft_006_475386ba.jpg" alt="girl7"></p>
+      <p><img src="/images/cover/girl_WallpapersCraft_006_475386ba.jpg" alt="girl7"></p>
 <h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><p>之前做了CTF的一道题，考察了文件上传，在此复习下文件上传。</p>
 <h3 id="文件上传漏洞原因："><a href="#文件上传漏洞原因：" class="headerlink" title="文件上传漏洞原因："></a>文件上传漏洞原因：</h3><p>1.服务器配置不当<br>2.文件上传限制被绕过<br>3.开源编辑器的上传漏洞<br>4.文件解析漏洞导致文件执行<br>5.过滤不严或被绕过</p>
 <h3 id="可能存在漏洞的位置："><a href="#可能存在漏洞的位置：" class="headerlink" title="可能存在漏洞的位置："></a>可能存在漏洞的位置：</h3><p>1.图片上传功能    2.头像上传功能    3.文档上传功能</p>
@@ -94,8 +91,8 @@
     </div>
 
     
-      <aside class="post-toc" aria-label="目录">
-        <div class="toc-title">目录</div>
+      <aside class="post-toc" aria-label="Table of contents">
+        <div class="toc-title">TOC</div>
         <ol class="post-toc-list"><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="post-toc-list-text">文件上传漏洞</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="post-toc-list-text">文件上传漏洞原因：</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%9A"><span class="post-toc-list-text">可能存在漏洞的位置：</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%A3%80%E6%B5%8B%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="post-toc-list-text">文件上传检测方式：</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="post-toc-list-text">总结：</span></a></li></ol></li></ol>
       </aside>
     
@@ -119,7 +116,7 @@
       
     </div>
     
-      <section class="related-posts" aria-label="相关文章">
+      <section class="related-posts" aria-label="Related posts">
         <div class="related-title">RELATED.LOG</div>
         <div class="related-list">
           
