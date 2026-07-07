@@ -22,10 +22,13 @@ var DB8GR_I18N = (function () {
     searchCommandLabel: "搜索文章",
     openCommandLabel: "打开搜索结果",
     copyCode: "⧉",
+    copyCodeLabel: "复制代码",
     copiedCode: "✓",
     copyFailed: "×",
     collapseCode: "−",
+    collapseCodeLabel: "折叠代码",
     expandCode: "+",
+    expandCodeLabel: "展开代码",
     expandNav: "展开导航",
     collapseNav: "收起导航",
     routeNames: {
@@ -55,10 +58,13 @@ var DB8GR_I18N = (function () {
     searchCommandLabel: "search posts",
     openCommandLabel: "open search result",
     copyCode: "⧉",
+    copyCodeLabel: "Copy code",
     copiedCode: "✓",
     copyFailed: "×",
     collapseCode: "−",
+    collapseCodeLabel: "Collapse code",
     expandCode: "+",
+    expandCodeLabel: "Expand code",
     expandNav: "Open navigation",
     collapseNav: "Close navigation",
     routeNames: {
@@ -408,7 +414,19 @@ var DB8GR_I18N = (function () {
 
     var header = document.createElement("div");
     header.className = "codeblock-header";
-    header.innerHTML = '<span class="codeblock-dots"><span></span><span></span><span></span></span><span class="codeblock-title">' + getCodeTitle(block) + '</span>';
+
+    var dots = document.createElement("span");
+    dots.className = "codeblock-dots";
+    for (var dotIndex = 0; dotIndex < 3; dotIndex += 1) {
+      dots.appendChild(document.createElement("span"));
+    }
+
+    var title = document.createElement("span");
+    title.className = "codeblock-title";
+    title.textContent = getCodeTitle(block);
+
+    header.appendChild(dots);
+    header.appendChild(title);
 
     var actions = document.createElement("div");
     actions.className = "codeblock-actions";
@@ -416,12 +434,14 @@ var DB8GR_I18N = (function () {
     var copyButton = document.createElement("button");
     copyButton.className = "codeblock-copy";
     copyButton.type = "button";
+    copyButton.setAttribute("aria-label", DB8GR_I18N.copyCodeLabel);
     copyButton.textContent = DB8GR_I18N.copyCode;
 
     var toggleButton = document.createElement("button");
     toggleButton.className = "codeblock-toggle";
     toggleButton.type = "button";
     toggleButton.setAttribute("aria-expanded", "true");
+    toggleButton.setAttribute("aria-label", DB8GR_I18N.collapseCodeLabel);
     toggleButton.textContent = DB8GR_I18N.collapseCode;
 
     function getCodeText() {
@@ -473,6 +493,7 @@ var DB8GR_I18N = (function () {
     toggleButton.addEventListener("click", function () {
       var collapsed = shell.classList.toggle("is-collapsed");
       toggleButton.setAttribute("aria-expanded", String(!collapsed));
+      toggleButton.setAttribute("aria-label", collapsed ? DB8GR_I18N.expandCodeLabel : DB8GR_I18N.collapseCodeLabel);
       toggleButton.textContent = collapsed ? DB8GR_I18N.expandCode : DB8GR_I18N.collapseCode;
     });
 
@@ -580,13 +601,13 @@ var DB8GR_I18N = (function () {
 
   function print(html) {
     var line = document.createElement("div");
-    line.innerHTML = html;
+    line.innerHTML = String(html || "");
     output.appendChild(line);
     output.scrollTop = output.scrollHeight;
   }
 
   function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, function (char) {
+    return String(text || "").replace(/[&<>"']/g, function (char) {
       return {
         "&": "&amp;",
         "<": "&lt;",
@@ -595,6 +616,26 @@ var DB8GR_I18N = (function () {
         "'": "&#39;"
       }[char];
     });
+  }
+
+  function canNavigateTo(target) {
+    try {
+      var url = new URL(String(target || ""), window.location.origin);
+      return url.origin === window.location.origin;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function navigateTo(target) {
+    if (!canNavigateTo(target)) {
+      print('<span class="visitor-muted">' + DB8GR_I18N.invalidResult + '</span> ' + escapeHtml(target));
+      return;
+    }
+
+    window.setTimeout(function () {
+      window.location.href = target;
+    }, 20);
   }
 
   function help() {
@@ -610,7 +651,7 @@ var DB8GR_I18N = (function () {
     if (searchIndex) return Promise.resolve(searchIndex);
     if (searchRequest) return searchRequest;
 
-    searchRequest = window.fetch(searchUrl, { cache: "no-store" })
+    searchRequest = window.fetch(searchUrl, { cache: "default", credentials: "same-origin" })
       .then(function (response) {
         if (!response.ok) throw new Error("HTTP " + response.status);
         return response.json();
@@ -618,6 +659,10 @@ var DB8GR_I18N = (function () {
       .then(function (data) {
         searchIndex = Array.isArray(data) ? data : [];
         return searchIndex;
+      })
+      .catch(function (error) {
+        searchRequest = null;
+        throw error;
       });
 
     return searchRequest;
@@ -742,9 +787,7 @@ var DB8GR_I18N = (function () {
       }
 
       print('<span class="visitor-muted">' + DB8GR_I18N.open + '</span> <span class="visitor-command">' + escapeHtml(result.path) + "</span>");
-      window.setTimeout(function () {
-        window.location.href = result.path;
-      }, 20);
+      navigateTo(result.path);
       return;
     }
 
@@ -773,9 +816,7 @@ var DB8GR_I18N = (function () {
 
     if (target) {
       print('<span class="visitor-muted">' + DB8GR_I18N.open + '</span> <span class="visitor-command">' + escapeHtml(target) + "</span>");
-      window.setTimeout(function () {
-        window.location.href = target;
-      }, 20);
+      navigateTo(target);
       return;
     }
 

@@ -10,16 +10,19 @@
 <link rel="stylesheet" href="../../css/style.css">
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
-  
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
 </head>
 <body class="theme-db8gr layout-post">
-  <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
+  
+    <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
+  
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
   
+
 <div class="boot-loader" id="boot-loader" data-once="true">
-  <canvas id="matrix-rain" aria-hidden="true"></canvas>
+  
+    <canvas id="matrix-rain" aria-hidden="true"></canvas>
+  
   <div class="boot-glass" role="status" aria-live="polite">
     <span class="boot-prefix">root@debu8ger:</span><span id="boot-type" data-text="initiating..."></span><span class="boot-cursor">_</span>
   </div>
@@ -79,7 +82,7 @@
       <h2 id="汇编学习01（X86）"><a href="#汇编学习01（X86）" class="headerlink" title="汇编学习01（X86）"></a><strong>汇编学习01（X86）</strong></h2><h3 id="0x01-寄存器-Registers"><a href="#0x01-寄存器-Registers" class="headerlink" title="0x01 寄存器(Registers)"></a>0x01 寄存器(Registers)</h3><ol>
 <li>现代的x86处理器有8个32位通用寄存器：</li>
 </ol>
-<p><img src="/images/%E6%B1%87%E7%BC%961.png" alt="huibian1"></p>
+<p><img loading="lazy" decoding="async" src="/images/%E6%B1%87%E7%BC%961.png" alt="huibian1"></p>
 <p>​	同时，在里面<strong>EAX</strong>也被称为<em><strong>累加器</strong></em> ；<strong>ECX</strong>为 <em><strong>计数器</strong></em>，其被用为保存循环的索引（次数）。</p>
 <ol start="2">
 <li>对于EAX、EBX、ECX以及EDX，它们可被分段开来使用。例如，可以把EAX的最低2位字节视为<strong>16位寄存器（AX）</strong>，也可将AX的最低位1位字节视为<strong>8位寄存器（AL）</strong>，同时AX的高位1个字节也可看成<strong>8位寄存器（AH）</strong>。当2字节大小的数据放入DX中，原本DH、DL、EDX的数据会受到相应的影响。</li>
@@ -158,7 +161,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">call &amp;lt;label</span><br><span class="line">ret5</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>调用约定(关于如何从例程调用&amp;返回的协议)：分为两组:第一组是<strong>面向子例程的调用者的</strong>；第二组则是<strong>面向子例程的编写者，即被调用者</strong>。</p>
-<p><img src="/images/%E6%B1%87%E7%BC%9602.png" alt="huibian2"></p>
+<p><img loading="lazy" decoding="async" src="/images/%E6%B1%87%E7%BC%9602.png" alt="huibian2"></p>
 <p>a.<strong>调用者约定</strong>：要调用子例程，请使用<code>call</code>指令(将返回地址存到栈上，并跳转到子程序的代码，其中子程序应遵循<strong>被调用者约定</strong>)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">例子：</span><br><span class="line">push (%ebx) ;最后一个参数最先入栈</span><br><span class="line">push $216 ;把第二个参数入栈</span><br><span class="line">push %eax ;第一个参数最后入栈</span><br><span class="line">call myFunc ;调用这个函数(假设以C语言模式命名)</span><br><span class="line">add $12, %esp ;清理栈内存</span><br></pre></td></tr></table></figure>
 
