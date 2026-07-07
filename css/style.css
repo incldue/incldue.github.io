@@ -266,6 +266,18 @@ body.is-booting.is-ready .site-footer {
     2px 2px 0 rgba(0, 74, 94, 0.32);
 }
 
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border: 1px solid rgba(0, 215, 255, 0.46);
+  border-radius: 10px;
+  background: rgba(0, 215, 255, 0.08);
+  box-shadow:
+    0 0 18px rgba(0, 215, 255, 0.28),
+    inset 0 0 16px rgba(57, 255, 136, 0.12);
+}
+
 .nav-head {
   display: flex;
   align-items: center;
@@ -1535,6 +1547,256 @@ html.js-enabled .post-card.is-revealed {
   outline: none;
 }
 
+.about-page {
+  width: min(1080px, calc(100vw - 32px));
+}
+
+.about-header {
+  margin-bottom: 24px;
+}
+
+.about-identity,
+.about-widget {
+  position: relative;
+  overflow: hidden;
+  margin: 24px 0;
+  border: 1px solid rgba(0, 215, 255, 0.34);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(0, 215, 255, 0.12), transparent 34%),
+    rgba(6, 17, 21, 0.72);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(215, 251, 255, 0.1);
+}
+
+.about-identity::before,
+.about-widget::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(215, 251, 255, 0.035) 0 1px, transparent 1px 8px),
+    linear-gradient(90deg, rgba(57, 255, 136, 0.08), transparent 36%, rgba(0, 215, 255, 0.08));
+  opacity: 0.7;
+}
+
+.about-identity > *,
+.about-widget > * {
+  position: relative;
+  z-index: 1;
+}
+
+.about-identity {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 26px;
+}
+
+.about-logo-shell {
+  display: grid;
+  place-items: center;
+  min-height: 210px;
+  border: 1px dashed rgba(57, 255, 136, 0.34);
+  border-radius: 22px;
+  background: rgba(0, 215, 255, 0.055);
+}
+
+.about-logo {
+  width: min(164px, 48vw);
+  height: auto;
+  border-radius: 28px;
+  filter: drop-shadow(0 0 28px rgba(0, 215, 255, 0.46));
+}
+
+.about-identity-copy h2,
+.about-widget h2 {
+  margin: 8px 0 12px;
+  color: var(--ink);
+  font-size: clamp(24px, 4vw, 40px);
+  letter-spacing: -0.045em;
+}
+
+.about-identity-copy p,
+.about-widget p {
+  margin: 0;
+  color: rgba(215, 251, 255, 0.78);
+  line-height: 1.8;
+}
+
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.about-badges span {
+  padding: 6px 10px;
+  border: 1px solid rgba(0, 215, 255, 0.34);
+  border-radius: 999px;
+  background: rgba(0, 215, 255, 0.08);
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-content {
+  padding: 10px 2px 2px;
+}
+
+.about-content h2 {
+  margin-top: 34px;
+  color: var(--cyan);
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+
+.about-content ul {
+  padding-left: 1.4em;
+}
+
+.about-content li::marker {
+  color: var(--acid);
+}
+
+.about-typewriter-card,
+.about-contrib-card {
+  padding: 26px;
+}
+
+.about-typewriter {
+  min-height: 76px;
+  margin-top: 20px;
+  padding: 18px 20px;
+  border: 1px solid rgba(57, 255, 136, 0.32);
+  border-radius: 18px;
+  background: rgba(3, 6, 8, 0.72);
+  color: var(--acid);
+  font-size: clamp(16px, 2.8vw, 24px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 16px rgba(57, 255, 136, 0.42);
+}
+
+.about-typewriter::before {
+  content: "guest@about:~$ ";
+  color: var(--cyan);
+}
+
+.about-typewriter-cursor {
+  color: var(--cyan);
+  animation: cursor-blink 760ms steps(1, end) infinite;
+}
+
+.about-contrib-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(420px, 1.4fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.about-contrib-shell {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(0, 215, 255, 0.34);
+  border-radius: 22px;
+  background: rgba(3, 6, 8, 0.68);
+}
+
+.contrib-summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.contrib-summary strong {
+  color: var(--acid);
+  font-size: 28px;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(57, 255, 136, 0.38);
+}
+
+.contrib-graph {
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px 10px;
+  scrollbar-color: rgba(0, 215, 255, 0.42) rgba(0, 215, 255, 0.08);
+}
+
+.contrib-week {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.contrib-cell,
+.contrib-legend i {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: rgba(176, 233, 242, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(215, 251, 255, 0.06);
+}
+
+.contrib-cell[data-level="1"],
+.contrib-legend i[data-level="1"] {
+  background: rgba(0, 215, 255, 0.34);
+}
+
+.contrib-cell[data-level="2"],
+.contrib-legend i[data-level="2"] {
+  background: rgba(0, 215, 255, 0.62);
+}
+
+.contrib-cell[data-level="3"],
+.contrib-legend i[data-level="3"] {
+  background: rgba(57, 255, 136, 0.68);
+}
+
+.contrib-cell[data-level="4"],
+.contrib-legend i[data-level="4"] {
+  background: #39ff88;
+  box-shadow:
+    inset 0 0 0 1px rgba(215, 251, 255, 0.16),
+    0 0 12px rgba(57, 255, 136, 0.38);
+}
+
+.contrib-cell.is-future {
+  opacity: 0.28;
+}
+
+.contrib-cell:hover {
+  transform: scale(1.18);
+  box-shadow:
+    inset 0 0 0 1px rgba(215, 251, 255, 0.28),
+    0 0 14px rgba(0, 215, 255, 0.34);
+}
+
+.contrib-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .comment-panel {
   margin-top: 54px;
   padding: 26px;
@@ -1981,6 +2243,36 @@ html.js-enabled .post-card.is-revealed {
 
   .terminal-page {
     padding-top: 132px;
+  }
+
+  .brand-logo {
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+  }
+
+  .about-identity,
+  .about-contrib-card {
+    grid-template-columns: 1fr;
+  }
+
+  .about-logo-shell {
+    min-height: 176px;
+  }
+
+  .about-contrib-shell {
+    padding: 14px;
+  }
+
+  .contrib-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .contrib-cell,
+  .contrib-legend i {
+    width: 10px;
+    height: 10px;
   }
 
   .archive-item {

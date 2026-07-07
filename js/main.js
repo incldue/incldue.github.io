@@ -952,6 +952,65 @@ var DB8GR_I18N = (function () {
 })();
 
 (function () {
+  var widgets = Array.prototype.slice.call(document.querySelectorAll("[data-db8gr-typewriter]"));
+  if (!widgets.length) return;
+
+  var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function parseLines(node) {
+    try {
+      var parsed = JSON.parse(node.getAttribute("data-lines") || "[]");
+      if (Array.isArray(parsed)) return parsed.map(function (line) { return String(line || ""); }).filter(Boolean);
+    } catch (error) {}
+    return [];
+  }
+
+  widgets.forEach(function (node) {
+    var output = node.querySelector(".about-typewriter-text") || node;
+    var lines = parseLines(node);
+    if (!lines.length) return;
+
+    if (reducedMotion) {
+      output.textContent = lines.join(" / ");
+      return;
+    }
+
+    var lineIndex = 0;
+    var charIndex = 0;
+    var deleting = false;
+
+    function tick() {
+      var line = lines[lineIndex] || "";
+      output.textContent = line.slice(0, charIndex);
+
+      if (!deleting && charIndex < line.length) {
+        charIndex += 1;
+        window.setTimeout(tick, 58 + Math.random() * 42);
+        return;
+      }
+
+      if (!deleting) {
+        deleting = true;
+        window.setTimeout(tick, 1200);
+        return;
+      }
+
+      if (charIndex > 0) {
+        charIndex -= 1;
+        window.setTimeout(tick, 28);
+        return;
+      }
+
+      deleting = false;
+      lineIndex = (lineIndex + 1) % lines.length;
+      window.setTimeout(tick, 260);
+    }
+
+    tick();
+  });
+})();
+
+(function () {
   var nav = document.getElementById("db8gr-nav");
   var progressBar = document.getElementById("scroll-progress-bar");
   var percentText = document.getElementById("scroll-percent");
