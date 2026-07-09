@@ -1764,7 +1764,7 @@ html.js-enabled .post-card.is-revealed {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-auto-flow: dense;
-  grid-auto-rows: minmax(168px, auto);
+  grid-auto-rows: minmax(164px, auto);
   gap: 16px;
   align-items: stretch;
   counter-reset: about-counter;
@@ -1863,19 +1863,19 @@ html.js-enabled .post-card.is-revealed {
 }
 
 .about-az-hello {
-  grid-column: span 7;
+  grid-column: span 6;
   grid-row: span 2;
   justify-content: flex-end;
 }
 
 .about-az-pursuit {
-  grid-column: span 5;
+  grid-column: span 6;
   grid-row: span 2;
   justify-content: space-between;
 }
 
 .about-az-skills {
-  grid-column: span 5;
+  grid-column: span 4;
 }
 
 .about-az-map {
@@ -1884,13 +1884,21 @@ html.js-enabled .post-card.is-revealed {
 }
 
 .about-az-stats {
-  grid-column: span 3;
+  grid-column: span 4;
 }
 
 .about-az-now,
-.about-az-type,
 .about-az-maxim {
   grid-column: span 4;
+}
+
+.about-az-type {
+  grid-column: 1 / -1;
+  min-height: 190px;
+}
+
+.about-az-type p {
+  max-width: 72ch;
 }
 
 .about-az-contrib {
@@ -2052,9 +2060,14 @@ html.js-enabled .post-card.is-revealed {
 }
 
 .about-typewriter {
+  display: flex;
+  align-items: center;
   min-height: 68px;
-  margin-top: auto;
+  height: 68px;
+  box-sizing: border-box;
+  margin-top: 16px;
   padding: 14px 16px;
+  overflow: hidden;
   border: 0;
   border-left: 2px solid rgba(57, 255, 136, 0.58);
   background:
@@ -2065,15 +2078,25 @@ html.js-enabled .post-card.is-revealed {
   font-weight: 900;
   letter-spacing: 0.02em;
   line-height: 1.55;
+  white-space: nowrap;
   text-shadow: 0 0 16px rgba(57, 255, 136, 0.42);
 }
 
 .about-typewriter::before {
   content: "guest@about:~$ ";
+  flex: 0 0 auto;
   color: var(--cyan);
 }
 
+.about-typewriter-text {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
 .about-typewriter-cursor {
+  flex: 0 0 auto;
   color: var(--cyan);
   animation: cursor-blink 760ms steps(1, end) infinite;
 }
