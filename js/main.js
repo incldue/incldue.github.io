@@ -967,11 +967,26 @@ var DB8GR_I18N = (function () {
 
   widgets.forEach(function (node) {
     var output = node.querySelector(".about-typewriter-text") || node;
+    var measure = node.querySelector(".about-typewriter-measure");
     var lines = parseLines(node);
     if (!lines.length) return;
 
+    function fillMeasure(items) {
+      if (!measure) return;
+      measure.textContent = "";
+      items.forEach(function (item) {
+        var span = document.createElement("span");
+        span.textContent = item;
+        measure.appendChild(span);
+      });
+    }
+
+    fillMeasure(lines);
+
     if (reducedMotion) {
-      output.textContent = lines.join(" / ");
+      var reducedText = lines.join(" / ");
+      output.textContent = reducedText;
+      fillMeasure([reducedText]);
       return;
     }
 
