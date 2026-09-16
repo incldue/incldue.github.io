@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en, zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="h3llo_w0rld">
+  <title>CineFlow：做一个真正属于桌面的影视世界 | D&#39;b8Gr的小站~</title>
+  
+    <link rel="icon" href="../../static/avatar/avatar1.png">
+    <link rel="apple-touch-icon" href="../../static/avatar/avatar1.png">
+  
+  
+<link rel="stylesheet" href="../../css/style.css">
+
+  
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="atom.xml" title="D'b8Gr的小站~" type="application/atom+xml">
+</head>
+<body class="theme-db8gr layout-post">
+  
+    <canvas class="ambient-rain" id="ambient-rain" aria-hidden="true"></canvas>
+  
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  
+
+<div class="boot-loader" id="boot-loader" data-once="true">
+  
+    <canvas id="matrix-rain" aria-hidden="true"></canvas>
+  
+  <div class="boot-glass" role="status" aria-live="polite">
+    <span class="boot-prefix">root@debu8ger:</span><span id="boot-type" data-text="initiating..."></span><span class="boot-cursor">_</span>
+  </div>
+</div>
+
+
+  
+<header class="terminal-nav" id="db8gr-nav">
+  <div class="nav-glass">
+    <div class="nav-head">
+      <a class="nav-brand" href="../../index.html" aria-label="返回首页">
+        <span class="brand-prompt">root@</span><span>D&#39;b8Gr的小站~</span><span class="brand-colon">:</span><span class="brand-motto" id="brand-type" data-text="I hack,therefore i am"></span><span class="brand-cursor" aria-hidden="true">_</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-controls="nav-menu" aria-expanded="false" aria-label="展开导航">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="nav-links" id="nav-menu" aria-label="主导航">
+      <a class="nav-link" href="../../index.html">首页</a>
+      <div class="nav-item nav-dropdown">
+        <a class="nav-link dropdown-trigger" href="../../archives/">文章</a>
+        <div class="dropdown-menu" aria-label="文章子菜单">
+          <a href="../../categories/">分类</a>
+          <a href="../../tags/">标签</a>
+          <a href="../../archives/">归档</a>
+        </div>
+      </div>
+      <a class="nav-link" href="../../links/">友链</a>
+      <a class="nav-link" href="../../about/">关于</a>
+    </nav>
+  </div>
+</header>
+
+  <main class="site-main">
+    
+<article class="terminal-page terminal-post">
+  <header class="page-header post-cover-header has-cover" style="--post-cover: url('../../images/bg.png');">
+    <p class="terminal-line"><span class="line-prefix">root@debu8ger:post$</span> cat ./CineFlow：做一个真正属于桌面的影视世界.md</p>
+    <h1>CineFlow：做一个真正属于桌面的影视世界</h1>
+    <div class="post-meta">
+      <time>2026-09-16</time>
+      <span>/</span>
+      <span>约 1805 字</span>
+      <span>/</span>
+      <span>7 分钟阅读</span>
+      
+        <span>/</span>
+        <span>杂谈</span>
+      
+    </div>
+  </header>
+
+  <div class="post-shell">
+    <div class="terminal-content post-content">
+      <h2 id="CineFlow：做一个真正属于桌面的影视世界"><a href="#CineFlow：做一个真正属于桌面的影视世界" class="headerlink" title="CineFlow：做一个真正属于桌面的影视世界"></a>CineFlow：做一个真正属于桌面的影视世界</h2><blockquote>
+<p><strong>Movies are not just something to watch. They are worlds to explore.</strong></p>
+</blockquote>
+<p>做 CineFlow 的最初想法其实很简单。</p>
+<p>我一直觉得，影视软件似乎已经有很多了。</p>
+<p>但真正打开电脑，准备找一部电影的时候，体验却并没有想象中那么好。</p>
+<p>搜索、翻网页、找资源、切播放器……</p>
+<p><strong>明明只是想看一部电影，却总要在播放之前做很多事情。</strong></p>
+<p>所以我想做一个不太一样的东西。</p>
+<p>不是再做一个单纯的播放器。</p>
+<p>而是做一个真正属于桌面的 <strong>影视世界入口</strong>。</p>
+<p>于是有了 <strong>CineFlow</strong>。</p>
+<p>直达：<a target="_blank" rel="noopener" href="https://github.com/incldue/CineFlow">CineFlow 是一款面向Win桌面的电影&#x2F;节目推荐应用</a></p>
+<p><img loading="lazy" decoding="async" src="/images/bg.png" alt="bg"></p>
+<hr>
+<h3 id="01-CineFlow-是什么？"><a href="#01-CineFlow-是什么？" class="headerlink" title="01 &#x2F; CineFlow 是什么？"></a>01 &#x2F; CineFlow 是什么？</h3><p>CineFlow 是我搓的一款 Win桌面影视聚合播放器。</p>
+<p>它的核心并不是单纯的“播放视频”。</p>
+<p>我更希望它能够把：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">寻找</span><br><span class="line"> ↓</span><br><span class="line">发现</span><br><span class="line"> ↓</span><br><span class="line">探索</span><br><span class="line"> ↓</span><br><span class="line">选择</span><br><span class="line"> ↓</span><br><span class="line">播放</span><br></pre></td></tr></table></figure>
+
+<p>变成一个连续的过程。</p>
+<p><img loading="lazy" decoding="async" src="/images/cine1.png" alt="cine1"></p>
+<p>你可以搜索一部电影。</p>
+<p>既可以从心情、天气等场景开始，也可以从演员、类型、关键词开始。</p>
+<p>甚至什么都不确定，只是随便逛逛。</p>
+<p>看到一部感兴趣的作品之后，再继续向外探索。</p>
+<p><strong>我希望 CineFlow 更像一个影视世界的入口，而不是一个冷冰冰的播放器。</strong></p>
+<hr>
+<h3 id="02-为什么要做它？"><a href="#02-为什么要做它？" class="headerlink" title="02 &#x2F; 为什么要做它？"></a>02 &#x2F; 为什么要做它？</h3><p>现在的影视内容已经多到很难真正“找完”。</p>
+<p>电影越来越多。</p>
+<p>电视剧越来越多。</p>
+<p>但内容越多，另一个问题也越来越明显：</p>
+<p><strong>选择反而变得困难。</strong></p>
+<p>有时候并不是没有电影看。</p>
+<p>而是不知道：</p>
+<blockquote>
+<p><strong>“今晚到底看什么？”</strong></p>
+</blockquote>
+<p>我做 CineFlow，就是想让这个过程简单一点。</p>
+<p>不需要提前想好完整的片名。</p>
+<p>也不需要为了寻找一部电影不断切换页面。</p>
+<p>你可以从心情开始。</p>
+<p>从现在天气开始。</p>
+<p>从一个关键词开始。</p>
+<p>从一个演员开始。</p>
+<p>也从一个类型开始。</p>
+<p>然后让内容自己把你带到下一个地方。</p>
+<hr>
+<h3 id="03-我想做的不是“播放器”"><a href="#03-我想做的不是“播放器”" class="headerlink" title="03 &#x2F; 我想做的不是“播放器”"></a>03 &#x2F; 我想做的不是“播放器”</h3><p>这是 CineFlow 和传统播放器最大的区别。</p>
+<p>传统播放器通常是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  视频</span><br><span class="line">   ↓</span><br><span class="line">播放器</span><br><span class="line">   ↓</span><br><span class="line">  播放</span><br></pre></td></tr></table></figure>
+
+<p>而我希望 CineFlow 是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">                 ┌── Actor</span><br><span class="line">                 │</span><br><span class="line">                 ├── Genre</span><br><span class="line">                 │</span><br><span class="line">Search ─────── Movie ───── Similar</span><br><span class="line">                 │</span><br><span class="line">                 ├── Keyword</span><br><span class="line">                 │</span><br><span class="line">                 └── Recommendation</span><br><span class="line">                         ↓</span><br><span class="line">                       Watch</span><br></pre></td></tr></table></figure>
+
+<p><strong>播放只是最后一步。</strong></p>
+<p>真正让我感兴趣的，是前面的那一大段过程。</p>
+<p><img loading="lazy" decoding="async" src="/images/cine2.png" alt="cine2"></p>
+<p>一部电影可以连接另一部电影。</p>
+<p>一个演员可以连接几十个故事。</p>
+<p>一种心情可以连接不同心灵。</p>
+<p>一个类型可以连接完全不同的世界。</p>
+<p>当这些内容被串起来之后，影视就不再只是一个个孤立的视频文件。</p>
+<p>它变成了一张巨大的内容网络。</p>
+<p>而 CineFlow，就是我想做的那个入口。</p>
+<hr>
+<h3 id="04-我喜欢“探索”胜过“搜索”"><a href="#04-我喜欢“探索”胜过“搜索”" class="headerlink" title="04 &#x2F; 我喜欢“探索”胜过“搜索”"></a>04 &#x2F; 我喜欢“探索”胜过“搜索”</h3><p>搜索是一件非常明确的事情。</p>
+<p>你知道自己想要什么。</p>
+<p>然后输入关键词。</p>
+<p>得到结果。</p>
+<p>结束。</p>
+<p>但看电影有时候不是这样的。</p>
+<p>很多时候，我们打开软件的时候甚至不知道自己想看什么。</p>
+<p>所以 CineFlow 里，我一直比较重视 <strong>Explore</strong>。</p>
+<p>你可以随便浏览。</p>
+<p>随便点进去。</p>
+<p>从一个作品跳到另一个作品。</p>
+<p>然后突然发现：</p>
+<blockquote>
+<p>“这个好像不错。”</p>
+</blockquote>
+<p>这可能就是影视内容最有意思的地方。</p>
+<p><strong>你永远不知道下一次点击会把你带到哪里。</strong></p>
+<hr>
+<h3 id="05-我希望它像一个“桌面终端”"><a href="#05-我希望它像一个“桌面终端”" class="headerlink" title="05 &#x2F; 我希望它像一个“桌面终端”"></a>05 &#x2F; 我希望它像一个“桌面终端”</h3><p>CineFlow不仅仅是一个Win桌面应用。</p>
+<p>也不是简单地把网页塞进一个窗口里。</p>
+<p>我希望它真正属于桌面。</p>
+<p>打开的时候，它是一个完整的影视空间。</p>
+<p>需要的时候，它可以快速出现。</p>
+<p>不需要的时候，它又可以安静地缩到一边。</p>
+<p>其中我比较喜欢的一个设计，就是<strong>灵动岛模式</strong>。</p>
+<p><img loading="lazy" decoding="async" src="/images/cine3.png" alt="cine3"></p>
+<p>它可以变成一个非常紧凑的桌面入口。</p>
+<p>搜索。</p>
+<p>展开。</p>
+<p>返回。</p>
+<p>然后继续消失在桌面边缘。</p>
+<p>这种感觉其实很像我对未来桌面软件的想象：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">┌───────────────────────────────┐</span><br><span class="line">│                               │</span><br><span class="line">│        Your Desktop           │</span><br><span class="line">│                               │</span><br><span class="line">│                     ┌───────┐ │</span><br><span class="line">│                     │CineFlow│ │</span><br><span class="line">│                     └───────┘ │</span><br><span class="line">│                               │</span><br><span class="line">└───────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><img loading="lazy" decoding="async" src="/images/cine4.png" alt="cine4"></p>
+<p><strong>软件不应该一直占据你的屏幕。</strong></p>
+<p>它应该在你需要的时候出现。</p>
+<hr>
+<h3 id="06-资源，可以由你自己决定"><a href="#06-资源，可以由你自己决定" class="headerlink" title="06 &#x2F; 资源，可以由你自己决定"></a>06 &#x2F; 资源，可以由你自己决定</h3><p>CineFlow 也支持外部影视资源导入。</p>
+<p>这一点对我来说很重要。</p>
+<p>我不希望 CineFlow 成为一个封闭的内容平台。</p>
+<p>相反，我更希望它是一个开放的播放入口。</p>
+<p>你可以使用自己的资源。</p>
+<p>使用自己熟悉的片源。</p>
+<p><img loading="lazy" decoding="async" src="/images/cine5.png" alt="cine5"></p>
+<p>然后交给 CineFlow 来完成后面的体验。</p>
+<p>简单来说：</p>
+<blockquote>
+<p><strong>资源从哪里来，由你决定。</strong></p>
+<p><strong>怎么发现、怎么管理、怎么看，由 CineFlow 来完成。</strong></p>
+</blockquote>
+<p>这种开放性也是我坚持把项目开源的原因之一。</p>
+<hr>
+<h3 id="07-我想让它越来越“懂你”"><a href="#07-我想让它越来越“懂你”" class="headerlink" title="07 &#x2F; 我想让它越来越“懂你”"></a>07 &#x2F; 我想让它越来越“懂你”</h3><p>CineFlow 还加入了个性化推荐。</p>
+<p>搜索过什么。</p>
+<p>看过什么。</p>
+<p>这些行为都会逐渐影响后续的内容推荐。</p>
+<p>我并不认为推荐一定要做得多么复杂。</p>
+<p>对于一个个人影视应用来说，我更喜欢一种自然的变化：</p>
+<p>刚开始：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CineFlow</span><br></pre></td></tr></table></figure>
+
+<p>用了一段时间之后：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CineFlow</span><br><span class="line">     ↓</span><br><span class="line">  Your Flow</span><br></pre></td></tr></table></figure>
+
+<p>首页开始出现你喜欢的类型。</p>
+<p>出现你可能感兴趣的作品。</p>
+<p>甚至出现一些原本不会主动搜索，却最终会喜欢上的电影。</p>
+<p><strong>我希望它最后变成一个“越来越像你”的应用。</strong></p>
+<hr>
+<h3 id="08-CineFlow-还远远没有完成"><a href="#08-CineFlow-还远远没有完成" class="headerlink" title="08 &#x2F; CineFlow 还远远没有完成"></a>08 &#x2F; CineFlow 还远远没有完成</h3><p>如果把现在的 CineFlow 当成终点，那其实完全错了。</p>
+<p>它现在只是一个开始。</p>
+<p>还有很多地方可以继续做。</p>
+<p>更多的内容发现方式。</p>
+<p>更完善的媒体管理。</p>
+<p>更自然的推荐。</p>
+<p>更好的播放体验。</p>
+<p>更多桌面交互。</p>
+<p>以及更多我现在还没有想到的东西。</p>
+<p>所以我更愿意把 CineFlow 看成一个 <strong>持续进化中的项目</strong>。</p>
+<p>版本号会变化。</p>
+<p>代码会变化。</p>
+<p>设计会变化。</p>
+<p>甚至某些最初的想法也可能被推翻。</p>
+<p>这很正常。</p>
+<p>因为：</p>
+<blockquote>
+<p><strong>一个真正持续开发的开源项目，本来就不应该一成不变。</strong></p>
+</blockquote>
+<hr>
+<h3 id="09-最后"><a href="#09-最后" class="headerlink" title="09 &#x2F; 最后"></a>09 &#x2F; 最后</h3><p>CineFlow 对我来说，不只是一个练手项目。</p>
+<p>它更像是我对“桌面影视应用应该是什么样”的一次尝试。</p>
+<p>我不想做一个复杂到让人不知道怎么用的软件。</p>
+<p>也不想做一个只有播放按钮的播放器。</p>
+<p>我想做的是一个足够简单，却又足够有趣的影视入口。</p>
+<p>打开它。</p>
+<p>找到一部电影。</p>
+<p>然后进入另一个世界。</p>
+<p>就这么简单。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">      C I N E F L O W</span><br><span class="line"></span><br><span class="line">┌──────────────────────┐</span><br><span class="line">│                      │</span><br><span class="line">│      DISCOVER        │</span><br><span class="line">│          ↓           │</span><br><span class="line">│       EXPLORE        │</span><br><span class="line">│          ↓           │</span><br><span class="line">│        WATCH         │</span><br><span class="line">│                      │</span><br><span class="line">└──────────────────────┘</span><br><span class="line"></span><br><span class="line">     ENTER THE FLOW.</span><br></pre></td></tr></table></figure>
+
+<p><strong>CineFlow —— 让寻找电影，本身也成为一种体验。</strong></p>
+<hr>
+<h3 id="Open-Source"><a href="#Open-Source" class="headerlink" title="Open Source"></a>Open Source</h3><p><strong>GitHub：<a target="_blank" rel="noopener" href="https://github.com/incldue/CineFlow">https://github.com/incldue/CineFlow</a></strong></p>
+<p>如果你也喜欢折腾桌面应用、影视工具或者开源项目，欢迎来看看 CineFlow。</p>
+<p><strong>Star &#x2F; Fork &#x2F; Issue &#x2F; PR，都欢迎。</strong></p>
+<p>这个项目还在继续。</p>
+<p>而我希望，它最终能够成为一个真正有自己灵魂的影视应用。</p>
+
+    </div>
+
+    
+      <aside class="post-toc" aria-label="目录">
+        <div class="toc-title">目录</div>
+        <ol class="post-toc-list"><li class="post-toc-list-item post-toc-list-level-2"><a class="post-toc-list-link" href="#CineFlow%EF%BC%9A%E5%81%9A%E4%B8%80%E4%B8%AA%E7%9C%9F%E6%AD%A3%E5%B1%9E%E4%BA%8E%E6%A1%8C%E9%9D%A2%E7%9A%84%E5%BD%B1%E8%A7%86%E4%B8%96%E7%95%8C"><span class="post-toc-list-text">CineFlow：做一个真正属于桌面的影视世界</span></a><ol class="post-toc-list-child"><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#01-CineFlow-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="post-toc-list-text">01 &#x2F; CineFlow 是什么？</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#02-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E5%AE%83%EF%BC%9F"><span class="post-toc-list-text">02 &#x2F; 为什么要做它？</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#03-%E6%88%91%E6%83%B3%E5%81%9A%E7%9A%84%E4%B8%8D%E6%98%AF%E2%80%9C%E6%92%AD%E6%94%BE%E5%99%A8%E2%80%9D"><span class="post-toc-list-text">03 &#x2F; 我想做的不是“播放器”</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#04-%E6%88%91%E5%96%9C%E6%AC%A2%E2%80%9C%E6%8E%A2%E7%B4%A2%E2%80%9D%E8%83%9C%E8%BF%87%E2%80%9C%E6%90%9C%E7%B4%A2%E2%80%9D"><span class="post-toc-list-text">04 &#x2F; 我喜欢“探索”胜过“搜索”</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#05-%E6%88%91%E5%B8%8C%E6%9C%9B%E5%AE%83%E5%83%8F%E4%B8%80%E4%B8%AA%E2%80%9C%E6%A1%8C%E9%9D%A2%E7%BB%88%E7%AB%AF%E2%80%9D"><span class="post-toc-list-text">05 &#x2F; 我希望它像一个“桌面终端”</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#06-%E8%B5%84%E6%BA%90%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%94%B1%E4%BD%A0%E8%87%AA%E5%B7%B1%E5%86%B3%E5%AE%9A"><span class="post-toc-list-text">06 &#x2F; 资源，可以由你自己决定</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#07-%E6%88%91%E6%83%B3%E8%AE%A9%E5%AE%83%E8%B6%8A%E6%9D%A5%E8%B6%8A%E2%80%9C%E6%87%82%E4%BD%A0%E2%80%9D"><span class="post-toc-list-text">07 &#x2F; 我想让它越来越“懂你”</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#08-CineFlow-%E8%BF%98%E8%BF%9C%E8%BF%9C%E6%B2%A1%E6%9C%89%E5%AE%8C%E6%88%90"><span class="post-toc-list-text">08 &#x2F; CineFlow 还远远没有完成</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#09-%E6%9C%80%E5%90%8E"><span class="post-toc-list-text">09 &#x2F; 最后</span></a></li><li class="post-toc-list-item post-toc-list-level-3"><a class="post-toc-list-link" href="#Open-Source"><span class="post-toc-list-text">Open Source</span></a></li></ol></li></ol>
+      </aside>
+    
+  </div>
+
+  <footer class="post-footer">
+    
+      <div class="post-tags">
+        <span class="footer-label">tags:</span>
+        
+          <a href="../../tags/%E5%BC%80%E6%BA%90%E5%88%86%E4%BA%AB/">#开源分享</a>
+        
+      </div>
+    
+    <div class="post-nav">
+      
+        <span></span>
+      
+      
+        <a href="../1299159283/">从汇编到机器码--理解X86/x64汇编编码序列 &gt;</a>
+      
+    </div>
+    
+      <section class="related-posts" aria-label="相关文章">
+        <div class="related-title">RELATED.LOG</div>
+        <div class="related-list">
+          
+            <a class="related-item" href="../3709781461/">
+              <span>Db8Gr的blog01</span>
+              <time>2025-06-01</time>
+            </a>
+          
+            <a class="related-item" href="../2569029955/">
+              <span>程序员关于学习的10件事[摘自...貌似忘了:(,emmm... ]</span>
+              <time>2025-04-26</time>
+            </a>
+          
+            <a class="related-item" href="../1146697123/">
+              <span>大学的近期Coding之旅及随笔(2024年)</span>
+              <time>2024-10-24</time>
+            </a>
+          
+            <a class="related-item" href="../4008351067/">
+              <span>第一次blog的Hello World(留作纪念~~)</span>
+              <time>2024-10-13</time>
+            </a>
+          
+        </div>
+      </section>
+    
+  </footer>
+
+  
+
+
+
+</article>
+
+  </main>
+  <div class="site-toolbar" id="site-toolbar" aria-label="页面工具栏">
+    <button class="toolbar-top" id="back-to-top" type="button" aria-label="回到页面顶部">↑</button>
+    <span class="toolbar-percent" id="scroll-percent">0%</span>
+  </div>
+  <footer class="site-footer">
+  <span>root@debu8ger:~$ uptime</span>
+  <span class="footer-sep">/</span>
+  <span>&copy; 2024-2026 debu8ger</span>
+</footer>
+
+  
+<script src="../../js/main.js"></script>
+
+</body>
+</html>
